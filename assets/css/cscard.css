@@ -1,0 +1,533 @@
+.header__cscard {
+  background-image: url(../img/back-img-header-plans.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.start__screen {
+  margin-top: 72px;
+  margin-bottom: 104px;
+}
+.start__title-descr-cscard {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #999999;
+
+  margin-bottom: 12px;
+}
+.start__title-cscard {
+  padding-top: 0;
+  margin-bottom: 12px;
+}
+.start__list {
+  display: flex;
+  margin-bottom: 28px;
+}
+.start__item {
+  margin-right: 40px;
+}
+.start__link {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  color: #fff;
+}
+.start__title-descr {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  color: #fff;
+  opacity: 0.6;
+  max-width: 460px;
+  margin-bottom: 72px;
+}
+.start__cscard-btn {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #fff;
+
+  padding: 15px 33px;
+  background-color: #0f7f69;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.start__cscard-btn:hover {
+  opacity: 0.2;
+}
+@media (max-width: 768px) {
+  .start__screen {
+    margin-top: 60px;
+    margin-bottom: 61px;
+  }
+  .start__title-cscard {
+    margin-bottom: 24px;
+  }
+  .start__list {
+    margin-bottom: 24px;
+  }
+  .start__title-descr {
+    margin-bottom: 24px;
+  }
+}
+/* advantage */
+.cscard__advantage {
+  margin-top: 52px;
+  margin-bottom: 72px;
+}
+.cscard__advantage-title {
+  margin-bottom: 24px;
+}
+.cscard__advantage-text {
+  opacity: 0.6;
+  margin-bottom: 96px;
+}
+.cscard__advantage-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 96px;
+}
+.cscard__advantage-card-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #202a89;
+
+  margin-bottom: 25px;
+}
+.cscard__advantage-card-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+  max-width: 578px;
+  opacity: 0.6;
+
+  margin-bottom: 24px;
+}
+.cscard__advantage-card-link {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #202a89;
+}
+.cscard__advantage-wrapper-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cscard__advantage-card-info-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+  margin-bottom: 24px;
+}
+.cscard__advantage-card-info-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000000;
+  opacity: 0.6;
+  max-width: 600px;
+}
+.cscard__advantage-card-info {
+  margin-bottom: 72px;
+}
+.cscard__advantage-img-info--mod {
+  display: none;
+}
+@media (max-width: 768px) {
+  .cscard__advantage {
+    margin-top: 28px;
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-title {
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-text {
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-img-info--mod {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-card-text {
+    max-width: 350px;
+  }
+  .cscard__advantage-img-info {
+    display: none;
+  }
+  .test__title {
+    font-family: "Graphik", sans-serif;
+    font-size: 38px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 41px;
+    letter-spacing: 0px;
+    text-align: left;
+  }
+  .cscard__advantage-wrap-info {
+    display: flex;
+  }
+  .cscard__advantage-card-info {
+    margin-right: 34px;
+  }
+  .cscard__advantage-card-info-title {
+    max-width: 320px;
+  }
+  .cscard__advantage-card-info-text {
+    max-width: 350px;
+  }
+  .cscard__advantage-card-info {
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 576px) {
+  .cscard__advantage-text {
+    margin-bottom: 104px;
+  }
+  .cscard__advantage-img-info--mod {
+    margin-bottom: 104px;
+  }
+  .cscard__advantage-wrapper {
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-card {
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-card:last-child {
+    margin-bottom: 0;
+  }
+  .cscard__advantage-wrap-info {
+    flex-wrap: wrap;
+  }
+  .cscard__advantage-card-info {
+    margin-bottom: 48px;
+  }
+  .cscard__advantage-card-info:last-child {
+    margin-bottom: 0;
+  }
+  .cscard__advantage-card-info-title {
+    max-width: 600px;
+  }
+  .cscard__advantage-card-info-text {
+    max-width: 600px;
+  }
+}
+/* possibilities */
+.possibilities {
+  background-color: #fcf7f2;
+  padding-top: 72px;
+}
+.possibilities__title {
+  margin-bottom: 86px;
+}
+.cscard-swiper {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 84px;
+  margin: 0 auto 70px;
+}
+
+.possibilities__wrapper-tab {
+  width: auto !important;
+
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000;
+  opacity: 0.4;
+  padding-bottom: 10px;
+  cursor: pointer;
+  margin-right: 64px;
+}
+.possibilities__wrapper-tab--active {
+  color: #000;
+  opacity: 1;
+  border-bottom: 6px solid #0f7f69;
+}
+.possibilities__wrapper {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 18px 0 55px;
+  margin: 0 auto;
+}
+[data-tab-content] {
+  display: none;
+}
+.possibilities__wrapper--active[data-tab-content] {
+  display: block;
+}
+.possibilities__cards {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.possibilities__card {
+  padding: 24px 18px 24px 30px;
+  margin-bottom: 48px;
+}
+.possibilities__card:hover {
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.possibilities__card-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000;
+  margin-bottom: 24px;
+}
+.possibilities__card-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  max-width: 580px;
+}
+@media (max-width: 1200px) {
+  .possibilities__card-text {
+    max-width: 510px;
+  }
+}
+@media (max-width: 768px) {
+  .possibilities {
+    padding-top: 48px;
+  }
+  .cscard-swiper {
+    padding: 0 24px;
+    margin-bottom: 48px;
+  }
+  .possibilities__title {
+    margin-bottom: 48px;
+  }
+  .possibilities__wrapper {
+    padding: 0;
+  }
+  .possibilities__card-text {
+    max-width: 330px;
+  }
+  .possibilities__card {
+    margin-bottom: 24px;
+  }
+}
+@media (max-width: 576px) {
+  .cscard-swiper {
+    padding: 0 0 0 16px;
+  }
+  .possibilities__card {
+    margin-bottom: 0;
+  }
+  .possibilities__card-text {
+    max-width: 510px;
+  }
+}
+/* license */
+.license {
+  background-color: #fcf7f2;
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+.license__title {
+  font-family: "Graphik", sans-serif;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 41px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-bottom: 72px;
+}
+.license__wrapper-cards {
+  display: flex;
+  flex-wrap: wrap;
+}
+.license__card {
+  background-color: #fff;
+  border-radius: 8px;
+
+  padding: 40px 24px 40px;
+  margin-right: 33px;
+}
+.license__card:last-child {
+  margin-right: 0;
+}
+.license__card-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  margin-bottom: 48px;
+}
+.license__card-list {
+  display: flex;
+  margin-bottom: 48px;
+}
+.card__list-text {
+  display: flex;
+
+  font-family: "Graphik", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+.card__list-total {
+  font-family: "Graphik", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  margin-left: 130px;
+}
+.license__card-price {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #830f1e;
+
+  margin-bottom: 48px;
+}
+.license__card-btn {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #ffffff;
+
+  background-color: #830f1e;
+  border-radius: 6px;
+  padding: 19px 141px 18px 144px;
+  cursor: pointer;
+}
+@media (max-width: 1200px) {
+  .license {
+    padding-bottom: 0;
+  }
+  .license__card {
+    margin-bottom: 48px;
+  }
+}
+@media (max-width: 992px) {
+  .license__card {
+    margin-right: 25px;
+  }
+  .license__card:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+@media (max-width: 768px) {
+  .license {
+    padding-top: 48px;
+  }
+  .license__title {
+    margin-bottom: 65px;
+  }
+  .license__card {
+    margin-right: 33px;
+  }
+  .license__card-title {
+    margin-bottom: 24px;
+  }
+  .card__list-text {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .card__list-total {
+    margin-left: 0;
+  }
+  .license__card-list {
+    margin-bottom: 24px;
+  }
+  .license__card-price {
+    margin-bottom: 24px;
+  }
+  .license__card-btn {
+    padding: 19px 113px 18px 116px;
+  }
+}
+@media (max-width: 576px) {
+  .license {
+    padding-bottom: 24px;
+  }
+  .license__title {
+    margin-bottom: 24px;
+    max-width: 240px;
+  }
+  .license__card {
+    margin-bottom: 24px;
+  }
+}

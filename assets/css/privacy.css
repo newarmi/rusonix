@@ -1,0 +1,90 @@
+.header__privacy {
+  background-image: url(../img/back-img-header-company.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.header__decor {
+  display: none;
+}
+.start__title-descr-bankinfo {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #999999;
+  padding-top: 84px;
+  margin-bottom: 12px;
+}
+.start__title-bankinfo {
+  padding-top: 0;
+  padding-bottom: 84px;
+}
+@media (max-width: 992px) {
+  .start__title-descr-bankinfo {
+    padding-top: 69px;
+  }
+  .start__title-bankinfo {
+    padding-bottom: 69px;
+  }
+}
+/* file */
+.file {
+  background-color: #f2f2f2;
+  padding-top: 48px;
+  padding-bottom: 72px;
+}
+.file__wrapper {
+  width: 1098px;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 72px 87px;
+  margin: 0 auto;
+}
+.file__text {
+  max-width: 890px;
+  color: #000;
+  opacity: 0.6;
+}
+.file__text-privacy {
+  max-width: 765px;
+}
+.file__wrap {
+  margin-bottom: 48px;
+}
+.file__pdf {
+  width: 200px;
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #fff;
+
+  background-color: #0f7f69;
+  border-radius: 6px;
+  padding: 15px 20px;
+}
+.file__pdf:hover {
+  opacity: 0.2;
+}
+@media (max-width: 992px) {
+  .header__decor {
+    display: block;
+  }
+  .file {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .file__wrapper {
+    width: 100%;
+    border-radius: 0;
+  }
+  .file__wrapper {
+    padding: 28px 24px 96px;
+  }
+}
