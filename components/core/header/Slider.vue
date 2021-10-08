@@ -38,15 +38,16 @@ export default {
 
     this.$nextTick(() => {
       this.slider = new Swiper('.' + this.sliderClass, {
-        slidesPerView: 1.5,
+        slidesPerView: 'auto',
+        // slidesPerView: 1.5,
         spaceBetween: 33,
         loop: true,
         breakpoints: {
           576: {
-            slidesPerView: 'auto',
-            spaceBetween: 33,
-            centerSlides: true,
-            loop: true,
+            // slidesPerView: 'auto',
+            // spaceBetween: 33,
+            centerSlides: true
+           
           }
         }
       })
@@ -102,7 +103,6 @@ export default {
 
 .start__slide-text {
   font-family: "Graphik", sans-serif;
-
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

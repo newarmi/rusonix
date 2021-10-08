@@ -106,17 +106,28 @@ export default {
 <style scoped>
 
 .decision {
-  margin-top: 72px;
+  margin-top: 46px;
   margin-bottom: 72px;
 }
+
+.title {
+  font-family: "Graphik", sans-serif;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 41px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+
 .decision__title {
   color: #000000;
-
   margin-bottom: 72px;
 }
 
 .decision__wrapper-cards {
   display: flex;
+  gap: 34px;
 }
 
 .decision__card {
@@ -124,15 +135,10 @@ export default {
   height: 520px;
   border: 1px solid #eaeaea;
   border-radius: 6px;
-  box-shadow: 0 20px 30px -20px #fcf7f2;
-  margin-right: 33px;
+  box-shadow: 0px 20px 30px -20px #fcf7f2;
+
   position: relative;
 }
-
-.decision__card:last-child {
-  margin-right: 0;
-}
-
 .decision__card-title {
   font-family: "Graphik", sans-serif;
   font-size: 30px;
@@ -153,7 +159,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-  letter-spacing: 0;
+  letter-spacing: 0px;
   text-align: left;
   color: #9e9e9e;
   max-width: 275px;
@@ -177,7 +183,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 15px;
-  letter-spacing: 0;
+  letter-spacing: 0px;
   text-align: left;
   color: #5b5b5b;
 }
@@ -188,47 +194,29 @@ export default {
   top: 41%;
   left: 2%;
 }
-@media (max-width: 992px) {
-  .decision {
-    margin-top: 28px;
-  }
-  .decision__title {
-    margin-bottom: 48px;
-  }
+@media (max-width: 1200px) {
   .decision__wrapper-cards {
     flex-wrap: wrap;
   }
+}
+@media (max-width: 992px) {
+  .decision {
+    margin-top: 8px;
+    margin-bottom: 48px;
+  }
+  .decision__title {
+    margin-bottom: 48px;
+  }
+
   .decision__card {
     width: 343px;
-    margin-bottom: 48px;
-    margin-right: 34px;
-  }
-  .decision__card:nth-child(2n + 2) {
-    margin-right: 0;
-  }
-}
-@media (max-width: 768px) {
-  .decision {
-    margin-bottom: 0;
-  }
-}
-@media (max-width: 576px) {
-  .decision__title {
-    max-width: 343px;
-  }
-  .decision__title {
-    margin-bottom: 90px;
-  }
-  .decision__card {
-    margin-right: 0;
-    margin-bottom: 24px;
-  }
-  .decision__card:last-child {
-    margin-bottom: 0;
-  }
-  .decision__wrapper-cards {
-    margin-bottom: 0;
   }
 }
 
+@media (max-width: 576px) {
+  .decision__wrapper-cards {
+    gap: 24px;
+    justify-content: center;
+  }
+}
 </style>
