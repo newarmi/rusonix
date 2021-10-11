@@ -20,7 +20,7 @@ export const mutations = {
 
 export const actions = {
   async fetchPage({commit}) {   
-    const page = await this.$axios.$get('https://api.rusonyx.staj.fun/api/company')
+    const page = await this.$axios.$get('company')
     commit('setPage', page)
   },
   async nuxtServerInit ({ dispatch }) {

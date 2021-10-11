@@ -2,7 +2,7 @@
   <header class="header" :style="bgImage">
     <TopLine />
     <HeaderContent />
-    <Slider v-if="headerData.headerSlider"/>
+    <Slider v-if="$route.name==='index'"/>
   </header>
 </template>
 
@@ -18,19 +18,21 @@ export default {
     HeaderContent,
     Slider
   },
-  props: {
-    headerData: {
-      type: Object,
-      required: true
-    }
-  },
   data: () => ({
 
   }),
   computed: {
+    header() {
+      if(this.$route.name==='index') {
+        return this.$store.getters.header
+      } else {
+        return this.$store.getters[this.$route.name + '/header']
+      }
+    },
     bgImage () {
-      return `background-image: url(${this.headerData.headerBgSrc});`
+      return `background-image: url(${this.$config.imgURL}${this.header.image});`
     }
+
   }
 }
 </script>

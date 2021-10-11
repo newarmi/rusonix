@@ -90,9 +90,9 @@
                <nuxt-link to="/company" class="navigation__link-mobile">О компании</nuxt-link>
             </li>
             <li class="navigation__item-mobile">
-              <nuxt-link to="/services" class="navigation__link-mobile dropdown-submenu" 
-                >Услуги</nuxt-link>
-              <ul class="dropdown-submenu__list-mobile" :style="displayNone">
+              <a style="cursor: pointer" class="navigation__link-mobile dropdown-submenu" @click="openSubmenu()"
+                >Услуги</a>
+              <ul class="dropdown-submenu__list-mobile" :style="display">
                 <li class="dropdown-submenu__item-mobile">
                   <a href="#" class="dropdown-submenu__link"
                     >Облачные VPS серверы</a
@@ -146,12 +146,22 @@ export default {
   data() {
     return {
       isMenuOpen: false,
+      isOpenSubmenu: false,
     }
   },
   computed: {
-      displayNone() {
-        return this.$route.name==='services' ? {display: 'block'} : {display: 'none'};
+      display() {
+        return this.isOpenSubmenu ? {display: 'block'} : {display: 'none'};
       }
+  },
+  methods: {
+    openSubmenu() {
+      if(this.isOpenSubmenu) {
+        this.$router.push({path: '/services', query: {q: this.q}});
+      } else {
+        this.isOpenSubmenu =  true;
+      }      
+    }
   },
 }
 </script>

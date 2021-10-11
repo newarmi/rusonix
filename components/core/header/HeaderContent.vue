@@ -9,18 +9,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'HeaderContent',
   computed: {
-    ...mapGetters([
-      'currentPage',
-      'pageData',      
-    ]),
-    headerData() {
-      return this.pageData(this.currentPage)
-    },
     header() {
       if(this.$route.name==='index') {
         return this.$store.getters.header

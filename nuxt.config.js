@@ -44,7 +44,7 @@ export default {
   ],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'http://127.0.0.1:3000'
+    baseURL: 'https://api.rusonyx.staj.fun/api/',
   },
 
   build: {
@@ -64,6 +64,10 @@ export default {
   },
 
   server: {
-    port: 8084 // default: 3000
+    port: 8085 // default: 3000
+  },
+
+  publicRuntimeConfig: {
+    imgURL: 'https://api.rusonyx.staj.fun/storage/'
   }
 }
