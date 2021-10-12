@@ -2,17 +2,10 @@
   <section class="domain">
     <div class="container">
 
-      <div class="domain__title title">Регистрация доменов</div>
+      <div class="domain__title title">{{ domainsInfo.title }}</div>
       <div class="domain__text-wrap">
         <p class="domain__text text">
-          Если вы хотите купить домен для сайта в зоне ru, рф, com и др.,
-          обратите внимание, что все цены указаны с учётом НДС 20%.
-        </p>
-        <p class="domain__text text">
-          Русоникс гарантирует своим клиентам полное соблюдение всех правил
-          и законов в области регистрации доменных имен, надежность и
-          высокое качество обслуживания. У нас вы можете купить доменное
-          имя, не опасаясь столкнуться с киберсквоттингом.
+          {{ domainsInfo.description }}
         </p>
       </div>
 
@@ -63,7 +56,7 @@ export default {
     Sliders
   },
   data: () => ({
-    domains: [
+    domainsBilling: [
       {
         title: '.ru',
         price: 1290
@@ -97,7 +90,20 @@ export default {
         price: 1290
       }
     ]
-  })
+  }),
+  computed: {
+    domains() {
+      const item = this.$store.getters['services/domainsList']
+      item.forEach(element => {
+        element.price = element.periods.find(Boolean).base_cost
+      })
+      return item
+    },
+    domainsInfo() {
+      return this.$store.getters['services/domainsInfo']
+    }
+
+  }
 }
 </script>
 

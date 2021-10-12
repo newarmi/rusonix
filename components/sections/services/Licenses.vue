@@ -1,73 +1,23 @@
 <template>
   <section class="license">
     <div class="container">
-      <div class="license__title title">Лицензии</div>
+      <div class="license__title title">{{ licenses.title }}</div>
       <div class="license__text-descr">
-        <p class="license__text text">
-          Мы используем только промышленное оборудование DELL, ПО мировых
-          лидеров рынка.
-        </p>
-        <p class="license__text text">
-          Для обеспечения uptime 99,99% наши сервера располагаются в
-          надежном дата центре уровня Tier IV.
+        <p class="license__text text" v-html="licenses.description">
         </p>
       </div>
 
       <div class="license__sertificates">
-        <div class="license__sertificate-wrap">
+        <div v-for="license in licenses.sections" :key="license.title" class="license__sertificate-wrap">
           <picture class="picture">
             <img
-              src="@/assets/img/license-1.png"
-              srcset="@/assets/img/license-1@2x.png 2x"
+              :src="license.imageLink"
+              :srcset="license.imageLink"
               alt="license"
               class="license__img"
             />
           </picture>
-          <div class="license__sertificate-title">Лицензии Plesk</div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/license-2.png"
-              srcset="@/assets/img/license-2@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Лицензии Virtuozzo</div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/license-3.png"
-              srcset="@/assets/img/license-3@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Лицензии Communigate</div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/license-4.png"
-              srcset="@/assets/img/license-4@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Лицензии CS Cart</div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/license-5.png"
-              srcset="@/assets/img/license-5@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Лицензии 1С Битрикс</div>
+          <div class="license__sertificate-title">{{ license.title }} </div>
         </div>
       </div>
     </div>
@@ -76,7 +26,16 @@
 
 <script>
 export default {
-  name: 'SectionLicenses'
+  name: 'SectionLicenses',
+  computed: {
+    licenses() {
+      const items  = this.$store.getters['services/licenses']
+      items.sections.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return items
+    }
+  }
 }
 </script>
 

@@ -1,66 +1,24 @@
 <template>
   <section class="license">
     <div class="container">
-      <div class="license__title title">SSL сертификаты</div>
+      <div class="license__title title">{{ certificates.title }}</div>
       <div class="license__text-descr">
-        <p class="license__text text">
-          Мы используем только промышленное оборудование DELL, ПО мировых
-          лидеров рынка.
-        </p>
-        <p class="license__text text">
-          Для обеспечения uptime 99,99% наши сервера располагаются в
-          надежном дата центре уровня Tier IV.
+        <p class="license__text text" v-html="certificates.description">
         </p>
       </div>
-
       <div class="license__sertificates">
-        <div class="license__sertificate-wrap">
+        <div v-for="certificate in certificates.sections" :key="certificate.title" class="license__sertificate-wrap">
           <picture class="picture">
             <img
-              src="@/assets/img/sertificate-1.png"
-              srcset="@/assets/img/sertificate-1@2x.png 2x"
+              :src="certificate.imageLink"
+              :srcset="certificate.imageLink"
               alt="license"
               class="license__img"
             />
           </picture>
           <div class="license__sertificate-title">
-            Для интернет-магазинов
+            {{ certificate.title }}
           </div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/sertificate-2.png"
-              srcset="@/assets/img/sertificate-2@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Для подписи кода</div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/sertificate-3.png"
-              srcset="@/assets/img/sertificate-3@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">
-            Для почтовых серверов
-          </div>
-        </div>
-        <div class="license__sertificate-wrap">
-          <picture class="picture">
-            <img
-              src="@/assets/img/sertificate-4.png"
-              srcset="@/assets/img/sertificate-4@2x.png 2x"
-              alt="license"
-              class="license__img"
-            />
-          </picture>
-          <div class="license__sertificate-title">Для сайтов</div>
         </div>
       </div>
     </div>
@@ -69,7 +27,16 @@
 
 <script>
 export default {
-  name: 'Certificates'
+  name: 'Certificates',
+  computed: {
+    certificates() {
+      const items  = this.$store.getters['services/certificates']
+      items.sections.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return items
+    }
+  }
 }
 </script>
 

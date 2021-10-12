@@ -64,7 +64,7 @@ export default {
   },
 
   server: {
-    port: 8085 // default: 3000
+    port: 8084 // default: 3000
   },
 
   publicRuntimeConfig: {
