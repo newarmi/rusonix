@@ -1,7 +1,7 @@
 <template>
   <section class="contact">
     <div class="container">
-      <div class="contact__title title">Контакты</div>
+      <div class="contact__title title">{{ contacts.title }}</div>
     </div>
     <div class="container contact__container-map">
       <div class="contact__map">
@@ -18,19 +18,13 @@
           />
         </picture>
         <div class="contact__map-address">
-          <div class="contact__map-address-wrap">
+          <div v-for="item in mainContacts" :key="item.title" class="contact__map-address-wrap">
             <div class="contact__address-title">
-              Адрес московского офиса
+              {{item.title}}
             </div>
             <p class="contact__address-text">
-              Ямского поля 5-я улица, дом 9, Помещение II, 2 этаж, офис №19
+              {{item.content}}
             </p>
-          </div>
-          <div class="contact__map-address-wrap">
-            <div class="contact__address-title">
-              Адрес для корреспонденции
-            </div>
-            <p class="contact__address-text">127137, г. Москва, а/я 19</p>
           </div>
         </div>
       </div>
@@ -38,57 +32,19 @@
     <div class="container">
       <div class="contact__address">
         <div class="contact__address-map">
-          <div class="contact__map-address-wrap">
+          <div v-for="item in mainContacts" :key="item.title" class="contact__map-address-wrap">
             <div class="contact__address-title">
-              Адрес московского офиса
+              {{ item.title }}
             </div>
             <p class="contact__address-text">
-              Ямского поля 5-я улица, дом 9, Помещение II, 2 этаж, офис №19
+              {{ item.content }}
             </p>
           </div>
-          <div class="contact__map-address-wrap">
-            <div class="contact__address-title">
-              Адрес для корреспонденции
-            </div>
-            <p class="contact__address-text">127137, г. Москва, а/я 19</p>
-          </div>
         </div>
-        <div class="contact__address-about">
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">Телефон для Москвы</div>
-            <p class="contact__address-text">+7 495 248 19 01</p>
-          </div>
-
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">Для регионов РФ</div>
-            <p class="contact__address-text">8 800 600 28 01</p>
-          </div>
-        </div>
-
-        <div class="contact__address-about">
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">
-              Для отзывов и предложений
-            </div>
-            <p class="contact__address-text">director@rusonyx.ru</p>
-          </div>
-
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">По общим вопросам</div>
-            <p class="contact__address-text">managers@rusonyx.ru</p>
-          </div>
-        </div>
-        <div class="contact__address-about">
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">Партнерская программа</div>
-            <p class="contact__address-text">partners@rusonyx.ru</p>
-          </div>
-
-          <div class="contact__address-about-wrap">
-            <div class="contact__address-title">
-              По бухгалтерским вопросам
-            </div>
-            <p class="contact__address-text">buh@rusonyx.ru</p>
+        <div v-for="item in otherContacts" :key="item" class="contact__address-about">
+          <div v-for="contact in item" :key="contact.title" class="contact__address-about-wrap">
+            <div class="contact__address-title">{{contact.title}}</div>
+            <p class="contact__address-text">{{contact.content}}</p>
           </div>
         </div>
       </div>
@@ -98,7 +54,25 @@
 
 <script>
 export default {
-  name: 'Contact'
+  name: 'Contact',
+  computed: {
+    contacts() {
+      return this.$store.getters['company/contact']
+    },
+    allContacts() {
+      return this.contacts.sections
+    },
+    mainContacts() {
+      return this.allContacts.slice(0, 2)
+    },
+    otherContacts() {
+      const contactArray = [];
+      contactArray.push(this.allContacts.slice(2,4))
+      contactArray.push(this.allContacts.slice(4,6))
+      contactArray.push(this.allContacts.slice(6,8))
+      return contactArray
+    }
+  }
 }
 </script>
 

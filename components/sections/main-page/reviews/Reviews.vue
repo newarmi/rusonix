@@ -1,7 +1,7 @@
 <template>
   <section class="reviews">
     <div class="container">
-      <h1 class="reviews__title title">Истории наших клиентов</h1>
+      <h1 class="reviews__title title">{{ title }}</h1>
       <Slider />
     </div>
   </section>
@@ -14,6 +14,11 @@ export default {
   name: 'Reviews',
   components: {
     Slider
+  },
+  computed: {
+    title() {
+      return this.$store.getters.reviewsTitle
+    }
   }
 }
 </script>

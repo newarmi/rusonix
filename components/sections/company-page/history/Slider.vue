@@ -6,16 +6,14 @@
         <div class="history__slide">
           <picture class="picture">
             <img
-              :src="item.image"
-              :srcset="item.srcset"
+              :src="item.imageLink"
+              :srcset="item.imageLink"
               class="history__img"
               alt="history"
             />
           </picture>
-          <div class="history__slide-date">{{ item.title }}</div>
-          <p class="history__slide-text text">
-            {{item.content}}
-          </p>
+          <div class="history__slide-date">{{item.title}}</div>
+          <p class="history__slide-text text" v-html="item.content"></p>
         </div>
       </div>
 
@@ -38,94 +36,16 @@ import uniqueId from 'lodash/uniqueId'
 export default {
   name: 'Slider',
   data: () => ({
-    items: [
-      {
-        src: require('@/assets/img/history-slide-1.png'),
-        srcset: require('@/assets/img/history-slide-1@2x.png'),
-        date: '1995'
-      },
-      {
-        src: require('@/assets/img/history-slide-2.png'),
-        srcset: require('@/assets/img/history-slide-2@2x.png'),
-        date: '2001'
-      },
-      {
-        src: require('@/assets/img/history-slide-3.png'),
-        srcset: require('@/assets/img/history-slide-3@2x.png'),
-        date: '2002'
-      },
-      {
-        src: require('@/assets/img/history-slide-4.png'),
-        srcset: require('@/assets/img/history-slide-4@2x.png'),
-        date: '2005'
-      },
-      {
-        src: require('@/assets/img/history-slide-1.png'),
-        srcset: require('@/assets/img/history-slide-1@2x.png'),
-        date: '1995'
-      },
-      {
-        src: require('@/assets/img/history-slide-2.png'),
-        srcset: require('@/assets/img/history-slide-2@2x.png'),
-        date: '2001'
-      },
-      {
-        src: require('@/assets/img/history-slide-3.png'),
-        srcset: require('@/assets/img/history-slide-3@2x.png'),
-        date: '2002'
-      },
-      {
-        src: require('@/assets/img/history-slide-4.png'),
-        srcset: require('@/assets/img/history-slide-4@2x.png'),
-        date: '2005'
-      },
-      {
-        src: require('@/assets/img/history-slide-1.png'),
-        srcset: require('@/assets/img/history-slide-1@2x.png'),
-        date: '1995'
-      },
-      {
-        src: require('@/assets/img/history-slide-2.png'),
-        srcset: require('@/assets/img/history-slide-2@2x.png'),
-        date: '2001'
-      },
-      {
-        src: require('@/assets/img/history-slide-3.png'),
-        srcset: require('@/assets/img/history-slide-3@2x.png'),
-        date: '2002'
-      },
-      {
-        src: require('@/assets/img/history-slide-4.png'),
-        srcset: require('@/assets/img/history-slide-4@2x.png'),
-        date: '2005'
-      },
-      {
-        src: require('@/assets/img/history-slide-1.png'),
-        srcset: require('@/assets/img/history-slide-1@2x.png'),
-        date: '1995'
-      },
-      {
-        src: require('@/assets/img/history-slide-2.png'),
-        srcset: require('@/assets/img/history-slide-2@2x.png'),
-        date: '2001'
-      },
-      {
-        src: require('@/assets/img/history-slide-3.png'),
-        srcset: require('@/assets/img/history-slide-3@2x.png'),
-        date: '2002'
-      },
-      {
-        src: require('@/assets/img/history-slide-4.png'),
-        srcset: require('@/assets/img/history-slide-4@2x.png'),
-        date: '2005'
-      }
-    ],
     slider: null,
     sliderClass: ''
   }),
   computed: {
     history() {
-      return this.$store.getters['company/history']
+      const items = this.$store.getters['company/history']
+      items.sections.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return items;
     }
   },
   mounted () {

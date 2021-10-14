@@ -25,8 +25,13 @@ export const getters = {
     confidents: state => state.homePage.blocks.trust,
     decision: state => state.homePage.blocks.solutions,
     details: state => state.homePage.blocks.cabinet,
-    magazine: state => state.homePage.journal,
+    benefits: state => state.homePage.blocks.business_benefits,
+    magazineTitle: state => state.homePage.blocks.journal.title,
+    magazineArticles: state => state.homePage.journal,
+
+    reviewsTitle: state => state.homePage.blocks.clients.title,
+    reviewsClients: state => state.homePage.blocks.clients.sections,
+
     header: state => state.homePage.header,
     footer: state => state.homePage.footer,
-
 }

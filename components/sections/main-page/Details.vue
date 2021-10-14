@@ -11,8 +11,8 @@
         <div class="details__img-desk">
           <picture class="picture">
             <img
-              src='~/assets/img/details-desk.jpg'
-              srcset="@/assets/img/details-desk@2x.jpg 2x"
+              :src="details.imageDesktop"
+              :srcset="details.imageDesktop"
               class="details__img"
               alt="details-desk"
             />
@@ -21,8 +21,8 @@
         <div class="details__img-mob">
           <picture class="picture">
             <img
-              src='~/assets/img/details-mob.jpg'
-              srcset="@/assets/img/details-mob@2x.jpg 2x"
+              :src="details.imageMobile"
+              :srcset="details.imageMobile"
               class="details__img"
               alt="details-mob"
             />
@@ -38,7 +38,10 @@ export default {
   name: 'Details',
   computed: {
       details() {
-        return this.$store.getters.details
+        const details = this.$store.getters.details
+        details.imageDesktop = this.$config.imgURL + '' + details.image
+        details.imageMobile = this.$config.imgURL + '' + details.content
+        return details
       }
   },
 

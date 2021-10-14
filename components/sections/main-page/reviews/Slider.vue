@@ -1,85 +1,24 @@
 <template>
   <div class="swiper-container" :class="sliderClass">
     <div class="swiper-wrapper">
-      <div class="swiper-slide">
+
+      <div v-for="client in clients" :key="client.title" class="swiper-slide">
         <div class="reviews__wrapper">
-          <p class="reviews__text">
-            &laquo; С Rusonyx мы начали работать еще до того, как мне
-            передали это направление. И спустя больше года я понял,
-            почему Танаис остановила свой выбор на них. Грамотная
-            поддержка - отвечают быстро и по-делу, качественный дата
-            центр и все это находится в Москве. &raquo;
+          <p class="reviews__text" v-html="client.content">
           </p>
           <div class="reviews__wrapper-icon">
             <picture class="picure">
               <img
-                src='~/assets/img/review-icon.png'
-                srcset="@/assets/img/review-icon@2x.png 2x"
+                :src="client.imageLink"
+                :srcset="client.imageLink"
                 class="review__img"
                 alt="reviews-icon"
               />
             </picture>
             <div class="reviews__icon-about">
-              <div class="reviews__icon-title">Михаил Подпасков</div>
+              <div class="reviews__icon-title">{{ client.title }}</div>
               <div class="reviews__icon-text">
-                Исполнительный директор Танаис,
-                <a href="#" class="reviews__icon-link">tanais.ru</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="reviews__wrapper">
-          <p class="reviews__text">
-            &laquo; С Rusonyx мы начали работать еще до того, как мне
-            передали это направление. И спустя больше года я понял,
-            почему Танаис остановила свой выбор на них. Грамотная
-            поддержка - отвечают быстро и по-делу, качественный дата
-            центр и все это находится в Москве. &raquo;
-          </p>
-          <div class="reviews__wrapper-icon">
-            <picture class="picure">
-              <img
-                src='~/assets/img/review-icon.png'
-                srcset="@/assets/img/review-icon@2x.png 2x"
-                class="review__img"
-                alt="reviews-icon"
-              />
-            </picture>
-            <div class="reviews__icon-about">
-              <div class="reviews__icon-title">Михаил Подпасков</div>
-              <div class="reviews__icon-text">
-                Исполнительный директор Танаис,
-                <a href="#" class="reviews__icon-link">tanais.ru</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="reviews__wrapper">
-          <p class="reviews__text">
-            &laquo; С Rusonyx мы начали работать еще до того, как мне
-            передали это направление. И спустя больше года я понял,
-            почему Танаис остановила свой выбор на них. Грамотная
-            поддержка - отвечают быстро и по-делу, качественный дата
-            центр и все это находится в Москве. &raquo;
-          </p>
-          <div class="reviews__wrapper-icon">
-            <picture class="picure">
-              <img
-                src='~/assets/img/review-icon.png'
-                srcset="@/assets/img/review-icon@2x.png 2x"
-                class="review__img"
-                alt="reviews-icon"
-              />
-            </picture>
-            <div class="reviews__icon-about">
-              <div class="reviews__icon-title">Михаил Подпасков</div>
-              <div class="reviews__icon-text">
-                Исполнительный директор Танаис,
-                <a href="#" class="reviews__icon-link">tanais.ru</a>
+                {{ client.alt_title }}
               </div>
             </div>
           </div>
@@ -100,6 +39,15 @@ export default {
     slider: null,
     sliderClass: ''
   }),
+  computed: {
+    clients() {
+      const clients = this.$store.getters.reviewsClients
+      clients.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      })
+      return clients
+    }
+  },
   mounted () {
     const sliderId = uniqueId()
     this.sliderClass = 'swiper-' + sliderId
@@ -118,6 +66,10 @@ export default {
 </script>
 
 <style scoped>
+
+.review__img {
+  border-radius: 100px;
+}
 
 .reviews__wrapper {
   display: flex;

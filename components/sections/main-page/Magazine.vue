@@ -1,9 +1,9 @@
 <template>
   <section class="magazine">
     <div class="container">
-      <h1 class="magazine__title title">Журнал</h1>
+      <h1 class="magazine__title title">{{ title }}</h1>
+
       <div class="magazine__wrapper">
-        
         <div class="magazine__left">
           <picture class="picture">
             <source
@@ -25,6 +25,7 @@
             <p class="magazine__text-title">История одной DDOS атаки</p>
           </div>
         </div>
+
         <div class="magazine__right">
           <picture class="picture">
             <source
@@ -47,6 +48,7 @@
           </div>
         </div>
       </div>
+
       <div class="magazine__wrapper">
         <div class="magazine__left">
           <picture class="picture">
@@ -71,7 +73,6 @@
             </p>
           </div>
         </div>
-
         <div class="magazine__right">
           <picture class="picture">
             <source
@@ -90,15 +91,14 @@
               <a href="#" class="magazine__link">Технологии</a>
               <p class="magazine__text">12 февраля 2021</p>
             </div>
-
             <p class="magazine__text-title">
               Тонкие клиенты с точки зрения безопасности
             </p>
           </div>
         </div>
       </div>
-      <div class="magazine__wrapper">
 
+      <div class="magazine__wrapper">
         <div class="magazine__left">
           <picture class="picture">
             <source
@@ -117,11 +117,9 @@
               <a href="#" class="magazine__link">Безопасность</a>
               <p class="magazine__text">12 февраля 2021</p>
             </div>
-
             <p class="magazine__text-title">История одной DDOS атаки</p>
           </div>
         </div>
-
         <div class="magazine__right">
           <picture class="picture">
             <source
@@ -140,11 +138,11 @@
               <a href="#" class="magazine__link">Технологии</a>
               <p class="magazine__text">12 февраля 2021</p>
             </div>
-
             <p class="magazine__text-title">И целого бэкапа мало</p>
           </div>
         </div>
       </div>
+
     </div>
   </section>  
 </template>
@@ -153,9 +151,13 @@
 export default {
   name: 'Magazine',
   computed: {
+    title() {
+        return this.$store.getters.magazineTitle
+    },
     articles() {
-            return this.$store.getters['home/magazine']
-        }
+        
+        return this.$store.getters.magazineArticles
+    }
   }
 }
 </script>

@@ -1,23 +1,20 @@
 <template>
   <section class="advantage">
     <div class="container">
-      <h1 class="advantage__title title">Преимущества для бизнеса</h1>
+      <h1 class="advantage__title title">{{ page.title }}</h1>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">
-            Надежное и безопасное хранение данных
+            {{ benefits[0].title }}
           </div>
-          <p class="advantage__text text">
-            Мы используем только промышленное оборудование DELL, ПО мировых
-            лидеров рынка. Для обеспечения uptime 99,99% наши сервера
-            располагаются в надежном дата центре уровня Tier IV.
+          <p class="advantage__text text" v-html="benefits[0].content">
           </p>
-          <a href="" class="advantage__link">Подробнее</a>
+          <a href="" class="advantage__link">{{ benefits[0].link_name }}</a>
         </div>
         <picture class="picture">
           <img
-            src='~/assets/img/advantage-section-1.png'
-            srcset="@/assets/img/advantage-section-1@2x.png 2x"
+            :src="benefits[0].imageLink"
+            :srcset="benefits[0].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -27,40 +24,32 @@
       <div class="advantage__wrapper advantage__wrapper--mod">
         <picture class="picture">
           <img
-            src='~/assets/img/advantage-section-2.png'
-            srcset="@/assets/img/advantage-section-2@2x.png 2x"
+            :src="benefits[1].imageLink"
+            :srcset="benefits[1].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
         </picture>
         <div class="advantage__section-text">
           <div class="advantage__title-text">
-            Прозрачные цены и честные правила игры
+            {{ benefits[1].title }}
           </div>
-          <p class="advantage__text text">
-            Тарифы подойдут как высоконагруженным сервисам больших компаний,
-            так и небольшим проектам со скромными требованиями. Платите
-            только за используемые ресурсы или зарезервируйте определенный
-            объём на 1 или 3 года и сэкономьте до 49%. Следить за расходами
-            можно прямо в консоли управления.
+          <p class="advantage__text text" v-html="benefits[1].content">
           </p>
-          <a href="" class="advantage__link">Рассчитать стоимость</a>
+          <a href="" class="advantage__link">{{ benefits[1].link_name }}</a>
         </div>
       </div>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
-          <div class="advantage__title-text">Проактивная поддержка</div>
-          <p class="advantage__text text">
-            Тарифы на хостинг для сайта с одним из лучших соотношений цены и
-            качества на рынке. Просто занимайтесь своим бизнесом, не
-            волнуясь за ваш сайт.
+          <div class="advantage__title-text">{{ benefits[2].title }}</div>
+          <p class="advantage__text text" v-html="benefits[2].content">
           </p>
-          <a href="" class="advantage__link">Подробнее</a>
+          <a href="" class="advantage__link">{{ benefits[2].link_name }}</a>
         </div>
         <picture class="picture">
           <img
-            src='~/assets/img/advantage-section-3.png'
-            srcset="@/assets/img/advantage-section-3@2x.png 2x"
+            :src="benefits[2].imageLink"
+            :srcset="benefits[2].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -74,7 +63,16 @@
 export default {
   name: 'Advantage',
   computed: {
-
+    page () {
+      const benefits = this.$store.getters.benefits
+      benefits.sections.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return benefits
+    },
+    benefits () {
+      return this.page.sections
+    }
 }
 }
 </script>

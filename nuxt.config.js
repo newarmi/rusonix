@@ -68,6 +68,7 @@ export default {
   },
 
   publicRuntimeConfig: {
-    imgURL: 'https://api.rusonyx.staj.fun/storage/'
+    imgURL: 'https://api.rusonyx.staj.fun/storage/',
+    siteURL: 'https://api.rusonyx.staj.fun/'
   }
 }

@@ -1,23 +1,18 @@
 <template>
   <section class="advantage">
     <div class="container">
-      <h1 class="advantage__title title">Ваш бизнес всегда онлайн</h1>
+      <h1 class="advantage__title title">{{ page.title }}</h1>
 
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
-          <div class="advantage__title-text">Наша Миссия</div>
-          <p class="advantage__text advantage__text-company text">
-            Мы помогаем строить бизнес и отношения в Интернет на
-            долгосрочном партнерстве, отношения без доминирования одной или
-            нескольких глобальных корпораций. Потому что у бизнесов, как и у
-            людей, всегда должен быть выбор. У нас простая формула:
-            партнерство ведет к успеху.
+          <div class="advantage__title-text">{{ advantages[0].title }}</div>
+          <p class="advantage__text advantage__text-company text" v-html="advantages[0].content">
           </p>
         </div>
         <picture class="picture">
           <img
-            src="@/assets/img/advantage-section-company-1.png"
-            srcset="@/assets/img/advantage-section-company-1@2x.png 2x"
+            :src="advantages[0].imageLink"
+            :srcset="advantages[0].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -26,44 +21,28 @@
       <div class="advantage__wrapper advantage__wrapper--mod">
         <picture class="picture">
           <img
-            src="@/assets/img/advantage-section-company-2.png"
-            srcset="@/assets/img/advantage-section-company-2@2x.png 2x"
+            :src="advantages[1].imageLink"
+            :srcset="advantages[1].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
         </picture>
         <div class="advantage__section-text">
-          <div class="advantage__title-text">Наши Ценности</div>
-          <p class="advantage__text advantage__text-company text">
-            Успех наших партнеров автоматически означает и наш успех.
-            Поэтому мы так привержены идее партнерства. Идее, которая
-            означает конкретных людей, а не безликих «клиентов», идее,
-            которая вызывает доверие и долгосрочные отношения, развивает наш
-            профессионализм и совместное творчество, заставляет
-            предоставлять нас крутой сервис и достигать результатов вместе.
-            Она означает то, что мы делаем.
+          <div class="advantage__title-text">{{ advantages[1].title }}</div>
+          <p class="advantage__text advantage__text-company text" v-html="advantages[1].content">
           </p>
         </div>
       </div>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
-          <div class="advantage__title-text">Наша стратегия</div>
-          <p class="advantage__text advantage__text-company text">
-            Мы предоставляем не серверы. Мы предоставляем сервис. Наша
-            основная задача - предоставлять крутой сервис облачной
-            инфраструктуры для e-commerce. С другой стороны, успех
-            долгосрочного партнерства подразумевает постоянное развитие.
-            Внедряя новые технические решения, повышая свой профессионализм,
-            мы делаем инфраструктуру для наших партнеров надежнее,
-            безопаснее и быстрее. Но самое главное – сверху этого, мы
-            развиваем наш сервис, делаем его удобнее и незаметнее. Потому
-            что именно сервис – лицо нашего бизнеса.
+          <div class="advantage__title-text">{{ advantages[2].title }}</div>
+          <p class="advantage__text advantage__text-company text" v-html="advantages[2].content">
           </p>
         </div>
         <picture class="picture">
           <img
-            src="@/assets/img/advantage-section-company-3.png"
-            srcset="@/assets/img/advantage-section-company-3@2x.png 2x"
+            :src="advantages[2].imageLink"
+            :srcset="advantages[2].imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -75,7 +54,19 @@
 
 <script>
 export default {
-  name: 'Advantage'
+  name: 'Advantage',
+  computed: {
+    page() {
+      return this.$store.getters['company/advantage']
+    },
+    advantages() {
+      const advantages = this.page.sections
+      advantages.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return advantages
+    }
+  }
 }
 </script>
 

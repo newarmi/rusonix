@@ -6,7 +6,6 @@
         <p class="license__text text" v-html="licenses.description">
         </p>
       </div>
-
       <div class="license__sertificates">
         <div v-for="license in licenses.sections" :key="license.title" class="license__sertificate-wrap">
           <picture class="picture">

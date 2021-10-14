@@ -1,7 +1,7 @@
 <template>
   <section class="history">
     <div class="container">
-      <h1 class="history__title title">История</h1>
+      <h1 class="history__title title">{{ title }}</h1>
     </div>
     <div class="container__history-slider">
       <Slider />
@@ -14,8 +14,13 @@ import Slider from '@/components/sections/company-page/history/Slider'
 
 export default {
   name: 'History',
-  components: {
+    components: {
     Slider
+  },
+  computed: {
+    title() {
+      return this.$store.getters['company/history'].title
+    }
   }
 }
 </script>

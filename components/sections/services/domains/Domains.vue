@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import Sliders from '~/components/sections/services/domains/Sliders'
+import Sliders from '@/components/sections/services/domains/Sliders'
 
 export default {
   name: 'Domains',
@@ -55,42 +55,6 @@ export default {
   components: {
     Sliders
   },
-  data: () => ({
-    domainsBilling: [
-      {
-        title: '.ru',
-        price: 1290
-      },
-      {
-        title: '.com',
-        price: 1290
-      },
-      {
-        title: '.net',
-        price: 1290
-      },
-      {
-        title: '.org',
-        price: 1290
-      },
-      {
-        title: '.su',
-        price: 1290
-      },
-      {
-        title: '.info',
-        price: 1290
-      },
-      {
-        title: '.biz',
-        price: 1290
-      },
-      {
-        title: '.host4g.ru',
-        price: 1290
-      }
-    ]
-  }),
   computed: {
     domains() {
       const item = this.$store.getters['services/domainsList']

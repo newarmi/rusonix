@@ -2,75 +2,21 @@
   <section class="requisites">
     <div class="container">
       <div class="requisites__title title">
-        Реквизиты и юридическая информация
+        {{ page.title }}
       </div>
       <div class="requisites__wrapper">
-        <div class="requisites__info">
+        <div v-for="item in requisites" :key="item.title" class="requisites__info">
           <a href="#" class="requisites__link">
             <picture class="picture">
               <img
-                src="@/assets/img/requisites-file.png"
-                srcset="@/assets/img/requisites-file@2x.png"
+                :src="item.imageLink"
+                :srcset="item.imageLink"
                 alt="requisites-file"
                 class="requisites__img"
               />
             </picture>
           </a>
-          <div class="requisites__info-title">Для юридических лиц</div>
-        </div>
-        <div class="requisites__info">
-          <a href="#" class="requisites__link">
-            <picture class="picture">
-              <img
-                src="@/assets/img/requisites-file.png"
-                srcset="@/assets/img/requisites-file@2x.png 2x"
-                alt="requisites-file"
-                class="requisites__img"
-              />
-            </picture>
-          </a>
-          <div class="requisites__info-title">Для физических лиц</div>
-        </div>
-        <div class="requisites__info">
-          <a href="#" class="requisites__link">
-            <picture class="picture">
-              <img
-                src="@/assets/img/requisites-file-1.png"
-                srcset="@/assets/img/requisites-file-1.png 2x"
-                alt="requisites-file"
-                class="requisites__img"
-              />
-            </picture>
-          </a>
-          <div class="requisites__info-title">Лицензия</div>
-        </div>
-        <div class="requisites__info">
-          <a href="#" class="requisites__link">
-            <picture class="picture">
-              <img
-                src="@/assets/img/requisites-file-1.png"
-                srcset="@/assets/img/requisites-file-1@2x.png 2x"
-                alt="requisites-file"
-                class="requisites__img"
-              />
-            </picture>
-          </a>
-          <div class="requisites__info-title requisites__info-title--mod">
-            Свидетельство о регистрации
-          </div>
-        </div>
-        <div class="requisites__info">
-          <a href="#" class="requisites__link">
-            <picture class="picture">
-              <img
-                src="@/assets/img/requisites-file-1.png"
-                srcset="@/assets/img/requisites-file-1@2x.png 2x"
-                alt="requisites-file"
-                class="requisites__img"
-              />
-            </picture>
-          </a>
-          <div class="requisites__info-title">Результаты СОУТ</div>
+          <div class="requisites__info-title">{{ item.title }}</div>
         </div>
       </div>
     </div>
@@ -79,7 +25,19 @@
 
 <script>
 export default {
-  name: 'Requisites'
+  name: 'Requisites',
+  computed: {
+    page() {
+      return this.$store.getters['company/requisities']
+    },
+    requisites () {
+      const requisities = this.page.sections
+      requisities.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return requisities
+    }
+  }
 }
 </script>
 
