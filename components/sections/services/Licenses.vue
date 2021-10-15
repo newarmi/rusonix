@@ -1,13 +1,13 @@
 <template>
   <section class="license">
     <div class="container">
-      <div class="license__title title">{{ licenses.title }}</div>
+      <div class="license__title title">{{ page.title }}</div>
       <div class="license__text-descr">
-        <p class="license__text text" v-html="licenses.description">
+        <p class="license__text text" v-html="page.description">
         </p>
       </div>
       <div class="license__sertificates">
-        <div v-for="license in licenses.sections" :key="license.title" class="license__sertificate-wrap">
+        <div v-for="license in licenses" :key="license.title" class="license__sertificate-wrap">
           <nuxt-link :to="license.link">
           <picture class="picture">
             <img
@@ -32,9 +32,12 @@ export default {
   name: 'SectionLicenses',
   
   computed: {
+    page() {
+        return this.$store.getters['services/licenses']
+    },
     licenses() {
-      const items  = this.$store.getters['services/licenses']
-      items.sections.forEach(element => {
+      const items  = this.page.sections
+      items.forEach(element => {
         element.imageLink = this.$config.imgURL + '' + element.image
       });
       return items

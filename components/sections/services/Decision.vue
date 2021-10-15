@@ -3,94 +3,25 @@
     <div class="container">
       <h1 class="decision__title title">IT-инфраструктура для бизнеса</h1>
       <div class="decision__wrapper-cards">
-        <div class="decision__card">
-          <div class="decision__card-title">Облачные VPS серверы</div>
+        <div v-for="card in decision" :key="card.title" class="decision__card" >
+          <div class="decision__card-title"><nuxt-link class="black-link" :to="card.link">{{card.title}}</nuxt-link></div>
           <p class="decision__card-text">
-            Гибкие конфигурации специально подготовленные для быстрой и
-            надежной работы интернет проектов
+            {{card.content}}
           </p>
           <ul class="decision__list">
-            <li class="decision__item">
-              <a href="#" class="decision__link">NVMe</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Intel Xeon Gold</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">KVM</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Plesk</a>
-            </li>
+            <label class="decision__item" v-html="card.alt_title">
+            </label>
           </ul>
-          <picture class="picture">
+          
+        <picture class="picture">
             <img
-              src="@/assets/img/decision-card-1.png"
-              srcset="@/assets/img/decision-card-1@2x.png 2x"
+              :src="card.imageLink"
+              :srcset="card.imageLink"
               class="decision__img"
               alt="decision-card"
-            />
-          </picture>
-        </div>
-
-        <div class="decision__card">
-          <div class="decision__card-title">Виртуальный дата центр</div>
-          <p class="decision__card-text">
-            Масштабируемые вычислительные мощности для размещения и
-            прототипирования ваших проектов
-          </p>
-          <ul class="decision__list">
-            <li class="decision__item">
-              <a href="#" class="decision__link">NVMe</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Intel Xeon Gold</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">KVM</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Plesk</a>
-            </li>
-          </ul>
-          <picture class="picture">
-            <img
-              src="@/assets/img/decision-card-2.png"
-              srcset="@/assets/img/decision-card-2@2x.png 2x"
-              class="decision__img"
-              alt="decision-card"
-            />
-          </picture>
-        </div>
-
-        <div class="decision__card">
-          <div class="decision__card-title">Облачный веб хостинг</div>
-          <p class="decision__card-text">
-            Масштабируемые вычислительные мощности для размещения и
-            прототипирования ваших проектов
-          </p>
-          <ul class="decision__list">
-            <li class="decision__item">
-              <a href="#" class="decision__link">NVMe</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Intel Xeon Gold</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">KVM</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Plesk</a>
-            </li>
-          </ul>
-          <picture class="picture">
-            <img
-              src="@/assets/img/decision-card-3.png"
-              srcset="@/assets/img/decision-card-3@2x.png 2x"
-              class="decision__img"
-              alt="decision-card"
-            />
-          </picture>
+            />   
+        </picture>
+          
         </div>
       </div>
     </div>
@@ -99,11 +30,23 @@
 
 <script>
 export default {
-  name: 'Decision'
+  name: 'Decision',
+  computed: {
+    decision() {
+      const decision = this.$store.getters['services/solutionsSections']
+      decision.forEach(element => {
+        element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return decision
+    }
+  }
 }
 </script>
 
 <style scoped>
+.black-link {
+  color: black;
+}
 
 .decision {
   margin-top: 46px;
@@ -174,7 +117,10 @@ export default {
 }
 
 .decision__item {
+  font-family: "Graphik", sans-serif;
   padding-right: 20px;
+  white-space: pre-wrap;
+  color: #5B5B5B;
 }
 
 .decision__link {

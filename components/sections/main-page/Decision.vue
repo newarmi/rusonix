@@ -9,25 +9,15 @@
             {{card.content}}
           </p>
           <ul class="decision__list">
-            <li class="decision__item">
-              <a href="#" class="decision__link">NVMe</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Intel Xeon Gold</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">KVM</a>
-            </li>
-            <li class="decision__item">
-              <a href="#" class="decision__link">Plesk</a>
-            </li>
+            <label class="decision__item" v-html="card.alt_title">
+            </label>
           </ul>
           
           <picture class="picture">
             
             <img
-              src='~/assets/img/decision-card-1.png'
-              srcset="@/assets/img/decision-card-1@2x.png 2x"
+              :src="card.imageLink"
+              :srcset="card.imageLink"
               class="decision__img"
               alt="decision-card"
             />
@@ -44,8 +34,12 @@
 export default {
   name: 'Decision',
   computed: {
-        decision() {
-        return this.$store.getters.decision
+    decision() {
+      const decision = this.$store.getters.decision
+      decision.sections.forEach(element => {
+          element.imageLink = this.$config.imgURL + '' + element.image
+      });
+      return decision
       }
   }
 }
@@ -126,7 +120,10 @@ export default {
 }
 
 .decision__item {
+  font-family: "Graphik", sans-serif;
   padding-right: 20px;
+  white-space: pre-wrap;
+  color: #5B5B5B;
 }
 
 .decision__link {
