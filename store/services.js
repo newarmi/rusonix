@@ -1,13 +1,11 @@
 export const state = () => ({
-    servicePage: {}
+    page: {}
   })
   
   export const mutations = {
-  
     setPage(state, page) {
-      state.servicePage = page
+      state.page = page
     },
-  
   }
   
   export const actions = {
@@ -18,14 +16,14 @@ export const state = () => ({
   }
   
   export const getters = {
-      domainsInfo: state => state.servicePage.blocks.domains,
-      domainsList: state => state.servicePage.domains,
-      solutionsTitle: state => state.servicePage.blocks.itForBusiness,
-      solutionsSections: state => state.servicePage.blocks.solutions,
-      licenses: state => state.servicePage.blocks.licenses,
-      certificates: state => state.servicePage.blocks.certificates,
+      domainsInfo: state => state.page.blocks.domains,
+      domainsList: state => state.page.domains,
+      solutionsTitle: state => state.page.blocks.itForBusiness,
+      solutionsSections: state => state.page.blocks.solutions,
+      licenses: state => state.page.blocks.licenses,
+      certificates: state => state.page.blocks.certificates,
       
-      header: state => state.servicePage.header,
-      footer: state => state.servicePage.footer,
+      header: state => state.page.header,
+      footer: state => state.page.footer,
   }
   

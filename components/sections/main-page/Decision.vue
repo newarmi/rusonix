@@ -4,7 +4,7 @@
       <h1 class="decision__title title">{{decision.title}}</h1>
       <div class="decision__wrapper-cards">
         <div v-for="card in decision.sections" :key="card.title" class="decision__card" >
-          <div class="decision__card-title">{{card.title}}</div>
+          <div class="decision__card-title"><nuxt-link class="black-link" :to="card.link">{{card.title}}</nuxt-link></div>
           <p class="decision__card-text">
             {{card.content}}
           </p>
@@ -22,14 +22,18 @@
               <a href="#" class="decision__link">Plesk</a>
             </li>
           </ul>
+          
           <picture class="picture">
+            
             <img
               src='~/assets/img/decision-card-1.png'
               srcset="@/assets/img/decision-card-1@2x.png 2x"
               class="decision__img"
               alt="decision-card"
             />
+            
           </picture>
+          
         </div>
       </div>
     </div>
@@ -48,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.black-link {
+  color: black;
+}
+
 
 .decision {
   margin-top: 46px;

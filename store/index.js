@@ -1,12 +1,12 @@
 
 
 export const state = () => ({
-  homePage: {},
+  page: {},
 })
 
 export const mutations = {
   setPage(state, homePage) {
-    state.homePage = homePage
+    state.page = homePage
   },
   setFooter(state, footer) {
     state.footer = footer
@@ -15,23 +15,23 @@ export const mutations = {
 
 export const actions = {
   async fetchPage({commit}) {   
-    const homePage = await this.$axios.$get('home')
-    commit('setPage', homePage)
+    const page = await this.$axios.$get('home')
+    commit('setPage', page)
   },
 }
 
 export const getters = {
-    advantage: state => state.homePage.blocks.main_articles,
-    confidents: state => state.homePage.blocks.trust,
-    decision: state => state.homePage.blocks.solutions,
-    details: state => state.homePage.blocks.cabinet,
-    benefits: state => state.homePage.blocks.business_benefits,
-    magazineTitle: state => state.homePage.blocks.journal.title,
-    magazineArticles: state => state.homePage.journal,
+    advantage: state => state.page.blocks.main_articles,
+    confidents: state => state.page.blocks.trust,
+    decision: state => state.page.blocks.solutions,
+    details: state => state.page.blocks.cabinet,
+    benefits: state => state.page.blocks.business_benefits,
+    magazineTitle: state => state.page.blocks.journal.title,
+    magazineArticles: state => state.page.journal,
 
-    reviewsTitle: state => state.homePage.blocks.clients.title,
-    reviewsClients: state => state.homePage.blocks.clients.sections,
+    reviewsTitle: state => state.page.blocks.clients.title,
+    reviewsClients: state => state.page.blocks.clients.sections,
 
-    header: state => state.homePage.header,
-    footer: state => state.homePage.footer,
+    header: state => state.page.header,
+    footer: state => state.page.footer,
 }

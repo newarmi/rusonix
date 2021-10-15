@@ -1,10 +1,10 @@
 export const state = () => ({
-  companyPage: {}
+  page: {}
 })
 
 export const mutations = {
   setPage(state, page) {
-    state.companyPage = page
+    state.page = page
   },
 }
 
@@ -16,13 +16,13 @@ export const actions = {
 }
 
 export const getters = {
-    advantage: state => state.companyPage.blocks.online,
-    career: state => state.companyPage.blocks.career,
-    contact: state => state.companyPage.blocks.contacts,
-    magazine: state => state.companyPage.journal,
-    requisities: state => state.companyPage.blocks.requisites,
-    history: state => state.companyPage.blocks.history,
+    advantage: state => state.page.blocks.online,
+    career: state => state.page.blocks.career,
+    contact: state => state.page.blocks.contacts,
+    magazine: state => state.page.journal,
+    requisities: state => state.page.blocks.requisites,
+    history: state => state.page.blocks.history,
     
-    header: state => state.companyPage.header,
-    footer: state => state.companyPage.footer,
+    header: state => state.page.header,
+    footer: state => state.page.footer,
 }
