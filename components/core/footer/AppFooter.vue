@@ -13,17 +13,17 @@
           </nuxt-link>
         </picture>
         <div class="footer__icon">
-          <a class="footer__icon-link" href="#">
+          <a class="footer__icon-link" :href="footer.instagram">
             <svg class="inst__icon" width="20" height="20">
               <use xlink:href="@/assets/svg/sprites.svg#instagram"></use>
             </svg>
           </a>
-          <a class="footer__icon-link" href="#">
+          <a class="footer__icon-link" :href="footer.facebook">
             <svg class="facebook__icon" width="20" height="20">
               <use xlink:href="@/assets/svg/sprites.svg#facebook"></use>
             </svg>
           </a>
-          <a class="footer__icon-link" href="#">
+          <a class="footer__icon-link" :href="footer.youtube">
             <svg class="youtube__icon" width="20" height="14">
               <use xlink:href="@/assets/svg/sprites.svg#youtube"></use>
             </svg>
@@ -68,7 +68,7 @@ export default {
       if(this.$route.name==='index') {
         return this.$store.getters.footer
       } else {
-        return this.$store.getters[this.$route.name + '/footer']
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']
       }
     }
   }

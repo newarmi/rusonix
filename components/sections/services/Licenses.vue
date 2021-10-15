@@ -8,6 +8,7 @@
       </div>
       <div class="license__sertificates">
         <div v-for="license in licenses.sections" :key="license.title" class="license__sertificate-wrap">
+          <nuxt-link :to="license.link">
           <picture class="picture">
             <img
               :src="license.imageLink"
@@ -16,7 +17,10 @@
               class="license__img"
             />
           </picture>
-          <div class="license__sertificate-title">{{ license.title }} </div>
+          </nuxt-link>
+          <nuxt-link class="nl__black" :to="license.link">
+            <div class="license__sertificate-title">{{ license.title }} </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -26,6 +30,7 @@
 <script>
 export default {
   name: 'SectionLicenses',
+  
   computed: {
     licenses() {
       const items  = this.$store.getters['services/licenses']
@@ -39,6 +44,10 @@ export default {
 </script>
 
 <style scoped>
+.nl__black {
+  color: black
+}
+
 
 .license {
   background-color: #fcf7f2;

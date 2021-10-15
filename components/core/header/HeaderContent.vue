@@ -17,7 +17,7 @@ export default {
       if(this.$route.name==='index') {
         return this.$store.getters.header
       } else {
-        return this.$store.getters[this.$route.name + '/header']
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
       }
     }
   }
