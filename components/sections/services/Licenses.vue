@@ -3,8 +3,8 @@
     <div class="container">
       <div class="license__title title">{{ page.title }}</div>
       <div class="license__text-descr">
-        <p class="license__text text" v-html="page.description">
-        </p>
+        <div class="license__text text" v-html="page.description">
+        </div>
       </div>
       <div class="license__sertificates">
         <div v-for="license in licenses" :key="license.title" class="license__sertificate-wrap">

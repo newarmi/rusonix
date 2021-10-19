@@ -13,8 +13,8 @@
             />
           </picture>
           <div class="career__card-title">{{ item.title }}</div>
-          <p class="career__card-text text" v-html="item.content">
-          </p>
+          <div class="career__card-text text" v-html="item.content">
+          </div>
         </div>
       </div>
     </div>

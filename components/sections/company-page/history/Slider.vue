@@ -13,7 +13,7 @@
             />
           </picture>
           <div class="history__slide-date">{{item.title}}</div>
-          <p class="history__slide-text text" v-html="item.content"></p>
+          <div class="history__slide-text text" v-html="item.content"></div>
         </div>
       </div>
 

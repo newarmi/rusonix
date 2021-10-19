@@ -41,7 +41,7 @@
             </p>
           </div>
         </div>
-        <div v-for="item in otherContacts" :key="item" class="contact__address-about">
+        <div v-for="item in otherContacts" :key="item.title" class="contact__address-about">
           <div v-for="contact in item" :key="contact.title" class="contact__address-about-wrap">
             <div class="contact__address-title">{{contact.title}}</div>
             <p class="contact__address-text">{{contact.content}}</p>

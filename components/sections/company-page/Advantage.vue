@@ -6,8 +6,8 @@
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ advantages[0].title }}</div>
-          <p class="advantage__text advantage__text-company text" v-html="advantages[0].content">
-          </p>
+          <div class="advantage__text advantage__text-company text" v-html="advantages[0].content">
+          </div>
         </div>
         <picture class="picture">
           <img
@@ -29,15 +29,15 @@
         </picture>
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ advantages[1].title }}</div>
-          <p class="advantage__text advantage__text-company text" v-html="advantages[1].content">
-          </p>
+          <div class="advantage__text advantage__text-company text" v-html="advantages[1].content">
+          </div>
         </div>
       </div>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ advantages[2].title }}</div>
-          <p class="advantage__text advantage__text-company text" v-html="advantages[2].content">
-          </p>
+          <div class="advantage__text advantage__text-company text" v-html="advantages[2].content">
+          </div>
         </div>
         <picture class="picture">
           <img

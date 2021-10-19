@@ -4,8 +4,8 @@
 
       <div v-for="client in clients" :key="client.title" class="swiper-slide">
         <div class="reviews__wrapper">
-          <p class="reviews__text" v-html="client.content">
-          </p>
+          <div class="reviews__text" v-html="client.content">
+          </div>
           <div class="reviews__wrapper-icon">
             <picture class="picure">
               <img

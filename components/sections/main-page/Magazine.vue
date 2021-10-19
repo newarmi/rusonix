@@ -1,150 +1,158 @@
 <template>
   <section class="magazine">
-    <div class="container">
-      <h1 class="magazine__title title">{{ title }}</h1>
+        <div class="container">
+          <h1 class="magazine__title title">Журнал</h1>
+          <div class="magazine__wrapper">
+            <div class="magazine__left">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-1.jpg"
+                  srcset="@/assets/img/magazine-mobile-1.jpg"
+                />
+                <img
+                  src="@/assets/img/magazine-1.jpg"
+                  srcset="@/assets/img/magazine-1.jpg"
+                  class="magazine__img-big"
+                  alt="magazine"
+                />
+              </picture>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Безопасность</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
+                <p class="magazine__text-title">История одной DDOS атаки</p>
+              </div>
+            </div>
+            <div class="magazine__right">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-2.jpg"
+                  srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                />
+                <img
+                  src="@/assets/img/magazine-2.jpg"
+                  srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                  class="magazine__img-small"
+                  alt="magazine"
+                />
+              </picture>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Технологии</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
+                <p class="magazine__text-title">И целого бэкапа мало</p>
+              </div>
+            </div>
+          </div>
 
-      <div class="magazine__wrapper">
-        <div class="magazine__left">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-1.jpg, @/assets/img/magazine-mobile-1@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-1.jpg'
-              srcset="@/assets/img/magazine-1@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Безопасность</a>
-              <p class="magazine__text">12 февраля 2021</p>
-            </div>
-            <p class="magazine__text-title">История одной DDOS атаки</p>
-          </div>
-        </div>
+          <div class="magazine__wrapper">
+            <div class="magazine__right">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-3.jpg"
+                  srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                />
+                <img
+                  src="@/assets/img/magazine-3.jpg"
+                  srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                  class="magazine__img-small"
+                  alt="magazine"
+                />
+              </picture>
 
-        <div class="magazine__right">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-2.jpg, @/assets/img/magazine-mobile-2@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-2.jpg'
-              srcset="@/assets/img/magazine-2@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Технологии</a>
-              <p class="magazine__text">12 февраля 2021</p>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Безопасность</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
+                <p class="magazine__text-title magazine__text-title--mod">
+                  Типичные ошибки при оценке киберрисков
+                </p>
+              </div>
             </div>
-            <p class="magazine__text-title">И целого бэкапа мало</p>
-          </div>
-        </div>
-      </div>
+            <div class="magazine__left">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-4.jpg"
+                  srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                />
+                <img
+                  src="@/assets/img/magazine-4.jpg"
+                  srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                  class="magazine__img-big"
+                  alt="magazine"
+                />
+              </picture>
 
-      <div class="magazine__wrapper">
-        <div class="magazine__left">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-3.jpg, @/assets/img/magazine-mobile-3@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-3.jpg'
-              srcset="@/assets/img/magazine-3@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Безопасность</a>
-              <p class="magazine__text">12 февраля 2021</p>
-            </div>
-            <p class="magazine__text-title magazine__text-title--mod">
-              Типичные ошибки при оценке киберрисков
-            </p>
-          </div>
-        </div>
-        <div class="magazine__right">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-4.jpg, @/assets/img/magazine-mobile-4@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-4.jpg'
-              srcset="@/assets/img/magazine-4@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Технологии</a>
-              <p class="magazine__text">12 февраля 2021</p>
-            </div>
-            <p class="magazine__text-title">
-              Тонкие клиенты с точки зрения безопасности
-            </p>
-          </div>
-        </div>
-      </div>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Технологии</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
 
-      <div class="magazine__wrapper">
-        <div class="magazine__left">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-5.jpg, @/assets/img/magazine-mobile-5@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-5.jpg'
-              srcset="@/assets/img/magazine-5@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Безопасность</a>
-              <p class="magazine__text">12 февраля 2021</p>
+                <p class="magazine__text-title">
+                  Тонкие клиенты с точки зрения безопасности
+                </p>
+              </div>
             </div>
-            <p class="magazine__text-title">История одной DDOS атаки</p>
           </div>
-        </div>
-        <div class="magazine__right">
-          <picture class="picture">
-            <source
-              media="(max-width: 1250px)"
-              srcset="@/assets/img/magazine-mobile-6.jpg, @/assets/img/magazine-mobile-6@2x.jpg 2x"
-            />
-            <img
-              src='~/assets/img/magazine-6.jpg'
-              srcset="@/assets/img/magazine-6@2x.jpg 2x"
-              class="magazine__img"
-              alt="magazine"
-            />
-          </picture>
-          <div class="magazine__left-about">
-            <div class="magazine__wrap-text">
-              <a href="#" class="magazine__link">Технологии</a>
-              <p class="magazine__text">12 февраля 2021</p>
-            </div>
-            <p class="magazine__text-title">И целого бэкапа мало</p>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  </section>  
+          <div class="magazine__wrapper">
+            <div class="magazine__left">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-5.jpg"
+                  srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                />
+                <img
+                  src="@/assets/img/magazine-5.jpg"
+                  srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                  class="magazine__img-big"
+                  alt="magazine"
+                />
+              </picture>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Безопасность</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
+
+                <p class="magazine__text-title">История одной DDOS атаки</p>
+              </div>
+            </div>
+            <div class="magazine__right">
+              <picture class="picture">
+                <source
+                  media="(max-width: 1250px)"
+                  src="@/assets/img/magazine-mobile-6.jpg"
+                  srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                />
+                <img
+                  src="@/assets/img/magazine-6.jpg"
+                  srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                  class="magazine__img-small"
+                  alt="magazine"
+                />
+              </picture>
+              <div class="magazine__left-about">
+                <div class="magazine__wrap-text">
+                  <a href="#" class="magazine__link">Технологии</a>
+                  <p class="magazine__text">12 февраля 2021</p>
+                </div>
+
+                <p class="magazine__text-title">И целого бэкапа мало</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> 
 </template>
 
 <script>
@@ -163,7 +171,6 @@ export default {
 </script>
 
 <style scoped>
-
 .magazine__title {
   padding-top: 72px;
   margin-bottom: 72px;
@@ -175,14 +182,28 @@ export default {
   margin-bottom: 75px;
   gap: 33px;
 }
-
 .magazine__left-about {
   display: flex;
   flex-direction: column;
   margin-top: 24px;
   margin-bottom: 21px;
 }
-
+ 
+ .magazine__img-big{
+   width: 100%;
+   max-width: 808px;
+   height: 390px;
+   border-radius: 6px;
+   object-fit: cover;
+  
+ }
+ .magazine__img-small{
+  width: 100%;
+  max-width: 431px;
+  height: 390px;
+  border-radius: 6px; 
+  object-fit: cover;
+ }
 .magazine__wrap-text {
   display: flex;
 }
@@ -243,6 +264,9 @@ export default {
   .magazine__text-title {
     max-width: 340px;
   }
+  .magazine__right {
+    max-width: none;
+  }
   .magazine__img {
     object-fit: cover;
     max-width: 343px;
@@ -268,5 +292,4 @@ export default {
     margin-bottom: 24px;
   }
 }
-
 </style>
