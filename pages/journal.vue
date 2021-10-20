@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'MagazinePage',
+  name: 'JournalPage',
 }
 </script>
 

@@ -59,7 +59,7 @@ export default {
     domains() {
       const item = this.$store.getters['services/domainsList']
       item.forEach(element => {
-        element.price = element.periods.find(Boolean).base_cost
+        element.price = Math.floor(element.periods.find(Boolean).base_cost)
       })
       return item
     },

@@ -10,12 +10,12 @@ export const state = () => ({
   
   export const actions = {
     async fetchPage({commit}) {   
-      const page = await this.$axios.$get('services/cscart')
+      const page = await this.$axios.$get('support')
       commit('setPage', page)
     },
   }
   
-  export const getters = {
+  export const getters = {  
       buttons: state => state.page.buttons,
       header: state => state.page.header,
       footer: state => state.page.footer,

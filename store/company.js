@@ -23,6 +23,7 @@ export const getters = {
     requisities: state => state.page.blocks.requisites,
     history: state => state.page.blocks.history,
     
+    buttons: state => state.page.buttons,
     header: state => state.page.header,
     footer: state => state.page.footer,
 }

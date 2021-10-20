@@ -2,7 +2,7 @@
   <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
     <div class="container">
       <h1 class="start__title" v-html="header.title"></h1>
-      <p v-show="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></p>
+      <p v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></p>
     </div>
     <div class="header__decor"></div>
   </div>

@@ -44,19 +44,270 @@
         <nav class="navigation">
           <ul class="navigation__list">
             <li class="navigation__item">
-              <nuxt-link to="/company" class="navigation__link">О компании</nuxt-link>
+              <nuxt-link to="/company" class="navigation__link">{{ buttons.company }}</nuxt-link>
+               <ul class="navigation__dropdown">
+                    <div class="navigation__container-dropdown">
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link"
+                          >Ваш бизнес всегда онлайн</a>
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Наша миссия</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Наши ценности</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Наша стратегия</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <ul>
+                      <li>
+                        <a class="dropdown__link" href="#"
+                          >История</a>
+                      </li>
+                      <li class="dropdown__submenu-navigation">
+                        <a class="dropdown__link" href="#"
+                          >Контакты</a>
+                      </li>
+                      <li class="dropdown__submenu-navigation">
+                        <a class="dropdown__link" href="#"
+                          >Карьера</a>
+                      </li>
+                      </ul>
+                      <ul>
+                      <li>
+                        <a class="dropdown__link " href="#"
+                          >События и новости</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Обзоры</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Технологии</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Безопасность</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Новости</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >E-commerce</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      </ul>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Реквизиты и юридическая информация</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Для юридических лиц</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Для физических лиц</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Лицензия</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Свидетельство о регистрации</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Результаты СОУТ</a
+                            >
+                          </li>
+                        </ul>
+                      </li> 
+                    </div>
+                  </ul>
             </li>
             <li class="navigation__item">
-              <nuxt-link to="/services" class="navigation__link">Услуги</nuxt-link>
+              <nuxt-link to="/services" class="navigation__link">{{ buttons.services }}</nuxt-link>
+                  <ul class="navigation__dropdown">
+                    <div class="navigation__container-dropdown">
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Облачные VPS серверы</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Готовые тарифы</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Своя конфигурация</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >NVMe + Intel Xeon Gold</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a class="dropdown__link" href="#"
+                          >Виртуальный дата центр</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link">Обзор</a>
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Serverless</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a class="dropdown__link" href="#"
+                          >Облачный веб хостинг</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link">Тарифы</a>
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Тестовый хостинг</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                      <li>
+                        <a class="dropdown__link" href="#"
+                          >SSL, лицензии и домены</a
+                        >
+                        <ul class="dropdown__submenu-navigation">
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >SSL сертификаты</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Лицензии</a
+                            >
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link"
+                              >Купить домен</a
+                            >
+                          </li>
+                        </ul>
+                      </li>
+                    </div>
+                  </ul>
             </li>
             <li class="navigation__item">
-              <nuxt-link to="/magazine" class="navigation__link">Журнал</nuxt-link>
+              <nuxt-link to="/magazine" class="navigation__link">{{ buttons.journal }}</nuxt-link>
+                 <ul class="navigation__dropdown">
+                    <div class="navigation__container-dropdown">
+                    <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Все статьи</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Обзоры</a>
+                      </li>
+                      <li>
+                        <a class="dropdown__link " href="#"
+                          >Технологии</a>
+                      </li>
+                      <li>
+                        <a class="dropdown__link " href="#"
+                          >Безопасность</a>
+                      </li>
+                      <li>
+                        <a class="dropdown__link " href="#"
+                          >Новости</a>
+                      </li>
+                      <li>
+                        <a class="dropdown__link " href="#"
+                          >E-commerce</a>
+                      </li>
+                    </div>
+                  </ul>
             </li>
             <li class="navigation__item">
-              <nuxt-link to="/support" class="navigation__link">Поддержка</nuxt-link>
+              <nuxt-link to="/support" class="navigation__link">{{ buttons.support }}</nuxt-link>
+              <ul class="navigation__dropdown">
+                    <div class="navigation__container-dropdown">
+                    <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >База знаний</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Онлайн консультация</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Поиск по ресурсам службы поддержки</a>
+                      </li>
+                    </div>
+              </ul>
             </li>
             <li class="navigation__item">
-              <nuxt-link to="/partners" class="navigation__link">Партнерская программа</nuxt-link>
+              <nuxt-link to="/partners" class="navigation__link">{{ buttons.partners }}</nuxt-link>
+                <ul class="navigation__dropdown">
+                    <div class="navigation__container-dropdown">
+                    <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Преимущества</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Для кого подходит программа</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Условия</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Почему нас рекомендуют</a>
+                      </li>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#"
+                          >Анкета для регистрации</a>
+                      </li>
+                    </div>
+                </ul>
             </li>
             <button class="navigation__btn" type='button'>Протестировать</button>
           </ul>
@@ -87,11 +338,11 @@
         <nav  class="navigation__mobile" :class="{open: isMenuOpen}">
           <ul class="navigation__list-mobile">
             <li class="navigation__item-mobile">
-               <nuxt-link to="/company" class="navigation__link-mobile">О компании</nuxt-link>
+               <nuxt-link to="/company" class="navigation__link-mobile">{{ buttons.company }}</nuxt-link>
             </li>
             <li class="navigation__item-mobile">
               <a style="cursor: pointer" class="navigation__link-mobile dropdown-submenu" @click="openSubmenu()"
-                >Услуги</a>
+                >{{ buttons.services }}</a>
               <ul class="dropdown-submenu__list-mobile" :style="display">
                 <li class="dropdown-submenu__item-mobile">
                   <a href="#" class="dropdown-submenu__link"
@@ -116,14 +367,14 @@
               </ul>
             </li>
             <li class="navigation__item-mobile">
-              <nuxt-link to="/magazine" class="navigation__link-mobile">Журнал</nuxt-link>
+              <nuxt-link to="/magazine" class="navigation__link-mobile">{{ buttons.journal }}</nuxt-link>
             </li>
             <li class="navigation__item-mobile">
-              <nuxt-link to="/support" class="navigation__link-mobile">Поддержка</nuxt-link>
+              <nuxt-link to="/support" class="navigation__link-mobile">{{ buttons.support }}</nuxt-link>
             </li>
             <li class="navigation__item-mobile">
               <nuxt-link to="/partners" class="navigation__link-mobile" href="#"
-                >Партнерская программа</nuxt-link>
+                >{{ buttons.partners }}</nuxt-link>
             </li>
           </ul>
           <ul class="contacts__mobile">
@@ -152,6 +403,13 @@ export default {
   computed: {
       display() {
         return this.isOpenSubmenu ? {display: 'block'} : {display: 'none'};
+      },
+      buttons() {
+        if(this.$route.name==='index') {
+        return this.$store.getters.buttons
+      } else {
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
+      }
       }
   },
   methods: {
@@ -168,9 +426,12 @@ export default {
 
 <style scoped>
 
+
+
 .top-line__wrapper {
   position: absolute;
   width: 100%;
+  z-index: 5;
 }
 
 .header__wrapper-top {
@@ -269,6 +530,76 @@ export default {
 .navigation__item {
   margin-right: 60px;
 }
+
+.navigation__item--active {
+  padding-top: 25px;
+  padding-bottom: 21px;
+  border-bottom: 4px solid #ffffff;
+}
+.navigation__item:hover {
+  padding-top: 25px;
+  padding-bottom: 21px;
+  border-bottom: 4px solid #ffffff;
+}
+.navigation__item:hover > .navigation__dropdown {
+  transition: 0.3s ease-in-out;
+  opacity: 0.9;
+  visibility: visible;
+}
+
+.navigation__container-dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  width: calc(100vw - 17px);
+  height: 60vh;
+
+  padding: 0 26px;
+
+  margin-top: 20%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.navigation__dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: rgba(12, 12, 12, 0.901088);
+  backdrop-filter: blur(38.0559px);
+  opacity: 0;
+  visibility: hidden;
+}
+
+.dropdown__link {
+  color: #fff;
+  font-family: "Graphik", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+}
+.dropdown__submenu-navigation {
+  margin-top: 48px;
+}
+
+.dropdown__submenu-item {
+  margin-bottom: 24px;
+}
+.dropdown__submenu-link {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #fff;
+}
+
 
 .navigation__item:last-child {
   padding: 0;

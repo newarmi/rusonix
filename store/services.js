@@ -23,6 +23,7 @@ export const state = () => ({
       licenses: state => state.page.blocks.licenses,
       certificates: state => state.page.blocks.certificates,
       
+      buttons: state => state.page.buttons,
       header: state => state.page.header,
       footer: state => state.page.footer,
   }

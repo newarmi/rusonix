@@ -34,16 +34,16 @@
           <div class="advantage__title-text">
             {{ benefits[1].title }}
           </div>
-          <!-- <p class="advantage__text text" v-html="benefits[1].content"> -->
-          <!-- </p> -->
+          <div class="advantage__text text" v-html="benefits[1].content">
+          </div>
           <a href="" class="advantage__link">{{ benefits[1].link_name }}</a>
         </div>
       </div>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ benefits[2].title }}</div>
-          <!-- <p class="advantage__text text" v-html="benefits[2].content"> -->
-          <!-- </p> -->
+          <div class="advantage__text text" v-html="benefits[2].content">
+          </div>
           <a href="" class="advantage__link">{{ benefits[2].link_name }}</a>
         </div>
         <picture class="picture">

@@ -1,154 +1,30 @@
 <template>
   <section class="magazine">
         <div class="container">
-          <h1 class="magazine__title title">Журнал</h1>
-          <div class="magazine__wrapper">
-            <div class="magazine__left">
+          <h1 class="magazine__title title">{{ title }}</h1>
+
+          <div v-for="(item, i) in articlesArray" :key="item" class="magazine__wrapper">
+            <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">              
               <picture class="picture">
                 <source
                   media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-1.jpg"
-                  srcset="@/assets/img/magazine-mobile-1.jpg"
+                  :src="article.imgMobileLink"
+                  :srcset="article.imgMobileLink"
                 />
                 <img
-                  src="@/assets/img/magazine-1.jpg"
-                  srcset="@/assets/img/magazine-1.jpg"
-                  class="magazine__img-big"
+                  :src="article.imgDesktopLink"
+                  :srcset="article.imgDesktopLink"
+                  :class="smallBigImg(i, j)"
                   alt="magazine"
                 />
               </picture>
               <div class="magazine__left-about">
                 <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Безопасность</a>
-                  <p class="magazine__text">12 февраля 2021</p>
+                  <a href="#" class="magazine__link">{{ article.rubricName }}</a>
+                  <p class="magazine__text">{{ article.date }}</p>
                 </div>
-                <p class="magazine__text-title">История одной DDOS атаки</p>
-              </div>
-            </div>
-            <div class="magazine__right">
-              <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-2.jpg"
-                  srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-                />
-                <img
-                  src="@/assets/img/magazine-2.jpg"
-                  srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                  class="magazine__img-small"
-                  alt="magazine"
-                />
-              </picture>
-              <div class="magazine__left-about">
-                <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Технологии</a>
-                  <p class="magazine__text">12 февраля 2021</p>
-                </div>
-                <p class="magazine__text-title">И целого бэкапа мало</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="magazine__wrapper">
-            <div class="magazine__right">
-              <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-3.jpg"
-                  srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-                />
-                <img
-                  src="@/assets/img/magazine-3.jpg"
-                  srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                  class="magazine__img-small"
-                  alt="magazine"
-                />
-              </picture>
-
-              <div class="magazine__left-about">
-                <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Безопасность</a>
-                  <p class="magazine__text">12 февраля 2021</p>
-                </div>
-                <p class="magazine__text-title magazine__text-title--mod">
-                  Типичные ошибки при оценке киберрисков
-                </p>
-              </div>
-            </div>
-            <div class="magazine__left">
-              <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-4.jpg"
-                  srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-                />
-                <img
-                  src="@/assets/img/magazine-4.jpg"
-                  srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                  class="magazine__img-big"
-                  alt="magazine"
-                />
-              </picture>
-
-              <div class="magazine__left-about">
-                <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Технологии</a>
-                  <p class="magazine__text">12 февраля 2021</p>
-                </div>
-
-                <p class="magazine__text-title">
-                  Тонкие клиенты с точки зрения безопасности
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div class="magazine__wrapper">
-            <div class="magazine__left">
-              <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-5.jpg"
-                  srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-                />
-                <img
-                  src="@/assets/img/magazine-5.jpg"
-                  srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                  class="magazine__img-big"
-                  alt="magazine"
-                />
-              </picture>
-              <div class="magazine__left-about">
-                <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Безопасность</a>
-                  <p class="magazine__text">12 февраля 2021</p>
-                </div>
-
-                <p class="magazine__text-title">История одной DDOS атаки</p>
-              </div>
-            </div>
-            <div class="magazine__right">
-              <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
-                  src="@/assets/img/magazine-mobile-6.jpg"
-                  srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-                />
-                <img
-                  src="@/assets/img/magazine-6.jpg"
-                  srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                  class="magazine__img-small"
-                  alt="magazine"
-                />
-              </picture>
-              <div class="magazine__left-about">
-                <div class="magazine__wrap-text">
-                  <a href="#" class="magazine__link">Технологии</a>
-                  <p class="magazine__text">12 февраля 2021</p>
-                </div>
-
-                <p class="magazine__text-title">И целого бэкапа мало</p>
-              </div>
+                <p class="magazine__text-title">{{ article.title }}</p>
+              </div>           
             </div>
           </div>
         </div>
@@ -163,11 +39,53 @@ export default {
         return this.$store.getters.magazineTitle
     },
     articles() {
-        
-        return this.$store.getters.magazineArticles
+        const articles = this.$store.getters.magazineArticles
+        articles.forEach(element => {
+        element.imgDesktopLink = this.$config.imgURL + '' + element.img_desktop
+        element.imgMobileLink = this.$config.imgURL + '' + element.img_mobile
+        element.rubricName = element.rubric.title
+        element.date = this.timeConverter(element.created_at)
+        })
+      return articles
+    },
+    articlesArray() {
+      const articlesArray = []
+      articlesArray.push(this.articles.slice(0,2))
+      articlesArray.push(this.articles.slice(2,4))
+      articlesArray.push(this.articles.slice(4,6))
+      return articlesArray
+    },
+
+  }, 
+  methods: {
+    timeConverter(unixTimestamp){
+        const a = new Date(unixTimestamp);
+        const months = ['Января','Февраля','Марта','Апреля','Мая','Июня','Июля','Августа','Сентября','Октября','Ноября','Декабря'];
+        const year = a.getFullYear();
+        const month = months[a.getMonth()];
+        const date = a.getDate();
+        const time = date + ' ' + month + ' ' + year;
+        return time;
+    },
+    leftRight(i, j) {
+      if(i!==1) {
+      return j===0 ? 'magazine__left':'magazine__right';
+    } else {
+      return j===0 ? 'magazine__right':'magazine__left';
+      }
+    },
+
+    smallBigImg(i, j) {
+      if(i!==1) {
+      return j===0 ? 'magazine__img-big':'magazine__img-small';
+    } else {
+      return j===0 ? 'magazine__img-small':'magazine__img-big';
+      }
     }
   }
 }
+
+
 </script>
 
 <style scoped>
@@ -187,14 +105,15 @@ export default {
   flex-direction: column;
   margin-top: 24px;
   margin-bottom: 21px;
+      max-width: 431px;
 }
  
  .magazine__img-big{
    width: 100%;
-   max-width: 808px;
+   width: 808px;
    height: 390px;
    border-radius: 6px;
-   object-fit: cover;
+   /* object-fit: cover; */
   
  }
  .magazine__img-small{
@@ -202,7 +121,7 @@ export default {
   max-width: 431px;
   height: 390px;
   border-radius: 6px; 
-  object-fit: cover;
+  /* object-fit: cover; */
  }
 .magazine__wrap-text {
   display: flex;
@@ -266,6 +185,11 @@ export default {
   }
   .magazine__right {
     max-width: none;
+  }
+  .magazine__img-big{
+    width: 100%;
+    max-width: 808px;
+    
   }
   .magazine__img {
     object-fit: cover;

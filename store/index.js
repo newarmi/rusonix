@@ -32,6 +32,7 @@ export const getters = {
     reviewsTitle: state => state.page.blocks.clients.title,
     reviewsClients: state => state.page.blocks.clients.sections,
 
+    buttons: state => state.page.buttons,
     header: state => state.page.header,
     footer: state => state.page.footer,
 }
