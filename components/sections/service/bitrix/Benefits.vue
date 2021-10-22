@@ -1,12 +1,9 @@
 <template>
     <section class="bitrix__advantage">
         <div class="container">
-          <div class="bitrix__advantage-title title">Основные преимущества</div>
-          <p class="bitrix__advantage-text text">
-            Панель Plesk обеспечивает безопасное соединение между сервером и
-            браузером пользователя. Информация передается в закодированном виде
-            по протоколу HTTPS, и расшифровать ее можно с помощью специального
-            ключа, который известен только владельцу сертификата.
+          <div class="bitrix__advantage-title title">{{ benefits.blockTitle }}</div>
+          <p class="bitrix__advantage-text text" v-html="benefits.blockDescription">
+            
           </p>
           <div class="bitrix__advantage-img-info--mod">
             <picture class="picture">
@@ -23,58 +20,30 @@
               />
             </picture>
           </div>
+
           <div class="bitrix__advantage-wrapper">
-            <div class="bitrix__advantage-card">
-              <div class="bitrix__advantage-card-title">Сервер без забот</div>
-              <p class="bitrix__advantage-card-text">
-                Все "Серверы без забот™" предоставляются с предустановленным
-                инсталлятором CMS Битрикс. Настройки программного обеспечения
-                оптимизированы для быстрой и стабильной работы ваших сайтов.
+            <div v-for="article in articlesWithLink" :key="article.textTitle" class="bitrix__advantage-card">
+              <div class="bitrix__advantage-card-title">{{ article.textTitle }}</div>
+              <p class="bitrix__advantage-card-text" v-html="article.text">
               </p>
               <a href="#" class="bitrix__advantage-card-link"
-                >Подробнее про оборудование ></a
-              >
-            </div>
-
-            <div class="bitrix__advantage-card">
-              <div class="bitrix__advantage-card-title">
-                Профессиональное управление
-              </div>
-              <p class="bitrix__advantage-card-text">
-                Выставляйте диапазоны цен и SKU, управляйте заказами и
-                доставкой, предлагайте скидки и сравнение товаров, ведите
-                остатки на складе, а также:импортируйте/экспортируйте данные;
-                управляйте валютой; ведите аналитику продаж.
-              </p>
-              <a href="#" class="bitrix__advantage-card-link">Подробнее ></a>
+                >{{ article.linkName }}</a>
             </div>
           </div>
+
           <div class="bitrix__advantage-wrapper-info">
             <div class="bitrix__advantage-wrap-info">
-              <div class="bitrix__advantage-card-info">
-                <div class="bitrix__advantage-card-info-title">Надежность</div>
-                <p class="bitrix__advantage-card-info-text">
-                  Все инженерные системы дата-центра резервируются по схеме 2
-                  (N+1): дублируются как основная, так и дополнительная системы.
-                  Допустимый уровень простоя сервисов всего 26 минут в год.
-                </p>
-              </div>
-              <div class="bitrix__advantage-card-info">
-                <div class="bitrix__advantage-card-info-title">
-                  Защищенность
-                </div>
-                <p class="bitrix__advantage-card-info-text">
-                  Пропускная способность каналов связи превышает 100 Гбит/сек.
-                  Благодаря этому скорость открытия сайта становится минимально
-                  возможной
+              <div v-for="article in simpleArticles" :key="article.textTitle" class="bitrix__advantage-card-info">
+                <div class="bitrix__advantage-card-info-title">{{ article.textTitle }}</div>
+                <p class="bitrix__advantage-card-info-text" v-html="article.text">
                 </p>
               </div>
             </div>
             <div class="bitrix__advantage-img-info">
               <picture class="picture">
                 <img
-                  src="@/assets/img/bitrix-advantage.png"
-                  srcset="@/assets/img/bitrix-advantage@2x.png 2x"
+                  :src="benefits.image"
+                  :srcset="benefits.image"
                   alt="bitrix img"
                   class="bitrix__img"
                 />
@@ -88,7 +57,31 @@
 <script>
 
 export default {
-    
+    computed: {
+      benefits() {
+        const benefits = this.$store.getters['service/bitrix/topBlock']
+        benefits.image = this.$config.imgURL + '' + benefits.blickImage
+        return benefits
+      },
+      articlesWithLink() {
+        const articles = []
+        this.benefits.blocks.forEach(element => {
+          if(element.layout==='textWithLink') {
+            articles.push(element.attributes)
+          }
+        });
+        return articles
+      },
+      simpleArticles() {
+        const simpleArticles = []
+        this.benefits.blocks.forEach(element => {
+          if(element.layout==='simpleText') {
+            simpleArticles.push(element.attributes)
+          }
+        });
+        return simpleArticles
+      }
+    }
 }
 </script>
 

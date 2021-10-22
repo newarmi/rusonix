@@ -17,6 +17,7 @@ export const state = () => ({
   
   export const getters = {
 
+      topBlock: state => state.page.top_block[0].attributes,
       tariffs: state => state.page.tariffs,
 
       buttons: state => state.page.buttons,
