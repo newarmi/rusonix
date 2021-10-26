@@ -1,19 +1,21 @@
 <template>
-  <div class='hz'>
-    <h1>Журнал</h1>
-  </div>
+  <full-journal />
 </template>
 
 <script>
+
+import FullJournal from '@/components/sections/journal/FullJournal.vue'
 export default {
   name: 'JournalPage',
+  components: { 
+    FullJournal 
+    },
+  async asyncData({ store }) {
+    await store.dispatch('journal/fetchPage')
+  },
 }
 </script>
 
 <style scoped>
-  .hz {
-    height: 3000px;
-    padding: 50px 100px;
-  }
 
 </style>

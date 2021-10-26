@@ -233,7 +233,7 @@
                   </ul>
             </li>
             <li class="navigation__item">
-              <nuxt-link to="/magazine" class="navigation__link">{{ buttons.journal }}</nuxt-link>
+              <nuxt-link to="/journal" class="navigation__link">{{ buttons.journal }}</nuxt-link>
                  <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
                     <li class="navigation__dropdown-item">

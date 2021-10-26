@@ -17,6 +17,8 @@ export const state = () => ({
   
   export const getters = {  
       buttons: state => state.page.buttons,
+      rubrics: state => state.page.rubrics,
+      articles: state => state.page.articles,
       header: state => state.page.header,
       footer: state => state.page.footer,
   }

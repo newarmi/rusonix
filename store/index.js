@@ -8,9 +8,6 @@ export const mutations = {
   setPage(state, homePage) {
     state.page = homePage
   },
-  setFooter(state, footer) {
-    state.footer = footer
-  },
 }
 
 export const actions = {
