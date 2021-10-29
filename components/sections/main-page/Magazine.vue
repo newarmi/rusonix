@@ -89,6 +89,11 @@ export default {
 </script>
 
 <style scoped>
+
+.start__title-magazine {
+  margin-bottom: 48px;
+}
+
 .magazine__title {
   padding-top: 72px;
   margin-bottom: 72px;

@@ -7,6 +7,9 @@
 <script>
 export default {
   name: 'PartnersPage',
+  async asyncData({store}) {
+      await store.dispatch('partners/fetchPage')
+  },
 }
 </script>
 

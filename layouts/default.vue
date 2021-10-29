@@ -20,8 +20,8 @@ import Footer from '@/components/core/footer/AppFooter'
 export default {
   name: 'Default',
   components: {
-    AppHeader,
-    Footer
+   AppHeader,
+   Footer
   },
 }
 </script>

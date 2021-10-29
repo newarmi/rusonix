@@ -67,9 +67,14 @@ export default {
     footer() {
       if(this.$route.name==='index') {
         return this.$store.getters.footer
-      } else {
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']
       }
+      
+      if(this.$route.name==='service-slug') {
+        return this.$store.getters['service/universal/footer']
+      }
+
+      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']
+      
     }
   }
 }

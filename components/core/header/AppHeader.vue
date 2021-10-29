@@ -25,11 +25,16 @@ export default {
     header() {
       if(this.$route.name==='index') {
         return this.$store.getters.header
-      } else {
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
+      } 
+
+      if(this.$route.name==='service-slug') {
+        return this.$store.getters['service/universal/header']
       }
+
+      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
     },
     bgImage () {
+      console.log(this.header)
       return `background-image: url(${this.$config.imgURL}${this.header.image});`
     }
 
@@ -44,6 +49,7 @@ export default {
   background-size: cover;
   background-position: center;
   position: relative;
+  min-height: 100vh;
 }
 
 </style>

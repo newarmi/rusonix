@@ -9,17 +9,21 @@ export const state = () => ({
   }
   
   export const actions = {
-    async fetchPage({commit}, hey) {   
+    async fetchPage({commit}, slug) {   
       const page = await this.$axios.$get('services/bitrix_license')
-      console.log(hey)
+      console.log(this.$route)
+      console.log(slug)
       commit('setPage', page)
     },
   }
   
   export const getters = {
 
+      // topBlock: state => state.page.top_block[0].attributes,
+      // tariffs: state => state.page.tariffs,
       topBlock: state => state.page.top_block[0].attributes,
-      tariffs: state => state.page.tariffs,
+      reviews: state => state.page.clients,
+      details: state => state.page.cabinet,
 
       buttons: state => state.page.buttons,
       header: state => state.page.header,

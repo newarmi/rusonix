@@ -5,6 +5,7 @@ export const state = () => ({
   export const mutations = {
     setPage(state, page) {
       state.page = page
+      page.header.button = 'Читать'
     },
   }
   

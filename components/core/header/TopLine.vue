@@ -20,7 +20,7 @@
             <nuxt-link to="/knowledge-base">База знаний</nuxt-link>
           </li>
           <li class="contact__auth">
-            <nuxt-link to="/account">Личный кабинет
+            <nuxt-link to="/login">Личный кабинет
               <svg class="auth__icon" width="15" height="18">
                 <use xlink:href="@/assets/svg/sprites.svg#auth"></use>
               </svg>
@@ -407,9 +407,14 @@ export default {
       buttons() {
         if(this.$route.name==='index') {
         return this.$store.getters.buttons
-      } else {
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
+      } 
+
+      if(this.$route.name==='service-slug') {
+        return this.$store.getters['service/universal/buttons']
       }
+
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
+      
       }
   },
   methods: {
