@@ -4,7 +4,7 @@
           <h1 class="confidents__title title">{{ title }}</h1>
         </div>
         <div class="confidents__partners">
-          <picture v-for="logo in firstLine" :key="logo.image" class="picture">
+          <picture v-for="(logo, i) in firstLine" :key="'fl:' + i + logo.image" class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -14,7 +14,7 @@
           </picture>
         </div>
         <div class="confidents__partners">
-          <picture v-for="logo in secondLine" :key="logo.image" class="picture">
+          <picture v-for="(logo, i) in secondLine" :key="'sl:' + i + logo.image" class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -24,7 +24,7 @@
           </picture>
         </div>
         <div class="confidents__partners">
-          <picture v-for="logo in thirdLine" :key="logo.image" class="picture">
+          <picture v-for="(logo, i) in thirdLine" :key="'tl:' + i + logo.image" class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -37,7 +37,7 @@
         <!-- Slider tablet   -->
         <div class="swiper partner-swiper">
           <div class="swiper-wrapper">
-            <div v-for="logo in firstLine" :key="logo.image" class="swiper-slide slide__indent-1">
+            <div v-for="logo, i in firstLine" :key="'smfl' + i  + logo.image" class="swiper-slide slide__indent-1">
               <picture class="picture">
                 <img
                   :src="logo.imageLink"
@@ -52,7 +52,7 @@
 
         <div class="swiper partner-swiper">
            <div class="swiper-wrapper">
-            <div v-for="logo in secondLine" :key="logo.image" class="swiper-slide slide__indent-1">
+            <div v-for="logo, i in secondLine" :key="'smsl' + i  + logo.image" class="swiper-slide slide__indent-1">
               <picture class="picture">
                 <img
                   :src="logo.imageLink"
@@ -67,7 +67,7 @@
 
         <div class="swiper partner-swiper">
           <div class="swiper-wrapper">
-            <div v-for="logo in thirdLine" :key="logo.image" class="swiper-slide slide__indent-1">
+            <div v-for="logo, i in thirdLine" :key="'smtl' + i  + logo.image" class="swiper-slide slide__indent-1">
               <picture class="picture">
                 <img
                   :src="logo.imageLink"

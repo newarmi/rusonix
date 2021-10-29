@@ -3,7 +3,7 @@
         <div class="container">
           <h1 class="magazine__title title">{{ title }}</h1>
 
-          <div v-for="(item, i) in articlesArray" :key="item" class="magazine__wrapper">
+          <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
             <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">              
               <picture class="picture">
                 <source

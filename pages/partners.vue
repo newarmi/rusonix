@@ -1,12 +1,23 @@
 <template>
-  <div class='hz'>
-    <h1>Партнерская программа</h1>
+  <div>
+    <Advantage />
+    <Program />
+    <Conditions />
+    <Recommendation />
+    <Form />
   </div>
 </template>
 
 <script>
 export default {
   name: 'PartnersPage',
+  components: {
+    'Advantage': () => import('~/components/sections/partners/Advantage'),
+    'Program': () => import('~/components/sections/partners/Program'),
+    'Conditions': () => import('~/components/sections/partners/Conditions'),
+    'Recommendation': () => import('~/components/sections/partners/Recommendation'),
+    'Form': () => import('~/components/sections/partners/Form'),
+  },
   async asyncData({store}) {
       await store.dispatch('partners/fetchPage')
   },
@@ -14,9 +25,6 @@ export default {
 </script>
 
 <style scoped>
-  .hz {
-    height: 3000px;
-    padding: 50px 100px;
-  }
+
 
 </style>

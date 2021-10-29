@@ -32,7 +32,6 @@ export default {
   },
   mounted () {
     const sliderId = uniqueId()
-    console.log(sliderId)
 
     this.sliderClass = 'swiper-' + sliderId
 

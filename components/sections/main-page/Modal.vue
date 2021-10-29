@@ -1,5 +1,6 @@
 <template> 
     <div>
+
       <div class="popup-feature1">
         <div class="popup-container">
           <div class="popup-feature1-wrap">
@@ -42,6 +43,7 @@
           </div>
         </div>
       </div>
+
       <div class="popup-feature2">
         <div class="popup-container">
           <div class="popup-feature2-wrap">
@@ -110,6 +112,7 @@
           </div>
         </div>
       </div>
+
       <div class="popup-feature3">
         <div class="popup-container">
           <div class="popup-feature3-wrap">
@@ -132,6 +135,7 @@
           </div>
         </div>
       </div>
+
     </div>
 </template>
 
@@ -166,6 +170,7 @@ export default {
   const activePopUpSlideDublicate = document.querySelector(
     ".swiper-slide.start__slide.swiper-slide-duplicate-next"
   );
+
   const bodyDontScroll = document.body;
 
   prefPopUpSlide.addEventListener("click", () => {
@@ -211,7 +216,7 @@ export default {
     popUpFeature3.classList.remove("popup-show");
     bodyDontScroll.classList.remove("body-scroll");
   });
-    }
+  }
 }
 </script>
 
@@ -220,7 +225,6 @@ export default {
 .popup-feature2,
 .popup-feature3 {
   display: none;
-
   position: fixed;
   top: 0;
   left: 0;

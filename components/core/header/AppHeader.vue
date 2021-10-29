@@ -34,7 +34,6 @@ export default {
       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
     },
     bgImage () {
-      console.log(this.header)
       return `background-image: url(${this.$config.imgURL}${this.header.image});`
     }
 

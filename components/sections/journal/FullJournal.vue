@@ -1,950 +1,970 @@
 <template>
   <section class="magazine">
-    <div class="container__magazine-navigation">
-      <div class="swiper magazine-swiper">
-        <div class="swiper-wrapper navigation__magazine">
+        <div class="container__magazine-navigation">
+          <div class="swiper magazine-swiper">
+            <div class="swiper-wrapper navigation__magazine">
+              <div
+                class="
+                  swiper-slide
+                  navigation__magazine-link navigation__magazine-link--active
+                "
+                data-tab-target="#magazine-link-1"
+              >
+                Все статьи
+              </div>
+              <div
+                class="swiper-slide navigation__magazine-link"
+                data-tab-target="#magazine-link-2"
+              >
+                Обзоры
+              </div>
+              <div
+                class="swiper-slide navigation__magazine-link"
+                data-tab-target="#magazine-link-3"
+              >
+                Технологии
+              </div>
+              <div
+                class="swiper-slide navigation__magazine-link"
+                data-tab-target="#magazine-link-4"
+              >
+                Безопасность
+              </div>
+              <div
+                class="swiper-slide navigation__magazine-link"
+                data-tab-target="#magazine-link-5"
+              >
+                Новости
+              </div>
+              <div
+                class="swiper-slide navigation__magazine-link"
+                data-tab-target="#magazine-link-6"
+              >
+                E-commerce
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container">
           <div
-            class="
-              swiper-slide
-              navigation__magazine-link navigation__magazine-link--active
-            "
-            data-tab-target="#magazine-link-1"
+            id="magazine-link-1"
+            data-tab-content
+            class="magazine__tabs-wrapper magazine__tabs-wrapper--active"
           >
-            Все статьи
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
+              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div
-            class="swiper-slide navigation__magazine-link"
-            data-tab-target="#magazine-link-2"
+            id="magazine-link-2"
+            data-tab-content
+            class="magazine__tabs-wrapper"
           >
-            Обзоры
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность 2</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии 2</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
+              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div
-            class="swiper-slide navigation__magazine-link"
-            data-tab-target="#magazine-link-3"
+            id="magazine-link-3"
+            data-tab-content
+            class="magazine__tabs-wrapper"
           >
-            Технологии
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность 3</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии 3</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
+              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div
-            class="swiper-slide navigation__magazine-link"
-            data-tab-target="#magazine-link-4"
+            id="magazine-link-4"
+            data-tab-content
+            class="magazine__tabs-wrapper"
           >
-            Безопасность
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
+              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div
-            class="swiper-slide navigation__magazine-link"
-            data-tab-target="#magazine-link-5"
+            id="magazine-link-5"
+            data-tab-content
+            class="magazine__tabs-wrapper"
           >
-            Новости
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
+              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
+              </div>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
+            </div>
           </div>
+
           <div
-            class="swiper-slide navigation__magazine-link"
-            data-tab-target="#magazine-link-6"
+            id="magazine-link-6"
+            data-tab-content
+            class="magazine__tabs-wrapper"
           >
-            E-commerce
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div
-        id="magazine-link-1"
-        data-tab-content
-        class="magazine__tabs-wrapper magazine__tabs-wrapper--active"
-      >
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture>
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-1.jpg"
+                    srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-1.jpg"
+                    srcset="@/assets/img/magazine-1@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
               </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-2.jpg"
+                    srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-2.jpg"
+                    srcset="@/assets/img/magazine-2@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
               </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
             </div>
-          </div>
-        </div>
 
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
+            <div class="magazine__wrapper">
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-3.jpg"
+                    srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-3.jpg"
+                    srcset="@/assets/img/magazine-3@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title magazine__text-title--mod">
+                    Типичные ошибки при оценке киберрисков
+                  </p>
+                </div>
               </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-4.jpg"
+                    srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-4.jpg"
+                    srcset="@/assets/img/magazine-4@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
 
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
+                  <p class="magazine__text-title">
+                    Тонкие клиенты с точки зрения безопасности
+                  </p>
+                </div>
               </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
             </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
+
+            <div class="magazine__wrapper">
+              <div class="magazine__left">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-5.jpg"
+                    srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-5.jpg"
+                    srcset="@/assets/img/magazine-5@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Безопасность</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+
+                  <p class="magazine__text-title">История одной DDOS атаки</p>
+                </div>
               </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
+              <div class="magazine__right">
+                <picture class="picture">
+                  <source
+                    media="(max-width: 1250px)"
+                    src="@/assets/img/magazine-mobile-6.jpg"
+                    srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
+                  />
+                  <img
+                    src="@/assets/img/magazine-6.jpg"
+                    srcset="@/assets/img/magazine-6@2x.jpg 2x"
+                    class="magazine__img"
+                    alt="magazine"
+                  />
+                </picture>
+                <div class="magazine__left-about">
+                  <div class="magazine__wrap-text">
+                    <a href="#" class="magazine__link">Технологии</a>
+                    <p class="magazine__text">12 февраля 2021</p>
+                  </div>
+                  <p class="magazine__text-title">И целого бэкапа мало</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div id="magazine-link-2" data-tab-content class="magazine__tabs-wrapper">
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность 2</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии 2</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="magazine-link-3" data-tab-content class="magazine__tabs-wrapper">
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность 3</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии 3</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="magazine-link-4" data-tab-content class="magazine__tabs-wrapper">
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="magazine-link-5" data-tab-content class="magazine__tabs-wrapper">
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="magazine-link-6" data-tab-content class="magazine__tabs-wrapper">
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture>
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-1.jpg"
-                srcset="@/assets/img/magazine-mobile-1@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-1.jpg"
-                srcset="@/assets/img/magazine-1@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-2.jpg"
-                srcset="@/assets/img/magazine-mobile-2@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-2.jpg"
-                srcset="@/assets/img/magazine-2@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-3.jpg"
-                srcset="@/assets/img/magazine-mobile-3@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-3.jpg"
-                srcset="@/assets/img/magazine-3@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title magazine__text-title--mod">
-                Типичные ошибки при оценке киберрисков
-              </p>
-            </div>
-          </div>
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-4.jpg"
-                srcset="@/assets/img/magazine-mobile-4@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-4.jpg"
-                srcset="@/assets/img/magazine-4@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">
-                Тонкие клиенты с точки зрения безопасности
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="magazine__wrapper">
-          <div class="magazine__left">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-5.jpg"
-                srcset="@/assets/img/magazine-mobile-5@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-5.jpg"
-                srcset="@/assets/img/magazine-5@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Безопасность</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-
-              <p class="magazine__text-title">История одной DDOS атаки</p>
-            </div>
-          </div>
-          <div class="magazine__right">
-            <picture class="picture">
-              <source
-                media="(max-width: 1250px)"
-                src="@/assets/img/magazine-mobile-6.jpg"
-                srcset="@/assets/img/magazine-mobile-6@2x.jpg 2x"
-              />
-              <img
-                src="@/assets/img/magazine-6.jpg"
-                srcset="@/assets/img/magazine-6@2x.jpg 2x"
-                class="magazine__img"
-                alt="magazine"
-              />
-            </picture>
-            <div class="magazine__left-about">
-              <div class="magazine__wrap-text">
-                <a href="#" class="magazine__link">Технологии</a>
-                <p class="magazine__text">12 февраля 2021</p>
-              </div>
-              <p class="magazine__text-title">И целого бэкапа мало</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      </section>
 </template>
 
 <script>
@@ -957,15 +977,16 @@ export default {
       this.slider = new Swiper('.magazine-swiper', {
         spaceBetween: 48,
         centerSlides: true,
+
         breakpoints: {
           360: {
-            slidesPerView: 2.7,
+            slidesPerView: 3.2,
           },
           480: {
             slidesPerView: 3.5,
           },
           576: {
-            slidesPerView: 4.2,
+            slidesPerView: 4.2,     
           },
           768: {
             slidesPerView: 4.5,
@@ -1017,7 +1038,7 @@ export default {
   margin-bottom: 48px;
 }
 .start__magazine-btn {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -1036,7 +1057,8 @@ export default {
 /* navigation Magazine*/
 .container__magazine-navigation {
   display: flex;
-  justify-content: center;
+  justify-content: left; 
+  /* center */
   align-items: center;
 
   width: 100%;
@@ -1046,8 +1068,9 @@ export default {
 
   overflow: hidden;
 }
+
 .navigation__magazine-link {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -1089,7 +1112,7 @@ export default {
 .magazine__link {
   color: #636aac;
   opacity: 0.6;
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -1101,7 +1124,7 @@ export default {
 }
 
 .magazine__text {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -1112,7 +1135,7 @@ export default {
   position: relative;
 }
 .magazine__text-title {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -1125,7 +1148,7 @@ export default {
 }
 .magazine__text::before {
   display: block;
-  content: '';
+  content: "";
   width: 4px;
   height: 4px;
   border-radius: 50%;
@@ -1180,4 +1203,5 @@ export default {
     margin-bottom: 24px;
   }
 }
+
 </style>
