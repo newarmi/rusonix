@@ -413,7 +413,11 @@ export default {
         return this.$store.getters['service/universal/buttons']
       }
 
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
+      if(this.$route.name==='journal-article') {
+        return this.$store.getters['journal/buttons']
+      }
+
+      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
       
       }
   },
@@ -566,6 +570,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
+
 .navigation__dropdown {
   position: absolute;
   top: 0;
@@ -575,6 +580,7 @@ export default {
   backdrop-filter: blur(38.0559px);
   opacity: 0;
   visibility: hidden;
+
 }
 
 .dropdown__link {

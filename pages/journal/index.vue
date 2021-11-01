@@ -1,17 +1,17 @@
 <template>
-  <full-journal />
+  <AllArticles />
 </template>
 
 <script>
 
-import FullJournal from '@/components/sections/journal/FullJournal.vue'
+import AllArticles from '@/components/sections/journal/AllArticles'
 export default {
   name: 'JournalPage',
   components: { 
-    FullJournal 
+    AllArticles 
     },
   async asyncData({ store }) {
-    await store.dispatch('journal/fetchPage')
+    await store.dispatch('journal/fetchPage', '')
   },
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
     <div class="container">
-      <h1 class="start__title start__title-cscard" v-html="header.title"></h1>
+      <h1 v-if="header.show_title" class="start__title start__title-cscard" v-html="header.title"></h1>
       <ul v-if="header.tags" class="start__list">
             <li class="start__item">
               <a class="start__link" href="#">Обзор</a>
@@ -11,7 +11,7 @@
             </li>
           </ul>
       <p v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></p>
-      <button v-if="header.button" class="start__cscard-btn">{{ header.button }}</button>
+      <button v-if="header.header_button" class="start__cscard-btn">{{ header.header_button }}</button>
     </div>
     <div class="header__decor"></div>
   </div>
@@ -31,7 +31,13 @@ export default {
         return this.$store.getters['service/universal/header']
       }
 
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
+      if(this.$route.name==='journal-article') {
+        const articleHeader =  this.$store.getters['journal/header']
+        articleHeader.header_button = 0;
+        return articleHeader
+      }
+
+       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
       
     }
   }

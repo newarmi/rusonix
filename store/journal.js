@@ -5,13 +5,12 @@ export const state = () => ({
   export const mutations = {
     setPage(state, page) {
       state.page = page
-      page.header.button = 'Читать'
     },
   }
   
   export const actions = {
-    async fetchPage({commit}) {   
-      const page = await this.$axios.$get('journal')
+    async fetchPage({commit}, article) {   
+      const page = await this.$axios.$get('journal' + article)
       commit('setPage', page)
     },
   }
