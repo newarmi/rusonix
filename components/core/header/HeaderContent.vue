@@ -11,9 +11,9 @@
             </li>
           </ul>
       <p v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></p>
-      <button v-if="header.header_button" class="start__cscard-btn">{{ header.header_button }}</button>
+      <button v-if="button" class="start__cscard-btn">{{ button }}</button>
     </div>
-    <div class="header__decor"></div>
+    <div v-if="isArticle" class="header__decor"></div>
   </div>
 </template>
 
@@ -22,6 +22,9 @@
 export default {
   name: 'HeaderContent',
   computed: {
+    isArticle() {
+        return this.$route.name==='journal-article'
+    },
     header() {
       if(this.$route.name==='index') {
         return this.$store.getters.header
@@ -31,14 +34,17 @@ export default {
         return this.$store.getters['service/universal/header']
       }
 
-      if(this.$route.name==='journal-article') {
+      if(this.isArticle) {
         const articleHeader =  this.$store.getters['journal/header']
-        articleHeader.header_button = 0;
         return articleHeader
       }
-
        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
-      
+    },
+    button() {
+      if(this.isArticle) {
+        return false
+      }
+      return this.header.header_button
     }
   }
 }

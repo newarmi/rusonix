@@ -86,6 +86,7 @@
 </template>
 
 <style scoped>
+
 .secret__container {
   padding: 0 171px;
   margin: 0 auto;
@@ -177,5 +178,11 @@
 }
 .secret__title-second {
   margin-bottom: 48px;
+}
+
+@media (max-width: 1250px) {
+  .secret__container {
+    padding: 0;
+  }
 }
 </style>
