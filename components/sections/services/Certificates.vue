@@ -3,8 +3,8 @@
     <div class="container">
       <div class="license__title title">{{ page.title }}</div>
       <div class="license__text-descr">
-        <p class="license__text text" v-html="page.description">
-        </p>
+        <div class="license__text text" v-html="page.description">
+        </div>
       </div>
       <div class="license__sertificates">
         <div v-for="certificate in certificates" :key="certificate.title" class="license__sertificate-wrap">
@@ -17,7 +17,7 @@
             />
           </picture>
           <div class="license__sertificate-title">
-            {{ certificate.title }}
+            <nuxt-link to="service/ssl" class="nl__black">{{ certificate.title }}</nuxt-link>
           </div>
         </div>
       </div>
@@ -44,11 +44,20 @@ export default {
 </script>
 
 <style scoped>
+.nl__black {
+  color: black
+}
 
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
   padding-bottom: 24px;
+}
+.license__container {
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 84px;
+  margin: 0 auto;
 }
 .license__title {
   margin-bottom: 24px;
@@ -63,10 +72,7 @@ export default {
 .license__sertificates {
   display: flex;
   flex-wrap: wrap;
-}
-.license__sertificate-wrap {
-  margin-right: 33px;
-  margin-bottom: 48px;
+  gap: 48px 33px;
 }
 
 .license__img {
@@ -86,25 +92,14 @@ export default {
   letter-spacing: 0px;
   text-align: left;
 }
-@media (max-width: 1440px) {
-  .license__sertificate-wrap:nth-child(3n + 3) {
-    margin-right: 0;
-  }
-}
-@media (max-width: 1200px) {
-  .license__sertificate-wrap {
-    margin-right: 34px;
-  }
-  .license__sertificate-wrap:nth-child(3n + 3) {
-    margin-right: 34px;
-  }
-}
+
 @media (max-width: 992px) {
-  .license__img {
-    width: 395px;
+  .license__sertificate-wrap {
+    width: 100%;
+    max-width: 343px;
   }
-  .license__sertificate-wrap:nth-child(2n + 2) {
-    margin-right: 0;
+  .license__container {
+    padding: 0 24px;
   }
 }
 @media (max-width: 768px) {
@@ -112,10 +107,7 @@ export default {
     padding-top: 48px;
     padding-bottom: 0;
   }
-  .license__img {
-    width: 343px;
-    height: 200px;
-  }
+
   .license__text-descr {
     margin-bottom: 48px;
   }
@@ -124,13 +116,14 @@ export default {
   .license {
     padding-bottom: 24px;
   }
-  .license__sertificate-wrap {
-    margin-right: 0;
-    margin-bottom: 24px;
+  .license__container {
+    padding: 0 16px;
   }
-  .license__sertificate-wrap:nth-child(3n + 3) {
-    margin-right: 0;
+  .license__sertificates {
+    gap: 24px 33px;
+  }
+  .license__img {
+    padding: 29px 65px;
   }
 }
-
 </style>

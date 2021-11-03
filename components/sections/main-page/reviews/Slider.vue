@@ -7,14 +7,14 @@
           <div class="reviews__text" v-html="client.content">
           </div>
           <div class="reviews__wrapper-icon">
-            <picture class="picure">
+            <div class="picure">
               <img
                 :src="client.imageLink"
                 :srcset="client.imageLink"
                 class="review__img"
                 alt="reviews-icon"
               />
-            </picture>
+            </div>
             <div class="reviews__icon-about">
               <div class="reviews__icon-title">{{ client.title }}</div>
               <div class="reviews__icon-text">

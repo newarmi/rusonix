@@ -77,6 +77,10 @@ export default {
         return this.$store.getters['journal/footer']
       }
 
+      if(this.$route.name==='company-document') {
+        return this.$store.getters['requisites/footer']
+      }
+
       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']
       
     }

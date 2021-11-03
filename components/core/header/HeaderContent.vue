@@ -10,10 +10,10 @@
               <a class="start__link" href="#">Стоимость</a>
             </li>
           </ul>
-      <p v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></p>
+      <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></div>
       <button v-if="button" class="start__cscard-btn">{{ button }}</button>
     </div>
-    <div v-if="isArticle" class="header__decor"></div>
+    <div v-if="isDecor" class="header__decor"></div>
   </div>
 </template>
 
@@ -25,6 +25,9 @@ export default {
     isArticle() {
         return this.$route.name==='journal-article'
     },
+    isDocument() {
+        return this.$route.name==='company-document'
+    },
     header() {
       if(this.$route.name==='index') {
         return this.$store.getters.header
@@ -32,6 +35,10 @@ export default {
       
       if(this.$route.name==='service-slug') {
         return this.$store.getters['service/universal/header']
+      }
+
+      if(this.$route.name==='company-document') {
+        return this.$store.getters['requisites/header']
       }
 
       if(this.isArticle) {
@@ -45,6 +52,9 @@ export default {
         return false
       }
       return this.header.header_button
+    },
+    isDecor() {
+      return !this.isArticle&&!this.isDocument;
     }
   }
 }

@@ -9,15 +9,13 @@ export const state = () => ({
   }
   
   export const actions = {
-    async fetchPage({commit}) {   
-      const page = await this.$axios.$get('services/virtual-data')
+    async fetchPage({commit}, document) {   
+      const page = await this.$axios.$get('documents' + document)
       commit('setPage', page)
     },
   }
   
   export const getters = {
-      
-      reviews: state => state.page.clients,
       buttons: state => state.page.buttons,
       header: state => state.page.header,
       footer: state => state.page.footer,

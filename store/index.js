@@ -19,6 +19,9 @@ export const actions = {
 
 export const getters = {
     advantage: state => state.page.blocks.main_articles,
+
+    articles: state => state.page.articles,
+
     confidents: state => state.page.blocks.trust,
     decision: state => state.page.blocks.solutions,
     details: state => state.page.blocks.cabinet,

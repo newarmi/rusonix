@@ -286,7 +286,34 @@ export default {
   name: 'Calculate',
   computed: {
 
-  }
+  },
+  mounted() {
+    const inputRange = document.querySelectorAll('.calculate__input-range')
+    const inputText = document.querySelectorAll('.calculate__input-number')
+
+    function setBackgroundSize(inputRange) {
+      inputRange.style.setProperty(
+        '--background-size2',
+        `${getBackgroundSize(inputRange)}%`
+      )
+    }
+
+    // setBackgroundSize(inputRange);
+    inputText.forEach((item, index) => {
+      setBackgroundSize(inputRange[index])
+      item.addEventListener('input', () => setBackgroundSize(inputRange[index]))
+    })
+
+    function getBackgroundSize(inputRange) {
+      const min = +inputRange.min || 0
+      const max = +inputRange.max || 100
+      const value = +inputRange.value
+
+      const size = ((value - min) / (max - min)) * 100
+
+      return size
+    }
+  },
 }
 </script>
 

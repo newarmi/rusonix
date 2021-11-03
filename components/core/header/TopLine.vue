@@ -53,18 +53,15 @@
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >Наша миссия</a
-                            >
+                              >Наша миссия</a>
                           </li>
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >Наши ценности</a
-                            >
+                              >Наши ценности</a>
                           </li>
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >Наша стратегия</a
-                            >
+                              >Наша стратегия</a>
                           </li>
                         </ul>
                       </li>
@@ -156,9 +153,8 @@
                   <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Облачные VPS серверы</a
-                        >
+                        <nuxt-link class="dropdown__link" to="/service/vps-servers"
+                          >Облачные VPS серверы</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
@@ -178,9 +174,8 @@
                         </ul>
                       </li>
                       <li>
-                        <a class="dropdown__link" href="#"
-                          >Виртуальный дата центр</a
-                        >
+                        <nuxt-link class="dropdown__link" to="/service/virtual-data-center"
+                          >Виртуальный дата центр</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link">Обзор</a>
@@ -193,9 +188,8 @@
                         </ul>
                       </li>
                       <li>
-                        <a class="dropdown__link" href="#"
-                          >Облачный веб хостинг</a
-                        >
+                        <nuxt-link class="dropdown__link" to="/service/cloud-web-hosting"
+                          >Облачный веб хостинг</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link">Тарифы</a>
@@ -208,24 +202,20 @@
                         </ul>
                       </li>
                       <li>
-                        <a class="dropdown__link" href="#"
-                          >SSL, лицензии и домены</a
-                        >
+                        <a class="dropdown__link" href="/services"
+                          >SSL, лицензии и домены</a>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >SSL сертификаты</a
-                            >
+                              >SSL сертификаты</a>
                           </li>
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >Лицензии</a
-                            >
+                              >Лицензии</a>
                           </li>
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link"
-                              >Купить домен</a
-                            >
+                              >Купить домен</a>
                           </li>
                         </ul>
                       </li>
@@ -415,6 +405,10 @@ export default {
 
       if(this.$route.name==='journal-article') {
         return this.$store.getters['journal/buttons']
+      }
+
+      if(this.$route.name==='company-document') {
+        return this.$store.getters['requisites/buttons']
       }
 
       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']

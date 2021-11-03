@@ -3,7 +3,7 @@
     <Benefits />
     <Possibilities />
     <Details />
-    <!-- <Reviews /> -->
+    <Reviews />
     <Calculate />
 
   </div>
@@ -14,7 +14,7 @@ import Benefits from '@/components/sections/service/virtual-data-center/Benefits
 import Possibilities from '@/components/sections/service/virtual-data-center/Possibilities.vue'
 import Details from '@/components/sections/service/virtual-data-center/Details.vue'
 import Calculate from '~/components/sections/service/virtual-data-center/Calculate.vue'
-// import Reviews from '@/components/sections/service/virtual-data-center/reviews/Reviews.vue'
+import Reviews from '@/components/sections/service/virtual-data-center/reviews/Reviews.vue'
 
 export default {
 
@@ -24,7 +24,7 @@ export default {
       Possibilities,
       Details,
       Calculate,
-      // Reviews
+      Reviews
   },
   async asyncData({store}) {
       await store.dispatch('service/virtual-data-center/fetchPage')

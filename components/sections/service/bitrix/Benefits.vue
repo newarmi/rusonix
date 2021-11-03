@@ -2,9 +2,8 @@
     <section class="bitrix__advantage">
         <div class="container">
           <div class="bitrix__advantage-title title">{{ benefits.blockTitle }}</div>
-          <p class="bitrix__advantage-text text" v-html="benefits.blockDescription">
-            
-          </p>
+          <div class="bitrix__advantage-text text" v-html="benefits.blockDescription">
+          </div>
           <div class="bitrix__advantage-img-info--mod">
             <picture class="picture">
               <source
@@ -24,8 +23,8 @@
           <div class="bitrix__advantage-wrapper">
             <div v-for="article in articlesWithLink" :key="article.textTitle" class="bitrix__advantage-card">
               <div class="bitrix__advantage-card-title">{{ article.textTitle }}</div>
-              <p class="bitrix__advantage-card-text" v-html="article.text">
-              </p>
+              <div class="bitrix__advantage-card-text" v-html="article.text">
+              </div>
               <a href="#" class="bitrix__advantage-card-link"
                 >{{ article.linkName }}</a>
             </div>
@@ -35,8 +34,8 @@
             <div class="bitrix__advantage-wrap-info">
               <div v-for="article in simpleArticles" :key="article.textTitle" class="bitrix__advantage-card-info">
                 <div class="bitrix__advantage-card-info-title">{{ article.textTitle }}</div>
-                <p class="bitrix__advantage-card-info-text" v-html="article.text">
-                </p>
+                <div class="bitrix__advantage-card-info-text" v-html="article.text">
+                </div>
               </div>
             </div>
             <div class="bitrix__advantage-img-info">

@@ -1,6 +1,5 @@
 <template> 
     <div>
-
       <div class="popup-feature1">
         <div class="popup-container">
           <div class="popup-feature1-wrap">

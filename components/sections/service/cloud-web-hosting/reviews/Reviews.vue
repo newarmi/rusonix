@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import Slider from '~/components/sections/service/virtual-data-center/reviews/Slider'
+import Slider from '~/components/sections/service/cloud-web-hosting/reviews/Slider'
 
 export default {
   name: 'Reviews',
@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     reviews() {
-      return this.$store.getters['service/virtual-data-center/reviews'];
+      return this.$store.getters['service/cloud-web-hosting/reviews'];
     },
     title() {
       return this.reviews.title

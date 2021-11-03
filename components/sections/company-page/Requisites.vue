@@ -16,7 +16,9 @@
               />
             </picture>
           </a>
-          <div class="requisites__info-title">{{ item.title }}</div>
+          <div class="requisites__info-title">
+            <nuxt-link :to="'/company/' + item.link" class="nl__black">{{ item.title }}</nuxt-link>
+          </div>
         </div>
       </div>
     </div>
@@ -42,6 +44,10 @@ export default {
 </script>
 
 <style scoped>
+
+.nl__black {
+  color: black;
+}
 
 .requisites {
   background-color: #fcf7f2;

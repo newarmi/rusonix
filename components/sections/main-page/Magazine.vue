@@ -23,7 +23,7 @@
                   <a href="#" class="magazine__link">{{ article.rubricName }}</a>
                   <p class="magazine__text">{{ article.date }}</p>
                 </div>
-                <p class="magazine__text-title">{{ article.title }}</p>
+                <nuxt-link :to="'journal/' + article.slug" class="magazine__text-title nl__black">{{ article.title }}</nuxt-link>
               </div>           
             </div>
           </div>
@@ -89,6 +89,10 @@ export default {
 </script>
 
 <style scoped>
+.nl__black {
+  color: black;
+}
+
 
 .start__title-magazine {
   margin-bottom: 48px;

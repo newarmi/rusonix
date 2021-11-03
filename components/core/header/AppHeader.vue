@@ -38,6 +38,10 @@ export default {
         return this.$store.getters['journal/header']
       }
 
+      if(this.$route.name==='company-document') {
+        return this.$store.getters['requisites/header']
+      }
+
       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
     },
     bgImage () {

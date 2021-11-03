@@ -9,17 +9,19 @@ export const state = () => ({
   }
   
   export const actions = {
-    async fetchPage({commit}) {   
-      const page = await this.$axios.$get('services/virtual-data')
+    async fetchPage({commit}, hey) {   
+      const page = await this.$axios.$get('services/licplesk')
+      console.log(hey)
       commit('setPage', page)
     },
   }
   
   export const getters = {
-      
-      reviews: state => state.page.clients,
+
+      topBlock: state => state.page.top_block[0].attributes,
+      tariffs: state => state.page.tariffs,
+
       buttons: state => state.page.buttons,
       header: state => state.page.header,
       footer: state => state.page.footer,
   }
-  

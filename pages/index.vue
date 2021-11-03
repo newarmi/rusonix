@@ -6,7 +6,7 @@
     <SectionConfidents />
     <SectionReviews />
     <SectionMagazine />
-    <SectionModal />
+    <!-- <SectionModal /> -->
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
     'SectionConfidents': () => import('~/components/sections/main-page/Confidents'),
     'SectionReviews': () => import('~/components/sections/main-page/reviews/Reviews'),
     'SectionMagazine': () => import('~/components/sections/main-page/Magazine'),
-    'SectionModal': () => import('~/components/sections/main-page/Modal')
+    // 'SectionModal': () => import('~/components/sections/main-page/Modal')
   },
   async asyncData({store}) {
       await store.dispatch('fetchPage')

@@ -41,7 +41,7 @@ export default {
   }),
   computed: {
     reviews() {
-      return this.$store.getters['service/virtual-data-center/reviews'];
+      return this.$store.getters['service/cloud-web-hosting/reviews'];
     },
     clients() {
       const clients = this.reviews.sections
