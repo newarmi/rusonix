@@ -31,6 +31,7 @@ export default {
   background-color: #fcf7f2;
   padding-top: 72px;
   padding-bottom: 72px;
+
 }
 
 .reviews__title {

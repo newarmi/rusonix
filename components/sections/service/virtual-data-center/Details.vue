@@ -51,6 +51,7 @@ export default {
   background-color: #fdf7f2;
   padding-top: 72px;
   padding-bottom: 72px;
+
 }
 
 .details__title {

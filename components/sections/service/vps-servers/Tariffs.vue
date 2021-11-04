@@ -1062,6 +1062,7 @@ export default {
   padding-top: 72px;
   padding-bottom: 72px;
   background-color: #fcf7f2;
+    overflow: hidden;
 }
 
 .tariff__title {

@@ -19,8 +19,7 @@
                     value="E-commerce"
                   />
                   <label class="custom__radio-label" for="custom-radio-1"
-                    >E-commerce</label
-                  >
+                    >E-commerce</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -31,8 +30,7 @@
                     value="Подписи кода"
                   />
                   <label class="custom__radio-label" for="custom-radio-2"
-                    >Подписи кода</label
-                  >
+                    >Подписи кода</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -43,8 +41,7 @@
                     value="Почтовых серверов"
                   />
                   <label class="custom__radio-label" for="custom-radio-3"
-                    >Почтовых серверов</label
-                  >
+                    >Почтовых серверов</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -55,8 +52,7 @@
                     value="Сайтов"
                   />
                   <label class="custom__radio-label" for="custom-radio-4"
-                    >Сайтов</label
-                  >
+                    >Сайтов</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -68,8 +64,7 @@
                     checked="checked"
                   />
                   <label class="custom__radio-label" for="custom-radio-5"
-                    >Любое</label
-                  >
+                    >Любое</label>
                 </div>
               </div>
             </div>
@@ -77,7 +72,6 @@
           <div class="sertificate__wrapper-right">
             <div class="sertificate__wrap-right">
               <div class="sertificate__right-title">Уровень доверия</div>
-
               <div class="sertificate__custom-radio">
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -88,8 +82,7 @@
                     value="Базовый"
                   />
                   <label class="custom__radio-label" for="custom-radio-6"
-                    >Базовый</label
-                  >
+                    >Базовый</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -100,8 +93,7 @@
                     value="Стандартный"
                   />
                   <label class="custom__radio-label" for="custom-radio-7"
-                    >Стандартный</label
-                  >
+                    >Стандартный</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -119,14 +111,13 @@
                   <input
                     id="custom-radio-9"
                     class="custom-radio"
-                    type="radio"
+                    type="radio" 
                     name="custom-radio-6"
                     value="Любой"
                     checked="checked"
                   />
                   <label class="custom__radio-label" for="custom-radio-9"
-                    >Любой</label
-                  >
+                    >Любой</label>
                 </div>
               </div>
             </div>
@@ -142,36 +133,33 @@
                     id="custom-radio-10"
                     class="custom-radio"
                     type="radio"
-                    name="custom-radio-11"
+                    name="custom-radio-10"
                     value="GlobalSign"
                   />
                   <label class="custom__radio-label" for="custom-radio-10"
-                    >GlobalSign</label
-                  >
+                    >GlobalSign</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
                     id="custom-radio-11"
                     class="custom-radio"
                     type="radio"
-                    name="custom-radio-11"
+                    name="custom-radio-10"
                     value="Comodo"
                   />
                   <label class="custom__radio-label" for="custom-radio-11"
-                    >Comodo</label
-                  >
+                    >Comodo</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
                     id="custom-radio-12"
                     class="custom-radio"
                     type="radio"
-                    name="custom-radio-11"
+                    name="custom-radio-10"
                     value="AlphaSSL"
                   />
                   <label class="custom__radio-label" for="custom-radio-12"
-                    >AlphaSSL</label
-                  >
+                    >AlphaSSL</label>
                 </div>
 
                 <div class="sertificate__custom-radio-wrap">
@@ -179,13 +167,12 @@
                     id="custom-radio-13"
                     class="custom-radio"
                     type="radio"
-                    name="custom-radio-11"
-                    value="Любое"
+                    name="custom-radio-10"
+                    value="Любой"
                     checked="checked"
                   />
                   <label class="custom__radio-label" for="custom-radio-13"
-                    >Любой</label
-                  >
+                    >Любой</label>
                 </div>
               </div>
             </div>
@@ -193,7 +180,6 @@
           <div class="sertificate__wrapper-right">
             <div class="sertificate__wrap-right">
               <div class="sertificate__right-title">Дополнительные домены</div>
-
               <div class="sertificate__custom-radio">
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -204,8 +190,7 @@
                     value="Поддержка поддоменов WС"
                   />
                   <label class="custom__radio-label" for="custom-radio-14"
-                    >Поддержка поддоменов WС</label
-                  >
+                    >Поддержка поддоменов WС</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input
@@ -216,8 +201,7 @@
                     value="Поддержка мультидоменов SAN"
                   />
                   <label class="custom__radio-label" for="custom-radio-15"
-                    >Поддержка мультидоменов SAN</label
-                  >
+                    >Поддержка мультидоменов SAN</label>
                 </div>
 
                 <div class="sertificate__custom-radio-wrap">
@@ -230,8 +214,7 @@
                     checked="checked"
                   />
                   <label class="custom__radio-label" for="custom-radio-16"
-                    >Любой</label
-                  >
+                    >Любой</label>
                 </div>
               </div>
             </div>
@@ -267,7 +250,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -493,7 +481,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -719,7 +712,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -945,7 +943,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -1171,7 +1174,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -1397,7 +1405,12 @@
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
-        <div class="sertificate__buy-wrapper-info">
+        <div
+          class="
+            sertificate__buy-wrapper-info
+            hide__sertificate__buy-wrapper-info
+          "
+        >
           <div class="sertificate__info-text">
             <span class="sertificate__buy--mod"> SGC Wildcard SSL</span> —
             подходит для поддержки поддоменов, расположенных на одном доменом
@@ -1603,6 +1616,56 @@
   </section>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      filters: [
+        {
+          title: 'Для чего подходит сертификат',
+          options: [
+            'E-commerce',
+            'Подписи кода',
+            'Почтовых серверов',
+            'Сайтов',
+            'Любое',
+          ],
+        },
+        {
+          title: 'Уровень доверия',
+          options: ['Базовый', 'Стандартный', 'Максимальный', 'Любой'],
+        },
+        {
+          title: 'Сертификационный центр',
+          options: ['GlobalSign', 'Comodo', 'AlphaSSL', 'Любой'],
+        },
+        {
+          title: 'Дополнительные домены',
+          options: [
+            'Поддержка поддоменой WC',
+            'Поддержка мультидоменов SUN',
+            'Любой',
+          ],
+        },
+      ],
+    }
+  },
+  mounted() {
+    const sslWrapper = document.querySelectorAll('.sertificate__buy-wrapper')
+    // const sslContent = document.querySelectorAll(".sertificate__buy-wrapper-info");
+
+    sslWrapper.forEach((elem) => {
+      elem?.addEventListener('click', (e) => {
+        const targetContent = elem.querySelector(
+          '.sertificate__buy-wrapper-info'
+        )
+        targetContent.classList.toggle('hide__sertificate__buy-wrapper-info')
+      })
+    })
+  },
+}
+</script>
+
 <style scoped>
 .sertificate {
   background-color: #fcf7f2;
@@ -1800,9 +1863,14 @@
   background-color: #660915;
 }
 .sertificate__buy-wrapper-info {
-  display: none;
   padding: 40px 24px;
   background-color: #fff;
+}
+.show__sertificate__buy-wrapper-info {
+  display: block;
+}
+.hide__sertificate__buy-wrapper-info {
+  display: none;
 }
 .sertificate__info-wrap {
   display: flex;
@@ -1914,6 +1982,16 @@
     max-width: 311px;
   }
 }
+@media (max-width: 992px) {
+  .sertificate__wrapper {
+    gap: 48px;
+  }
+}
+@media (max-width: 768px) {
+  .sertificate__wrapper {
+    margin-bottom: 48px;
+  }
+}
 @media (max-width: 600px) {
   .sertificate__info-wrap {
     gap: 12px;
@@ -1925,6 +2003,19 @@
   .sertificate__info-wrap-left--mobile,
   .sertificate__info-wrap-right--mobile {
     display: block;
+  }
+}
+@media (max-width: 576px) {
+  .sertificate__wrapper {
+    gap: 16px;
+  }
+  .sertificate__wrapper-first {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .sertificate__wrapper-second {
+    flex-direction: column;
+    gap: 16px;
   }
 }
 

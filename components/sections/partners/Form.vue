@@ -1,63 +1,69 @@
 <template>
   <section class="form">
-    <div class="container">
-      <div class="form__title title">
-        Анкета для регистрации в партнерской программе
-      </div>
-    </div>
-    <div class="form__wrapper">
-      <form action="#" class="partner__form">
-        <div class="form__card">
-          <div class="form__card-input-field">
-            Ваше имя
-            <div class="form__card-input-wrap">
-              <input
-                type="text"
-                class="form__card-input"
-                value=""
-              />
-            </div>
+        <div class="container">
+          <div class="form__title title">
+            Анкета для регистрации в партнерской программе
           </div>
-
-          <div class="form__card-input-field">
-            Email
-            <div class="form__card-input-wrap">
-              <input
-                type="text"
-                class="form__card-input"
-                value=""
-              />
-            </div>
-          </div>
-
-          <div class="form__card-input-field">
-            Телефон
-            <div class="form__card-input-wrap">
-              <input
-                type="text"
-                class="form__card-input"
-                value=""
-              />
-            </div>
-          </div>
-
-          <div class="form__card-input-field">
-            Ваша отрасль
-            <div class="form__card-select">
-              <select class="form__select">
-                <option value="Представитель digital агентства">
-                  Представитель digital агентства
-                </option>
-                <option value="Интегратор">
-                  Интегратор
-                </option>
-              </select>
-            </div>
-          </div>
-          <div class="form__btn-registration">Зарегистрироваться</div>
         </div>
-      </form>
-    </div>
+        <div class="form__wrapper">
+          <form action="#" class="partner__form">
+            <div class="form__card">
+              <div class="form__card-input-field">
+                Ваше имя
+                <div class="form__card-input-wrap">
+                  <input
+                    type="text"
+                    class="form__card-input"
+                    value=""
+                  />
+                </div>
+              </div>
+
+              <div class="form__card-input-field">
+                Email
+                <div class="form__card-input-wrap">
+                  <input
+                    type="text"
+                    class="form__card-input"
+                    value=""
+                  />
+                </div>
+              </div>
+
+              <div class="form__card-input-field">
+                Телефон
+                <div class="form__card-input-wrap">
+                  <input
+                    type="text"
+                    class="form__card-input"
+                    value=""
+                  />
+                </div>
+              </div>
+
+              <div class="form__card-input-field">
+                Ваша отрасль
+                <div class="form__card-select">
+                  <select class="form__select">
+                    <option value="Представитель digital агентства">
+                      Представитель digital агентства
+                    </option>
+                    <option value="Интегратор">
+                      Интегратор 
+                    </option>
+                    <option value="Аутсорс компания">
+                      Аутсорс компания 
+                    </option>
+                    <option value="IT-блоггер">
+                      IT-блоггер
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="form__btn-registration">Зарегистрироваться</div>
+            </div>
+          </form>
+        </div>
   </section>
 </template>
 
@@ -127,7 +133,7 @@ export default {
   max-width: 460px;
   height: 60px;
   border: 1px solid #ede7e2;
-  border-radius: 8 px;
+  border-radius: 8px;
   -webkit-appearance: none;
   appearance: none;
   font-family: "Graphik", sans-serif;
@@ -137,7 +143,7 @@ export default {
   line-height: 20px;
   letter-spacing: 0px;
   text-align: left;
-  padding: 20px 24px;
+  padding: 15px 24px;
   background: url(@/assets/img/arrow-select.png) no-repeat right;
   background-position-x: 95%;
   cursor: pointer;

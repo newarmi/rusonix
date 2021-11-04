@@ -322,6 +322,7 @@ export default {
   background-color: #fcf7f2;
   padding-top: 72px;
   padding-bottom: 72px;
+
 }
 .calculate__title {
   margin-bottom: 48px;
@@ -337,6 +338,7 @@ export default {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 62px;
+    overflow: hidden;
 }
 .calculate__wrapper-left {
   width: 100%;

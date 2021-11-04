@@ -106,6 +106,15 @@ export default {
 </script>
 
 <style scoped>
+.nl__black {
+  color: black;
+}
+
+
+.start__title-magazine {
+  margin-bottom: 48px;
+}
+
 .magazine__title {
   padding-top: 72px;
   margin-bottom: 72px;
@@ -117,14 +126,29 @@ export default {
   margin-bottom: 75px;
   gap: 33px;
 }
-
 .magazine__left-about {
   display: flex;
   flex-direction: column;
   margin-top: 24px;
   margin-bottom: 21px;
+      max-width: 431px;
 }
-
+ 
+ .magazine__img-big{
+   width: 100%;
+   width: 808px;
+   height: 390px;
+   border-radius: 6px;
+   /* object-fit: cover; */
+  
+ }
+ .magazine__img-small{
+  width: 100%;
+  max-width: 431px;
+  height: 390px;
+  border-radius: 6px; 
+  /* object-fit: cover; */
+ }
 .magazine__wrap-text {
   display: flex;
 }
@@ -184,6 +208,14 @@ export default {
 @media (max-width: 1250px) {
   .magazine__text-title {
     max-width: 340px;
+  }
+  .magazine__right {
+    max-width: none;
+  }
+  .magazine__img-big{
+    width: 100%;
+    max-width: 808px;
+    
   }
   .magazine__img {
     object-fit: cover;

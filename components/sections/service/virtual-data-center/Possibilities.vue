@@ -304,6 +304,7 @@ export default {
 .possibilities {
   background-color: #fcf7f2;
   padding-top: 72px;
+    overflow: hidden;
 }
 
 .possibilities__title {

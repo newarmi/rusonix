@@ -3,7 +3,7 @@
     <div class="header__wrapper-top">
       <div class="header__wrapper">
         <div class="header__top-info">
-          Блог: Почему переход на NVMe окупается в первый месяц
+          <nuxt-link to="/journal/slug" class="header__top-info">Блог: Почему переход на NVMe окупается в первый месяц</nuxt-link>
         </div>
         <ul class="contacts">
           <li class="contacts__phone">
@@ -11,13 +11,12 @@
           </li>
           <li class="contacts__search">
             <a href="#">Поиск</a>
-
             <svg class="search__icon" width="17" height="17">
               <use xlink:href="@/assets/svg/sprites.svg#search"></use>
             </svg>
           </li>
           <li>
-            <nuxt-link to="/knowledge-base">База знаний</nuxt-link>
+            <nuxt-link to="/support">База знаний</nuxt-link>
           </li>
           <li class="contact__auth">
             <nuxt-link to="/login">Личный кабинет
@@ -335,29 +334,25 @@
                 >{{ buttons.services }}</a>
               <ul class="dropdown-submenu__list-mobile" :style="display">
                 <li class="dropdown-submenu__item-mobile">
-                  <a href="#" class="dropdown-submenu__link"
-                    >Облачные VPS серверы</a
-                  >
+                  <nuxt-link to="/service/vps-servers" class="dropdown-submenu__link"
+                    >Облачные VPS серверы</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <a href="#" class="dropdown-submenu__link"
-                    >Виртуальный дата центр</a
-                  >
+                  <nuxt-link to="/service/virtual-data-center" class="dropdown-submenu__link"
+                    >Виртуальный дата центр</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <a href="#" class="dropdown-submenu__link"
-                    >Облачный веб хостинг</a
-                  >
+                  <nuxt-link to="/service/cloud-web-hosting" class="dropdown-submenu__link"
+                    >Облачный веб хостинг</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <a href="#" class="dropdown-submenu__link"
-                    >SSL, лицензии и домены</a
-                  >
+                  <nuxt-link to="/services" class="dropdown-submenu__link"
+                    >SSL, лицензии и домены</nuxt-link>
                 </li>
               </ul>
             </li>
             <li class="navigation__item-mobile">
-              <nuxt-link to="/magazine" class="navigation__link-mobile">{{ buttons.journal }}</nuxt-link>
+              <nuxt-link to="/journal" class="navigation__link-mobile">{{ buttons.journal }}</nuxt-link>
             </li>
             <li class="navigation__item-mobile">
               <nuxt-link to="/support" class="navigation__link-mobile">{{ buttons.support }}</nuxt-link>
@@ -377,13 +372,18 @@
             </li>
           </ul>
         </nav>
+  <Search v-if="$route.name==='support'"/>
     <!-- end mobile header-->
   </div>
 </template>
 
 <script>
+import Search from '@/components/core/header/Search'
 export default {
   name: 'TopLine',
+  components: {
+    Search
+  },
   data() {
     return {
       isMenuOpen: false,

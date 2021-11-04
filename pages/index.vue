@@ -1,12 +1,11 @@
 <template>
   <div id='mainPage'>
-    <SectionDecision />
-    <SectionDetails />
-    <SectionAdvantage />
-    <SectionConfidents />
-    <SectionReviews />
-    <SectionMagazine />
-    <!-- <SectionModal /> -->
+    <Decision />
+    <Details />
+    <Advantage />
+    <Confidents />
+    <Reviews />
+    <Magazine />
   </div>
 </template>
 
@@ -15,13 +14,12 @@
 export default {
   name: 'HomePage',
   components: {
-    'SectionDecision': () => import('~/components/sections/main-page/Decision'),
-    'SectionDetails': () => import('~/components/sections/main-page/Details'),
-    'SectionAdvantage': () => import('~/components/sections/main-page/Advantage'),
-    'SectionConfidents': () => import('~/components/sections/main-page/Confidents'),
-    'SectionReviews': () => import('~/components/sections/main-page/reviews/Reviews'),
-    'SectionMagazine': () => import('~/components/sections/main-page/Magazine'),
-    // 'SectionModal': () => import('~/components/sections/main-page/Modal')
+    'Decision': () => import('~/components/sections/main-page/Decision'),
+    'Details': () => import('~/components/sections/main-page/Details'),
+    'Advantage': () => import('~/components/sections/main-page/Advantage'),
+    'Confidents': () => import('~/components/sections/main-page/Confidents'),
+    'Reviews': () => import('~/components/sections/main-page/reviews/Reviews'),
+    'Magazine': () => import('~/components/sections/main-page/Magazine'),
   },
   async asyncData({store}) {
       await store.dispatch('fetchPage')
