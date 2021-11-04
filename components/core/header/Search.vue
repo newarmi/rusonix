@@ -38,7 +38,8 @@
 .start__screen {
   display: flex;
   justify-content: center;
-  padding-top: 166px;
+  padding-top: 230px;
+  padding-bottom: 100px;
   margin-bottom: 203px;
 }
 .start__screen-search {
@@ -105,7 +106,7 @@
 }
 @media (max-width: 768px) {
   .start__screen {
-    margin-top: 60px;
+    margin-top: 50px;
     margin-bottom: 61px;
   }
   .start__title-cscard {

@@ -1,7 +1,7 @@
 <template>
   <header class="header" :style="bgImage">
     <TopLine />
-    <!-- <Search v-if="header.search"/> -->
+    <Search v-if="header.search"/>
     <HeaderContent />
     <Slider v-if="$route.name==='index'"/>
   </header>
@@ -9,9 +9,10 @@
 
 <script>
 import TopLine from '@/components/core/header/TopLine'
+
 import HeaderContent from '@/components/core/header/HeaderContent'
 import Slider from '@/components/core/header/Slider'
-// import Search from '@/components/core/header/Search'
+import Search from '@/components/core/header/Search'
 
 export default {
   name: "AppHeader",
@@ -19,7 +20,7 @@ export default {
     TopLine,
     HeaderContent,
     Slider,
-    // Search
+    Search
   },
   data: () => ({
 

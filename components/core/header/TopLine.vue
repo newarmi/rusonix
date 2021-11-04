@@ -1,4 +1,5 @@
 <template>
+
   <div class='top-line__wrapper'>
     <div class="header__wrapper-top">
       <div class="header__wrapper">
@@ -372,17 +373,17 @@
             </li>
           </ul>
         </nav>
-  <Search v-if="$route.name==='support'"/>
+  
     <!-- end mobile header-->
   </div>
 </template>
 
 <script>
-import Search from '@/components/core/header/Search'
+
 export default {
   name: 'TopLine',
   components: {
-    Search
+    
   },
   data() {
     return {
