@@ -31,8 +31,8 @@ export default {
         return this.$store.getters.header
       } 
 
-      if(this.$route.name==='service-slug') {
-        return this.$store.getters['service/universal/header']
+      if(this.$route.name==='serv-slug') {
+        return this.$store.getters['universal/header']
       }
 
       if(this.$route.name==='journal-article') {

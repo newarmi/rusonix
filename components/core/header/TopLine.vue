@@ -400,8 +400,8 @@ export default {
         return this.$store.getters.buttons
       } 
 
-      if(this.$route.name==='service-slug') {
-        return this.$store.getters['service/universal/buttons']
+      if(this.$route.name==='serv-slug') {
+        return this.$store.getters['universal/buttons']
       }
 
       if(this.$route.name==='journal-article') {

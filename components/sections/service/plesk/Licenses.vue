@@ -359,30 +359,30 @@
 <script>
 export default {
   mounted() {
-const pleskAdditionWrapper = document.querySelectorAll(".addition__wrapper ");
-// const pleskAdditionContent = document.querySelectorAll(".addition__wrap-content");
-// const pleskAdditionWrap = document.querySelectorAll(".addition__wrap");
+    const pleskAdditionWrapper = document.querySelectorAll(
+      '.addition__wrapper '
+    )
+    // const pleskAdditionContent = document.querySelectorAll(".addition__wrap-content");
+    // const pleskAdditionWrap = document.querySelectorAll(".addition__wrap");
 
-pleskAdditionWrapper.forEach((elem) => {
-  elem?.addEventListener("click", (e) => {
-    const targetContent = elem.querySelector(".addition__wrap-content");
-    const targetPlusMinus = elem.querySelector(".plus-minus__plesk");
-    // stopPropagation();
-    targetPlusMinus.classList.toggle("plus-minus__plesk--mod");
-    targetContent.classList.toggle("hide__addition__wrap-content");
-  });
-});
-pleskAdditionWrapper.forEach((item) => {
-  const itemContent = item.querySelectorAll(".addition__wrap-content");
-  console.dir(itemContent);
-  itemContent.forEach((it) => {
-    it.addEventListener("click", (e) => {
-      e.stopPropagation();
-    });
-  });
-});
-
-
+    pleskAdditionWrapper.forEach((elem) => {
+      elem?.addEventListener('click', (e) => {
+        const targetContent = elem.querySelector('.addition__wrap-content')
+        const targetPlusMinus = elem.querySelector('.plus-minus__plesk')
+        // stopPropagation();
+        targetPlusMinus.classList.toggle('plus-minus__plesk--mod')
+        targetContent.classList.toggle('hide__addition__wrap-content')
+      })
+    })
+    pleskAdditionWrapper.forEach((item) => {
+      const itemContent = item.querySelectorAll('.addition__wrap-content')
+      console.dir(itemContent)
+      itemContent.forEach((it) => {
+        it.addEventListener('click', (e) => {
+          e.stopPropagation()
+        })
+      })
+    })
   },
 }
 </script>
@@ -414,7 +414,7 @@ pleskAdditionWrapper.forEach((item) => {
   max-width: 402px;
 }
 .license__card-title {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -432,7 +432,7 @@ pleskAdditionWrapper.forEach((item) => {
   width: 300px;
 }
 .license__card-left-text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -443,7 +443,7 @@ pleskAdditionWrapper.forEach((item) => {
   opacity: 0.6;
 }
 .license__card-right-text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -465,7 +465,7 @@ pleskAdditionWrapper.forEach((item) => {
   margin-bottom: 24px;
 }
 .license__card-total {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -475,7 +475,7 @@ pleskAdditionWrapper.forEach((item) => {
   color: #830f1e;
 }
 .license__card-total-descr {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -491,7 +491,7 @@ pleskAdditionWrapper.forEach((item) => {
   background: #830f1e;
   border-radius: 6px;
 
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -555,7 +555,7 @@ pleskAdditionWrapper.forEach((item) => {
   height: 24px;
 }
 .plus-minus__plesk::before {
-  content: "";
+  content: '';
   position: absolute;
   background-color: #830f1e;
   top: 4%;
@@ -569,7 +569,7 @@ pleskAdditionWrapper.forEach((item) => {
   display: none;
 }
 .plus-minus__plesk::after {
-  content: "";
+  content: '';
   position: absolute;
   background-color: #830f1e;
   top: 50%;
@@ -599,7 +599,7 @@ pleskAdditionWrapper.forEach((item) => {
 }
 
 .addition__wrapper-title {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -638,7 +638,7 @@ pleskAdditionWrapper.forEach((item) => {
   flex: 0 1 40%;
 } */
 .addition__text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -648,7 +648,7 @@ pleskAdditionWrapper.forEach((item) => {
   opacity: 0.6;
 }
 .addition__item-text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -663,7 +663,7 @@ pleskAdditionWrapper.forEach((item) => {
   border-radius: 8px;
   -webkit-appearance: none;
   appearance: none;
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -677,7 +677,7 @@ pleskAdditionWrapper.forEach((item) => {
   outline: none;
 }
 .addition__total {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -693,7 +693,7 @@ pleskAdditionWrapper.forEach((item) => {
   margin-left: auto;
   background: #830f1e;
   border-radius: 6px;
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -730,5 +730,4 @@ pleskAdditionWrapper.forEach((item) => {
     max-width: 293px;
   }
 }
-
 </style>

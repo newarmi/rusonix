@@ -931,8 +931,19 @@
 </template>
 
 <script>
+import Swiper from 'swiper'
+import 'swiper/css/swiper.min.css'
+
 export default {
   mounted() {
+    this.$nextTick(() => {
+      this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
+        loop: true,
+        slidesPerView: 1.35,
+        spaceBetween: 33,
+      })
+    })
+
     const plansTabs = document.querySelectorAll('[data-tab-tariff]')
     const plansTabContents = document.querySelectorAll(
       '[data-tabTariff-content]'
@@ -1062,7 +1073,7 @@ export default {
   padding-top: 72px;
   padding-bottom: 72px;
   background-color: #fcf7f2;
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .tariff__title {
@@ -1283,6 +1294,7 @@ export default {
   border-radius: 6px;
   padding: 48px 24px;
   flex: 1 1 calc((100% / 2) - 33px);
+ 
 }
 
 .tariff__configuration-card--mod {
@@ -1882,6 +1894,9 @@ export default {
   }
   .container__tab-2 {
     padding: 0 26px;
+  }
+  .tariff__configuration-card{
+    height: 290px;
   }
 }
 

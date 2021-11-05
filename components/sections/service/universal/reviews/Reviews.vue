@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     reviews() {
-      return this.$store.getters['service/universal/reviews'];
+      return this.$store.getters['universal/reviews'];
     },
     title() {
       return this.reviews.title

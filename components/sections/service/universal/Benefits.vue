@@ -9,12 +9,12 @@
             <picture class="picture">
               <source
                 media="(max-width: 768px)"
-                src="@/assets/img/bitrix-advantage-table.png"
-                srcset="@/assets/img/bitrix-advantage-table@2x.png 2x"
+                :src="benefits.image"
+                :srcset="benefits.image"
               />
               <img
-                src="@/assets/img/bitrix-advantage.png"
-                srcset="@/assets/img/bitrix-advantage@2x.png 2x"
+                :src="benefits.image"
+                :srcset="benefits.image"
                 alt="bitrix img"
                 class="bitrix__img"
               />
@@ -59,8 +59,8 @@
 export default {
     computed: {
       benefits() {
-        const benefits = this.$store.getters['service/universal/topBlock']
-        benefits.image = this.$config.imgURL + '' + benefits.blickImage
+        const benefits = this.$store.getters['universal/topBlock']
+        benefits.image = this.$config.imgURL + '' + benefits.blockImage
         return benefits
       },
       articlesWithLink() {
