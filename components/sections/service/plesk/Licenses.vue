@@ -359,58 +359,30 @@
 <script>
 export default {
   mounted() {
-    const pleskAdditionWrapper = document.querySelectorAll(".addition__wrapper");
+const pleskAdditionWrapper = document.querySelectorAll(".addition__wrapper ");
+// const pleskAdditionContent = document.querySelectorAll(".addition__wrap-content");
+// const pleskAdditionWrap = document.querySelectorAll(".addition__wrap");
 
 pleskAdditionWrapper.forEach((elem) => {
-  elem?.addEventListener("click", () => {
+  elem?.addEventListener("click", (e) => {
     const targetContent = elem.querySelector(".addition__wrap-content");
     const targetPlusMinus = elem.querySelector(".plus-minus__plesk");
-
+    // stopPropagation();
     targetPlusMinus.classList.toggle("plus-minus__plesk--mod");
     targetContent.classList.toggle("hide__addition__wrap-content");
   });
 });
+pleskAdditionWrapper.forEach((item) => {
+  const itemContent = item.querySelectorAll(".addition__wrap-content");
+  console.dir(itemContent);
+  itemContent.forEach((it) => {
+    it.addEventListener("click", (e) => {
+      e.stopPropagation();
+    });
+  });
+});
 
-    // const plusIMG = document.querySelector('.plus__plesk')
-    // const minusIMG = document.querySelector('.minus__plesk')
-    // const plusIMGsecond = document.querySelector('.plus__plesk-second')
-    // const minusIMGsecond = document.querySelector('.minus__plesk-second')
-    // const clickContent = document.querySelector('.addition__wrap')
-    // const cliclContentsecond = document.querySelector('.addition__wrap-second')
-    // const openContent = document.querySelector('.addition__wrap-content')
-    // const openContentsecond = document.querySelector(
-    //   '.addition__wrap-content-second'
-    // )
 
-    // let coontentOpen = false
-
-    // clickContent?.addEventListener('click', () => {
-    //   if (!coontentOpen) {
-    //     plusIMG.style.display = 'none'
-    //     minusIMG.style.display = 'block'
-    //     openContent.style.display = 'block'
-    //     coontentOpen = true
-    //   } else {
-    //     plusIMG.style.display = 'block'
-    //     openContent.style.display = 'none'
-    //     minusIMG.style.display = 'none'
-
-    //     coontentOpen = false
-    //   }
-    // })
-    // cliclContentsecond?.addEventListener('click', () => {
-    //   if (!coontentOpen) {
-    //     plusIMGsecond.style.display = 'none'
-    //     minusIMGsecond.style.display = 'block'
-    //     openContentsecond.style.display = 'block'
-    //     coontentOpen = true
-    //   } else {
-    //     plusIMGsecond.style.display = 'block'
-    //     minusIMGsecond.style.display = 'none'
-    //     openContentsecond.style.display = 'none'
-    //     coontentOpen = false
-    //   }
-    // })
   },
 }
 </script>

@@ -10,7 +10,7 @@ export const state = () => ({
   
   export const actions = {
     async fetchPage({commit}, hey) {   
-      const page = await this.$axios.$get('services/licplesk')
+      const page = await this.$axios.$get('services/plesk')
       console.log(hey)
       commit('setPage', page)
     },

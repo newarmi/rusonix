@@ -10,7 +10,7 @@ export const state = () => ({
   
   export const actions = {
     async fetchPage({commit}, hey) {   
-      const page = await this.$axios.$get('services/dummy_ssl_rsnx_oa_migrate')
+      const page = await this.$axios.$get('services/ssl')
       console.log(hey)
       commit('setPage', page)
     },

@@ -10,7 +10,7 @@ export const state = () => ({
   
   export const actions = {
     async fetchPage({commit}) {   
-      const page = await this.$axios.$get('services/virtual-data')
+      const page = await this.$axios.$get('services/virtual-data-center')
       commit('setPage', page)
     },
   }
