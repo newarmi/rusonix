@@ -106,21 +106,13 @@
 
         <div class="addition__wrapper">
           <div class="addition__wrap">
-            <img
-              src="@/assets/img/plus-plesk.png"
-              class="plus__plesk"
-              alt="plus"
-            />
-            <img
-              src="@/assets/img/minus-plesk.png"
-              class="minus__plesk"
-              alt="minus"
-            />
+            <span class="plus-minus__plesk"></span>
+
             <div class="addition__wrapper-title">
               Дополнения к Plesk Onyx для VPS
             </div>
           </div>
-          <div class="addition__wrap-content">
+          <div class="addition__wrap-content hide__addition__wrap-content">
             <div class="addition__wrap-title">
               <div class="addition__text">Редакция</div>
               <div class="addition__text">Период</div>
@@ -291,22 +283,13 @@
         </div>
 
         <div class="addition__wrapper">
-          <div class="addition__wrap addition__wrap-second">
-            <img
-              src="@/assets/img/plus-plesk.png"
-              class="plus__plesk-second"
-              alt="plus"
-            />
-            <img
-              src="@/assets/img/minus-plesk.png"
-              class="minus__plesk-second"
-              alt="minus"
-            />
+          <div class="addition__wrap">
+            <span class="plus-minus__plesk"></span>
             <div class="addition__wrapper-title">
               Дополнения к Plesk Onyx для VPS
             </div>
           </div>
-          <div class="addition__wrap-content addition__wrap-content-second">
+          <div class="addition__wrap-content hide__addition__wrap-content">
             <div class="addition__wrap-title">
               <div class="addition__text">Редакция</div>
               <div class="addition__text">Период</div>
@@ -376,46 +359,58 @@
 <script>
 export default {
   mounted() {
-    const plusIMG = document.querySelector('.plus__plesk')
-    const minusIMG = document.querySelector('.minus__plesk')
-    const plusIMGsecond = document.querySelector('.plus__plesk-second')
-    const minusIMGsecond = document.querySelector('.minus__plesk-second')
-    const clickContent = document.querySelector('.addition__wrap')
-    const cliclContentsecond = document.querySelector('.addition__wrap-second')
-    const openContent = document.querySelector('.addition__wrap-content')
-    const openContentsecond = document.querySelector(
-      '.addition__wrap-content-second'
-    )
+    const pleskAdditionWrapper = document.querySelectorAll(".addition__wrapper");
 
-    let coontentOpen = false
+pleskAdditionWrapper.forEach((elem) => {
+  elem?.addEventListener("click", () => {
+    const targetContent = elem.querySelector(".addition__wrap-content");
+    const targetPlusMinus = elem.querySelector(".plus-minus__plesk");
 
-    clickContent?.addEventListener('click', () => {
-      if (!coontentOpen) {
-        plusIMG.style.display = 'none'
-        minusIMG.style.display = 'block'
-        openContent.style.display = 'block'
-        coontentOpen = true
-      } else {
-        plusIMG.style.display = 'block'
-        openContent.style.display = 'none'
-        minusIMG.style.display = 'none'
+    targetPlusMinus.classList.toggle("plus-minus__plesk--mod");
+    targetContent.classList.toggle("hide__addition__wrap-content");
+  });
+});
 
-        coontentOpen = false
-      }
-    })
-    cliclContentsecond?.addEventListener('click', () => {
-      if (!coontentOpen) {
-        plusIMGsecond.style.display = 'none'
-        minusIMGsecond.style.display = 'block'
-        openContentsecond.style.display = 'block'
-        coontentOpen = true
-      } else {
-        plusIMGsecond.style.display = 'block'
-        minusIMGsecond.style.display = 'none'
-        openContentsecond.style.display = 'none'
-        coontentOpen = false
-      }
-    })
+    // const plusIMG = document.querySelector('.plus__plesk')
+    // const minusIMG = document.querySelector('.minus__plesk')
+    // const plusIMGsecond = document.querySelector('.plus__plesk-second')
+    // const minusIMGsecond = document.querySelector('.minus__plesk-second')
+    // const clickContent = document.querySelector('.addition__wrap')
+    // const cliclContentsecond = document.querySelector('.addition__wrap-second')
+    // const openContent = document.querySelector('.addition__wrap-content')
+    // const openContentsecond = document.querySelector(
+    //   '.addition__wrap-content-second'
+    // )
+
+    // let coontentOpen = false
+
+    // clickContent?.addEventListener('click', () => {
+    //   if (!coontentOpen) {
+    //     plusIMG.style.display = 'none'
+    //     minusIMG.style.display = 'block'
+    //     openContent.style.display = 'block'
+    //     coontentOpen = true
+    //   } else {
+    //     plusIMG.style.display = 'block'
+    //     openContent.style.display = 'none'
+    //     minusIMG.style.display = 'none'
+
+    //     coontentOpen = false
+    //   }
+    // })
+    // cliclContentsecond?.addEventListener('click', () => {
+    //   if (!coontentOpen) {
+    //     plusIMGsecond.style.display = 'none'
+    //     minusIMGsecond.style.display = 'block'
+    //     openContentsecond.style.display = 'block'
+    //     coontentOpen = true
+    //   } else {
+    //     plusIMGsecond.style.display = 'block'
+    //     minusIMGsecond.style.display = 'none'
+    //     openContentsecond.style.display = 'none'
+    //     coontentOpen = false
+    //   }
+    // })
   },
 }
 </script>
@@ -447,7 +442,7 @@ export default {
   max-width: 402px;
 }
 .license__card-title {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -465,7 +460,7 @@ export default {
   width: 300px;
 }
 .license__card-left-text {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
@@ -476,7 +471,7 @@ export default {
   opacity: 0.6;
 }
 .license__card-right-text {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -498,7 +493,7 @@ export default {
   margin-bottom: 24px;
 }
 .license__card-total {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -508,7 +503,7 @@ export default {
   color: #830f1e;
 }
 .license__card-total-descr {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -524,7 +519,7 @@ export default {
   background: #830f1e;
   border-radius: 6px;
 
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -581,15 +576,41 @@ export default {
   padding-bottom: 24px;
   gap: 60px;
 }
-.minus__plesk {
-  display: none;
-  height: 2px;
+
+.plus-minus__plesk {
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
-.minus__plesk-second {
-  display: none;
-  height: 2px;
+.plus-minus__plesk::before {
+  content: "";
+  position: absolute;
+  background-color: #830f1e;
+  top: 4%;
+  left: 46%;
+  width: 2px;
+  height: 100%;
+
+  border-radius: 2px;
 }
-.addition__wrap-content {
+.plus-minus__plesk--mod::before {
+  display: none;
+}
+.plus-minus__plesk::after {
+  content: "";
+  position: absolute;
+  background-color: #830f1e;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+
+  border-radius: 2px;
+}
+.show__addition__wrap-content {
+  display: block;
+}
+.hide__addition__wrap-content {
   display: none;
 }
 .addition__wrap-content-second {
@@ -606,7 +627,7 @@ export default {
 }
 
 .addition__wrapper-title {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -645,7 +666,7 @@ export default {
   flex: 0 1 40%;
 } */
 .addition__text {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -655,7 +676,7 @@ export default {
   opacity: 0.6;
 }
 .addition__item-text {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -670,7 +691,7 @@ export default {
   border-radius: 8px;
   -webkit-appearance: none;
   appearance: none;
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -684,7 +705,7 @@ export default {
   outline: none;
 }
 .addition__total {
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
@@ -700,7 +721,7 @@ export default {
   margin-left: auto;
   background: #830f1e;
   border-radius: 6px;
-  font-family: 'Graphik', sans-serif;
+  font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -737,4 +758,5 @@ export default {
     max-width: 293px;
   }
 }
+
 </style>

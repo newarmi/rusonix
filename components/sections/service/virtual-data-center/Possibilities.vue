@@ -274,12 +274,33 @@
 </template>
 
 <script>
+import Swiper from 'swiper'
+import 'swiper/css/swiper.min.css'
+
 export default {
   name: 'Possibilities',
   computed: {
 
   },
   mounted() {
+    this.$nextTick(() => {
+      this.slider = new Swiper(".cscard-swiper", {
+        slidesPerView: 3.65,
+      spaceBetween: 64,
+      breakpoints: {
+        360: {
+          slidesPerView: 2,
+        },
+        576: {
+          slidesPerView: 3.1,
+        },
+        768: {
+          slidesPerView: 3.4,
+        },
+      },
+      })
+    })
+
     const cscardTags = document.querySelectorAll("[ data-tab-target]");
     const cscardTabContents = document.querySelectorAll("[data-tab-content]");
 

@@ -1,35 +1,46 @@
 <template>
-<div>
-  <div class="swiper__wrapper">
-    <div class="container">
-      <div class="swiper-container container__start-sliders" :class="sliderClass">
-        <div class="swiper-wrapper">
-          <div v-for="article, i in clearArticles" :key="article[0].content" class="swiper-slide start__slide pointer" @click="showPopup(i)">
-            <p class="start__slide-text">{{article[0].content}}</p>
+  <div>
+    <div class="swiper__wrapper">
+      <div class="container">
+        <div
+          class="swiper-container container__start-sliders"
+          :class="sliderClass"
+        >
+          <div class="swiper-wrapper">
+            <div v-for="(article) in clearArticles" :key="article[0].content"
+              class="swiper-slide start__slide pointer" >
+              <p class="start__slide-text">{{ article[0].content }}</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div v-for="article, i in clearArticles" :key="article[0].content">
-    <Popup :title="article[0].content" :show-popup="is_show[i].show" @closePopup="closePopup(i)">
-      <div v-for="item, j in article" :key="item.type + j">
-        <div v-if="item.type==='text'" class="popup-feature-text" v-html="item.content"></div>
-        <picture v-if="item.type==='image'" class="picture">
-          <img class="popup__img" 
-              :src="$config.imgURL + '' + item.image" 
-              :srcset="$config.imgURL + '' + item.image" 
-              alt="popup img" />
-        </picture>
-        <button v-if="item.type==='button'" class="popup__btn">{{item.button}}</button>
-      </div>
+    <div v-for="(article, i) in clearArticles" :key="article[0].content">
+      <Popup :title="article[0].content" :show-popup="is_show[i].show" @closePopup="closePopup(i)">
+        <div v-for="(item, j) in article" :key="item.type + j">
+          <div
+            v-if="item.type === 'text'"
+            class="popup-feature-text"
+            v-html="item.content"
+          ></div>
+          <picture v-if="item.type === 'image'" class="picture">
+            <img
+              class="popup__img"
+              :src="$config.imgURL + '' + item.image"
+              :srcset="$config.imgURL + '' + item.image"
+              alt="popup img"
+            />
+          </picture>
+          <button v-if="item.type === 'button'" class="popup__btn">
+            {{ item.button }}
+          </button>
+        </div>
       </Popup>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
-
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 import uniqueId from 'lodash/uniqueId'
@@ -37,58 +48,62 @@ import uniqueId from 'lodash/uniqueId'
 export default {
   name: 'Slider',
   components: {
-    'Popup': () => import('~/components/core/header/Popup'),
+    Popup: () => import('~/components/core/header/Popup'),
   },
-  data () {
+  data() {
     return {
       slider: null,
       sliderClass: '',
-      is_show: []  
+      is_show: []
     }
   },
   computed: {
-      clearArticles() {
-        return this.$store.getters.articles
-      },
+    clearArticles() {
+      return this.$store.getters.articles
+    },
   },
   created() {
-    this.clearArticles.forEach(element => {
-        this.is_show.push({'show': false})
-    });
-
+    this.clearArticles.forEach((element) => {
+      this.is_show.push({ show: false })
+    })
   },
-  mounted () {
-
-
+  mounted() {
     const sliderId = uniqueId()
-
     this.sliderClass = 'swiper-' + sliderId
-
     this.$nextTick(() => {
+      
       this.slider = new Swiper('.' + this.sliderClass, {
         slidesPerView: 'auto',
         spaceBetween: 33,
         loop: true,
         breakpoints: {
           576: {
-            centerSlides: true          
-          }
-        }
+            centerSlides: true,
+          },
+        },
+        on: {
+          click:  () => {
+            const index = this.slider.clickedSlide.attributes[2].value
+            this.showPopup(index);
+          },
+        },
       })
     })
+    
   },
-  beforeDestroy () {
-    if (this.slider) { this.slider.destroy() }
+  beforeDestroy() {
+    if (this.slider) {
+      this.slider.destroy()
+    }
   },
   methods: {
-      showPopup(i) {
-        this.is_show[i].show=true
-      },
-      closePopup(i) {
-        this.is_show[i].show=false
-      }
+    showPopup(i) {
+      this.is_show[i].show = true
+    },
+    closePopup(i) {
+      this.is_show[i].show = false
+    },
   },
-
 }
 </script>
 
@@ -130,7 +145,7 @@ export default {
   position: relative;
 }
 .popup-feature-title {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
@@ -141,7 +156,7 @@ export default {
   margin-bottom: 48px;
 }
 .popup-feature-text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -168,7 +183,7 @@ export default {
   margin-bottom: 24px;
 }
 .popup__btn {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -256,7 +271,7 @@ export default {
 }
 
 .start__slide-text {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
@@ -266,5 +281,4 @@ export default {
   color: #ffffff;
   padding: 48px 36px 24px 24px;
 }
-
 </style>
