@@ -1,73 +1,76 @@
 <template>
-    <section class="license">
-        <div class="container">
-          <div class="license__title title">Лицензии 1С Битрикс</div>
-            <div class="license__wrapper-cards">
+  <section class="license">
 
-            <div v-for="card in tariffs" :key="card.name" class="license__wrap-card">
-              <div class="license__card-title">{{ card.name }}</div>
+    <div class="container">
+      <div class="license__title title">{{ cards.tariffTitle }}</div>
+      <div class="license__wrapper-cards">
+
+        <div v-for="card in cards.cards" :key="card.key" class="license__wrap-card">
+          <div class="license__card-title">{{ card.attributes.cardTitle }}</div>
               <div class="license__card-content">
                 <div class="license__card-left">
-                  <div class="license__card-left-text">Количество сайтов</div>
-                  <div class="license__card-left-text">Количество модулей</div>
-                  <div class="license__card-left-text">Интеграция с Битрикс24</div>
-                  <div class="license__card-left-text">Социальные сервисы</div>
+                  <div v-for="option in card.attributes.options" :key="option.key">
+                    <div v-if="option.layout === 'simpleOption'" class="license__card-left-text">{{ option.attributes.option }}</div>
+                  </div>
                 </div>
                 <div class="license__card-content-right">
-                  <div class="license__card-right-text">2 шт</div>
-                  <div class="license__card-right-text">14</div>
-                  <div class="license__card-right-text">Да</div>
-                  <div class="license__card-right-text">Да</div>
+                  <div v-for="option in card.attributes.options" :key="option.key">
+                    <div v-if="option.layout === 'simpleOption'" class="license__card-right-text">{{ option.attributes.value }}</div>
+                  </div>
                 </div>
               </div>
 
-
-
-              <div class="license__card-selection-title">Выберите подарок</div>
-              
+          <div v-for="option in card.attributes.options" :key="option.key">
+            <div v-if="option.layout === 'listOption'">
+              <div class="license__card-selection-title">
+                {{ option.attributes.option }}
+              </div>
               <div class="license__card-selection">
                 <select class="license__select">
-                  <option value="Ultra One (10Gb NVME) 3 мес.">
-                    Ultra One (10Gb NVME) 3 мес.
-                  </option>
-
-                  <option value="Ultra One (10Gb NVME) 2 мес.">
-                    Ultra One (10Gb NVME) 2 мес.
-                  </option>
-                  <option value="Ultra One (10Gb NVME) 1 мес.">
-                    Ultra One (10Gb NVME) 1 мес.
+                  <option
+                    v-for="item in option.attributes.list"
+                    :key="item.key"
+                    value="item.attributes.listItem">
+                    {{ item.attributes.listItem }}
                   </option>
                 </select>
               </div>
-
-              <div class="license__card-total">{{card.price}} ₽</div>
-              <button class="license__btn">Заказать</button>
             </div>
+          </div>
 
+          <div class="license__card-total">
+            {{ card.attributes.price }}
+            <div
+              v-show="card.attributes.priceComment"
+              class="license__card-total-descr">
+              {{ card.attributes.priceComment }}
+            </div>
+          </div>
+          <div>
+            <a href="#" class="license__btn">{{ card.attributes.buttonName }}</a>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-
 export default {
-  computed: {
-    tariffs() {
-      const tariffs = this.$store.getters['service/bitrix/tariffs']
-      tariffs.forEach(element => {
-        element.price = Math.floor(element.periods[0].amount)
-      });
-      return tariffs
+  name: 'Cards',
+  props: {
+    cards: {
+      type: Object,
+      required: true
     }
-  }
+  },
+  computed: {
 
+  },
 }
 </script>
 
 <style scoped>
-/* license */
-
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
@@ -186,21 +189,19 @@ export default {
   margin-bottom: 48px;
 }
 .license__btn {
-  width: 100%;
-  max-width: 354px;
-  padding: 14px 60px;
-  background: #830f1e;
-  border-radius: 6px;
-
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
   letter-spacing: 0px;
   text-align: center;
-  color: #fff;
+  color: #ffffff;
+  background-color: #830f1e;
+  border-radius: 6px;
+  padding: 19px 141px 18px 144px;
   cursor: pointer;
+  margin-top: 30px;
 }
 .license__btn:hover {
   background-color: #660915;

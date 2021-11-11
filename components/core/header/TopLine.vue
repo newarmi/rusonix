@@ -319,11 +319,11 @@
               />
             </picture>
           </nuxt-link>
-          <a href="#">
+          <nuxt-link to="/login">
             <svg class="auth__icon" width="15" height="18">
               <use xlink:href="@/assets/img/sprites.svg#auth"></use>
             </svg>
-          </a>
+          </nuxt-link>
         </div>
         <nav  class="navigation__mobile" :class="{open: isMenuOpen}">
           <ul class="navigation__list-mobile">

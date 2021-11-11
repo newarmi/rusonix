@@ -59,7 +59,7 @@
 export default {
     computed: {
       benefits() {
-        const benefits = this.$store.getters['universal/topBlock']
+        const benefits = this.$store.getters['universal/benefits']
         benefits.image = this.$config.imgURL + '' + benefits.blockImage
         return benefits
       },

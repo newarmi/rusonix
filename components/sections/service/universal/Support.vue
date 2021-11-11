@@ -54,7 +54,7 @@ export default {
   name: 'Support',
   computed: {
       support () {
-        return this.$store.getters['universal/questionsData']
+        return this.$store.getters['universal/questions']
       },
       image () {
         return this.$config.imgURL + '' + this.support.blockImage

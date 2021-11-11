@@ -1,171 +1,25 @@
 <template>
       <section class="possibilities">
         <div class="container">
-          <div class="possibilities__title title">Доступные возможности</div>
+          <div class="possibilities__title title">{{tabs.blockTitle}}</div>
         </div>
         <div class="swiper cscard-swiper">
           <div class="swiper-wrapper possibilities__wrapper-tabs">
-            <div
-              data-tab-target="#cscard-1"
-              class="swiper-slide possibilities__wrapper-tab possibilities__wrapper-tab--active">
-              Почему CS-Cart
-            </div>
-            <div
-              data-tab-target="#cscard-2"
-              class="swiper-slide possibilities__wrapper-tab">
-              Кому подходит
-            </div>
-            <div
-              data-tab-target="#cscard-3"
-              class="swiper-slide possibilities__wrapper-tab">
-              Сравнение изданий
-            </div>
-            <div
-              data-tab-target="#cscard-4"
-              class="swiper-slide possibilities__wrapper-tab">
-              Дополнения
+            <div v-for="tab, i in tabs.tab" :key="tab.key" :data-tab-target="'#cscard-' + i"
+              class="swiper-slide possibilities__wrapper-tab" :class="{'possibilities__wrapper-tab--active' : i===0}">
+              {{tab.attributes.tabTitle}}
             </div>
           </div>
         </div>
 
-        <div
-          id="cscard-1"
-          data-tab-content
-          class="possibilities__wrapper possibilities__wrapper--active">
+        <div v-for="tab, i in tabs.tab" :id="'cscard-' + i" :key="tab.key" data-tab-content class="possibilities__wrapper" 
+            :class="{'possibilities__wrapper--active' : i===0}">
           <div class="possibilities__cards">
-            <div class="possibilities__card">
+            <div v-for="article in tab.attributes.blocks" :key="article.key" class="possibilities__card">
               <div class="possibilities__card-title">
-                Хранение и обмен файлами
+                {{ article.attributes.textTitle }}
               </div>
-              <div class="possibilities__card-text">
-                Двусторонний обмен данными вашего магазина с 1С по товарам,
-                заказам, покупателям и контрагентам. Обмен работает в режиме
-                реального времени.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Взаимодействие с продуктами Microsoft
-              </div>
-              <div class="possibilities__card-text">
-                Собственная запатентованная технология для быстрой загрузки
-                страниц. Поддержка «облачных» хранилищ. Распределение нагрузки
-                между серверами.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Возможность коллективной работы
-              </div>
-              <div class="possibilities__card-text">
-                Соответствие и поддержание соответствия всем требованиям
-                законодательства, включая требования ФЗ-54. Готовое соглашение
-                об обработке персональных данных.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="cscard-2" data-tab-content class="possibilities__wrapper">
-          <div class="possibilities__cards">
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Хранение и обмен файлами2
-              </div>
-              <div class="possibilities__card-text">
-                Двусторонний обмен данными вашего магазина с 1С по товарам,
-                заказам, покупателям и контрагентам. Обмен работает в режиме
-                реального времени.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Взаимодействие с продуктами Microsoft2
-              </div>
-              <div class="possibilities__card-text">
-                Собственная запатентованная технология для быстрой загрузки
-                страниц. Поддержка «облачных» хранилищ. Распределение нагрузки
-                между серверами.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Возможность коллективной работы2
-              </div>
-              <div class="possibilities__card-text">
-                Соответствие и поддержание соответствия всем требованиям
-                законодательства, включая требования ФЗ-54. Готовое соглашение
-                об обработке персональных данных.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="cscard-3" data-tab-content class="possibilities__wrapper">
-          <div class="possibilities__cards">
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Хранение и обмен файлами3
-              </div>
-              <div class="possibilities__card-text">
-                Двусторонний обмен данными вашего магазина с 1С по товарам,
-                заказам, покупателям и контрагентам. Обмен работает в режиме
-                реального времени.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Взаимодействие с продуктами Microsoft3
-              </div>
-              <div class="possibilities__card-text">
-                Собственная запатентованная технология для быстрой загрузки
-                страниц. Поддержка «облачных» хранилищ. Распределение нагрузки
-                между серверами.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Возможность коллективной работы3
-              </div>
-              <div class="possibilities__card-text">
-                Соответствие и поддержание соответствия всем требованиям
-                законодательства, включая требования ФЗ-54. Готовое соглашение
-                об обработке персональных данных.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="cscard-4" data-tab-content class="possibilities__wrapper">
-          <div class="possibilities__cards">
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Хранение и обмен файлами4
-              </div>
-              <div class="possibilities__card-text">
-                Двусторонний обмен данными вашего магазина с 1С по товарам,
-                заказам, покупателям и контрагентам. Обмен работает в режиме
-                реального времени.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Взаимодействие с продуктами Microsoft4
-              </div>
-              <div class="possibilities__card-text">
-                Собственная запатентованная технология для быстрой загрузки
-                страниц. Поддержка «облачных» хранилищ. Распределение нагрузки
-                между серверами.
-              </div>
-            </div>
-            <div class="possibilities__card">
-              <div class="possibilities__card-title">
-                Возможность коллективной работы4
-              </div>
-              <div class="possibilities__card-text">
-                Соответствие и поддержание соответствия всем требованиям
-                законодательства, включая требования ФЗ-54. Готовое соглашение
-                об обработке персональных данных.
+              <div class="possibilities__card-text" v-html="article.attributes.text">
               </div>
             </div>
           </div>
@@ -180,7 +34,9 @@ import 'swiper/css/swiper.min.css'
 export default {
   name: 'Possibilities',
   computed: {
-
+      tabs() {
+        return this.$store.getters['universal/tabs']
+      }
   },
   mounted() {
     this.$nextTick(() => {

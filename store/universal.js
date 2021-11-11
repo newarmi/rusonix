@@ -11,27 +11,22 @@ export const state = () => ({
   export const actions = {
     async fetchPage({commit}, slug) {   
       const page = await this.$axios.$get('services/' + slug)
-      console.log(this.$route)
-      console.log(slug)
       commit('setPage', page)
     },
   }
   
   export const getters = {
-   
-      tariffs: state => state.page.tariffs,
-      top: state => state.page.top_block,
-      topBlock: state => state.page.top_block[0].attributes,
-      technologies: state => state.page.technologies,
-      technologiesData: state => state.page.technologies[0].attributes,
-      questions: state => state.page.questions,
-      questionsData: state => state.page.questions[0].attributes,
-      tabs: state => state.page.tabs,
-      tabsData: state => state.page.tabs[0].attributes,
-      reviews: state => state.page.clients,
-      details: state => state.page.cabinet,
+    buttons: state => state.page.buttons,
+    header: state => state.page.header,
+    footer: state => state.page.footer,   
+    
+    blocks: state => state.page.blocks,
+    tabs: state => state.page.blocks.tabs.attributes,
+    benefits: state => state.page.blocks.benefits.attributes,
+    questions: state => state.page.blocks.questions.attributes,
+    reviews: state => state.page.clients,
+    billing: state => state.page.cabinet,
 
-      buttons: state => state.page.buttons,
-      header: state => state.page.header,
-      footer: state => state.page.footer,
+    tariffs: state => state.page.tariffs,
+    billingTariffs: state => state.page.billingTariffs,
   }

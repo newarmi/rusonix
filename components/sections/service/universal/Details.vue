@@ -38,9 +38,7 @@ export default {
   name: 'Details',
   computed: {
       details() {
-
-        const details = this.$store.getters['universal/details'];
-
+        const details = this.$store.getters['universal/billing'];
         details.imageDesktop = this.$config.imgURL + '' + details.image
         details.imageMobile = this.$config.imgURL + '' + details.content
         return details
