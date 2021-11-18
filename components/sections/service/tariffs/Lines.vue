@@ -2,82 +2,123 @@
   <div>
     <section class="license__storage">
       <div class="container">
-        <div class="license__title title">{{ lines.tariffTitle }}</div>
-        <div class="license__wrap-title">
-          <div class="license__text">Сертификат</div>
-          <div
-            v-for="option in lines.options"
-            :key="option.key"
-            class="license__text"
-          >
-            {{ option.attributes.title }}
-          </div>
-          <div class="license__text">Стоимость</div>
+        <div class="license__title title">
+          {{ lines.tariffTitle }}
         </div>
 
-        <div v-for="line in lines.lines" :key="line.key" class="license__wrap">
-          <div class="license__wrap-text">
-            {{ line.attributes.title }}
+        <div class="license__wrapper" :class="wrapper">
+          <div class="license__wrapper-top" :class="titleWrapper">
+            <div class="license__top-title" :class="titleText">Сертификат</div>
+            <div
+              v-for="option in lines.options"
+              :key="option.key"
+              class="license__top-title"
+              :class="titleText">
+              {{ option.attributes.title }}
+            </div>
+            <div class="license__top-title" :class="titleText">Стоимость</div>
           </div>
 
-          <div v-for="item in line.attributes.options" :key="item.key">
+          <div
+            v-for="line in lines.lines"
+            :key="line.key"
+            class="license__wrapper-bottom"
+            :class="wrapperBottom">
 
-            <div v-if="item.layout === 'list'" class="license__wrap-select">
-              <select class="license__select license__select--mod">
-                <option
-                  v-for="option in item.attributes.list"
-                  :key="option.key"
-                  :value="option.attributes.item">
-                  {{ option.attributes.item }}
-                </option>
-              </select>
+            <div class="license__wrap-text">{{ line.attributes.title }}</div>
+
+            <div v-for="item in line.attributes.options" :key="item.key">
+              <div v-if="item.layout === 'list'" class="license__wrap-select">
+                <select class="license__select license__select--mod">
+                  <option
+                    v-for="option in item.attributes.list"
+                    :key="option.key"
+                    :value="option.attributes.item"
+                  >
+                    {{ option.attributes.item }}
+                  </option>
+                </select>
+              </div>
+
+              <div v-if="item.layout === 'field'" class="license__input">
+                <input
+                  class="license__input-text"
+                  type="number"
+                  :value="item.attributes.value"
+                />
+              </div>
+
+              <div v-if="item.layout === 'text'" class="license__wrap-text">
+                {{ item.attributes.value }}
+              </div>
             </div>
 
-            <div v-if="item.layout === 'field'" class="license__input">
-              <input class="license__input-text" type="number" :value="item.attributes.value" />
-            </div>
-
-            <div v-if="item.layout === 'text'" class="license__wrap-text">
-              {{ item.attributes.value }}
+            <div class="license__wrap-total-box">
+              <div class="license__total">{{ line.attributes.price }}</div>
+              <button class="license__btn">
+                {{ line.attributes.buttonName }}
+              </button>
             </div>
           </div>
-
-          <div class="license__total">{{ line.attributes.price }}</div>
-          <button class="license__btn">{{ line.attributes.buttonName }}</button>
         </div>
 
         <!-- tablet  -->
         <div class="license__tablet-wrapper">
-
-          <div v-for="line in lines.lines" :key="line.key" class="license__tablet">
+          <div
+            v-for="line in lines.lines"
+            :key="line.key"
+            class="license__tablet"
+          >
             <div class="license__tablet-title">{{ line.attributes.title }}</div>
 
-            <div v-for="item, i in line.attributes.options" :key="item.key" class="license__tablet-wrap--tablet">
-
+            <div
+              v-for="(item, i) in line.attributes.options"
+              :key="item.key"
+              class="license__tablet-wrap--tablet"
+            >
               <div class="license__tablet-text">{{ options[i].title }}</div>
 
               <div v-if="item.layout === 'field'" class="license__input">
-                <input class="license__input-text" type="number" :value="item.attributes.value" />
+                <input
+                  class="license__input-text"
+                  type="number"
+                  :value="item.attributes.value"
+                />
               </div>
 
               <div v-if="item.layout === 'list'" class="license__wrap-select">
-                <select class="license__select license__select-tablet license__select-tablet--mod">
-                  <option v-for="option in item.attributes.list"
-                  :key="option.key" :value="option.attributes.item">
-                  {{ option.attributes.item }}</option>    
+                <select
+                  class="
+                    license__select
+                    license__select-tablet
+                    license__select-tablet--mod
+                  "
+                >
+                  <option
+                    v-for="option in item.attributes.list"
+                    :key="option.key"
+                    :value="option.attributes.item"
+                  >
+                    {{ option.attributes.item }}
+                  </option>
                 </select>
               </div>
 
-              <div v-if="item.layout === 'text'" class="license__tablet-text license__tablet-text--mod">
-                  {{ item.attributes.value }}
+              <div
+                v-if="item.layout === 'text'"
+                class="license__tablet-text license__tablet-text--mod"
+              >
+                {{ item.attributes.value }}
               </div>
-
             </div>
 
-            <div class="license__total license__total--tablet">{{ line.attributes.price }}</div>
-            <button class="license__btn license__btn--tablet">{{ line.attributes.buttonName }}</button>
+            <div class="license__total license__total--tablet">
+              {{ line.attributes.price }}
+            </div>
+            <button class="license__btn license__btn--tablet">
+              {{ line.attributes.buttonName }}
+            </button>
           </div>
-
         </div>
       </div>
     </section>
@@ -101,6 +142,35 @@ export default {
       })
       return options
     },
+    optionNumber() {
+      return this.lines.options.length
+    },
+    wrapper() {
+      return {'license__wrapper-one': this.optionNumber === 1,
+              'license__wrapper-two': this.optionNumber === 2,
+              'license__wrapper-three': this.optionNumber === 3,}
+    },
+    titleWrapper() {
+      return {
+        'license__wrapper-top-one': this.optionNumber === 1,
+        'license__wrapper-top-two': this.optionNumber === 2,
+        'license__wrapper-top-three': this.optionNumber === 3,
+      }
+    },
+    titleText() {
+      return {
+        'license__top-title-one': this.optionNumber === 1,
+        'license__top-title-two': this.optionNumber === 2,
+        'license__top-title-three': this.optionNumber === 3,
+      }
+    },
+    wrapperBottom() {
+      return {
+        'license__wrapper-bottom-one': this.optionNumber === 1,
+        'license__wrapper-bottom-two': this.optionNumber === 2,
+        'license__wrapper-bottom-three': this.optionNumber === 3,
+      }
+    },
   },
 }
 </script>
@@ -109,6 +179,12 @@ export default {
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
+  padding-bottom: 36px;
+}
+
+.license__storage {
+  background-color: #fcf7f2;
+  padding-top: 36px;
   padding-bottom: 36px;
 }
 
@@ -185,7 +261,6 @@ export default {
   background: url(@/assets/img/arrow-select.png) no-repeat right;
   background-position-x: 75%;
   cursor: pointer;
-
 }
 .license__select--mod {
   background-position-x: 90%;
@@ -283,12 +358,10 @@ export default {
 .license__select-tablet {
   padding: 20px 164px 20px 24px;
   background-position-x: 85%;
-
 }
 .license__select-tablet--mod {
   padding: 20px 74px 20px 24px;
   width: 196px;
-
 }
 .license__total--tablet {
   display: flex;
@@ -315,7 +388,12 @@ export default {
   .license__tablet-wrapper {
     display: flex;
   }
+
+  .license__wrapper {
+    display: none;
+  }
 }
+
 @media (max-width: 768px) {
   .license {
     padding-top: 36px;
@@ -333,33 +411,6 @@ export default {
   }
 }
 
-/* license-indefinite */
-
-.license-indefinite {
-  background-color: #fcf7f2;
-  padding-top: 36px;
-  padding-bottom: 36px;
-}
-
-/* license-storage */
-
-.license__storage {
-  background-color: #fcf7f2;
-  padding-top: 36px;
-  padding-bottom: 36px;
-}
-.license__storage-text:nth-child(1) {
-  flex-basis: 30%;
-}
-.license__storage-text:nth-child(2) {
-  flex-basis: 11%;
-}
-.license__storage-text:nth-child(3) {
-  flex-basis: 11%;
-}
-.license__storage-text:nth-child(4) {
-  flex-basis: 19%;
-}
 .license__input {
 }
 .license__storage-wrap-text {
@@ -392,43 +443,120 @@ export default {
     max-width: 201px;
   }
 }
-/* license__perpetual */
 
-.license__perpetual {
-  background-color: #fcf7f2;
-  padding-top: 36px;
-  padding-bottom: 36px;
+
+.license__top-title {
+  font-family: 'Graphik', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #000;
+  opacity: 0.6;
+  padding: 0 10px;
 }
-.license__perpetual-text:nth-child(1) {
-  flex-basis: 39%;
+.license__wrapper-top {
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin: 0 -10px;
 }
-.license__perpetual-text:nth-child(2) {
-  flex-basis: 12%;
+.license__top-title-one:nth-child(1) {
+  flex: 1 2 33.333%;
 }
-.license__perpetual-text:nth-child(3) {
-  flex-basis: 19%;
+.license__top-title-one:nth-child(2) {
+  flex: 1 2 33.333%;
 }
-.license__perpetual-wrap-text {
-  max-width: 425px;
+.license__top-title-one:nth-child(3) {
+  flex: 1 0 33.333%;
 }
-.license__perpetual-select {
-  width: 200px;
+
+.license__top-title-two:nth-child(1) {
+  flex: 1 2 29%;
 }
-@media (max-width: 1200px) {
-  .license__perpetual-text-tablet--mod {
-    max-width: 200px;
-  }
-  .license__select-perpetual-tablet--mod {
-    width: 200px;
-  }
+.license__top-title-two:nth-child(2) {
+  flex: 1 2 19%;
 }
-/* license__readykernal */
-.license__readykernal {
-  background-color: #fcf7f2;
-  padding-top: 36px;
-  padding-bottom: 36px;
+.license__top-title-two:nth-child(3) {
+  flex: 1 2 19%;
 }
-.license__input-readykernal-text {
-  max-width: 103px;
+.license__top-title-two:nth-child(4) {
+  flex: 1 0 33%;
+}
+
+.license__top-title-three:nth-child(1) {
+  flex: 1 2 20%;
+}
+.license__top-title-three:nth-child(2) {
+  flex: 1 2 15.66%;
+}
+.license__top-title-three:nth-child(3) {
+  flex: 1 2 15.66%;
+}
+.license__top-title-three:nth-child(4) {
+  flex: 1 2 15.66%;
+}
+.license__top-title-three:nth-child(5) {
+  flex: 1 0 33%;
+}
+
+.license__wrapper-bottom {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  margin: 10px -10px;
+}
+.license__wrapper-bottom > div {
+  padding: 0 10px;
+}
+.license__wrapper-bottom-one > div:nth-child(1) {
+  flex: 1 2 33.33%;
+}
+.license__wrapper-bottom-one > div:nth-child(2) {
+  flex: 1 2 33.33%;
+}
+.license__wrapper-bottom-one > div:nth-child(3) {
+  flex: 1 0 33.33%;
+}
+
+.license__wrapper-bottom-two > div:nth-child(1) {
+  flex: 1 2 29%;
+}
+.license__wrapper-bottom-two > div:nth-child(2) {
+  flex: 1 2 19%;
+}
+.license__wrapper-bottom-two > div:nth-child(3) {
+  flex: 1 2 19%;
+}
+.license__wrapper-bottom-two > div:nth-child(4) {
+  flex: 1 0 33%;
+}
+
+.license__wrapper-bottom-three > div:nth-child(1) {
+  flex: 1 2 20%;
+}
+.license__wrapper-bottom-three > div:nth-child(2) {
+  flex: 1 2 15.66%;
+}
+.license__wrapper-bottom-three > div:nth-child(3) {
+  flex: 1 2 15.66%;
+}
+.license__wrapper-bottom-three > div:nth-child(4) {
+  flex: 1 2 15.66%;
+}
+.license__wrapper-bottom-three > div:nth-child(5) {
+  flex: 1 0 33%;
+}
+
+.license__wrap-total-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 </style>

@@ -15,6 +15,11 @@
 
       <Cards v-if="tariff.layout=='cards'" :cards="tariff.attributes" />
       <Lines v-if="tariff.layout=='lines'" :lines="tariff.attributes" />
+      <OneLine v-if="tariff.layout=='oneLine'" :lines="tariff.attributes" />
+      <Additions v-if="tariff.layout=='additions'" :addition="tariff.attributes" />
+      <Ssl v-if="tariff.layout=='filters'" :ssl="tariff.attributes" />
+      <Calculate v-if="tariff.layout=='calculate'" :data="tariff.attributes" />
+      <Solutions v-if="tariff.layout=='solutions'" :data="tariff.attributes" />
     </div>
 
   </div>
@@ -31,8 +36,15 @@ export default {
     'Possibilities': () => import('~/components/sections/service/universal/Possibilities'),
     'Cards': () => import('~/components/sections/service/tariffs/Cards'),
     'Lines': () => import('~/components/sections/service/tariffs/Lines'),
+    'OneLine': () => import('~/components/sections/service/tariffs/OneLine'),
+    'Additions': () => import('~/components/sections/service/tariffs/Additions'),
+    'Ssl': () => import('~/components/sections/service/tariffs/Ssl'),
+    'Calculate': () => import('~/components/sections/service/tariffs/Calculate'),
+    'Solutions': () => import('~/components/sections/service/tariffs/Solutions'),
+    
     'BillingCards': () => import('~/components/sections/service/billing/Cards'),
-    'BillingLines': () => import('~/components/sections/service/billing/Lines')
+    'BillingLines': () => import('~/components/sections/service/billing/Lines'),
+
   },
 
   async asyncData({ params, store }) {

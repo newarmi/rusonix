@@ -41,6 +41,14 @@ export default {
   modules: [
     '@nuxtjs/axios',
     // '@nuxtjs/style-resources'
+    [
+      'primevue/nuxt', {
+        theme: 'md-light-indigo',
+        ripple: true,    
+          components: ['Slider'],     //an array of components to be registered
+          directives: []      //an array of directives to be registered
+      }
+  ]
   ],
 
   axios: {
@@ -60,7 +68,8 @@ export default {
       css: ({ isDev }) => isDev ? '[name].css' : 'css/[contenthash].css',
       img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
       font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]'
-    }
+    },
+    transpile: ['primevue']
   },
 
   server: {

@@ -48,100 +48,70 @@
                <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link"
-                          >Ваш бизнес всегда онлайн</a>
+                        <a class="dropdown__link">Ваш бизнес всегда онлайн</a>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Наша миссия</a>
+                            <a href="" class="dropdown__submenu-link">Наша миссия</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Наши ценности</a>
+                            <a href="" class="dropdown__submenu-link">Наши ценности</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Наша стратегия</a>
+                            <a href="" class="dropdown__submenu-link">Наша стратегия</a>
                           </li>
                         </ul>
                       </li>
                       <ul>
                       <li>
-                        <a class="dropdown__link" href="#"
-                          >История</a>
+                        <a class="dropdown__link" href="#">История</a>
                       </li>
                       <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#"
-                          >Контакты</a>
+                        <a class="dropdown__link" href="#">Контакты</a>
                       </li>
                       <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#"
-                          >Карьера</a>
+                        <a class="dropdown__link" href="#">Карьера</a>
                       </li>
                       </ul>
                       <ul>
                       <li>
-                        <a class="dropdown__link " href="#"
-                          >События и новости</a
-                        >
+                        <a class="dropdown__link " href="#">События и новости</a>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Обзоры</a
+                            <a href="" class="dropdown__submenu-link">Обзоры</a>
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link">Технологии</a>
+                          </li>
+                          <li class="dropdown__submenu-item">
+                            <a href="" class="dropdown__submenu-link">Безопасность</a
                             >
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Технологии</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Новости</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Безопасность</a
-                            >
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Новости</a
-                            >
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >E-commerce</a
-                            >
+                            <a href="" class="dropdown__submenu-link">E-commerce</a>
                           </li>
                         </ul>
                       </li>
                       </ul>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Реквизиты и юридическая информация</a
-                        >
+                        <a class="dropdown__link" href="#">Реквизиты и юридическая информация</a>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Для юридических лиц</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Для юридических лиц</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Для физических лиц</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Для физических лиц</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Лицензия</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Лицензия</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Свидетельство о регистрации</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Свидетельство о регистрации</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Результаты СОУТ</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Результаты СОУТ</a>
                           </li>
                         </ul>
                       </li> 
@@ -153,23 +123,16 @@
                   <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
                       <li class="navigation__dropdown-item">
-                        <nuxt-link class="dropdown__link" to="/service/vps-servers"
-                          >Облачные VPS серверы</nuxt-link>
+                        <nuxt-link class="dropdown__link" to="/service/vps-servers">Облачные VPS серверы</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Готовые тарифы</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Готовые тарифы</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Своя конфигурация</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Своя конфигурация</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >NVMe + Intel Xeon Gold</a
-                            >
+                            <a href="" class="dropdown__submenu-link">NVMe + Intel Xeon Gold</a>
                           </li>
                         </ul>
                       </li>
@@ -372,8 +335,7 @@
               </svg>
             </li>
           </ul>
-        </nav>
-  
+        </nav>  
     <!-- end mobile header-->
   </div>
 </template>
