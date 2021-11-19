@@ -31,7 +31,7 @@ export default {
         return this.$store.getters.header
       } 
 
-      if(this.$route.name==='serv-slug') {
+      if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/header']
       }
 

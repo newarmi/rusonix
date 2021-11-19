@@ -186,57 +186,14 @@
                 </div>
               </div>
               <div
-                class="
-                  tariff__configuration-card tariff__configuration-card--mod
-                "
-              >
-                <div
-                  class="
-                    tariff__configuration-card-title
-                    tariff__configuration-card-title--mod
-                  "
-                >
-                  L Ultra
+                class="tariff__configuration-card tariff__configuration-card--mod">
+                <div class="tariff__configuration-card-title tariff__configuration-card-title--mod">L Ultra</div>
+                <div class="tariff__configuration-wrap-text tariff__configuration-card-text--mod">
+                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">6 CPU</div>
+                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">8 ГБ RAM</div>
+                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">136 ГБ SSD</div>
                 </div>
-                <div
-                  class="
-                    tariff__configuration-wrap-text
-                    tariff__configuration-card-text--mod
-                  "
-                >
-                  <div
-                    class="
-                      tariff__configuration-card-text
-                      tariff__configuration-card-text--mod
-                    "
-                  >
-                    6 CPU
-                  </div>
-                  <div
-                    class="
-                      tariff__configuration-card-text
-                      tariff__configuration-card-text--mod
-                    "
-                  >
-                    8 ГБ RAM
-                  </div>
-                  <div
-                    class="
-                      tariff__configuration-card-text
-                      tariff__configuration-card-text--mod
-                    "
-                  >
-                    136 ГБ SSD
-                  </div>
-                </div>
-                <div
-                  class="
-                    tariff__configuration-card-total
-                    tariff__configuration-card-total--mod
-                  "
-                >
-                  6500 ₽ / месяц
-                </div>
+                <div class="tariff__configuration-card-total tariff__configuration-card-total--mod">6500 ₽ / месяц</div>
               </div>
               <div class="tariff__configuration-card">
                 <div class="tariff__configuration-card-title">L+ Ultra</div>
@@ -245,13 +202,9 @@
                   <div class="tariff__configuration-card-text">16 ГБ RAM</div>
                   <div class="tariff__configuration-card-text">135 ГБ SSD</div>
                 </div>
-                <div class="tariff__configuration-card-total">
-                  9500 ₽ / месяц
-                </div>
+                <div class="tariff__configuration-card-total">9500 ₽ / месяц</div>
               </div>
-              <button class="tariff__btn-add">
-                + добавить еще одну конфигурацию
-              </button>
+              <button class="tariff__btn-add">+ добавить еще одну конфигурацию</button>
             </div>
             <div class="tariff__wrapper-right">
               <div class="tariff__total">
@@ -292,9 +245,7 @@
                 </div>
                 <ul class="tariff__total-list">
                   <li class="tariff__total-item">Голосовая поддержка 24/7</li>
-                  <li class="tariff__total-item">
-                    Безлимитный трафик 100 мбит
-                  </li>
+                  <li class="tariff__total-item">Безлимитный трафик 100 мбит</li>
                   <li class="tariff__total-item">Маска и антисептик</li>
                 </ul>
               </div>

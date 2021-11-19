@@ -362,7 +362,7 @@ export default {
         return this.$store.getters.buttons
       } 
 
-      if(this.$route.name==='serv-slug') {
+      if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/buttons']
       }
 

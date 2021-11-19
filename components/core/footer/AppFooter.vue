@@ -69,7 +69,7 @@ export default {
         return this.$store.getters.footer
       }
       
-      if(this.$route.name==='serv-slug') {
+      if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/footer']
       }
 
