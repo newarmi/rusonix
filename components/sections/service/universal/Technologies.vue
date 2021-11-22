@@ -25,7 +25,7 @@ export default {
   name: 'Technologies',
   computed: {
       technologies () {
-        return this.$store.getters['universal/technologiesData']
+        return this.$store.getters['universal/technologies']
       }
   },
 }

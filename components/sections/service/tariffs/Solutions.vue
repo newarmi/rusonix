@@ -9,8 +9,8 @@
         </div>
 
         <div class="tariff__tab">
-          <a href="#tab-1" class="tariff__tab-links tariff__tab-links--active">Готовые конфигурации</a>
-          <a href="#tab-2" class="tariff__tab-links"> Своя конфигурация </a>
+          <a href="#tab-1" class="tariff__tab-links tariff__tab-links--active">{{ data.firstButton }}</a>
+          <a href="#tab-2" class="tariff__tab-links">{{ data.secondButton }}</a>
         </div>
       </div>
 
@@ -21,35 +21,24 @@
             <div class="tariff__wrap-tab">
               <p class="tariff__tab-text">Тип диска</p>
               <div class="tariff__tab-sample">
-                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-1">SSD</div>
-                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-2">NVMe + Intel Xeon Gold</div>
+                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-1">{{ data.firstDisk }}</div>
+                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-2">{{ data.secondDisk }}</div>
               </div>
               <div class="tariff__tab-sample tariff__tab-sample--mobile">
-                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-3">SSD</div>
-                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-4">NVMe + Intel Xeon Gold</div>
-              </div>
+                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-3">{{ data.firstDisk }}</div>
+                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-4">{{ data.secondDisk }}</div>
+              </div>            
             </div>
 
             <div class="tariff__wrap-dropdown">
               <p class="tariff__tab-text">Период</p>
               <div class="tariff__dropdown">
-                <span class="tariff__dropdown-btn">12 месяцев </span>
+                <span class="tariff__dropdown-btn">{{data.periods[0].attributes.period}}</span>
                 <svg class="dropdown__icon" width="20" height="20">
                   <use xlink:href="@/assets/img/sprites.svg#arrow-dropdown"></use>
                 </svg>
                 <ul class="tariff__dropdown-content">
-                  <li dropText="1 месяц" class="tariff__dropdown-text">1 месяц</li>
-                  <li dropText="2 месяца" class="tariff__dropdown-text">2 месяца</li>
-                  <li dropText="3 месяца" class="tariff__dropdown-text">3 месяца</li>
-                  <li dropText="4 месяца" class="tariff__dropdown-text">4 месяца</li>
-                  <li dropText="5 месяцев" class="tariff__dropdown-text">5 месяцев</li>
-                  <li dropText="6 месяцев" class="tariff__dropdown-text">6 месяцев</li>
-                  <li dropText="7 месяцев" class="tariff__dropdown-text">7 месяцев</li>
-                  <li dropText="8 месяцев" class="tariff__dropdown-text">8 месяцев</li>
-                  <li dropText="9 месяцев" class="tariff__dropdown-text">9 месяцев</li>
-                  <li dropText="10 месяцев" class="tariff__dropdown-text">10 месяцев</li>
-                  <li dropText="11 месяцев" class="tariff__dropdown-text">11 месяцев</li>
-                  <li dropText="12 месяцев" class="tariff__dropdown-text">12 месяцев</li>
+                  <li v-for="period in data.periods" :key="period.key" :dropText="period.attributes.period" class="tariff__dropdown-text">{{ period.attributes.period }}</li>
                 </ul>
               </div>
             </div>
@@ -59,66 +48,28 @@
                 <svg class="counter__icon-minus" width="8" height="3">
                   <use xlink:href="@/assets/img/sprites.svg#counter-minus"></use>
                 </svg>
-                <span class="tariff__counter-text"> 26 серверов</span>
+                <span class="tariff__counter-text"> {{ data.serverNumber }} серверов</span>
                 <svg class="counter__icon-plus" width="9" height="9">
                   <use xlink:href="@/assets/img/sprites.svg#counter-plus"></use>
                 </svg>
               </div>
             </div>
           </div>
-
           <!-- START Tariff SSD -->
-          <div id="tariff-1" data-tabTariff-content class="tariff__wrapper-configuration">
-            <div class="tariff__configuration">
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">S Ultra SSD</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">2 CPU SSD</div>
-                  <div class="tariff__configuration-card-text">4 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">39 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">2500 ₽ / месяц</div>
-              </div>
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">M Ultra</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">4 CPU</div>
-                  <div class="tariff__configuration-card-text">6 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">97 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">4500 ₽ / месяц</div>
-              </div>
-              <div class="tariff__configuration-card tariff__configuration-card--mod">
-                <div class="tariff__configuration-card-title tariff__configuration-card-title--mod">L Ultra</div>
-                <div class="tariff__configuration-wrap-text tariff__configuration-card-text--mod">
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">6 CPU</div>
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">8 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">136 ГБ SSD</div>
-                </div>
-                <div
-                  class="
-                    tariff__configuration-card-total
-                    tariff__configuration-card-total--mod
-                  "
-                >
-                  6500 ₽ / месяц
-                </div>
-              </div>
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">L+ Ultra</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">8 CPU</div>
-                  <div class="tariff__configuration-card-text">16 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">135 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">
-                  9500 ₽ / месяц
-                </div>
-              </div>
-              <button class="tariff__btn-add">
+
+          <div id="tariff-1" data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
+            <div class="tariff__configuration">              
+              <SolutionCard v-for="item, i in firstSolutions" :key="item.key" 
+                            :title="item.attributes.title" 
+                            :price="item.attributes.price" 
+                            :options="item.attributes.options"
+                            :choose="firstCards[i].select" 
+                            @chooseCard="chooseFirstCard(i)" />
+              <button class="tariff__btn-add" >
                 + добавить еще одну конфигурацию
               </button>
             </div>
+           
             <div class="tariff__total">
               <div class="tarif__total-title">Итого</div>
               <div class="tariff__wrapper-total-text">
@@ -154,58 +105,19 @@
           </div>
 
           <!-- START Tariff total NVMe + Intel Xeon Gold -->
-          <div
-            id="tariff-2"
-            data-tabTariff-content
-            class="
-              tariff__wrapper-configuration
-              tariff__wrapper-configuration--active
-            "
-          >
-            <div class="tariff__configuration">
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">S Ultra</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">2 CPU</div>
-                  <div class="tariff__configuration-card-text">4 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">39 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">
-                  2500 ₽ / месяц
-                </div>
-              </div>
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">M Ultra</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">4 CPU</div>
-                  <div class="tariff__configuration-card-text">6 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">97 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">
-                  4500 ₽ / месяц
-                </div>
-              </div>
-              <div
-                class="tariff__configuration-card tariff__configuration-card--mod">
-                <div class="tariff__configuration-card-title tariff__configuration-card-title--mod">L Ultra</div>
-                <div class="tariff__configuration-wrap-text tariff__configuration-card-text--mod">
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">6 CPU</div>
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">8 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text tariff__configuration-card-text--mod">136 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total tariff__configuration-card-total--mod">6500 ₽ / месяц</div>
-              </div>
-              <div class="tariff__configuration-card">
-                <div class="tariff__configuration-card-title">L+ Ultra</div>
-                <div class="tariff__configuration-wrap-text">
-                  <div class="tariff__configuration-card-text">8 CPU</div>
-                  <div class="tariff__configuration-card-text">16 ГБ RAM</div>
-                  <div class="tariff__configuration-card-text">135 ГБ SSD</div>
-                </div>
-                <div class="tariff__configuration-card-total">9500 ₽ / месяц</div>
-              </div>
-              <button class="tariff__btn-add">+ добавить еще одну конфигурацию</button>
+          <div id="tariff-2" data-tabTariff-content class="tariff__wrapper-configuration">
+            <div class="tariff__configuration">              
+              <SolutionCard v-for="item, i in secondSolutions" :key="item.key" 
+                            :title="item.attributes.title" 
+                            :price="item.attributes.price" 
+                            :options="item.attributes.options"
+                            :choose="secondCards[i].select" 
+                            @chooseCard="chooseSecondCard(i)" />
+              <button class="tariff__btn-add" >
+                + добавить еще одну конфигурацию
+              </button>
             </div>
+           
             <div class="tariff__wrapper-right">
               <div class="tariff__total">
                 <div class="tarif__total-title">Итого</div>
@@ -254,125 +166,17 @@
           <!-- END Tariff total NVMe + Intel Xeon Gold -->
 
           <!-- START Tariff slider SSD -->
-          <div id="tariff-3" data-tab-slider class="tariff__wrapper-slider">
+          <div id="tariff-3" data-tab-slider class="tariff__wrapper-slider tariff__wrapper-slider--active">
             <div class="tariff__wrapper-configuration-slider">
               <div class="swiper tariff__wrapper-configuration-swiper">
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        S Ultra NVMe + Intel Xeon Gold SSD
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">2 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          4 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          39 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        2500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        M Ultra NVMe + Intel Xeon Gold
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">4 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          6 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          97 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        4500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div
-                      class="
-                        tariff__configuration-card
-                        tariff__configuration-card--mod
-                      "
-                    >
-                      <div
-                        class="
-                          tariff__configuration-card-title
-                          tariff__configuration-card-title--mod
-                        "
-                      >
-                        L Ultra
-                      </div>
-                      <div
-                        class="
-                          tariff__configuration-wrap-text
-                          tariff__configuration-card-text--mod
-                        "
-                      >
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          6 CPU
-                        </div>
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          8 ГБ RAM
-                        </div>
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          136 ГБ SSD
-                        </div>
-                      </div>
-                      <div
-                        class="
-                          tariff__configuration-card-total
-                          tariff__configuration-card-total--mod
-                        "
-                      >
-                        6500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        L+ Ultra
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">8 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          16 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          135 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        9500 ₽ / месяц
-                      </div>
-                    </div>
+                  <div v-for="item, i in firstSolutions" :key="item.key" class="swiper-slide"> 
+                    <SolutionCard  
+                            :title="item.attributes.title" 
+                            :price="item.attributes.price" 
+                            :options="item.attributes.options"
+                            :choose="firstCards[i].select" 
+                            @chooseCard="chooseFirstCard(i)" />
                   </div>
                 </div>
               </div>
@@ -384,130 +188,19 @@
             </div>
           </div>
           <!-- END Tariff slider SSD -->
+
           <!-- START Tariff slider NVMe + Intel Xeon Gold -->
-          <div
-            id="tariff-4"
-            data-tab-slider
-            class="tariff__wrapper-slider tariff__wrapper-slider--active"
-          >
+          <div id="tariff-4" data-tab-slider class="tariff__wrapper-slider">
             <div class="tariff__wrapper-configuration-slider">
               <div class="swiper tariff__wrapper-configuration-swiper">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        S Ultra NVMe + Intel Xeon Gold
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">2 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          4 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          39 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        2500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        M Ultra NVMe + Intel Xeon Gold
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">4 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          6 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          97 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        4500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div
-                      class="
-                        tariff__configuration-card
-                        tariff__configuration-card--mod
-                      "
-                    >
-                      <div
-                        class="
-                          tariff__configuration-card-title
-                          tariff__configuration-card-title--mod
-                        "
-                      >
-                        L Ultra
-                      </div>
-                      <div
-                        class="
-                          tariff__configuration-wrap-text
-                          tariff__configuration-card-text--mod
-                        "
-                      >
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          6 CPU
-                        </div>
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          8 ГБ RAM
-                        </div>
-                        <div
-                          class="
-                            tariff__configuration-card-text
-                            tariff__configuration-card-text--mod
-                          "
-                        >
-                          136 ГБ SSD
-                        </div>
-                      </div>
-                      <div
-                        class="
-                          tariff__configuration-card-total
-                          tariff__configuration-card-total--mod
-                        "
-                      >
-                        6500 ₽ / месяц
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="swiper-slide">
-                    <div class="tariff__configuration-card">
-                      <div class="tariff__configuration-card-title">
-                        L+ Ultra
-                      </div>
-                      <div class="tariff__configuration-wrap-text">
-                        <div class="tariff__configuration-card-text">8 CPU</div>
-                        <div class="tariff__configuration-card-text">
-                          16 ГБ RAM
-                        </div>
-                        <div class="tariff__configuration-card-text">
-                          135 ГБ SSD
-                        </div>
-                      </div>
-                      <div class="tariff__configuration-card-total">
-                        9500 ₽ / месяц
-                      </div>
-                    </div>
+                <div class="swiper-wrapper">                 
+                  <div v-for="item, i in secondSolutions" :key="item.key" class="swiper-slide">
+                    <SolutionCard 
+                            :title="item.attributes.title" 
+                            :price="item.attributes.price" 
+                            :options="item.attributes.options"
+                            :choose="secondCards[i].select" 
+                            @chooseCard="chooseSecondCard(i)" />
                   </div>
                 </div>
               </div>
@@ -780,16 +473,47 @@
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 
+
+
 export default {
+  components: {
+    'SolutionCard': () => import('~/components/sections/service/tariffs/SolutionCard'),
+  },
   props: {
     data: {
       type: Object,
       required: true,
     },
   },
-  computed: {
-      
+  data () {
+    return {
+         firstCards: [],
+         secondCards: []                      
+    }
   },
+  computed: {
+      solutions() {
+        return this.data.solutions
+      },
+      showButton() {
+        return true
+      },
+      firstSolutions() {
+        return this.solutions.filter(solution => solution.attributes.diskType===this.data.firstDisk)
+      },
+      secondSolutions() {
+        return this.solutions.filter(solution => solution.attributes.diskType===this.data.secondDisk)
+      },
+  },
+  created() {
+    this.firstSolutions.forEach(element => {
+        this.firstCards.push({select: false})
+    })
+    this.secondSolutions.forEach(element => {
+        this.secondCards.push({select: false})
+    })
+  },
+
   mounted() {
     this.$nextTick(() => {
       this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
@@ -809,18 +533,20 @@ export default {
     // const plansSliders = document.querySelectorAll(".tariff__wrapper-slider");
     // console.log(plansSliders);
     plansTabs.forEach((tab) => {
-      tab?.addEventListener('click', () => {
+      tab?.addEventListener('click', () => {       
         const target = document.querySelector(tab.dataset.tabTariff)
         plansTabContents.forEach((plansTabContent) => {
           plansTabContent.classList.remove(
             'tariff__wrapper-configuration--active'
           )
         })
+
         target.classList.add('tariff__wrapper-configuration--active')
 
         plansTabsSliders.forEach((plansTabsSlider) => {
           plansTabsSlider.classList.remove('tariff__wrapper-slider--active')
         })
+
         target.classList.add('tariff__wrapper-slider--active')
 
         plansTabs.forEach((tab) => {
@@ -919,6 +645,20 @@ export default {
         contentText.innerText = `${counter} сервер`
       }
     })
+  },
+  methods: {
+      chooseFirstCard(i) {
+        this.firstCards.forEach(element => {
+          element.select=false
+        })
+        this.firstCards[i].select=true
+      },
+      chooseSecondCard(i) {
+        this.secondCards.forEach(element => {
+          element.select=false
+        })
+        this.secondCards[i].select=true
+      }
   },
 }
 </script>
@@ -1136,11 +876,13 @@ export default {
 .tariff__wrapper-slider {
   display: block;
 }
+
 .tariff__configuration {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 24px 33px;
+  flex: 1 1 50%;
 }
 
 .tariff__configuration-card {
@@ -1148,7 +890,8 @@ export default {
   box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.0869858);
   border-radius: 6px;
   padding: 48px 24px;
-  flex: 1 1 calc((100% / 2) - 33px);
+  flex: 0 1 calc((100% / 2) - 33px);
+  max-width: 407px; 
  
 }
 
@@ -1311,6 +1054,9 @@ export default {
   margin-top: 24px;
   background-color: transparent;
   cursor: pointer;
+  display: flex;
+  /* margin: 48px auto 0; */
+  margin: auto;
 }
 
 .tariff__btn-add:hover {
@@ -1638,7 +1384,8 @@ export default {
     flex-wrap: wrap;
   }
   .tariff__btn-add {
-    margin-bottom: 48px;
+    /* margin-bottom: 48px; */
+    margin: auto auto;
   }
   .tariff__total-wrap-tablet-btn {
     display: flex;
@@ -1738,7 +1485,8 @@ export default {
     flex-direction: column;
   }
   .tariff__btn-add {
-    margin-bottom: 24px;
+    margin: auto auto;
+    /* margin-bottom: 24px; */
   }
 
   .tariff__ready-configuration-input {

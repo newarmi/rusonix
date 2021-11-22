@@ -8,7 +8,7 @@
       </div>
       <div class="license__sertificates">
         <div v-for="license in licenses" :key="license.title" class="license__sertificate-wrap">
-          <nuxt-link :to="license.link">
+          <nuxt-link :to="'service/' + license.link">
           <picture class="picture">
             <img
               :src="license.imageLink"
@@ -18,7 +18,7 @@
             />
           </picture>
           </nuxt-link>
-          <nuxt-link class="nl__black" :to="license.link">
+          <nuxt-link class="nl__black" :to="'service/' + license.link">
             <div class="license__sertificate-title">{{ license.title }} </div>
           </nuxt-link>
         </div>

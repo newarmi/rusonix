@@ -1,5 +1,4 @@
 <template>
-
   <div class='top-line__wrapper'>
     <div class="header__wrapper-top">
       <div class="header__wrapper">
@@ -43,7 +42,7 @@
         </nuxt-link>
         <nav class="navigation">
           <ul class="navigation__list">
-            <li class="navigation__item">
+            <li class="navigation__item" @mouseover="openMenu">
               <nuxt-link to="/company" class="navigation__link">{{ buttons.company }}</nuxt-link>
                <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
@@ -62,15 +61,15 @@
                         </ul>
                       </li>
                       <ul>
-                      <li>
-                        <a class="dropdown__link" href="#">История</a>
-                      </li>
-                      <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#">Контакты</a>
-                      </li>
-                      <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#">Карьера</a>
-                      </li>
+                        <li>
+                          <a class="dropdown__link" href="#">История</a>
+                        </li>
+                        <li class="dropdown__submenu-navigation">
+                          <a class="dropdown__link" href="#">Контакты</a>
+                        </li>
+                        <li class="dropdown__submenu-navigation">
+                          <a class="dropdown__link" href="#">Карьера</a>
+                        </li>
                       </ul>
                       <ul>
                       <li>
@@ -137,48 +136,38 @@
                         </ul>
                       </li>
                       <li>
-                        <nuxt-link class="dropdown__link" to="/service/virtual-data-center"
-                          >Виртуальный дата центр</nuxt-link>
+                        <nuxt-link class="dropdown__link" to="/service/virtual-data-center">Виртуальный дата центр</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link">Обзор</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Serverless</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Serverless</a>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <nuxt-link class="dropdown__link" to="/service/cloud-web-hosting"
-                          >Облачный веб хостинг</nuxt-link>
+                        <nuxt-link class="dropdown__link" to="/service/cloud-web-hosting">Облачный веб хостинг</nuxt-link>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
                             <a href="" class="dropdown__submenu-link">Тарифы</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Тестовый хостинг</a
-                            >
+                            <a href="" class="dropdown__submenu-link">Тестовый хостинг</a>
                           </li>
                         </ul>
                       </li>
                       <li>
-                        <a class="dropdown__link" href="/services"
-                          >SSL, лицензии и домены</a>
+                        <a class="dropdown__link" href="/services">SSL, лицензии и домены</a>
                         <ul class="dropdown__submenu-navigation">
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >SSL сертификаты</a>
+                            <a href="" class="dropdown__submenu-link">SSL сертификаты</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Лицензии</a>
+                            <a href="" class="dropdown__submenu-link">Лицензии</a>
                           </li>
                           <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link"
-                              >Купить домен</a>
+                            <a href="" class="dropdown__submenu-link">Купить домен</a>
                           </li>
                         </ul>
                       </li>
@@ -187,31 +176,25 @@
             </li>
             <li class="navigation__item">
               <nuxt-link to="/journal" class="navigation__link">{{ buttons.journal }}</nuxt-link>
-                 <ul class="navigation__dropdown">
+                  <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
-                    <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Все статьи</a>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#">Все статьи</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Обзоры</a>
+                        <a class="dropdown__link" href="#">Обзоры</a>
                       </li>
                       <li>
-                        <a class="dropdown__link " href="#"
-                          >Технологии</a>
+                        <a class="dropdown__link " href="#">Технологии</a>
                       </li>
                       <li>
-                        <a class="dropdown__link " href="#"
-                          >Безопасность</a>
+                        <a class="dropdown__link " href="#">Безопасность</a>
                       </li>
                       <li>
-                        <a class="dropdown__link " href="#"
-                          >Новости</a>
+                        <a class="dropdown__link " href="#">Новости</a>
                       </li>
                       <li>
-                        <a class="dropdown__link " href="#"
-                          >E-commerce</a>
+                        <a class="dropdown__link " href="#">E-commerce</a>
                       </li>
                     </div>
                   </ul>
@@ -220,17 +203,14 @@
               <nuxt-link to="/support" class="navigation__link">{{ buttons.support }}</nuxt-link>
               <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
-                    <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >База знаний</a>
+                      <li class="navigation__dropdown-item">
+                        <a class="dropdown__link" href="#">База знаний</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Онлайн консультация</a>
+                        <a class="dropdown__link" href="#">Онлайн консультация</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Поиск по ресурсам службы поддержки</a>
+                        <a class="dropdown__link" href="#">Поиск по ресурсам службы поддержки</a>
                       </li>
                     </div>
               </ul>
@@ -240,24 +220,19 @@
                 <ul class="navigation__dropdown">
                     <div class="navigation__container-dropdown">
                     <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Преимущества</a>
+                        <a class="dropdown__link" href="#">Преимущества</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Для кого подходит программа</a>
+                        <a class="dropdown__link" href="#">Для кого подходит программа</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Условия</a>
+                        <a class="dropdown__link" href="#">Условия</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Почему нас рекомендуют</a>
+                        <a class="dropdown__link" href="#">Почему нас рекомендуют</a>
                       </li>
                       <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#"
-                          >Анкета для регистрации</a>
+                        <a class="dropdown__link" href="#">Анкета для регистрации</a>
                       </li>
                     </div>
                 </ul>
@@ -298,20 +273,16 @@
                 >{{ buttons.services }}</a>
               <ul class="dropdown-submenu__list-mobile" :style="display">
                 <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/vps-servers" class="dropdown-submenu__link"
-                    >Облачные VPS серверы</nuxt-link>
+                  <nuxt-link to="/service/vps-servers" class="dropdown-submenu__link">Облачные VPS серверы</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/virtual-data-center" class="dropdown-submenu__link"
-                    >Виртуальный дата центр</nuxt-link>
+                  <nuxt-link to="/service/virtual-data-center" class="dropdown-submenu__link">Виртуальный дата центр</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/cloud-web-hosting" class="dropdown-submenu__link"
-                    >Облачный веб хостинг</nuxt-link>
+                  <nuxt-link to="/service/cloud-web-hosting" class="dropdown-submenu__link">Облачный веб хостинг</nuxt-link>
                 </li>
                 <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/services" class="dropdown-submenu__link"
-                    >SSL, лицензии и домены</nuxt-link>
+                  <nuxt-link to="/services" class="dropdown-submenu__link">SSL, лицензии и домены</nuxt-link>
                 </li>
               </ul>
             </li>
@@ -351,6 +322,7 @@ export default {
     return {
       isMenuOpen: false,
       isOpenSubmenu: false,
+      navigationDropdown: 'navigation__dropdown'
     }
   },
   computed: {
@@ -385,8 +357,12 @@ export default {
       } else {
         this.isOpenSubmenu =  true;
       }      
+    },
+    openMenu() {
+      
     }
   },
+  
 }
 </script>
 
@@ -507,6 +483,7 @@ export default {
   padding-bottom: 21px;
   border-bottom: 4px solid #ffffff;
 }
+
 .navigation__item:hover > .navigation__dropdown {
   transition: 0.3s ease-in-out;
   opacity: 0.9;

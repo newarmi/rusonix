@@ -24,6 +24,7 @@ export const state = () => ({
     tabs: state => state.page.blocks.tabs.attributes,
     benefits: state => state.page.blocks.benefits.attributes,
     questions: state => state.page.blocks.questions.attributes,
+    technologies: state => state.page.blocks.technologies.attributes,
     reviews: state => state.page.clients,
     billing: state => state.page.cabinet,
 
