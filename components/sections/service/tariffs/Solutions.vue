@@ -21,12 +21,13 @@
             <div class="tariff__wrap-tab">
               <p class="tariff__tab-text">Тип диска</p>
               <div class="tariff__tab-sample">
-                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-1">{{ data.firstDisk }}</div>
-                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-2">{{ data.secondDisk }}</div>
+                <div class="tariff__tab-sample-links" :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab}" @click="changeDiscTab(data.firstDisk)">{{ data.firstDisk }}</div>
+                <div class="tariff__tab-sample-links" :class="{'tariff__tab-sample-links--active': data.secondDisk===activeTab}" @click="changeDiscTab(data.secondDisk)">{{ data.secondDisk }}</div>
               </div>
+
               <div class="tariff__tab-sample tariff__tab-sample--mobile">
-                <div class="tariff__tab-sample-links tariff__tab-sample-links--active" data-tab-tariff="#tariff-3">{{ data.firstDisk }}</div>
-                <div class="tariff__tab-sample-links" data-tab-tariff="#tariff-4">{{ data.secondDisk }}</div>
+                <div class="tariff__tab-sample-links" :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab}"  @click="changeDiscTab(data.firstDisk)">{{ data.firstDisk }}</div>
+                <div class="tariff__tab-sample-links" :class="{'tariff__tab-sample-links--active': data.secondDisk===activeTab}" @click="changeDiscTab(data.secondDisk)">{{ data.secondDisk }}</div>
               </div>            
             </div>
 
@@ -55,64 +56,15 @@
               </div>
             </div>
           </div>
-          <!-- START Tariff SSD -->
 
-          <div id="tariff-1" data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
+          <div id="tariff-2" data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
             <div class="tariff__configuration">              
               <SolutionCard v-for="item, i in firstSolutions" :key="item.key" 
                             :title="item.attributes.title" 
                             :price="item.attributes.price" 
                             :options="item.attributes.options"
-                            :choose="firstCards[i].select" 
-                            @chooseCard="chooseFirstCard(i)" />
-              <button class="tariff__btn-add" >
-                + добавить еще одну конфигурацию
-              </button>
-            </div>
-           
-            <div class="tariff__total">
-              <div class="tarif__total-title">Итого</div>
-              <div class="tariff__wrapper-total-text">
-                <div class="tariff__total-wrap-text">
-                  <div class="tariff__total-card-text">CPU: 6 шт</div>
-                  <div class="tariff__total-card-text">RAM: 8 GB</div>
-                  <div class="tariff__total-card-text">SSD: 136 GB</div>
-                </div>
-                <div class="tariff__total-wrap-price">
-                  <div class="tariff__total-card-text">4600 ₽</div>
-                  <div class="tariff__total-card-text">9300 ₽</div>
-                  <div class="tariff__total-card-text">7700 ₽</div>
-                </div>
-              </div>
-              <div class="tariff__total-wrap">
-                <div class="tariff__total-card-text">
-                  <span class="tariff__total-card-text--mod">169 000 ₽</span>
-                  / месяц
-                </div>
-                <div class="tariff__total-card-text">
-                  <span class="tariff__total-card-text--mod">5 633,33 ₽</span>
-                  / день
-                </div>
-              </div>
-              <button class="tariff__btn">Подключиться</button>
-              <button class="tariff__btn-download">
-                <svg class="clip__icon" width="9" height="18">
-                  <use xlink:href="@/assets/img/sprites.svg#clip"></use>
-                </svg>
-                Скачать PDF с расчетом
-              </button>
-            </div>
-          </div>
-
-          <!-- START Tariff total NVMe + Intel Xeon Gold -->
-          <div id="tariff-2" data-tabTariff-content class="tariff__wrapper-configuration">
-            <div class="tariff__configuration">              
-              <SolutionCard v-for="item, i in secondSolutions" :key="item.key" 
-                            :title="item.attributes.title" 
-                            :price="item.attributes.price" 
-                            :options="item.attributes.options"
-                            :choose="secondCards[i].select" 
-                            @chooseCard="chooseSecondCard(i)" />
+                            :choose="cards[i].select" 
+                            @chooseCard="chooseCard(i)" />
               <button class="tariff__btn-add" >
                 + добавить еще одну конфигурацию
               </button>
@@ -166,16 +118,12 @@
           <!-- END Tariff total NVMe + Intel Xeon Gold -->
 
           <!-- START Tariff slider SSD -->
-          <div id="tariff-3" data-tab-slider class="tariff__wrapper-slider tariff__wrapper-slider--active" >
-            <SolutionSlider :solutions="firstSolutions" />
+          <div id="tariff-3"  class="tariff__wrapper-slider">
+            <SolutionSlider :solutions="firstSolutions"  />
           </div>
           <!-- END Tariff slider SSD -->
 
-          <!-- START Tariff slider NVMe + Intel Xeon Gold -->
-          <div id="tariff-4" data-tab-slider class="tariff__wrapper-slider">
-            <SolutionSlider :solutions="secondSolutions" />
-          </div>
-          <!-- END Tariff slider NVMe + Intel Xeon Gold -->
+
         </div>
       </div>
     </div>
@@ -420,7 +368,7 @@
 </template>
 
 <script>
-import Swiper from 'swiper'
+
 import 'swiper/css/swiper.min.css'
 
 
@@ -439,22 +387,25 @@ export default {
   data () {
     return {
          firstCards: [],
-         secondCards: []                      
+         secondCards: [],
+         activeTab: this.data.firstDisk                       
     }
   },
   computed: {
       solutions() {
         return this.data.solutions
       },
-      showButton() {
-        return true
-      },
       firstSolutions() {
-        return this.solutions.filter(solution => solution.attributes.diskType===this.data.firstDisk)
+        return this.solutions.filter(solution => solution.attributes.diskType===this.activeTab)
       },
       secondSolutions() {
         return this.solutions.filter(solution => solution.attributes.diskType===this.data.secondDisk)
       },
+      cards() {
+        if(this.activeTab===this.data.firstDisk)
+          return this.firstCards
+        return this.secondCards
+      }
   },
   created() {
     this.firstSolutions.forEach(element => {
@@ -466,46 +417,6 @@ export default {
   },
 
   mounted() {
-
-    const plansTabs = document.querySelectorAll('[data-tab-tariff]')
-    const plansTabContents = document.querySelectorAll(
-      '[data-tabTariff-content]'
-    )
-    const plansTabsSliders = document.querySelectorAll('[data-tab-slider]')
-
-    plansTabs.forEach((tab) => {
-      tab?.addEventListener('click', () => {       
-        const target = document.querySelector(tab.dataset.tabTariff)
-        plansTabContents.forEach((plansTabContent) => {
-          plansTabContent.classList.remove(
-            'tariff__wrapper-configuration--active'
-          )
-        })
-
-        target.classList.add('tariff__wrapper-configuration--active')
-
-        plansTabsSliders.forEach((plansTabsSlider) => {
-          plansTabsSlider.classList.remove('tariff__wrapper-slider--active')
-        })
-
-        target.classList.add('tariff__wrapper-slider--active')
-
-        plansTabs.forEach((tab) => {
-          tab.classList.remove('tariff__tab-sample-links--active')
-        })
-        tab.classList.add('tariff__tab-sample-links--active')
-
-        this.$nextTick(() => {
-          this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
-            loop: false,
-            slidesPerView: 1.35,
-            spaceBetween: 33,
-          })
-        })
-        
-      })
-    })
-
     const tabs = document.querySelectorAll('.tariff__tab-links')
     const content = document.querySelectorAll('.tariff__common-wrapper')
 
@@ -596,18 +507,16 @@ export default {
       }
     })
   },
+
   methods: {
-      chooseFirstCard(i) {
-        this.firstCards.forEach(element => {
-          element.select=false
-        })
-        this.firstCards[i].select=true
+      chooseCard(i) {
+          this.cards.forEach(element => {
+            element.select=false
+          })
+          this.cards[i].select=true
       },
-      chooseSecondCard(i) {
-        this.secondCards.forEach(element => {
-          element.select=false
-        })
-        this.secondCards[i].select=true
+      changeDiscTab(tab) {
+          this.activeTab=tab
       }
   },
 }
@@ -823,8 +732,9 @@ export default {
   align-items: flex-start;
   gap: 33px;
 }
+
 .tariff__wrapper-slider {
-  display: block;
+  display: none;
 }
 
 .tariff__configuration {
@@ -1366,6 +1276,10 @@ export default {
 }
 
 @media (max-width: 576px) {
+.tariff__wrapper-slider {
+  display: block;
+}
+
   .tariff__configuration {
     display: none;
   }
@@ -1374,9 +1288,7 @@ export default {
     display: none;
   }
 
-  .tariff__wrapper-slider--active[data-tab-slider] {
-    display: block;
-  }
+
   /* .tariff__wrapper-slider--active {
     display: block;
   } */

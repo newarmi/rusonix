@@ -37,7 +37,8 @@ export default {
     },
     data () {
         return {
-            cards: [],                 
+            cards: [],
+            slider: null,        
         }
     },
     computed: {
@@ -50,13 +51,14 @@ export default {
 
     },
     mounted() {
-        this.$nextTick(() => {
+        
             this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
+                observer: true,
                 loop: false,
                 slidesPerView: 1.35,
                 spaceBetween: 33,
             })
-        })
+      
     },
     methods: {
         chooseCard(i) {
