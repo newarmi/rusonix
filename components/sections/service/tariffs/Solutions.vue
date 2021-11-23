@@ -166,50 +166,14 @@
           <!-- END Tariff total NVMe + Intel Xeon Gold -->
 
           <!-- START Tariff slider SSD -->
-          <div id="tariff-3" data-tab-slider class="tariff__wrapper-slider tariff__wrapper-slider--active">
-            <div class="tariff__wrapper-configuration-slider">
-              <div class="swiper tariff__wrapper-configuration-swiper">
-                <div class="swiper-wrapper">
-                  <div v-for="item, i in firstSolutions" :key="item.key" class="swiper-slide"> 
-                    <SolutionCard  
-                            :title="item.attributes.title" 
-                            :price="item.attributes.price" 
-                            :options="item.attributes.options"
-                            :choose="firstCards[i].select" 
-                            @chooseCard="chooseFirstCard(i)" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tariff__ready-configuration-btn-slider">
-              <button class="tariff__btn-add">
-                + добавить еще одну конфигурацию
-              </button>
-            </div>
+          <div id="tariff-3" data-tab-slider class="tariff__wrapper-slider tariff__wrapper-slider--active" >
+            <SolutionSlider :solutions="firstSolutions" />
           </div>
           <!-- END Tariff slider SSD -->
 
           <!-- START Tariff slider NVMe + Intel Xeon Gold -->
           <div id="tariff-4" data-tab-slider class="tariff__wrapper-slider">
-            <div class="tariff__wrapper-configuration-slider">
-              <div class="swiper tariff__wrapper-configuration-swiper">
-                <div class="swiper-wrapper">                 
-                  <div v-for="item, i in secondSolutions" :key="item.key" class="swiper-slide">
-                    <SolutionCard 
-                            :title="item.attributes.title" 
-                            :price="item.attributes.price" 
-                            :options="item.attributes.options"
-                            :choose="secondCards[i].select" 
-                            @chooseCard="chooseSecondCard(i)" />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="tariff__ready-configuration-btn-slider">
-              <button class="tariff__btn-add">
-                + добавить еще одну конфигурацию
-              </button>
-            </div>
+            <SolutionSlider :solutions="secondSolutions" />
           </div>
           <!-- END Tariff slider NVMe + Intel Xeon Gold -->
         </div>
@@ -228,24 +192,10 @@
                 <div class="tariff__ready-configuration-input-text">
                   Количество ядер CPU
                   <div class="tariff__ready-configuration-input">
-                    <input
-                      class="tariff__input-text"
-                      type="number"
-                      name="CPUinput"
-                      value="8"
-                      oninput="this.form.CPUrange.value=(this.value === '' ? 0 :
-                      this.value)"
-                    />
-                    <input
-                      id="status"
-                      class="tariff__input-range"
-                      type="range"
-                      name="CPUrange"
-                      min="0"
-                      max="10"
-                      value="8"
-                      oninput="this.form.CPUinput.value=this.value"
-                    />
+                    <input class="tariff__input-text" type="number" name="CPUinput" value="8"
+                      oninput="this.form.CPUrange.value=(this.value === '' ? 0 : this.value)" />
+                    <input id="status" class="tariff__input-range" type="range" name="CPUrange"
+                      min="0" max="10" value="8" oninput="this.form.CPUinput.value=this.value" />
                   </div>
                 </div>
                 <div class="tariff__ready-configuration-input-text">
@@ -478,6 +428,7 @@ import 'swiper/css/swiper.min.css'
 export default {
   components: {
     'SolutionCard': () => import('~/components/sections/service/tariffs/SolutionCard'),
+    'SolutionSlider': () => import('~/components/sections/service/tariffs/SolutionSlider'),
   },
   props: {
     data: {
@@ -515,23 +466,13 @@ export default {
   },
 
   mounted() {
-    this.$nextTick(() => {
-      this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
-        loop: true,
-        slidesPerView: 1.35,
-        spaceBetween: 33,
-      })
-    })
 
     const plansTabs = document.querySelectorAll('[data-tab-tariff]')
     const plansTabContents = document.querySelectorAll(
       '[data-tabTariff-content]'
     )
     const plansTabsSliders = document.querySelectorAll('[data-tab-slider]')
-    console.log(plansTabsSliders)
 
-    // const plansSliders = document.querySelectorAll(".tariff__wrapper-slider");
-    // console.log(plansSliders);
     plansTabs.forEach((tab) => {
       tab?.addEventListener('click', () => {       
         const target = document.querySelector(tab.dataset.tabTariff)
@@ -553,6 +494,15 @@ export default {
           tab.classList.remove('tariff__tab-sample-links--active')
         })
         tab.classList.add('tariff__tab-sample-links--active')
+
+        this.$nextTick(() => {
+          this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
+            loop: false,
+            slidesPerView: 1.35,
+            spaceBetween: 33,
+          })
+        })
+        
       })
     })
 
