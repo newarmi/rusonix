@@ -16,14 +16,21 @@ export const actions = {
 }
 
 export const getters = {
-    advantage: state => state.page.blocks.online,
-    career: state => state.page.blocks.career,
-    contact: state => state.page.blocks.contacts,
-    magazine: state => state.page.journal,
-    requisities: state => state.page.blocks.requisites,
-    history: state => state.page.blocks.history,
+  pageBlocks: state => state.page.blocks,
+  articles: state => state.page.articles,
+  journal: state => state.page.journal,
+  domainTarriff: state => state.page.domains,
+
+  billing: state => state.page.general.cabinet,
+  trust: state => state.page.general.trust,
+  reviews: state => state.page.general.clients,
+  history: state => state.page.general.history,
+  career: state => state.page.general.career,
+  contacts: state => state.page.general.contacts,
+  requisites: state => state.page.general.requisites,
+  domains: state => state.page.general.domains,
     
-    buttons: state => state.page.buttons,
-    header: state => state.page.header,
-    footer: state => state.page.footer,
+  buttons: state => state.page.buttons,
+  header: state => state.page.header,
+  footer: state => state.page.footer,
 }

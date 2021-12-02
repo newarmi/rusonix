@@ -1,23 +1,29 @@
 <template>
   <section class="reviews">
     <div class="container">
-      <h1 class="reviews__title title">{{ title }}</h1>
-      <Slider />
+      <h1 class="reviews__title title">{{ reviews.title }}</h1>
+      <Slider :reviews="reviews"/>
     </div>
   </section>
 </template>
 
 <script>
-import Slider from '~/components/sections/main-page/reviews/Slider'
+import Slider from '~/components/sections/general/reviews/Slider'
 
 export default {
   name: 'Reviews',
   components: {
     Slider
   },
+  props: {
+    reviews: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     title() {
-      return this.$store.getters.reviewsTitle
+      return this.reviews.title
     }
   }
 }

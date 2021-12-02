@@ -4,19 +4,12 @@
 
       <div class="domain__title title">{{ domainsInfo.title }}</div>
       <div class="domain__text-wrap">
-        <p class="domain__text text">
-          {{ domainsInfo.description }}
-        </p>
+        <p class="domain__text text">{{ domainsInfo.description }}</p>
       </div>
 
       <div class="domain__search">
         <div class="domain__search-wrap">
-          <!-- placeholder на адаптиве текст меняется -->
-          <input
-            type="text"
-            placeholder="Введите имя домена, которое хотите зарегистрировать"
-            class="domain__search-input"
-          />
+          <input type="text" placeholder="Введите имя домена, которое хотите зарегистрировать" class="domain__search-input" />
           <svg class="domain__icon" width="20" height="20">
             <use xlink:href="@/assets/svg/sprites.svg#search-domain"></use>
           </svg>
@@ -25,7 +18,7 @@
 
       <div class="domain__cards-wrapp">
         <div class="domain__cards">
-          <div v-for="item in domains" :key="item.title" class="domain__card">
+          <div v-for="item in domainItems" :key="item.title" class="domain__card">
             <div class="domain__card-content">
               <span class="domain__card-title">{{ item.title }}</span>
               <span class="domain__card-text">{{ item.price | toTypePrice }}</span>
@@ -35,7 +28,7 @@
       </div>
 
       <div class="domain__sliders-wrapp">
-        <Sliders :items="domains"/>
+        <Sliders :items="domainItems"/>
       </div>
 
     </div>
@@ -43,7 +36,7 @@
 </template>
 
 <script>
-import Sliders from '@/components/sections/services/domains/Sliders'
+import Sliders from '@/components/sections/general/domains/Sliders'
 
 export default {
   name: 'Domains',
@@ -55,16 +48,26 @@ export default {
   components: {
     Sliders
   },
+  props: {
+    domains: {
+      type: Object,
+      required: true
+    },
+    tariffs: {
+      type: Array,
+      required: true
+    }
+  },
   computed: {
-    domains() {
-      const item = this.$store.getters['services/domainsList']
+    domainItems() {
+      const item = this.tariffs
       item.forEach(element => {
         element.price = Math.floor(element.periods.find(Boolean).base_cost)
       })
       return item
     },
     domainsInfo() {
-      return this.$store.getters['services/domainsInfo']
+      return this.domains
     }
 
   }

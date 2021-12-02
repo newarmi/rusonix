@@ -1,8 +1,7 @@
 <template>
   <div class="swiper history-swiper swiper-container" :class="sliderClass">
     <div class="swiper-wrapper">
-
-      <div v-for="(item, i) in history.sections" :key="`${item.date}-${i}`" class="swiper-slide">
+      <div v-for="(item, i) in historyItems.sections" :key="`${item.date}-${i}`" class="swiper-slide">
         <div class="history__slide">
           <picture class="picture">
             <img
@@ -35,13 +34,19 @@ import uniqueId from 'lodash/uniqueId'
 
 export default {
   name: 'Slider',
+  props: {
+    history: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     slider: null,
     sliderClass: ''
   }),
   computed: {
-    history() {
-      const items = this.$store.getters['company/history']
+    historyItems() {
+      const items = this.history
       items.sections.forEach(element => {
         element.imageLink = this.$config.imgURL + '' + element.image
       });

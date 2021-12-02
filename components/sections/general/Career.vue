@@ -1,9 +1,9 @@
 <template>
   <section class="career">
     <div class="container">
-      <h1 class="career__title title">{{ career.title }}</h1>
+      <h1 class="career__title title">{{ careerItems.title }}</h1>
       <div class="career__wrapper">
-        <div v-for="item in career.sections" :key="item.title" class="career__wrap-card" >
+        <div v-for="item in careerItems.sections" :key="item.title" class="career__wrap-card" >
           <picture class="picture">
             <img
               :src="item.imageLink"
@@ -24,11 +24,17 @@
 <script>
 export default {
   name: 'Career',
+  props: {
+    career: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    career() {
-      const career = this.$store.getters['company/career']
+    careerItems() {
+      const career = this.career
       career.sections.forEach(element => {
-        element.imageLink = this.$config.imgURL + '' + element.image
+        element.imageLink = this.$config.imgURL + element.image
       });
       return career
     }

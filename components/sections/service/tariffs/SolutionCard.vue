@@ -46,7 +46,7 @@ export default {
   border-radius: 6px;
   padding: 48px 24px;
   flex: 0 1 calc((100% / 2) - 33px);
-  max-width: 407px; 
+  max-width: 390px; 
  
 }
 

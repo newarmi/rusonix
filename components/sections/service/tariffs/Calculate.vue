@@ -4,24 +4,26 @@
           <h1 class="calculate__title title">{{data.title}}</h1>
         </div>
         <div class="calculate__wrapper">
-          <div v-for="config in configNumber" :key="config" class="calculate__wrapper-left">
+          <div v-for="config, c in configValues" :key="'config' + c" class="calculate__wrapper-left">
             <div class="calculate__configuration">
               <form action="#" class="calculate__form">
                 <div class="calculate__form-title">Конфигурация</div>
-
                 <div v-for="item in data.fields" :key="item.key + 'topField'">   
+
                   <div v-if="item.layout==='listOption'" class="calculate__input-text">{{ item.attributes.option }}
                     <div class="calculate__input-select">
                       <select class="calculate__select">
-                        <option v-for="option in item.attributes.list" :key="option.key" value="Ubuntu 20.04 LTS">{{ option.attributes.listItem }}</option>
+                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.listItem">{{ option.attributes.listItem }}</option>
                       </select>
                     </div>
                   </div>
 
                   <div v-if="item.layout==='setting'" class="calculate__input-text">{{ item.attributes.title }}
                     <div class="calculate__input">
-                      <input v-model="value[item.attributes.index]" class="calculate__input-number" type="number"  />
-                      <Slider v-model="value[item.attributes.index]" :min="0" :max="Number(item.attributes.max)"/>
+                      <input v-model="config.settings[item.attributes.index]" class="calculate__input-number" type="number"  />
+                      <Slider v-model="config.settings[item.attributes.index]" 
+                              :min="Number(item.attributes.min)" 
+                              :max="Number(item.attributes.max)" />
                     </div>
                   </div>
 
@@ -55,35 +57,37 @@
                 </div>
 
                 <div v-for="item in data.fields" :key="item.key + 'diskField'">
-
+                  
                   <div v-if="item.layout==='disk'">
-                    <div class="calculate__form-title">{{ item.attributes.title + ' ' + index}}</div>
-                    <div v-for="field in item.attributes.fields" :key="field.key">
-                      <div v-if="field.layout==='radio'" class="calculate__input-text">{{field.attributes.title}}
-                        <div class="calculate-input-radio">
-                          <div v-for="radio, i  in field.attributes.list" :key="radio.key" class="radio__wrapper-btn-1">
-                            <input :id="'radio-' + i" class="radio__btn" type="radio" name="radio" :value="radio.attributes.listItem" :checked="i===0" />
-                            <label class="radio__lebel" :for="'radio-' + i">{{ radio.attributes.listItem }}</label>
-                          </div>
-                        </div>
+                      <div v-for="oneDisk, k in config.disks" :key="oneDisk.key">
+                        <div class="calculate__form-title">{{ item.attributes.title + ' ' + (k +1)}}</div>
+                          <div v-for="field in item.attributes.fields" :key="field.key">
+                            <div v-if="field.layout==='radio'" class="calculate__input-text">{{field.attributes.title}}
+                                <div class="calculate-input-radio">
+                                    <div v-for="radio, i  in field.attributes.list" :key="radio.key" class="radio__wrapper-btn-1">
+                                        <input :id="'radio-' + i + k + c" class="radio__btn" type="radio" :name="'radio' + k + c" :value="radio.attributes.listItem" :checked="i===0" />
+                                        <label class="radio__lebel" :for="'radio-' + i + k + c">{{ radio.attributes.listItem }}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div v-if="field.layout==='setting'" class="calculate__input-text">{{ field.attributes.title }}
+                                <div class="calculate__input">
+                                    <input v-model="config.disks[k][field.attributes.index]" class="calculate__input-number" type="number"  />
+                                    <Slider v-model="config.disks[k][field.attributes.index]" 
+                                            :min="Number(field.attributes.min)" 
+                                            :max="Number(field.attributes.max)"/>
+                                </div>
+                            </div>
+                      
+                          </div>    
                       </div>
-                      <div v-if="field.layout==='setting'" class="calculate__input-text">{{ field.attributes.title }}
-                        <div class="calculate__input">
-                          <input v-model="disk" class="calculate__input-number" type="number"  />
-                          <Slider v-model="disk" :min="0" :max="Number(field.attributes.max)"/>
-                        </div>
-                      </div>
-                      <div v-if="field.layout==='addButton'" class="calculate__btn-disk" @click="addDisk()">{{ field.attributes.title }}</div>
-                    </div>
+                         <div class="calculate__btn-disk" @click="addDisk(c)">+ добавить диск</div>
+                         <div v-if="config.disks.length>1" class="calculate__btn-disk" @click="removeDisk(c)">- убрать диск</div>      
+                     </div>
                   </div>
-                </div>
               </form>
-            </div>
-            <div v-for="item in data.fields" :key="item.key + 'button'">
-              <div v-if="item.layout==='addConfig'" class="calculate__wrapper-btn-add">
-                <button class="calculate__btn-add" @click="addConfiguration()">{{ item.attributes.title }}</button>
-              </div>
-            </div>   
+            </div>           
           </div>
        
           <div class="calculate__wrapper-right">
@@ -120,19 +124,20 @@
               </button>
             </div>
 
-            <div class="calculate__total-bottom">
+            <div v-if="bonus" class="calculate__total-bottom">
               <div class="calculate__total-bottom-title">
-                В любую конфигурацию сервера всегда входит
+                {{ bonus.title }}
               </div>
               <ul class="calculate__total-list">
-                <li class="calculate__total-item">Голосовая поддержка 24/7</li>
-                <li class="calculate__total-item">Безлимитный трафик 100 мбит</li>
-                <li class="calculate__total-item">Маска и антисептик</li>
+                <li v-for="item in bonus.bonuses" :key="item.key" class="calculate__total-item">{{ item.attributes.title }}</li>
               </ul>
             </div>
           </div>
         </div>
-
+        <div class="calculate__wrapper-btn-add">
+            <button class="calculate__btn-add" @click="addConfiguration()">+ добавить конфигурацию</button>
+            <button v-if="configValues.length>1" class="calculate__btn-add" @click="removeConfiguration()">- убрать конфигурацию</button>
+        </div>
 
         <div class="calculate__total-tablet">
           <div class="calculate__total-tablet-container">
@@ -192,35 +197,75 @@ export default {
   },
   data () {
     return {
-        value: [],
-        disk: 86,
-        index: 1,
-        configNumber: 1
+        firstDisk: null,
+        configValues: [{
+          settings: [],
+          disks:[[]]
+        }],
+        bonus: null
     }
-
   },
   computed: {
-
+      fields() {
+        return this.data.fields
+      }
   },
   created() {
-    let i=0;
-    this.data.fields.forEach(element => {   
-      if(element.layout==='setting') {
-          element.attributes.index=i
-          this.value.push(Number(element.attributes.default))
-          i++
+    let i=0
+    let j=0
+    this.fields.forEach(field => {
+      if(field.layout==='bonus') {
+        this.bonus = field.attributes
       }
+      if(field.layout==='setting') {
+        field.attributes.index=i
+        this.configValues[0].settings.push(Number(field.attributes.default))
+        i++
+       }
+       if(field.layout==='disk') {
+         this.firstDisk = field.attributes.fields
+         this.firstDisk.forEach(disk => {
+           if(disk.layout==='setting') {
+             disk.attributes.index=j
+             this.configValues[0].disks[0].push(Number(disk.attributes.default))
+             j++
+           }
+         })
+       }
     });
   },
-  mounted() {
-
-  },
   methods: {
-    addDisk() {
-      alert('hey')
+    addDisk(index) {
+      this.configValues[index].disks.push([])
+      this.firstDisk.forEach(disk => {
+           if(disk.layout==='setting') {
+             this.configValues[index].disks[this.configValues[index].disks.length-1].push(Number(disk.attributes.default))
+           }
+      })
+    },
+    removeDisk(index) {
+      this.configValues[index].disks.pop()
     },
     addConfiguration() {
-      this.configNumber++
+      this.configValues.push({settings: [], disks: [[]]})
+
+        this.fields.forEach(field => {   
+        if(field.layout==='setting') {
+          this.configValues[this.configValues.length-1].settings.push(Number(field.attributes.default))
+        }
+        if(field.layout==='disk') {
+          this.firstDisk = field.attributes.fields
+          this.firstDisk.forEach(disk => {
+            if(disk.layout==='setting') {
+              this.configValues[this.configValues.length-1].disks[0].push(Number(disk.attributes.default))
+            }
+          })
+        }
+      });
+
+    },
+    removeConfiguration() {
+      this.configValues.pop()
     }
   },
 }
@@ -460,6 +505,8 @@ export default {
   border-radius: 8px;
 }
 .calculate__btn-disk {
+  display: inline-block;
+  margin-right: 30px;
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -479,6 +526,7 @@ export default {
   margin-top: 48px;
 }
 .calculate__btn-add {
+  margin-left: 30px;
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -493,8 +541,7 @@ export default {
 .calculate__btn-add:hover {
   opacity: 0.4;
 }
-.calculate__wrapper-right {
-}
+
 .calculate__total {
   background-color: #fff;
   border-radius: 8px;

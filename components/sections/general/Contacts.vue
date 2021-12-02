@@ -54,11 +54,14 @@
 
 <script>
 export default {
-  name: 'Contact',
+  name: 'Contacts',
+  props: {
+    contacts: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    contacts() {
-      return this.$store.getters['company/contact']
-    },
     allContacts() {
       return this.contacts.sections
     },

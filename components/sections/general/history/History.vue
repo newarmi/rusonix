@@ -4,18 +4,24 @@
       <h1 class="history__title title">{{ title }}</h1>
     </div>
     <div class="container__history-slider">
-      <Slider />
+      <Slider :history="history"/>
     </div>
   </section>
 </template>
 
 <script>
-import Slider from '@/components/sections/company-page/history/Slider'
+import Slider from '@/components/sections/general/history/Slider'
 
 export default {
   name: 'History',
-    components: {
+  components: {
     Slider
+  },
+  props: {
+    history: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
     title() {

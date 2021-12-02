@@ -15,9 +15,6 @@
         </div>
       </div>
     </div>
-    <div class="tariff__ready-configuration-btn-slider">
-      <button class="tariff__btn-add">+ добавить еще одну конфигурацию</button>
-    </div>
   </div>
 </template>
 
@@ -44,35 +41,42 @@ export default {
     computed: {
         
     },
-    created() {
+    watch: {
+      solutions(){
+        this.cards = []
         this.solutions.forEach(element => {
             this.cards.push({select: false})
         })
+      }
+    },
+    created() {
+        this.solutions.forEach(element => {
+            this.cards.push({select: false})
+      
+
+        })
 
     },
-    mounted() {
-        
-            this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
-                observer: true,
-                loop: false,
-                slidesPerView: 1.35,
-                spaceBetween: 33,
-            })
-      
+    mounted() {        
+      this.slider = new Swiper('.tariff__wrapper-configuration-swiper', {
+          observer: true,
+          loop: false,
+          slidesPerView: 1.35,
+          spaceBetween: 33,
+      })     
     },
     methods: {
-        chooseCard(i) {
-            this.cards.forEach(element => {
-                element.select=false
-            })
-            this.cards[i].select=true
-        }
-    },
+      chooseCard(i) {
+          this.cards.forEach(element => {
+              element.select=false
+          })
+          this.cards[i].select=true
+      }
+    }
 }
 </script>
 
 <style scoped>
-
 
 .tariff__btn-add {
   font-family: 'Graphik', sans-serif;

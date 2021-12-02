@@ -86,13 +86,19 @@
 import Swiper from 'swiper'
 
 export default {
-  name: 'Confidents',
+  name: 'Trust',
+  props: {
+    trust: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     title() {
-      return this.$store.getters.confidents.title
+      return this.trust.title
     },
     firstLine() {
-      const firstLine = this.$store.getters.confidents.sections.find(Boolean).alt_title
+      const firstLine = this.trust.sections.find(Boolean).alt_title
       const arrayFirstLine = JSON.parse(firstLine)
       arrayFirstLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url
@@ -100,7 +106,7 @@ export default {
       return arrayFirstLine
     },
     secondLine() {
-      const secondLine = this.$store.getters.confidents.sections.find(Boolean).image
+      const secondLine = this.trust.sections.find(Boolean).image
       const arraySecondLine = JSON.parse(secondLine)
       arraySecondLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url
@@ -108,7 +114,7 @@ export default {
       return arraySecondLine
     },
     thirdLine() {
-      const thirdLine = this.$store.getters.confidents.sections.find(Boolean).content
+      const thirdLine = this.trust.sections.find(Boolean).content
       const arrayThirdLine = JSON.parse(thirdLine)
       arrayThirdLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url

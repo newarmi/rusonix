@@ -1,7 +1,7 @@
 <template>
   <div v-if="$route.name!=='support'" class="header-content__wrapper" :class="`header-content__${$route.name}`">
     <div class="container">
-      <h1 v-if="header.show_title" class="start__title start__title-cscard" v-html="header.title"></h1>
+      <h1 v-if="header.title" class="start__title start__title-cscard" v-html="header.title"></h1>
       <ul v-if="header.tags" class="start__list">
             <li class="start__item">
               <a class="start__link" href="#">Обзор</a>

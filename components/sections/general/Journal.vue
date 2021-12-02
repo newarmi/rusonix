@@ -6,11 +6,9 @@
           <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
             <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">              
               <picture class="picture">
-                <source
-                  media="(max-width: 1250px)"
+                <source media="(max-width: 1250px)"
                   :src="article.imgMobileLink"
-                  :srcset="article.imgMobileLink"
-                />
+                  :srcset="article.imgMobileLink" />
                 <img
                   :src="article.imgDesktopLink"
                   :srcset="article.imgDesktopLink"
@@ -32,14 +30,28 @@
 </template>
 
 <script>
+
 export default {
-  name: 'Magazine',
-  computed: {
-    title() {
-        return this.$store.getters.magazineTitle
+  name: 'Journal',
+  props: {
+    journal: {
+      type: Array,
+      required: true
     },
+    title: {
+      type: String,
+      required: false,
+      default: 'Журнал'
+    },
+    lines: {
+      type: String,
+      required: false,
+      default: 'three'
+    },
+  },
+  computed: {
     articles() {
-        const articles = this.$store.getters.magazineArticles
+        const articles = this.journal
         articles.forEach(element => {
         element.imgDesktopLink = this.$config.imgURL + '' + element.img_desktop
         element.imgMobileLink = this.$config.imgURL + '' + element.img_mobile
@@ -50,8 +62,12 @@ export default {
     },
     articlesArray() {
       const articlesArray = []
-      articlesArray.push(this.articles.slice(0,2))
-      articlesArray.push(this.articles.slice(2,4))
+      if(this.lines==='two') {
+        articlesArray.push(this.articles.slice(0,2))
+        articlesArray.push(this.articles.slice(2,4)) 
+        return articlesArray
+      }
+
       articlesArray.push(this.articles.slice(4,6))
       return articlesArray
     },
@@ -84,7 +100,6 @@ export default {
     }
   }
 }
-
 
 </script>
 

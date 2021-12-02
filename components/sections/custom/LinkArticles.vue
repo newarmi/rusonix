@@ -1,20 +1,19 @@
 <template>
   <section class="advantage">
     <div class="container">
-      <h1 class="advantage__title title">{{ page.title }}</h1>
+      <h1 class="advantage__title title">{{ blocks.title }}</h1>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">
-            {{ benefits[0].title }}
+            {{ blocks.article[0].attributes.title }}
           </div>
-          <div class="advantage__text text" v-html="benefits[0].content">
-          </div>
-          <a href="" class="advantage__link">{{ benefits[0].link_name }}</a>
+          <div class="advantage__text text" v-html="blocks.article[0].attributes.text"></div>
+          <a href="" class="advantage__link">{{ blocks.article[0].attributes.linkName }}</a>
         </div>
         <picture class="picture">
           <img
-            :src="benefits[0].imageLink"
-            :srcset="benefits[0].imageLink"
+            :src="blocks.article[0].attributes.imageLink"
+            :srcset="blocks.article[0].attributes.imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -24,32 +23,31 @@
       <div class="advantage__wrapper advantage__wrapper--mod">
         <picture class="picture">
           <img
-            :src="benefits[1].imageLink"
-            :srcset="benefits[1].imageLink"
+            :src="blocks.article[1].attributes.imageLink"
+            :srcset="blocks.article[1].attributes.imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
         </picture>
         <div class="advantage__section-text">
           <div class="advantage__title-text">
-            {{ benefits[1].title }}
+            {{ blocks.article[1].attributes.title }}
           </div>
-          <div class="advantage__text text" v-html="benefits[1].content">
-          </div>
-          <a href="" class="advantage__link">{{ benefits[1].link_name }}</a>
+          <div class="advantage__text text" v-html="blocks.article[1].attributes.text"></div>
+          <a href="" class="advantage__link">{{ blocks.article[1].attributes.link_name }}</a>
         </div>
       </div>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
-          <div class="advantage__title-text">{{ benefits[2].title }}</div>
-          <div class="advantage__text text" v-html="benefits[2].content">
+          <div class="advantage__title-text">{{ blocks.article[2].attributes.title }}</div>
+          <div class="advantage__text text" v-html="blocks.article[2].attributes.text">
           </div>
-          <a href="" class="advantage__link">{{ benefits[2].link_name }}</a>
+          <a href="" class="advantage__link">{{ blocks.article[2].attributes.linkName }}</a>
         </div>
         <picture class="picture">
           <img
-            :src="benefits[2].imageLink"
-            :srcset="benefits[2].imageLink"
+            :src="blocks.article[2].attributes.imageLink"
+            :srcset="blocks.article[2].attributes.imageLink"
             class="advantage__img"
             alt="advantage-img"
           />
@@ -61,19 +59,23 @@
 
 <script>
 export default {
-  name: 'Advantage',
-  computed: {
-    page () {
-      const benefits = this.$store.getters.benefits
-      benefits.sections.forEach(element => {
-        element.imageLink = this.$config.imgURL + '' + element.image
-      });
-      return benefits
-    },
-    benefits () {
-      return this.page.sections
+  name: 'Articles',
+  props: {
+    articles: {
+      type: Object,
+      required: true
     }
-}
+  },
+  computed: {
+    blocks() {
+      return this.articles.attributes
+    },
+  },
+  created() {
+    this.blocks.article.forEach(element => {
+        element.attributes.imageLink = this.$config.imgURL + '' + element.attributes.image
+    })
+  }
 }
 </script>
 

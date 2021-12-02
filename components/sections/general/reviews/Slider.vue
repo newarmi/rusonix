@@ -1,7 +1,6 @@
 <template>
   <div class="swiper-container" :class="sliderClass">
     <div class="swiper-wrapper">
-
       <div v-for="client in clients" :key="client.title" class="swiper-slide">
         <div class="reviews__wrapper">
           <div class="reviews__text" v-html="client.content">
@@ -35,13 +34,19 @@ import uniqueId from 'lodash/uniqueId'
 
 export default {
   name: 'Slider',
+  props: {
+    reviews: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     slider: null,
     sliderClass: ''
   }),
   computed: {
     clients() {
-      const clients = this.$store.getters.reviewsClients
+      const clients = this.reviews.sections
       clients.forEach(element => {
         element.imageLink = this.$config.imgURL + '' + element.image
       })
@@ -63,6 +68,7 @@ export default {
     if (this.slider) { this.slider.destroy() }
   }
 }
+
 </script>
 
 <style scoped>

@@ -2,10 +2,10 @@
   <section class="requisites">
     <div class="container">
       <div class="requisites__title title">
-        {{ page.title }}
+        {{ requisites.title }}
       </div>
       <div class="requisites__wrapper">
-        <div v-for="item in requisites" :key="item.title" class="requisites__info">
+        <div v-for="item in requisitesItems" :key="item.title" class="requisites__info">
           <a href="#" class="requisites__link">
             <picture class="picture">
               <img
@@ -28,14 +28,17 @@
 <script>
 export default {
   name: 'Requisites',
+  props: {
+    requisites: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    page() {
-      return this.$store.getters['company/requisities']
-    },
-    requisites () {
-      const requisities = this.page.sections
+    requisitesItems () {
+      const requisities = this.requisites.sections
       requisities.forEach(element => {
-        element.imageLink = this.$config.imgURL + '' + element.image
+        element.imageLink = this.$config.imgURL + element.image
       });
       return requisities
     }

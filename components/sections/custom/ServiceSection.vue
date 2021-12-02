@@ -1,24 +1,26 @@
 <template>
   <section class="license">
     <div class="container">
-      <div class="license__title title">{{ page.title }}</div>
+      <div class="license__title title">{{ services.title }}</div>
       <div class="license__text-descr">
-        <div class="license__text text" v-html="page.description">
+        <div class="license__text text" v-html="services.description">
         </div>
       </div>
       <div class="license__sertificates">
-        <div v-for="certificate in certificates" :key="certificate.title" class="license__sertificate-wrap">
+        <div v-for="item in services.services" :key="item.key" class="license__sertificate-wrap">
+          <nuxt-link :to="'service/' + item.attributes.link">
           <picture class="picture">
             <img
-              :src="certificate.imageLink"
-              :srcset="certificate.imageLink"
+              :src="$config.imgURL + item.attributes.image"
+              :srcset="$config.imgURL + item.attributes.image"
               alt="license"
               class="license__img"
             />
           </picture>
-          <div class="license__sertificate-title">
-            <nuxt-link to="service/ssl" class="nl__black">{{ certificate.title }}</nuxt-link>
-          </div>
+          </nuxt-link>
+          <nuxt-link class="nl__black" :to="'service/' + item.attributes.link">
+            <div class="license__sertificate-title">{{ item.attributes.title }} </div>
+          </nuxt-link>
         </div>
       </div>
     </div>
@@ -27,18 +29,21 @@
 
 <script>
 export default {
-  name: 'Certificates',
-  computed: {
-    page() {
-      return this.$store.getters['services/certificates']
-    },
-    certificates() {
-      const items  = this.page.sections
-      items.forEach(element => {
-        element.imageLink = this.$config.imgURL + '' + element.image
-      });
-      return items
+  name: 'ServiceSection',
+  props: {
+    services: {
+      type: Object,
+      required: true
     }
+  }, 
+  computed: {
+    // serviceItem() {
+    //   const items  = this.page.sections
+    //   items.forEach(element => {
+    //     element.imageLink = this.$config.imgURL + '' + element.image
+    //   });
+    //   return items
+    // }
   }
 }
 </script>

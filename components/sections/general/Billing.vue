@@ -2,17 +2,15 @@
   <section class="details">
     <div class="container">
       <h1 class="details__title title">
-        {{details.title}}
+        {{billing.title}}
       </h1>
-      <p class="details__text text">
-        {{details.description}}
-      </p>
+      <div class="details__text text" v-html="billing.description"></div>
       <div class="details__wrapper-img">
         <div class="details__img-desk">
           <picture class="picture">
             <img
-              :src="details.imageDesktop"
-              :srcset="details.imageDesktop"
+              :src="imageDesktop"
+              :srcset="imageDesktop"
               class="details__img"
               alt="details-desk"
             />
@@ -21,8 +19,8 @@
         <div class="details__img-mob">
           <picture class="picture">
             <img
-              :src="details.imageMobile"
-              :srcset="details.imageMobile"
+              :src="imageMobile"
+              :srcset="imageMobile"
               class="details__img"
               alt="details-mob"
             />
@@ -35,15 +33,23 @@
 
 <script>
 export default {
-  name: 'Details',
-  computed: {
-      details() {
-        const details = this.$store.getters.details
-        details.imageDesktop = this.$config.imgURL + '' + details.image
-        details.imageMobile = this.$config.imgURL + '' + details.content
-        return details
-      }
+  name: 'Billing',
+  props: {
+    billing: {
+      type: Object,
+      required: true
+    }
   },
+  data() {
+    return {
+      imageDesktop: null,
+      imageMobile: null
+    }
+  },
+  created() {
+    this.imageDesktop = this.$config.imgURL + '' + this.billing.image
+    this.imageMobile = this.$config.imgURL + '' + this.billing.content
+  }
 
 }
 </script>

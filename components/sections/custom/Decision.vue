@@ -1,29 +1,22 @@
 <template>
   <section class="decision">
     <div class="container">
-      <h1 class="decision__title title">{{decision.title}}</h1>
+      <h1 class="decision__title title">{{blocks.title}}</h1>
       <div class="decision__wrapper-cards">
-        <div v-for="card in decision.sections" :key="card.title" class="decision__card" >
-          <div class="decision__card-title"><nuxt-link class="black-link" :to="card.link">{{card.title}}</nuxt-link></div>
-          <p class="decision__card-text">
-            {{card.content}}
-          </p>
+        <div v-for="card in blocks.cards" :key="card.key" class="decision__card" >
+          <div class="decision__card-title"><nuxt-link class="black-link" :to="'service/' + card.attributes.link">{{card.attributes.title}}</nuxt-link></div>
+          <div class="decision__card-text" v-html="card.attributes.description"></div>
           <ul class="decision__list">
-            <label class="decision__item" v-html="card.alt_title">
-            </label>
+            <label class="decision__item" v-html="card.attributes.services"></label>
           </ul>
-          
-          <picture class="picture">
-            
+          <picture class="picture">         
             <img
               :src="card.imageLink"
               :srcset="card.imageLink"
               class="decision__img"
               alt="decision-card"
             />
-            
           </picture>
-          
         </div>
       </div>
     </div>
@@ -33,14 +26,21 @@
 <script>
 export default {
   name: 'Decision',
+  props: {
+    decisions: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
-    decision() {
-      const decision = this.$store.getters.decision
-      decision.sections.forEach(element => {
-          element.imageLink = this.$config.imgURL + '' + element.image
-      });
-      return decision
-      }
+    blocks() {
+      return this.decisions.attributes
+    }
+  },
+  created() {
+    this.blocks.cards.forEach(element => {
+          element.imageLink = this.$config.imgURL + '' + element.attributes.image
+    });
   }
 }
 </script>
