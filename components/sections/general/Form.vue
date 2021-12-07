@@ -1,48 +1,30 @@
 <template>
   <section class="form">
         <div class="container">
-          <div class="form__title title">
-            Анкета для регистрации в партнерской программе
-          </div>
+          <div class="form__title title">Анкета для регистрации в партнерской программе</div>
         </div>
         <div class="form__wrapper">
           <form action="#" class="partner__form">
             <div class="form__card">
-              <div class="form__card-input-field">
-                Ваше имя
+              <div class="form__card-input-field">Ваше имя
                 <div class="form__card-input-wrap">
-                  <input
-                    type="text"
-                    class="form__card-input"
-                    value=""
-                  />
+                  <input type="text" class="form__card-input" value="" />
                 </div>
               </div>
 
-              <div class="form__card-input-field">
-                Email
+              <div class="form__card-input-field">Email
                 <div class="form__card-input-wrap">
-                  <input
-                    type="text"
-                    class="form__card-input"
-                    value=""
-                  />
+                  <input type="text" class="form__card-input" value="" />
                 </div>
               </div>
 
-              <div class="form__card-input-field">
-                Телефон
+              <div class="form__card-input-field">Телефон
                 <div class="form__card-input-wrap">
-                  <input
-                    type="text"
-                    class="form__card-input"
-                    value=""
-                  />
+                  <input type="text" class="form__card-input" value="" />
                 </div>
               </div>
 
-              <div class="form__card-input-field">
-                Ваша отрасль
+              <div class="form__card-input-field">Ваша отрасль
                 <div class="form__card-select">
                   <select class="form__select">
                     <option value="Представитель digital агентства">
@@ -68,8 +50,13 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-    
+  name: 'Form',
+  computed: {
+    ...mapGetters(['form'])
+  }
 }
 </script>
 

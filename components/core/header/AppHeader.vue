@@ -3,7 +3,7 @@
     <TopLine />
     <Search v-if="header.search"/>
     <HeaderContent />
-    <Slider v-if="$route.name==='index'"/>
+    <Slider v-if="$route.fullPath==='/'"/>
   </header>
 </template>
 
@@ -27,7 +27,7 @@ export default {
   }),
   computed: {
     header() {
-      if(this.$route.name==='index') {
+      if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
         return this.$store.getters.header
       } 
 
@@ -59,7 +59,8 @@ export default {
   background-size: cover;
   background-position: center;
   position: relative;
-  min-height: 100vh;
+  padding-bottom: 120px;
+  /* min-height: 100vh; */
 }
 
 </style>

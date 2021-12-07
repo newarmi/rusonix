@@ -10,8 +10,11 @@
     </div>
 
     <div v-for="tariff, j in tariffs" :key="tariff.layout + '' + j">
-      <BillingCards v-if="tariff.attributes.view=='cards'" :tariff="tariff.attributes" />
-      <BillingLines v-if="tariff.attributes.view=='lines'" :lines="tariff.attributes" />
+      
+      <div v-if="tariff.layout=='billing'">
+        <BillingCards v-if="tariff.attributes.view=='cards'" :tariff="tariff.attributes" />
+        <BillingLines v-if="tariff.attributes.view=='lines'" :lines="tariff.attributes" />
+      </div>
 
       <Cards v-if="tariff.layout=='cards'" :cards="tariff.attributes" />
       <Lines v-if="tariff.layout=='lines'" :lines="tariff.attributes" />
@@ -44,7 +47,6 @@ export default {
     
     'BillingCards': () => import('~/components/sections/service/billing/Cards'),
     'BillingLines': () => import('~/components/sections/service/billing/Lines'),
-
   },
 
   async asyncData({ params, store }) {

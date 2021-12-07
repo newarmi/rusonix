@@ -53,15 +53,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Contacts',
-  props: {
-    contacts: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters([
+      'contacts',
+    ]),
     allContacts() {
       return this.contacts.sections
     },

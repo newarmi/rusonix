@@ -2,29 +2,17 @@
   <div class="start__screen">
     <div class="container">
       <div class="start__screen-search">
-        <input
-          class="start__screen-input"
-          type="text"
-          placeholder="Поиск по ресурсам службы поддержки"
-        />
+        <input class="start__screen-input" type="text" placeholder="Поиск по ресурсам службы поддержки" />
         <label for="" class="start__screen-input-icon">
           <img src="@/assets/img/search__support.png" alt="search" />
         </label>
       </div>
       <div class="start__screen-search-descr">
-        <div class="start__screen-descr-text">
-          Проблема с доступом к серверу
-        </div>
-        <div class="start__screen-descr-text">
-          Ошибка 404</div>
-        <div class="start__screen-descr-text">
-          Как привязать домен к хостингу
-        </div>
-        <div class="start__screen-descr-text">
-          Зачем нужен SSL сертификат</div>
-        <div class="start__screen-descr-text">
-          Что делать если изменились реквизиты
-        </div>
+        <div class="start__screen-descr-text">Проблема с доступом к серверу</div>
+        <div class="start__screen-descr-text">Ошибка 404</div>
+        <div class="start__screen-descr-text">Как привязать домен к хостингу</div>
+        <div class="start__screen-descr-text">Зачем нужен SSL сертификат</div>
+        <div class="start__screen-descr-text">Что делать если изменились реквизиты</div>
       </div>
     </div>
   </div>
@@ -39,7 +27,7 @@
   display: flex;
   justify-content: center;
   padding-top: 230px;
-  padding-bottom: 100px;
+  padding-bottom: 0px;
   margin-bottom: 203px;
 }
 .start__screen-search {

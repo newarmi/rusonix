@@ -34,7 +34,7 @@ export default {
   },
   computed: {
     blocks() {
-      return this.decisions.attributes
+      return this.decisions
     }
   },
   created() {

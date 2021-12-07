@@ -26,15 +26,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Requisites',
-  props: {
-    requisites: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters(['requisites']),
     requisitesItems () {
       const requisities = this.requisites.sections
       requisities.forEach(element => {

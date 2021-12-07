@@ -22,15 +22,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Career',
-  props: {
-    career: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters(['career']),
     careerItems() {
       const career = this.career
       career.sections.forEach(element => {

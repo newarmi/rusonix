@@ -2,88 +2,69 @@
     <div class="secret__container">
           <div class="secret__wrapper">
             <div class="secret__date">
-              <div class="secret__date-text">12 февраля 2021</div>
-              <div class="secret__security">Безопасность</div>
+              <div class="secret__date-text">{{data}}</div>
+              <div class="secret__security">{{ rubric.title }}</div>
             </div>
 
-            <div class="secret__title">
-              Секреты невидимой технической поддержки
-            </div>
-            <div class="secret__title-text">
-              В последнее время участились атаки на цепочку поставок через
-              публичные репозитории. Рассказываем, как с этим бороться.
-            </div>
-            <p class="secret__text secret__text-top">
-              В прошлом году на новостных IT-сайтах появилась информация об
-              «отравлении» репозитория RubyGems, официального канала
-              распространения библиотек для языка Ruby. Некий злоумышленник
-              загружал на этот ресурс поддельные сборки кода, дополненные
-              вредоносным скриптом. То есть все программисты, которые
-              использовали этот код в своих разработках, невольно заражали
-              компьютеры своих пользователей зловредом, подменяющим адреса
-              криптовалютных кошельков.
-            </p>
-            <p class="secret__text secret__text-bottom">
-              Разумеется, это не первая атака на цепочку поставок, проведенная
-              через открытые репозитории. Но сейчас такой сценарий, похоже,
-              набирает популярность. И это неудивительно — ведь в результате
-              одной успешной атаки можно скомпрометировать десятки или сотни
-              тысяч пользователей. Все зависит только от популярности ПО,
-              разработчики которого воспользуются кодом из «отравленного»
-              репозитория и станут звеньями в цепи.
-            </p>
+            <div class="secret__title">{{ article.title }}</div>
 
-            <picture class="magazine__picture">
-              <source
-                media="(max-width: 768px)"
-                set="@/assets/img/magazine-post-mobile.png"
-                srcset="@/assets/img/magazine-post-mobile@2x.png 2x"
-              />
-              <source
-                media="(max-width: 576px)"
-                set="@/assets/img/magazine-post-mobile.png"
-                srcset="@/assets/img/magazine-post-mobile@2x.png 2x"
-              />
-              <img
-                src="@/assets/img/magazine-post.png"
-                srcset="@/assets/img/magazine-post@2x.png 2x"
-                class="magazine__img"
-                alt="post img"
-              />
-            </picture>
-            <div class="secret__title secret__title-second">
-              Как вредоносные пакеты оказываются в репозиториях?
-            </div>
-            <div class="secret__text secret__text-top">
-              В случае с RubyGems злоумышленник создал в репозитории множество
-              проектов с именами, похожими на популярные легитимные сборки кода.
-              Эта техника называется typosquatting: она подразумевает, что
-              разработчик может опечататься при вводе названия пакета и
-              загрузить вредоносный, или, получив несколько пакетов в ответ на
-              поисковой запрос, не понять, какой из них подлинный. Эту тактику
-              злоумышленники применяли и при атаках через Python Package Index,
-              и при загрузке фальшивых образов на Docker Hub. Да и вообще это
-              самый распространенный метод «отравления».
-            </div>
-            <div class="secret__text secret__text-middle">
-              В инциденте с криптокошельками Copay, о котором мы писали
-              некоторое время назад, злоумышленники использовали библиотеку,
-              репозиторий которой размещался на GitHub. Ее создатель потерял
-              интерес к своему детищу и был только рад, когда какой-то новичок
-              попросил права администратора, чтобы продолжить работу. В
-              результате популярная библиотека, которую использовали многие
-              разработчики в своих продуктах, была скомпрометирована.
-            </div>
-            <div class="secret__text secret__text-bottom">
-              Иногда злоумышленникам удается воспользоваться учетной записью
-              легитимного разработчика без его ведома и заменить пакеты
-              поддельными. Так случилось в инциденте с ESLint, библиотеки
-              которого размещались в онлайновой базе данных npm (Node Package
-              Manager).
+            <div v-for="item in article.content" :key="item.key">
+                <div v-if="item.layout==='description'" class="secret__title-text" v-html="item.attributes.description"></div>
+                <div v-if="item.layout==='text'" class="secret__text secret__text-bottom" v-html="item.attributes.text"></div>
+                <div v-if="item.layout==='title'" class="secret__title secret__title-second" v-html="item.attributes.title"></div>
+                <picture v-if="item.layout==='image'" class="magazine__picture">
+                  <img
+                    :src="$config.imgURL + item.attributes.image"
+                    :srcset="$config.imgURL + item.attributes.image"
+                    class="magazine__img"
+                    alt="post img" />
+                </picture>
             </div>
           </div>
         </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters('journal', ['article']),
+    data () {
+      return this.timeConverter(this.article.created_at)
+    },
+    rubric() {
+      return this.article.rubric
+    }
+  },
+  methods: {
+    timeConverter(unixTimestamp) {
+      const a = new Date(unixTimestamp)
+      const months = [
+        'Января',
+        'Февраля',
+        'Марта',
+        'Апреля',
+        'Мая',
+        'Июня',
+        'Июля',
+        'Августа',
+        'Сентября',
+        'Октября',
+        'Ноября',
+        'Декабря',
+      ]
+      const year = a.getFullYear()
+      const month = months[a.getMonth()]
+      const date = a.getDate()
+      const time = date + ' ' + month + ' ' + year
+      return time
+    },
+  }
+}
+</script>
+
+
 
 <style scoped>
 

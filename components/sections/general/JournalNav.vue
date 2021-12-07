@@ -13,12 +13,13 @@
 <script>
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    rubrics () {
-      return this.$store.getters['journal/rubrics']
-    }
+    ...mapGetters([
+      'rubrics'
+    ])
   },
   mounted() {
     this.$nextTick(() => {

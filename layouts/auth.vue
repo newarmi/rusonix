@@ -43,4 +43,10 @@ export default {
 .auth__link:hover {
   opacity: 0.4;
 }
+
+@media (max-width: 1200px) {
+  .auth__background {
+    display: none;
+  }
+}
 </style>

@@ -244,10 +244,11 @@ export default {
   align-items: center;
 
   background-color: #fff;
-  padding: 30px 24px;
+  padding: 12px 24px;
   cursor: pointer;
   border-radius: 8px;
 }
+
 .sertificate__content-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;

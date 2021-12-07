@@ -107,9 +107,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 export default {
+  computed: {
+    ...mapGetters(['partner'])
+  },
   mounted() {
     this.$nextTick(() => {
       this.slider = new Swiper('.partner-nav-swiper', {

@@ -32,19 +32,18 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Billing',
-  props: {
-    billing: {
-      type: Object,
-      required: true
-    }
-  },
   data() {
     return {
       imageDesktop: null,
       imageMobile: null
     }
+  },
+  computed: {
+    ...mapGetters(['billing'])
   },
   created() {
     this.imageDesktop = this.$config.imgURL + '' + this.billing.image

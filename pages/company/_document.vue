@@ -2,45 +2,11 @@
   <section class="file">
     <div class="file__wrapper">
       <div class="file__wrap">
-        <p class="file__text text">
-          Безналичным банковским переводом или с помощью клиент-банка
-        </p>
-        <p class="file__text text">
-          В качестве основания платежа обязательно указывайте номер счета. Если
-          счет не был выставлен — пожалуйста, свяжитесь с клиентским отделом.
-        </p>
+        <div v-for="item in content" :key="item.key">
+          <div v-if="item.layout==='text'" class="file__text text" v-html="item.attributes.text"></div>
+          <a v-if="item.layout==='button'" :href="$config.imgURL + item.attributes.file" class="file__pdf">{{item.attributes.title}}</a>
+        </div>
       </div>
-      <div class="file__wrap">
-        <p class="file__text text">Наши банковские реквизиты:</p>
-        <p class="file__text text">Получатель: ООО «Русоникс»</p>
-        <p class="file__text text">Почтовый адрес: 127137, г. Москва, а/я 19</p>
-        <p class="file__text text">
-          Адрес места нахождения: 125040, г. Москва, 5-я улица Ямского поля, дом
-          9, Помещение II, этаж 2, комната №19
-        </p>
-        <p class="file__text text">
-          Фактический адрес: 125040, г. Москва, 5-я улица Ямского поля, дом 9,
-          Помещение II, этаж 2, комната №19
-        </p>
-        <p class="file__text text">ИНН 7707301630</p>
-        <p class="file__text text">КПП 771401001</p>
-      </div>
-      <div class="file__wrap">
-        <p class="file__text text">Код по ОКПО: 58206261</p>
-        <p class="file__text text">Код по ОКОНХ: 82000, 14965, 52300, 80300</p>
-        <p class="file__text text">Код по ОГРН: 1027739119286</p>
-        <p class="file__text text">Код по ОКВЭД: 61.10.9</p>
-      </div>
-      <div class="file__wrap">
-        <p class="file__text text">Расчетный счет:: 40702810100250000578</p>
-        <p class="file__text text">
-          Наименование банка: Филиал «Центральный» Банка ВТБ (ПАО)
-        </p>
-        <p class="file__text text">Местонахождение банка: г. Москва</p>
-        <p class="file__text text">БИК: 044525411</p>
-        <p class="file__text text">Кор. Счет: 30101810145250000411</p>
-      </div>
-      <button class="file__pdf">Скачать PDF</button>
     </div>
   </section>
 </template>
@@ -50,6 +16,11 @@ export default {
   name: 'Requisites',
   async asyncData({store, params}) {
       await store.dispatch('requisites/fetchPage', '/' + params.document)
+  },
+  computed: {
+      content() {
+        return JSON.parse(this.$store.getters['requisites/content'])
+      }  
   },
 }
 </script>
@@ -84,6 +55,8 @@ export default {
 }
 
 .file__pdf {
+    display: inline-block;
+    margin-top: 15px;
     width: 200px;
     font-family: "Graphik", sans-serif;
     font-size: 16px;

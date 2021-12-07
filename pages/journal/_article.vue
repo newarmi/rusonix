@@ -1,6 +1,7 @@
 <template>
     <main>
       <section class="secret">
+
         <Article />
         <BottomArticles />
       </section>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+
 import Article from '@/components/sections/journal/Article'
 import BottomArticles from '@/components/sections/journal/BottomArticles'
 export default {
@@ -15,8 +17,7 @@ export default {
   components: { 
     Article,
     BottomArticles
-    },
-
+  },
   async asyncData({ store, params }) {
     await store.dispatch('journal/fetchPage', '/' + params.article)
   },

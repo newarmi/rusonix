@@ -68,7 +68,7 @@ export default {
   },
   computed: {
     blocks() {
-      return this.articles.attributes
+      return this.articles
     },
   },
   created() {

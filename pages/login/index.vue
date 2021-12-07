@@ -110,4 +110,10 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+@media (max-width: 1200px) {
+  .contauner {
+    padding: 50px;
+  }
+}
 </style>

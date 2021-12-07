@@ -2,9 +2,9 @@
   <section class="domain">
     <div class="container">
 
-      <div class="domain__title title">{{ domainsInfo.title }}</div>
+      <div class="domain__title title">{{ domains.title }}</div>
       <div class="domain__text-wrap">
-        <p class="domain__text text">{{ domainsInfo.description }}</p>
+        <div class="domain__text text" v-html="domains.description"></div>
       </div>
 
       <div class="domain__search">
@@ -36,6 +36,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Sliders from '@/components/sections/general/domains/Sliders'
 
 export default {
@@ -48,28 +49,15 @@ export default {
   components: {
     Sliders
   },
-  props: {
-    domains: {
-      type: Object,
-      required: true
-    },
-    tariffs: {
-      type: Array,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters(['domains', 'domainTarriff']),
     domainItems() {
-      const item = this.tariffs
+      const item = this.domainTarriff
       item.forEach(element => {
         element.price = Math.floor(element.periods.find(Boolean).base_cost)
       })
       return item
     },
-    domainsInfo() {
-      return this.domains
-    }
-
   }
 }
 </script>

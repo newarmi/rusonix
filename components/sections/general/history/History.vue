@@ -1,7 +1,7 @@
 <template>
   <section class="history">
     <div class="container">
-      <h1 class="history__title title">{{ title }}</h1>
+      <h1 class="history__title title">{{ history.title }}</h1>
     </div>
     <div class="container__history-slider">
       <Slider :history="history"/>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Slider from '@/components/sections/general/history/Slider'
 
 export default {
@@ -17,16 +18,8 @@ export default {
   components: {
     Slider
   },
-  props: {
-    history: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
-    title() {
-      return this.$store.getters['company/history'].title
-    }
+    ...mapGetters(['history'])
   }
 }
 </script>

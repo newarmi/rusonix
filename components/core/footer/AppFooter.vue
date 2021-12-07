@@ -34,19 +34,19 @@
         <nav class="navigation navigation__footer">
           <ul class="navigation__list">
             <li class="navigation__item navigation__item-footer">
-              <nuxt-link to="/company" class="navigation__link">О компании</nuxt-link>
+              <nuxt-link to="/company" class="navigation__link">{{ buttons.company }}</nuxt-link>
             </li>
             <li class="navigation__item navigation__item-footer">
-              <nuxt-link to="/services" class="navigation__link">Услуги</nuxt-link>
+              <nuxt-link to="/services" class="navigation__link">{{ buttons.services }}</nuxt-link>
             </li>
             <li class="navigation__item navigation__item-footer">
-              <nuxt-link to="/magazine" class="navigation__link">Журнал</nuxt-link>
+              <nuxt-link to="/journal" class="navigation__link">{{ buttons.journal }}</nuxt-link>
             </li>
             <li class="navigation__item navigation__item-footer">
-              <nuxt-link to="/support" class="navigation__link">Поддержка</nuxt-link>
+              <nuxt-link to="/support" class="navigation__link">{{ buttons.support }}</nuxt-link>
             </li>
             <li class="navigation__item navigation__item-footer">
-              <nuxt-link to="/partners" class="navigation__link">Партнерская программа</nuxt-link>
+              <nuxt-link to="/partners" class="navigation__link">{{ buttons.partners }}</nuxt-link>
             </li>
           </ul>
         </nav>
@@ -65,7 +65,7 @@ export default {
   name: 'AppFooter',
   computed: {
     footer() {
-      if(this.$route.name==='index') {
+      if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
         return this.$store.getters.footer
       }
       
@@ -81,9 +81,28 @@ export default {
         return this.$store.getters['requisites/footer']
       }
 
-      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']
-      
-    }
+      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']      
+    },
+    buttons() {
+        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
+          return this.$store.getters.buttons
+        } 
+
+        if(this.$route.name==='service-slug') {
+          return this.$store.getters['universal/buttons']
+        }
+
+        if(this.$route.name==='journal-article') {
+          return this.$store.getters['journal/buttons']
+        }
+
+        if(this.$route.name==='company-document') {
+          return this.$store.getters['requisites/buttons']
+        }
+
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
+        
+      },
   }
 }
 </script>
@@ -167,6 +186,5 @@ export default {
     opacity: 1;
   }
 }
-
 
 </style>

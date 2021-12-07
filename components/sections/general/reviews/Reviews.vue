@@ -8,20 +8,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Slider from '~/components/sections/general/reviews/Slider'
+
 
 export default {
   name: 'Reviews',
   components: {
     Slider
   },
-  props: {
-    reviews: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters(['reviews']),
     title() {
       return this.reviews.title
     }

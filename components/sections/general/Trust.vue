@@ -84,16 +84,12 @@
 
 <script>
 import Swiper from 'swiper'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Trust',
-  props: {
-    trust: {
-      type: Object,
-      required: true
-    }
-  },
   computed: {
+    ...mapGetters(['trust']),
     title() {
       return this.trust.title
     },

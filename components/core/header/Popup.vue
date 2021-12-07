@@ -16,32 +16,21 @@
 
 <script>
 export default {
-    props: {
-        title: {
-                type: String,
-                required: true
-                },
-        showPopup: {
-                type: Boolean,
-                default: false
-                }
-            },
-    data() {
-        return {
-            
-        }
-    },
-
-            
-    methods: {
-
-    }
-    
+  props: {
+    title: {
+      type: String,
+      required: true
+      },
+    showPopup: {
+      type: Boolean,
+      default: false
+      }
+  },
 }
 </script>
 
-
 <style scoped>
+
 .popup-feature {
   display: none;
   position: fixed;
@@ -49,10 +38,9 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(135.914px);
-}
-.popup-feature {
   overflow-y: scroll;
 }
+
 .body-scroll {
   overflow-y: hidden;
 }
@@ -100,7 +88,28 @@ export default {
   opacity: 0.6;
   max-width: 720px;
 }
-
+.popup-feature-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  max-width: 770px;
+}
+.popup-feature-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  max-width: 785px;
+}
 .popup-feature-wrap-text {
   margin-top: 50px;
   margin-bottom: 50px;
@@ -110,8 +119,24 @@ export default {
   right: -60px;
   top: 0;
   cursor: pointer;
+  fill: white;
 }
-
+.popup-feature-title-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-bottom: 24px;
+}
+.popup-feature__wrapper-content {
+  margin-bottom: 48px;
+}
+.popup-feature__wrapper-content:last-child {
+  margin-bottom: 0;
+}
 .popup__img {
   margin-top: 24px;
   margin-bottom: 24px;
@@ -135,7 +160,7 @@ export default {
 .popup__btn:hover {
   background-color: #065848;
 }
-.popup-feature2-wrap-text {
+.popup-feature-wrap-text {
   margin-top: 50px;
   margin-bottom: 50px;
 }
@@ -144,20 +169,24 @@ export default {
     padding: 48px 120px;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   .popup-container {
-    padding: 48px 70px;
+    padding: 48px 10px;
   }
   .popup__close-feature {
-    right: -50px;
+    top: 10px;
+    right: 10px;
+    fill: #000;
   }
 }
+
 @media (max-width: 576px) {
   .popup-feature-wrap {
     padding: 32px 20px;
   }
-  .popup-feature {
+  .popup-feature1 {
     overflow-y: scroll;
   }
 }
+
 </style>

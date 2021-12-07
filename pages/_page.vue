@@ -1,6 +1,6 @@
 <template>
   <div id='mainPage'>
-      <Constructor :pageblocks="pageBlocks" />     
+      <Constructor  :pageblocks="pageBlocks" />     
   </div>
 </template>
 
@@ -8,17 +8,18 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'Company',
+  name: 'MainPPages',
   components: {
     'Constructor': () => import('~/components/constructor'),
   },
-  async asyncData({store}) {
-    await store.dispatch('fetchPage', 'company')
+  async asyncData({params, store, route}) {
+    let page = params.page
+    if(route.fullPath==='/') page='index' 
+    await store.dispatch('fetchPage', page)
   },
   computed: {
     ...mapGetters(['pageBlocks'])
   },
-
 }
 </script>
 

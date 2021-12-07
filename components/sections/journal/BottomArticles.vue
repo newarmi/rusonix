@@ -2,75 +2,64 @@
   <div class="container">
     <div class="magazine__title-additionally">Также в журнале</div>
     <div class="magazine__additionally-wrapper">
-      <div class="magazine__additionally-card">
-        <picture class="picture">
-          <source
-            media="(max-width:1000px)"
-            src="@/assets/img/additionally-card-tablet-1.png"
-            srcset="@/assets/img/additionally-card-tablet-1@2x.png 2x"
-          />
+      <div v-for="card in bottom" :key="card.slug" class="magazine__additionally-card">
+        <nuxt-link :to="'/journal/' + card.slug" class="picture">
           <img
-            src="@/assets/img/additionally-card-1.png"
-            srcset="@/assets/img/additionally-card-1@2x.png 2x"
+            :src="$config.imgURL + card.img_mobile"
+            :srcset="$config.imgURL + card.img_mobile"
             class="additionally__img"
             alt="card 1"
           />
-        </picture>
+        </nuxt-link>
         <div class="additionally__date">
-          <div class="additionally__security">Безопасность</div>
-          <div class="additionally__text">12 февраля 2021</div>
+          <div class="additionally__security">{{ card.rubric.title }}</div>
+          <div class="additionally__text">{{ time(card.created_at) }}</div>
         </div>
-        <div class="additionally__title">История одной DDOS атаки</div>
-      </div>
-
-      <div class="magazine__additionally-card">
-        <picture class="picture">
-          <source
-            media="(max-width:1000px)"
-            src="@/assets/img/additionally-card-tablet-2.png"
-            srcset="@/assets/img/additionally-card-tablet-2@2x.png 2x"
-          />
-          <img
-            src="@/assets/img/additionally-card-2.png"
-            srcset="@/assets/img/additionally-card-2@2x.png 2x"
-            class="additionally__img"
-            alt="card 2"
-          />
-        </picture>
-        <div class="additionally__date">
-          <div class="additionally__security">Безопасность</div>
-          <div class="additionally__text">12 февраля 2021</div>
-        </div>
-        <div class="additionally__title">И целого бэкапа мало</div>
-      </div>
-
-      <div class="magazine__additionally-card">
-        <picture class="picture">
-          <source
-            media="(max-width:1000px)"
-            src="@/assets/img/additionally-card-tablet-3.png"
-            srcset="@/assets/img/additionally-card-tablet-3@2x.png 2x"
-          />
-          <img
-            src="@/assets/img/additionally-card-3.png"
-            srcset="@/assets/img/additionally-card-3@2x.png 2x"
-            class="additionally__img"
-            alt="card 3"
-          />
-        </picture>
-        <div class="additionally__date">
-          <div class="additionally__security">Безопасность</div>
-          <div class="additionally__text">12 февраля 2021</div>
-        </div>
-        <div class="additionally__title">История одной DDOS атаки</div>
+        <nuxt-link :to="'/journal/' + card.slug" class="additionally__title nl_black">{{ card.title }}</nuxt-link>
       </div>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed: {
+    ...mapGetters('journal', ['bottom']),
+  },
+  methods: {
+    time(unixTimestamp) {
+      const a = new Date(unixTimestamp)
+      const months = [
+        'Января',
+        'Февраля',
+        'Марта',
+        'Апреля',
+        'Мая',
+        'Июня',
+        'Июля',
+        'Августа',
+        'Сентября',
+        'Октября',
+        'Ноября',
+        'Декабря',
+      ]
+      const year = a.getFullYear()
+      const month = months[a.getMonth()]
+      const date = a.getDate()
+      const time = date + ' ' + month + ' ' + year
+      return time
+    },
+  }
+}
+</script>
 
 <style scoped>
+.nl_black {
+  color: black;
+}
+
 .magazine__title-additionally {
   font-family: "Graphik", sans-serif;
   font-size: 38px;
@@ -173,6 +162,9 @@
   }
 }
 @media (max-width: 576px) {
+  .additionally__img {
+  max-width: 325px;
+  }
   .secret__wrapper {
     padding: 48px 16px;
   }

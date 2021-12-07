@@ -1,7 +1,9 @@
 <template>
-  <div v-if="$route.name!=='support'" class="header-content__wrapper" :class="`header-content__${$route.name}`">
+<div>
+  <div v-if="$route.fullPath!=='/support'" class="header-content__wrapper" :class="`header-content__${$route.name}`">
     <div class="container">
-      <h1 v-if="header.title" class="start__title start__title-cscard" v-html="header.title"></h1>
+      <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
+      <h1 v-if="isJournal" class="start__title start__title-cscard" v-html="topArticles.top_journal.name"></h1>
       <ul v-if="header.tags" class="start__list">
             <li class="start__item">
               <a class="start__link" href="#">Обзор</a>
@@ -13,8 +15,10 @@
       <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></div>
       <button v-if="button" class="start__cscard-btn">{{ button }}</button>
     </div>
-    <div v-if="isDecor" class="header__decor"></div>
+    
   </div>
+  <div v-if="isDecor" class="header__decor"></div>
+</div>
 </template>
 
 <script>
@@ -28,11 +32,14 @@ export default {
     isDocument() {
         return this.$route.name==='company-document'
     },
+    isJournal() {
+        return this.$route.name==='journal'
+    },
     header() {
-      if(this.$route.name==='index') {
+      if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
         return this.$store.getters.header
       } 
-      
+            
       if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/header']
       }
@@ -47,6 +54,25 @@ export default {
       }
        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
     },
+    topArticles() {
+        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
+          return this.$store.getters.topArticles
+        }
+        
+        if(this.$route.name==='service-slug') {
+          return this.$store.getters['universal/topArticles']
+        }
+
+        if(this.$route.name==='journal-article') {
+          return this.$store.getters['journal/topArticles']
+        }
+
+        if(this.$route.name==='company-document') {
+          return this.$store.getters['requisites/topArticles']
+        }
+
+        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/topArticles']      
+      },
     button() {
       if(this.isArticle) {
         return false
