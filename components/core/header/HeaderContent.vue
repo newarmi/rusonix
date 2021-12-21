@@ -55,23 +55,7 @@ export default {
        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
     },
     topArticles() {
-        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-          return this.$store.getters.topArticles
-        }
-        
-        if(this.$route.name==='service-slug') {
-          return this.$store.getters['universal/topArticles']
-        }
-
-        if(this.$route.name==='journal-article') {
-          return this.$store.getters['journal/topArticles']
-        }
-
-        if(this.$route.name==='company-document') {
-          return this.$store.getters['requisites/topArticles']
-        }
-
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/topArticles']      
+      return this.$store.getters.topArticles
       },
     button() {
       if(this.isArticle) {

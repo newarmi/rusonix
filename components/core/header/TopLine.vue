@@ -1,9 +1,11 @@
 <template>
-  <div class='top-line__wrapper'>
+  <div class="top-line__wrapper">
     <div class="header__wrapper-top">
       <div class="header__wrapper">
         <div class="header__top-info">
-          <nuxt-link :to="'/journal/' + topArticles.top_header.content" class="header__top-info">{{ topArticles.top_header.name }}</nuxt-link>
+          <nuxt-link :to="'/journal/' + topArticles.top_header.content" class="header__top-info">
+            {{ topArticles.top_header.name }}
+          </nuxt-link>
         </div>
         <ul class="contacts">
           <li class="contacts__phone">
@@ -13,16 +15,14 @@
             <p @click="openSearch">{{ searchWord }}</p>
           </li>
           <li class="contacts__search">
-                      
-            <label for="search" class="search">              
-                <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace">
-                <svg class="search__icon" :class="isActive" width="17" height="17" viewbox="0 0 17 17" fill="none"
-                  xmlns="http://www.w3.org/2000/svg" @click="openSearch">
-                  <path
-                    d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
-                    stroke="white" />
-                </svg>
-              </label>
+            <label for="search" class="search">
+              <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" />
+              <svg class="search__icon" :class="isActive" width="17" height="17"
+                viewbox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"  @click="openSearch" >
+                <path d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
+                  stroke="white" />
+              </svg>
+            </label>
           </li>
           <li>
             <nuxt-link to="/support">База знаний</nuxt-link>
@@ -39,7 +39,7 @@
     </div>
     <div class="header__wrapper-bottom">
       <div class="header__wrapper">
-        <nuxt-link to='/' class='logo'>
+        <nuxt-link to="/" class="logo">
           <picture class="picture">
             <img
               src="@/assets/img/logo.png"
@@ -51,428 +51,154 @@
         </nuxt-link>
         <nav class="navigation">
           <ul class="navigation__list">
-
-            <li class="navigation__item" @mouseover="openMenu">
-              <nuxt-link to="/company" class="navigation__link">{{ buttons.company }}</nuxt-link>
-               <ul class="navigation__dropdown">
-                  <div class="navigation__container-dropdown">
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link">Ваш бизнес всегда онлайн</a>
-                      <ul class="dropdown__submenu-navigation">
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Наша миссия</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Наши ценности</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Наша стратегия</a>
-                        </li>
-                      </ul>
-                    </li>
-                    <ul>
-                      <li>
-                        <a class="dropdown__link" href="#">История</a>
-                      </li>
-                      <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#">Контакты</a>
-                      </li>
-                      <li class="dropdown__submenu-navigation">
-                        <a class="dropdown__link" href="#">Карьера</a>
-                      </li>
-                    </ul>
-                    <ul>
-                    <li>
-                      <a class="dropdown__link " href="#">События и новости</a>
-                      <ul class="dropdown__submenu-navigation">
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Обзоры</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Технологии</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Безопасность</a
-                          >
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Новости</a>
-                        </li>
-                      </ul>
-                    </li>
-                    </ul>
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">Реквизиты и юридическая информация</a>
-                      <ul class="dropdown__submenu-navigation">
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Для юридических лиц</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Для физических лиц</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Лицензия</a>
-                        </li>
-                        <li class="dropdown__submenu-item">
-                          <a href="" class="dropdown__submenu-link">Свидетельство о регистрации</a>
-                        </li>
-                      </ul>
-                    </li> 
-                  </div>
-                </ul>
-            </li>
-            <li class="navigation__item">
-              <nuxt-link to="/services" class="navigation__link">{{ buttons.services }}</nuxt-link>
-                  <ul class="navigation__dropdown">
-                    <div class="navigation__container-dropdown">
-                      <li class="navigation__dropdown-item">
-                        <nuxt-link class="dropdown__link" to="/service/vps-servers">Облачные VPS серверы</nuxt-link>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Готовые тарифы</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Своя конфигурация</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">NVMe + Intel Xeon Gold</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <nuxt-link class="dropdown__link" to="/service/virtual-data-center">Виртуальный дата центр</nuxt-link>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Обзор</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Serverless</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <nuxt-link class="dropdown__link" to="/service/cloud-web-hosting">Облачный веб хостинг</nuxt-link>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Тарифы</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Тестовый хостинг</a>
-                          </li>
-                        </ul>
-                      </li>
-                      <li>
-                        <a class="dropdown__link" href="/services">SSL, лицензии и домены</a>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">SSL сертификаты</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Лицензии</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Купить домен</a>
-                          </li>
-                        </ul>
-                      </li>
-                    </div>
-                  </ul>
-            </li>
-            <li class="navigation__item">
-              <nuxt-link to="/journal" class="navigation__link">{{ buttons.journal }}</nuxt-link>
-                <ul class="navigation__dropdown">
-                  <div class="navigation__container-dropdown">
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">Обзоры</a>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Что такое SSL сертификат</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Зачем нужно использовать Docker</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">GraphQL – новый взгляд на API</a>
-                          </li>
-                        </ul>
-                    </li>
-                    <li>
-                      <a class="dropdown__link " href="#">Технологии</a>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Как настроить VPN сервер</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Восстановление сайта на Битриксе</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Топ 10 ошибок в VPS серверах</a>
-                          </li>
-                        </ul>
-                    </li>
-                    <li>
-                      <a class="dropdown__link " href="#">Безопасность</a>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">10 популярных headless cms</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Использование GitFlow</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Server Side Rendering</a>
-                          </li>
-                        </ul>
-                    </li>
-                    <li>
-                      <a class="dropdown__link " href="#">Новости</a>
-                        <ul class="dropdown__submenu-navigation">
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Настройка автоматических бэкапов</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Установка Windows Server на VPS</a>
-                          </li>
-                          <li class="dropdown__submenu-item">
-                            <a href="" class="dropdown__submenu-link">Роуты в Redux Store</a>
-                          </li>
-                        </ul>
-                    </li>
-                  </div>
-                </ul>
-            </li>
-            <li class="navigation__item">
-              <nuxt-link to="/support" class="navigation__link">{{ buttons.support }}</nuxt-link>
+            <li v-for="item, i in menu" :key="item.id + item.title" class="navigation__item">
+              <nuxt-link :to="'/' + item.link" class="navigation__link">{{ item.title }}</nuxt-link>
               <ul class="navigation__dropdown">
-                  <div class="navigation__container-dropdown">
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">База знаний</a>
-                    </li>
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">Онлайн консультация</a>
-                    </li>
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">Служба поддержки</a>
-                    </li>
-                    <li class="navigation__dropdown-item">
-                      <a class="dropdown__link" href="#">Популярные советы</a>
-                    </li>
-                  </div>
+                <div class="navigation__container-dropdown">
+                  <li v-for="subMenu in item.menu_items" :key="subMenu.id + subMenu.title" class="navigation__dropdown-item">
+                    <a class="dropdown__link" @click="scrollTo('#' + subMenu.tab, subMenu.type + subMenu.link, i)">{{ subMenu.title }}</a>
+                    <ul class="dropdown__submenu-navigation">
+                      <li v-for="link in subMenu.menu_sections" :key="link.title + link.link" class="dropdown__submenu-item">
+                        <a class="dropdown__submenu-link" @click="scrollTo('#' + link.tab, link.type + link.link, i)">{{link.title}}</a>
+                      </li>
+                    </ul>
+                  </li>
+                </div>
               </ul>
-            </li>
-            <li class="navigation__item">
-              <nuxt-link to="/partners" class="navigation__link">{{ buttons.partners }}</nuxt-link>
-                <ul class="navigation__dropdown">
-                    <div class="navigation__container-dropdown">
-                      <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#">Преимущества</a>
-                      </li>
-                      <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#">Для кого подходит программа</a>
-                      </li>
-                      <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#">Условия</a>
-                      </li>
-                      <li class="navigation__dropdown-item">
-                        <a class="dropdown__link" href="#">Анкета для регистрации</a>
-                      </li>
-                    </div>
-                </ul>
-            </li>
-            <button class="navigation__btn" type='button'>Протестировать</button>
+            </li>                
+            <button class="navigation__btn" type="button">
+              Протестировать
+            </button>
           </ul>
         </nav>
       </div>
     </div>
     <!-- start mobile header-->
     <div class="header__wrapper-mobile">
-          <button class="header__burger-btn" @click="isMenuOpen=!isMenuOpen">
-            <span class="header__burger-btn-decor"></span>
-          </button>
-          <nuxt-link to='/' class="logo">
-            <picture class="picture">
-              <img
-                src="@/assets/img/logo-mobile.png"
-                srcset="@/assets/img/logo-mobile@2x.png 2x"
-                class="header__logo"
-                alt="logo-mobile"
-              />
-            </picture>
-          </nuxt-link>
-          <nuxt-link to="/login">
-            <svg class="auth__icon" width="15" height="18">
-              <use xlink:href="@/assets/img/sprites.svg#auth"></use>
-            </svg>
-          </nuxt-link>
-        </div>
-        <nav  class="navigation__mobile" :class="{open: isMenuOpen}">
-          <ul class="navigation__list-mobile">
-            <li class="navigation__item-mobile">
-               <nuxt-link to="/company" class="navigation__link-mobile">{{ buttons.company }}</nuxt-link>
-            </li>
-            <li class="navigation__item-mobile">
-              <a style="cursor: pointer" class="navigation__link-mobile dropdown-submenu" @click="openSubmenu()"
-                >{{ buttons.services }}</a>
-              <ul class="dropdown-submenu__list-mobile" :style="display">
-                <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/vps-servers" class="dropdown-submenu__link">Облачные VPS серверы</nuxt-link>
-                </li>
-                <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/virtual-data-center" class="dropdown-submenu__link">Виртуальный дата центр</nuxt-link>
-                </li>
-                <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/service/cloud-web-hosting" class="dropdown-submenu__link">Облачный веб хостинг</nuxt-link>
-                </li>
-                <li class="dropdown-submenu__item-mobile">
-                  <nuxt-link to="/services" class="dropdown-submenu__link">SSL, лицензии и домены</nuxt-link>
-                </li>
-              </ul>
-            </li>
-            <li class="navigation__item-mobile">
-              <nuxt-link to="/journal" class="navigation__link-mobile">{{ buttons.journal }}</nuxt-link>
-            </li>
-            <li class="navigation__item-mobile">
-              <nuxt-link to="/support" class="navigation__link-mobile">{{ buttons.support }}</nuxt-link>
-            </li>
-            <li class="navigation__item-mobile">
-              <nuxt-link to="/partners" class="navigation__link-mobile" href="#"
-                >{{ buttons.partners }}</nuxt-link>
+      <button class="header__burger-btn" @click="isMenuOpen = !isMenuOpen">
+        <span class="header__burger-btn-decor"></span>
+      </button>
+      <nuxt-link to="/" class="logo">
+        <picture class="picture">
+          <img
+            src="@/assets/img/logo-mobile.png"
+            srcset="@/assets/img/logo-mobile@2x.png 2x"
+            class="header__logo"
+            alt="logo-mobile"
+          />
+        </picture>
+      </nuxt-link>
+      <nuxt-link to="/login">
+        <svg class="auth__icon" width="15" height="18">
+          <use xlink:href="@/assets/img/sprites.svg#auth"></use>
+        </svg>
+      </nuxt-link>
+    </div>
+    <nav class="navigation__mobile" :class="{ open: isMenuOpen }">
+      <ul class="navigation__list-mobile">
+        <li v-for="item, i in menu" :key="item.id + item.title + 'mob'" class="navigation__item-mobile">
+          <a class="navigation__link-mobile dropdown-submenu" @click="openSubmenu(i, item.link)">{{ item.title }}</a>
+          <ul class="dropdown-submenu__list-mobile" :class="{'show_submenu' : isOpenSubmenu[i].open}">
+            <li v-for="subMenu in item.menu_items" :key="subMenu.id + subMenu.title + 'mob'" class="dropdown-submenu__item-mobile">
+              <a class="dropdown-submenu__link" @click="scrollTo('#' + subMenu.tab, subMenu.type + subMenu.link, i)">{{ subMenu.title }}</a>
             </li>
           </ul>
-          <ul class="contacts__mobile search">
-            
-            <li class="contacts__search-mobile">
-              <a href="#" class="contacts__search-link" @click="openSearch">{{ searchWord }}</a>
+        </li>
+      </ul>
+      <ul class="contacts__mobile search">
+        <li class="contacts__search-mobile">
+          <a href="#" class="contacts__search-link" @click="openSearch">{{ searchWord }}</a>
 
-              <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace">
-                <svg class="search__icon" :class="isActive" width="17" height="17" viewbox="0 0 17 17" fill="none"
-                  xmlns="http://www.w3.org/2000/svg" @click="openSearch">
-                  <path
-                    d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
-                    stroke="white" />
-              </svg>
-            </li>
-
-            
-          </ul>
-        </nav>  
+          <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" />
+          <svg class="search__icon" :class="isActive" width="17" height="17" viewbox="0 0 17 17"
+            fill="none" xmlns="http://www.w3.org/2000/svg" @click="openSearch" >
+            <path d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
+              stroke="white" />
+          </svg>
+        </li>
+      </ul>
+    </nav>
     <!-- end mobile header-->
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: 'TopLine',
-  components: {
-    
-  },
+  components: {},
   data() {
     return {
       search: false,
       isMenuOpen: false,
-      isOpenSubmenu: false,
-      navigationDropdown: 'navigation__dropdown'
+      isOpenSubmenu: [],
+      navigationDropdown: 'navigation__dropdown',
     }
   },
 
   computed: {
-      isActive () {
-          if(this.search) return 'active'
-          return ''
-      },
-      searchPlace () {
-          if(this.search) return 'Поиск'
-          return ''
-      },
-      searchWord() {
-          if(this.search) return ''
-          return 'Поиск'
-      }, 
-      display() {
-        return this.isOpenSubmenu ? {display: 'block'} : {display: 'none'};
-      },
-      buttons() {
-        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-          return this.$store.getters.buttons
-        } 
-
-        if(this.$route.name==='service-slug') {
-          return this.$store.getters['universal/buttons']
-        }
-
-        if(this.$route.name==='journal-article') {
-          return this.$store.getters['journal/buttons']
-        }
-
-        if(this.$route.name==='company-document') {
-          return this.$store.getters['requisites/buttons']
-        }
-
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/buttons']
-        
-      },
-      footer() {
-        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-          return this.$store.getters.footer
-        }
-        
-        if(this.$route.name==='service-slug') {
-          return this.$store.getters['universal/footer']
-        }
-
-        if(this.$route.name==='journal-article') {
-          return this.$store.getters['journal/footer']
-        }
-
-        if(this.$route.name==='company-document') {
-          return this.$store.getters['requisites/footer']
-        }
-
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/footer']      
-      },
-
-      topArticles() {
-        if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-          return this.$store.getters.topArticles
-        }
-        
-        if(this.$route.name==='service-slug') {
-          return this.$store.getters['universal/topArticles']
-        }
-
-        if(this.$route.name==='journal-article') {
-          return this.$store.getters['journal/topArticles']
-        }
-
-        if(this.$route.name==='company-document') {
-          return this.$store.getters['requisites/topArticles']
-        }
-
-        return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/topArticles']      
-      }
+    ...mapGetters(['footer', 'menu', 'topArticles']),
+    isActive() {
+      if (this.search) return 'active'
+      return ''
+    },
+    searchPlace() {
+      if (this.search) return 'Поиск'
+      return ''
+    },
+    searchWord() {
+      if (this.search) return ''
+      return 'Поиск'
+    },
+    display() {
+      return this.isOpenSubmenu ? { display: 'block' } : { display: 'none' }
+    },
+  },
+  created() {
+      this.menu.forEach(() => {
+        this.isOpenSubmenu.push({open: false})
+      });
   },
   methods: {
-    openSubmenu() {
-      if(this.isOpenSubmenu) {
-        this.$router.push({path: '/services', query: {q: this.q}});
+    ...mapActions(['setTag']),
+    openSubmenu(index, link) {
+      if (this.isOpenSubmenu[index].open) {
+        this.scrollTo('', link)
       } else {
-        this.isOpenSubmenu =  true;
-      }      
+        this.isOpenSubmenu.forEach(element => {
+          element.open=false
+        });
+        this.isOpenSubmenu[index].open = true
+      }
     },
     openSearch() {
       this.search = !this.search
     },
-    openMenu() {
-      
-    }
+    scrollTo(id, route, index) {
+       if(route[0]!=='/') {
+         route = '/' + route
+       }
+
+       if(this.$route.fullPath===route) {
+          if(id) {
+            const block = document.querySelector(id)
+              if(block) {  
+                block.scrollIntoView()
+                this.isMenuOpen = false
+                this.isOpenSubmenu[index].open = false
+              }
+            }
+       } else {
+        this.setTag(id)
+        this.$router.push(route)
+       }
+    },
   },
-  
 }
 </script>
 
 <style scoped>
-
 
 .header__wrapper-top {
   padding: 10px 0;
@@ -486,7 +212,6 @@ export default {
   max-width: 1440px;
   padding: 0 26px;
   margin: 0 auto;
-  
 }
 .top-line__wrapper {
   position: absolute;
@@ -495,7 +220,7 @@ export default {
 }
 .header__top-info {
   color: #ffffff;
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -515,7 +240,7 @@ export default {
 }
 
 .contacts li {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -543,7 +268,6 @@ export default {
   outline: none;
   border: none;
 }
-
 
 .contacts__search-input.active {
   width: 200px;
@@ -636,7 +360,7 @@ export default {
 
 .navigation__link {
   color: #ffffff;
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -683,13 +407,14 @@ export default {
 
 .dropdown__link {
   color: #fff;
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 21px;
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
   letter-spacing: 0px;
   text-align: left;
+  cursor: pointer;
 }
 .dropdown__submenu-navigation {
   margin-top: 48px;
@@ -699,13 +424,14 @@ export default {
   margin-bottom: 24px;
 }
 .dropdown__submenu-link {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
   letter-spacing: 0px;
   text-align: left;
+  cursor: pointer;
   color: #fff;
 }
 
@@ -714,7 +440,7 @@ export default {
 }
 
 .start__title {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -725,7 +451,7 @@ export default {
 }
 
 .start__title-decor {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 800;
@@ -746,9 +472,8 @@ export default {
 }
 
 @media (max-width: 992px) {
-
   .start__title {
-    font-family: "Graphik", sans-serif;
+    font-family: 'Graphik', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -757,7 +482,7 @@ export default {
     text-align: left;
   }
   .start__title-decor {
-    font-family: "Graphik", sans-serif;
+    font-family: 'Graphik', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 800;
@@ -769,7 +494,7 @@ export default {
 
 @media (max-width: 576px) {
   .start__title {
-    font-family: "Graphik", sans-serif;
+    font-family: 'Graphik', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
@@ -778,7 +503,7 @@ export default {
     text-align: left;
   }
   .start__title-decor {
-    font-family: "Graphik", sans-serif;
+    font-family: 'Graphik', sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 800;
@@ -800,7 +525,7 @@ export default {
 }
 
 .header__burger-btn::before {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 1px;
@@ -823,7 +548,7 @@ export default {
 }
 
 .header__burger-btn::after {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 1px;
@@ -867,7 +592,7 @@ export default {
   margin-bottom: 0;
 }
 .navigation__link-mobile {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -875,6 +600,7 @@ export default {
   letter-spacing: 0px;
   text-align: left;
   color: #fff;
+  cursor: pointer;
 }
 .dropdown-submenu__list-mobile {
   padding: 36px 32px 0px;
@@ -884,7 +610,7 @@ export default {
   margin-bottom: 24px;
 }
 .dropdown-submenu__link {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -893,12 +619,13 @@ export default {
   text-align: left;
   color: #fff;
   opacity: 0.6;
+  cursor: pointer;
 }
 .contacts__mobile {
   padding-left: 16px;
 }
 .contacts__search-link {
-  font-family: "Graphik", sans-serif;
+  font-family: 'Graphik', sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -919,14 +646,13 @@ export default {
 }
 
 @media (max-width: 1250px) {
-
-.search__icon {
-  left: 50px;
-}
-.search__icon.active {
-  transition: 0.5s;
-  left: 170px;
-}
+  .search__icon {
+    left: 50px;
+  }
+  .search__icon.active {
+    transition: 0.5s;
+    left: 170px;
+  }
 
   .header__wrapper-top {
     display: none;
@@ -964,4 +690,7 @@ export default {
   color: white;
 }
 
+.show_submenu {
+  display: block;
+}
 </style>

@@ -1,5 +1,6 @@
 export const state = () => ({
-    page: {}
+    page: {},
+    filter: 'All'
   })
   
   export const mutations = {
@@ -30,5 +31,8 @@ export const state = () => ({
     billing: state => state.page.billing,
 
     tariffs: state => state.page.tariffs,
+
     billingTariffs: state => state.page.billingTariffs,
-  }
+      
+  
+}

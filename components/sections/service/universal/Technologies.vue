@@ -1,5 +1,6 @@
 <template>
   <section class="technologies">
+    <a :name="technologies.tag"></a>
     <div class="container">
       <div class="technologies__title title">{{ technologies.blockTitle }}</div>
 

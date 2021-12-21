@@ -6,7 +6,7 @@
           <div v-for="(item, i) in solutions" :key="item.key" class="swiper-slide">
             <SolutionCard
               :title="item.attributes.title"
-              :price="item.attributes.price"
+              :price="item.attributes.periodPrice[period[example].periodNumber].price + ' ₽'"
               :options="item.attributes.options"
               :choose="cards[i].select"
               @chooseCard="chooseCard(i)"
@@ -31,6 +31,14 @@ export default {
             type: Array,
             required: true
         },
+        period: {
+            type: Array,
+            required: true
+        },
+        example: {
+            type: Number,
+            required: true
+        }
     },
     data () {
         return {
@@ -52,8 +60,6 @@ export default {
     created() {
         this.solutions.forEach(element => {
             this.cards.push({select: false})
-      
-
         })
 
     },

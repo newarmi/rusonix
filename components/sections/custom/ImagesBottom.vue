@@ -1,5 +1,5 @@
 <template>
-    <section class="advantage">
+    <section :id="images.tag" class="advantage">
         <div class="container">
           <div class="advantage__title title">{{images.title}}</div>
           <div class="advantage__title-text" v-html="images.description"></div>

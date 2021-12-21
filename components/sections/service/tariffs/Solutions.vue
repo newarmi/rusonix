@@ -12,7 +12,7 @@
           <div class="tariff__tab-links" :class="{'tariff__tab-links--active': !tab}" @click="showTab(2)">{{ data.secondButton }}</div>
         </div>
       </div>
-
+ <!-- <pre>{{billingClear}}</pre> -->
       <div v-if="tab" class="tariff__common-wrapper tariff__common-wrapper--active">
         <div v-for="solution, s in solutionConfigs" :key="'solution-' + s" class="ready__cofiguration">
           <div class="tariff__wrapper-sample">
@@ -44,10 +44,11 @@
                 <svg class="dropdown__icon" width="20" height="20">
                   <use xlink:href="@/assets/img/sprites.svg#arrow-dropdown"></use>
                 </svg>
+
                 <ul class="tariff__dropdown-content">
-                  <li v-for="onePeriod in data.periods" :key="onePeriod.key"
+                  <li v-for="onePeriod, p in data.periods" :key="onePeriod.key"
                       :dropText="onePeriod.attributes.period"
-                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period)">{{ onePeriod.attributes.period }}</li>
+                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p)">{{ onePeriod.attributes.period }}</li>
                 </ul>
               </div>
             </div>
@@ -69,7 +70,7 @@
             <div class="tariff__configuration">
               <SolutionCard v-for="item, i in solutionGroup[s].solution" :key="item.key"
                             :title="item.attributes.title"
-                            :price="item.attributes.price"
+                            :price="item.attributes.periodPrice[period[s].periodNumber].price + ' ₽'"
                             :options="item.attributes.options"
                             :choose="selectCards[s][tabIndex[s].tab][i].select"
                             @chooseCard="chooseCard(s, i)" />
@@ -123,7 +124,7 @@
           <!-- END Tariff total NVMe + Intel Xeon Gold -->
 
           <div class="tariff__wrapper-slider">
-             <SolutionSlider :solutions="solutionGroup[s].solution"  />
+             <SolutionSlider :solutions="solutionGroup[s].solution" :period="period" :example="s" />
           </div>
           <div v-if="solutionConfigs.length-s===1" class="tariff__ready-configuration-btn-slider btn_desktop_hide">
              <button class="tariff__btn-add" @click="addSolution(s)">+ добавить конфигурацию</button>
@@ -322,15 +323,41 @@ export default {
         tabIndex: [{tab:0}],
         tab: true,
         dropdown: [{show: false}],
-        period: [{period: this.data.periods[0].attributes.period}],
+        period: [{period: this.data.periods[0].attributes.period, periodNumber: 0}],
         setting: {settings: []},
         configValues: [{settings: []}],
         bonus: null
     }
   },
   computed: {
+      allBilling() {
+        return this.$store.getters['universal/billingTariffs']
+      },
+      billingClear() {
+        return this.allBilling.map(item => {
+        if(item.options) {
+          const options = item.options[0]
+
+          return {
+            layout: options.layout, 
+            key: options.key,
+            attributes: {
+                          "oldPrice": options.attributes.oldPrice,
+                          "options": options.attributes.options,
+                          "title": options.attributes.title ? options.attributes.title : item.name,
+                          "diskType": options.attributes.diskType,
+                          "price": Math.round(item.periods[0].amount) + ' ₽ / месяц',
+                          "periodPrice": item.periods.map(period => {
+                            return {period: period.period, price: Math.round(period.amount)}
+                          })
+                        }
+          }
+        }
+        return {}
+      }).filter(item => Object.keys(item).length)
+      },
       solutions() {
-        return this.data.solutions
+        return this.data.solutions.concat(this.billingClear)
       },
       firstSolutions() {
         return this.solutions.filter(solution => solution.attributes.diskType===this.data.firstDisk)
@@ -396,7 +423,7 @@ export default {
           this.servers.push({servers: Number(this.data.serverNumber),
                              word: this.serversWord(Number(this.data.serverNumber))})
           this.dropdown.push({show: false})
-          this.period.push({period: this.data.periods[0].attributes.period})
+          this.period.push({period: this.data.periods[0].attributes.period, periodNumber: 0})
 
           this.selectCards.push([[],[]])
 
@@ -472,8 +499,9 @@ export default {
       showDropdown(index) {
         this.dropdown[index].show = !this.dropdown[index].show
       },
-      choosePeriod(index, period) {
+      choosePeriod(index, period, p) {
         this.period[index].period=period
+        this.period[index].periodNumber=p
       }
   },
 }

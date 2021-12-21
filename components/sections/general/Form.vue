@@ -1,50 +1,56 @@
 <template>
-  <section class="form">
+  <section id="form" class="form">
         <div class="container">
           <div class="form__title title">Анкета для регистрации в партнерской программе</div>
         </div>
         <div class="form__wrapper">
-          <form action="#" class="partner__form">
-            <div class="form__card">
-              <div class="form__card-input-field">Ваше имя
-                <div class="form__card-input-wrap">
-                  <input type="text" class="form__card-input" value="" />
+            <form class="partner__form">
+              <div class="form__card">
+                <div v-show="!formSent">
+                <div class="form__card-input-field">Ваше имя
+                  <div class="form__card-input-wrap">
+                    <input v-model="name" type="text" class="form__card-input" value="" />
+                  </div>
                 </div>
-              </div>
 
-              <div class="form__card-input-field">Email
-                <div class="form__card-input-wrap">
-                  <input type="text" class="form__card-input" value="" />
+                <div class="form__card-input-field">Email
+                  <div class="form__card-input-wrap">
+                    <input v-model="email" type="text" class="form__card-input" value="" />
+                  </div>
                 </div>
-              </div>
 
-              <div class="form__card-input-field">Телефон
-                <div class="form__card-input-wrap">
-                  <input type="text" class="form__card-input" value="" />
+                <div class="form__card-input-field">Телефон
+                  <div class="form__card-input-wrap">
+                    <input v-model="phone" type="text" class="form__card-input" value="" />
+                  </div>
                 </div>
-              </div>
 
-              <div class="form__card-input-field">Ваша отрасль
-                <div class="form__card-select">
-                  <select class="form__select">
-                    <option value="Представитель digital агентства">
-                      Представитель digital агентства
-                    </option>
-                    <option value="Интегратор">
-                      Интегратор 
-                    </option>
-                    <option value="Аутсорс компания">
-                      Аутсорс компания 
-                    </option>
-                    <option value="IT-блоггер">
-                      IT-блоггер
-                    </option>
-                  </select>
+                <div class="form__card-input-field">Ваша отрасль
+                  <div class="form__card-select">
+                    <select v-model="department" class="form__select">
+                      <option value="Представитель digital агентства">
+                        Представитель digital агентства
+                      </option>
+                      <option value="Интегратор">
+                        Интегратор 
+                      </option>
+                      <option value="Аутсорс компания">
+                        Аутсорс компания 
+                      </option>
+                      <option value="IT-блоггер">
+                        IT-блоггер
+                      </option>
+                    </select>
+                  </div>
                 </div>
+                <button class="form__btn-registration" type="button" @click="addPartner()">Зарегистрироваться</button>
               </div>
-              <div class="form__btn-registration">Зарегистрироваться</div>
-            </div>
-          </form>
+              <div v-show="formSent" class="decision__card-title">
+               Заявка на партнерство отправлена
+              </div>
+              </div>
+              
+            </form>
         </div>
   </section>
 </template>
@@ -54,13 +60,46 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Form',
+  data() {
+    return {
+      formSent: false,
+      name: '',
+      email: '',
+      phone: '',
+      department: 'Представитель digital агентства'
+    }
+  },
   computed: {
     ...mapGetters(['form'])
+  },
+  methods: {
+    addPartner() {
+      this.$axios.$post(this.$config.siteURL + 'api/addPartner', {
+        name: this.name,
+        email: this.email,
+        phone: this.phone,
+        department: this.department
+      }).then(function (response) {
+          
+       })
+       this.formSent = true
+    }
   }
 }
 </script>
 
 <style scoped>
+.decision__card-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: center;
+  margin: 15px auto;
+}
+
 .form {
   background-color: #fcf7f2;
   padding-top: 72px;

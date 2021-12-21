@@ -1,5 +1,5 @@
 <template>
-  <section class="advice">
+  <section id="advice" class="advice" >
     <div class="container">
       <div class="advice__wrapper">
         <div class="advice__title">Популярные советы</div>
@@ -24,7 +24,8 @@
               <span class="advice__item-img"
                 ><img src="@/assets/img/advice__support.png" alt="advice img"
               /></span>
-              <a href="#" class="advice__link"
+              <a href="#
+              " class="advice__link"
                 >Как восстановить работу сайта на Битриксе</a
               >
             </li>

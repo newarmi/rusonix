@@ -5,8 +5,8 @@
       <div class="license__wrapper-cards">
 
         <div v-for="card in cards" :key="card.key" class="license__wrap-card">
-          <div class="license__card-title">{{ card.name }}</div>
-              <div class="license__card-content">
+          <div class="license__card-title">{{ card.title ? card.title : card.name }}</div>
+              <div v-if="card.options.length>0" class="license__card-content">
                 <div class="license__card-left">
                   <div v-for="option in card.options[0].attributes.options" :key="option.key">
                     <div v-if="option.layout === 'simpleOption'" class="license__card-left-text">{{ option.attributes.option }}</div>
@@ -19,34 +19,34 @@
                 </div>
               </div>
 
-          <div v-for="option in card.options[0].attributes.options" :key="option.key">
-            <div v-if="option.layout === 'listOption'">
-              <div class="license__card-selection-title">
-                {{ option.attributes.option }}
-              </div>
-              <div class="license__card-selection">
-                <select class="license__select">
-                  <option
-                    v-for="item in option.attributes.list"
-                    :key="item.key"
-                    value="item.attributes.listItem">
-                    {{ item.attributes.listItem }}
-                  </option>
-                </select>
+          <div v-if="card.options.length>0"> 
+            <div v-for="option in card.options[0].attributes.options" :key="option.key">
+              <div v-if="option.layout === 'listOption'">
+                <div class="license__card-selection-title">
+                  {{ option.attributes.option }}
+                </div>
+                <div class="license__card-selection">
+                  <select class="license__select">
+                    <option
+                      v-for="item in option.attributes.list"
+                      :key="item.key"
+                      value="item.attributes.listItem">
+                      {{ item.attributes.listItem }}
+                    </option>
+                  </select>
+                </div>
               </div>
             </div>
-          </div>
           
-           <div class="license__card-total">
-            {{ Math.floor(card.periods[0].amount) }} ₽
-            <div
-              v-show="card.options[0].attributes.priceComment"
-              class="license__card-total-descr">
-              {{ card.options[0].attributes.priceComment }}
+              <div class="license__card-total">
+                {{ Math.floor(card.periods[0].amount) }} ₽
+                <div v-show="card.options[0].attributes.priceComment"
+                    class="license__card-total-descr">
+                    {{ card.options[0].attributes.priceComment }}
+                </div>
+              </div>        
+                <a href="#" class="license__btn">{{card.options[0].attributes.buttonName}}</a>
             </div>
-          </div>        
-            <a href="#" class="license__btn">
-              {{card.options[0].attributes.buttonName}}</a>
           </div>
         </div>
       </div>
@@ -64,9 +64,16 @@ export default {
     }
   },
   computed: {
-    cards() {
+    allCards() {
       return this.$store.getters['universal/billingTariffs']
     },
+    cards() {
+      if(this.tariff.mode) {
+        return this.allCards.filter(item => item.mode===this.tariff.mode)
+      }
+      return this.allCards
+    }
+
   },
 }
 </script>

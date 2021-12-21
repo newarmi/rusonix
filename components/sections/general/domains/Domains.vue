@@ -1,7 +1,6 @@
-<template>
-  <section class="domain">
+<template >
+  <section id="domains" class="domain">
     <div class="container">
-
       <div class="domain__title title">{{ domains.title }}</div>
       <div class="domain__text-wrap">
         <div class="domain__text text" v-html="domains.description"></div>

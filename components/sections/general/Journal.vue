@@ -1,5 +1,5 @@
 <template>
-  <section class="magazine">
+  <section id="journal" class="magazine">
     <Navigation v-if="navigation" :rubrics="rubrics" @filter="filterArticles"/>
     <div class="container">
       <h1 v-if="!navigation" class="magazine__title title">{{ title }}</h1>

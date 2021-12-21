@@ -1,5 +1,5 @@
 <template>
-  <section class="details">
+  <section id="billing" class="details">
     <div class="container">
       <h1 class="details__title title">
         {{billing.title}}

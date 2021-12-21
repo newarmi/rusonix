@@ -1,6 +1,6 @@
 <template>
-<section class="confidents">
-        <div class="container">
+<section id="trust" class="confidents">
+  <div class="container">
           <h1 class="confidents__title title">{{ title }}</h1>
         </div>
         <div class="confidents__partners">

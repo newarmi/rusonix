@@ -1,5 +1,5 @@
 <template>
-  <section class="license">
+  <section :id="services.tag" class="license">
     <div class="container">
       <div class="license__title title">{{ services.title }}</div>
       <div class="license__text-descr">

@@ -86,9 +86,13 @@ export default {
   methods: {
     showPopup(i) {
       this.is_show[i].show = true
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
     },
     closePopup(i) {
       this.is_show[i].show = false
+      document.body.style.overflow = 'auto'
+      document.body.style.position = '';
     },
   },
 }

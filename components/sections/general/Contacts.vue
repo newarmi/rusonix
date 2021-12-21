@@ -1,5 +1,5 @@
 <template>
-  <section class="contact">
+  <section id="contacts" class="contact">
     <div class="container">
       <div class="contact__title title">{{ contacts.title }}</div>
     </div>

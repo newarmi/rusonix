@@ -1,5 +1,5 @@
 <template>
-    <section class="program">
+    <section :id="images.tag" class="program">
         <div class="container">
           <div class="program__title title">{{ images.title }}</div>
           <div class="program__title-wrap-text">

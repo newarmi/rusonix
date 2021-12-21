@@ -15,11 +15,11 @@
             <div class="license__top-title" :class="titleText">Стоимость</div>
           </div>
 
-          <div v-for="line in lines.lines" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
+          <div v-for="line in billingTariffs" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
 
-            <div class="license__wrap-text">{{ line.attributes.title }}</div>
+            <div class="license__wrap-text">{{ line.name }}</div>
 
-            <div v-for="item in line.attributes.options" :key="item.key">
+            <div v-for="item in line.options[0].attributes.options" :key="item.key">
               <div v-if="item.layout === 'list'" class="license__wrap-select">
                 <select class="license__select license__select--mod">
                   <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
@@ -38,20 +38,18 @@
             </div>
 
             <div class="license__wrap-total-box">
-              <div class="license__total">{{ line.attributes.price }}</div>
-              <button class="license__btn">
-                {{ line.attributes.buttonName }}
-              </button>
+              <div class="license__total">{{ Math.round(line.periods[0].amount)}} ₽</div>
+              <button class="license__btn">{{ line.options[0].attributes.buttonName }}</button>
             </div>
           </div>
         </div>
 
         <!-- tablet  -->
         <div class="license__tablet-wrapper">
-          <div v-for="line in lines.lines" :key="line.key" class="license__tablet" >
-            <div class="license__tablet-title">{{ line.attributes.title }}</div>
+          <div v-for="line in billingTariffs" :key="line.key" class="license__tablet" >
+            <div class="license__tablet-title">{{ line.name }}</div>
 
-            <div v-for="(item, i) in line.attributes.options" :key="item.key" class="license__tablet-wrap--tablet" >
+            <div v-for="item, i in line.options[0].attributes.options" :key="item.key" class="license__tablet-wrap--tablet" >
               <div class="license__tablet-text">{{ options[i].title }}</div>
 
               <div v-if="item.layout === 'field'" class="license__input">
@@ -71,12 +69,8 @@
               </div>
             </div>
 
-            <div class="license__total license__total--tablet">
-              {{ line.attributes.price }}
-            </div>
-            <button class="license__btn license__btn--tablet">
-              {{ line.attributes.buttonName }}
-            </button>
+            <div class="license__total license__total--tablet">{{ Math.round(line.periods[0].amount)}} ₽</div>
+            <button class="license__btn license__btn--tablet">{{ line.options[0].attributes.buttonName }}</button>
           </div>
         </div>
       </div>
@@ -94,6 +88,16 @@ export default {
     },
   },
   computed: {
+    allBillingTariffs () {
+      return this.$store.getters['universal/billingTariffs']
+    },
+    billingTariffs() {
+      if(this.lines.mode) {
+        return this.allCards.filter(item => item.mode===this.lines.mode)
+      }
+      return this.allBillingTariffs
+    },
+
     options() {
       const options = []
       this.lines.options.forEach((element) => {

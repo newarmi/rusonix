@@ -75,7 +75,7 @@
       <div class="sertificate__buy-wrapper-title">
         <div v-for="option in mainOptions" :key="option" class="sertificate__buy-title">{{option}}</div>
       </div>
-
+      
       <SslLine v-for="certificate in filtered" :key="certificate.key" :certificate="certificate"/>
 
     </div>
@@ -105,11 +105,40 @@ export default {
     }
   },
   computed: {
+      allBilling() {
+        return this.$store.getters['universal/billingTariffs']
+      },
+      billingClear() {
+        return this.allBilling.map(item => {
+        if(item.options) {
+            const options = item.options[0]
+
+            return {
+              layout: options.layout,
+              key: options.key,
+              attributes: {
+                            "logo": options.attributes.logo,
+                            "provider": options.attributes.provider,
+                            "forWhat": options.attributes.forWhat,
+                            "domains": options.attributes.domains,
+                            "level": options.attributes.level,
+                            "oldPrice": options.attributes.oldPrice,
+                            "description": options.attributes.description,
+                            "options": options.attributes.options,
+                            "title": item.title ? item.title : item.name,
+                            "price": Math.round(item.periods[0].amount) + ' ₽',
+                        }
+            }
+          } else {
+            return {}
+          }
+      }).filter(item => Object.keys(item).length)
+      },
       title() {
         return this.ssl.filterTitle
       },
       certificates() {
-        return this.ssl.certificates[0].attributes.certificates
+        return this.ssl.certificates[0].attributes.certificates.concat(this.billingClear)
       },
       filterDomens () {
         if(this.filter4==='all') {
@@ -123,11 +152,23 @@ export default {
       },
       filtered () {
         let filtered = this.certificates
+        const finish = [];
         if(this.filter3!=='all') filtered = filtered.filter(certificates => this.filter3 === certificates.attributes.provider)
         if(this.filter2!=='all') filtered = filtered.filter(certificates => this.filter2 === certificates.attributes.level)
         if(this.filter1!=='all') filtered = filtered.filter(certificates => this.filter1 === certificates.attributes.forWhat)
         if(this.filter4!=='all') filtered = filtered.filter(certificates => this.filter4 === certificates.attributes.domains)
-        return filtered
+
+        filtered.forEach(element => {
+          if(element.attributes.oldPrice)
+          finish.push(element)
+        })
+
+        filtered.forEach(element => {
+          if(!element.attributes.oldPrice)
+          finish.push(element)
+        })
+        
+        return finish
       }
       
   },
@@ -217,14 +258,17 @@ export default {
   margin-bottom: 16px;
 }
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(1) {
-  flex: 0 0 32%;
+  flex: 0 0 30%;
+  margin-left: 20px;
+ 
 }
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(2) {
-  flex: 0 1 14%;
+  flex: 0 1 18%;
 }
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(3) {
-  flex: 0 1 16%;
+  flex: 0 1 14%;
 }
+
 .sertificate__buy-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -487,5 +531,8 @@ export default {
     gap: 16px;
   }
 }
+
+
+
 
 </style>

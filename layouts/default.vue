@@ -31,11 +31,11 @@ export default {
 
 /* Анимация появления Header`a при смене роутов*/
 
-.fade-enter-active, .fade-leave-active {
+/* .fade-enter-active, .fade-leave-active {
   transition: opacity .2s
 }
 .fade-enter, .fade-leave-to {
   opacity: 0;
-}
+} */
 
 </style>

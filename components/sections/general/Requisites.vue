@@ -1,5 +1,5 @@
 <template>
-  <section class="requisites">
+  <section id="requisites" class="requisites">
     <div class="container">
       <div class="requisites__title title">
         {{ requisites.title }}

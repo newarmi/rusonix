@@ -46,7 +46,7 @@ export default {
     'Solutions': () => import('~/components/sections/service/tariffs/Solutions'),
     
     'BillingCards': () => import('~/components/sections/service/billing/Cards'),
-    'BillingLines': () => import('~/components/sections/service/billing/Lines'),
+    'BillingLines': () => import('~/components/sections/service/billing/SimpleLines'),
   },
 
   async asyncData({ params, store }) {

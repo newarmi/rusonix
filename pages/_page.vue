@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'MainPPages',
@@ -18,7 +18,10 @@ export default {
     await store.dispatch('fetchPage', page)
   },
   computed: {
-    ...mapGetters(['pageBlocks'])
+    ...mapGetters(['pageBlocks', 'tag'])
+  },
+  methods: {
+    ...mapActions(['resetTag'])
   },
 }
 </script>

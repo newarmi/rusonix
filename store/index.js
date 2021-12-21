@@ -1,11 +1,22 @@
 export const state = () => ({
   page: {},
+  basic: {},
+  tag: ''
 })
 
 export const mutations = {
   setPage(state, page) {
     state.page = page
   },
+  setBasic(state, basic) {
+    state.basic = basic
+  },
+  setTag(state, tag) {
+    state.tag = tag
+  },
+  resetTag(state) {
+    state.tag = ''
+  }
 }
 
 export const actions = {
@@ -13,9 +24,25 @@ export const actions = {
     const page = await this.$axios.$get(slug)
     commit('setPage', page)
   },
+  async nuxtServerInit({commit}) {
+    const basic = await this.$axios.$get('page/basics')
+    commit('setBasic', basic)
+  },
+  setTag({commit}, tag) {
+    commit('setTag', tag)
+  },
+  resetTag({commit}) {
+    commit('resetTag')
+  }
 }
 
 export const getters = {
+  footer: state => state.basic.footer,
+  menu: state => state.basic.menu,
+  topArticles: state => state.basic.articles,
+
+  tag: state => state.tag,
+
   pageBlocks: state => state.page.blocks,
   articles: state => state.page.articles,
   journal: state => state.page.journal,
@@ -35,6 +62,4 @@ export const getters = {
     
   buttons: state => state.page.buttons,
   header: state => state.page.header,
-  footer: state => state.page.footer,
-  topArticles: state => state.page.topArticles,
 }

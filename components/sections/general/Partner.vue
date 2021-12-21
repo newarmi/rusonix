@@ -1,5 +1,5 @@
 <template>
-  <section class="conditions">
+  <section id="partner" class="conditions">
     <div class="container">
       <div class="conditions__title title">Условия</div>
       <div class="conditions__title-wrap-text">

@@ -1,5 +1,5 @@
 <template>
-  <section class="decision">
+  <section :id="blocks.tag" class="decision">
     <div class="container">
       <h1 class="decision__title title">{{blocks.title}}</h1>
       <div class="decision__wrapper-cards">

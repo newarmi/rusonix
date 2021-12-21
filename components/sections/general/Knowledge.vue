@@ -1,5 +1,5 @@
 <template>
-  <section class="knowledge">
+  <section id="knowledge" class="knowledge">
     <div class="container">
       <div class="knowledge__wrapper">
         <div class="knowledge__wrapper-left">

@@ -3,7 +3,7 @@
         <div class="sertificate__buy-wrapper-content">
           <div class="sertificate__content-title">{{ title }}</div>
           <div class="sertificate__content">
-            <picture class="picture">
+            <picture v-if="certificateData.logo" class="picture">
               <img 
                 :src="logo"
                 :srcset="logo"
@@ -13,8 +13,8 @@
           </div>
           <div class="sertificate__content-total">
             <div class="sertificate__total">{{ certificateData.price }}</div>
-            <span class="sertificate__total-old--mod"></span>
-            <div class="sertificate__total-old">{{ certificateData.oldPrice }}</div>
+            <span v-if="certificateData.oldPrice" class="sertificate__total-old--mod"></span>
+            <div v-if="certificateData.oldPrice" class="sertificate__total-old">{{ certificateData.oldPrice }}</div>
           </div>
           <button class="sertificate__btn">Заказать</button>
         </div>
@@ -98,15 +98,21 @@ export default{
                 return this.certificateData.options
             },
             optionNumber () {
+                if(this.options)
                 return this.options.length
+                return 0
             },
             leftOptions () {
+                if(this.optionNumber===0) return 0
+
                 if(this.optionNumber%2===0) {
                     return this.options.slice(0, this.optionNumber/2)
                 }
                 return this.options.slice(0, this.optionNumber/2+1)
             },
             rightOptions () {
+                if(this.optionNumber===0) return 0
+
                 if(this.optionNumber%2===0) {
                     return this.options.slice(this.optionNumber/2, this.optionNumber)
                 }
@@ -128,11 +134,12 @@ export default{
 </script>
 
 <style scoped>
-.sertificate {
-  background-color: #fcf7f2;
-  padding-top: 72px;
-  padding-bottom: 72px;
+
+.sertificate-global-img {
+  width: 125px;
+  max-width: none;
 }
+
 .sertificate__title {
   margin-bottom: 36px;
 }
@@ -209,15 +216,6 @@ export default{
   display: flex;
   margin-bottom: 16px;
 }
-.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(1) {
-  flex: 0 0 32%;
-}
-.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(2) {
-  flex: 0 1 14%;
-}
-.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(3) {
-  flex: 0 1 16%;
-}
 .sertificate__buy-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -228,6 +226,17 @@ export default{
   text-align: left;
   opacity: 0.6;
 }
+.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(1) {
+  flex: 0 0 30%;
+ 
+}
+.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(2) {
+  flex: 0 1 18%;
+}
+.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(3) {
+  flex: 0 1 14%;
+}
+
 .sertificate__buy-wrapper {
   margin-bottom: 8px;
 }
@@ -479,5 +488,211 @@ export default{
     gap: 16px;
   }
 }
+
+/*sdgvsdfgbsdf*/
+
+.sertificate__buy-wrapper {
+  margin-bottom: 8px;
+}
+.sertificate__buy-wrapper-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #fff;
+  padding: 15px 24px;
+  cursor: pointer;
+  border-radius: 8px;
+
+  flex: 0 1 35%;
+}
+.sertificate__content-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  flex: 0 1 30%;
+}
+.sertificate__content {
+  display: flex;  
+  gap: 60px;
+  align-items: center;
+  flex: 1;
+}
+.sertificate__content-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  flex: 1 0 0%;
+
+}
+.sertificate__content-total {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  align-items: center;
+  flex: 0 1 24%;
+}
+.sertificate__total {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #830f1e;
+}
+
+.sertificate__total-old {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.2;
+}
+.sertificate__total-old--mod {
+  position: relative;
+}
+.sertificate__total-old--mod::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 24px;
+  bottom: 0;
+  width: 66px;
+  height: 2px;
+  background-color: #830f1e;
+  transform: rotate(-10deg);
+}
+.sertificate__btn {
+  width: 100%;
+  max-width: 207px;
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #fff;
+  background: #830f1e;
+  border-radius: 6px;
+  padding: 14px 36px;
+  cursor: pointer;
+  flex: 1 1 20%;
+}
+.sertificate__btn:hover {
+  background-color: #660915;
+}
+.sertificate__buy-wrapper-info {
+  padding: 40px 24px;
+  background-color: #fff;
+}
+.show__sertificate__buy-wrapper-info {
+  display: block;
+}
+.hide__sertificate__buy-wrapper-info {
+  display: none;
+}
+.sertificate__info-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
+.sertificate__info-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  margin-bottom: 40px;
+}
+.sertificate__buy--mod {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.8;
+}
+.sertificate__info-wrap-left {
+  display: flex;
+  gap: 60px;
+}
+.sertificate__info-wrap-right {
+  display: flex;
+  gap: 47px;
+}
+
+.sertificate__info-left {
+  display: flex;
+  flex-direction: column;
+}
+.sertificate__info-left-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+.sertificate__info-left-text:last-child {
+  margin-bottom: 0;
+}
+.sertificate__info-right {
+  display: flex;
+  flex-direction: column;
+}
+.sertificate__info-right-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+.sertificate__info-right-text:last-child {
+  margin-bottom: 0;
+}
+.sertificate__info-wrap-left--mobile,
+.sertificate__info-wrap-right--mobile {
+  display: none;
+}
+.sertificate__info-left-text--mobile,
+.sertificate__info-right-text--mobile {
+  margin-bottom: 0;
+}
+.sertificate__info-mobile-left,
+.sertificate__info-mobile-right {
+  margin-bottom: 12px;
+}
+
+.sertificate__buy-info--active {
+  display: block;
+}
+
 
 </style>

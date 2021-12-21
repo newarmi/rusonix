@@ -1,5 +1,6 @@
 <template>
       <section class="possibilities">
+        <a :name="tabs.tab"></a>
         <div class="container">
           <div class="possibilities__title title">{{tabs.blockTitle}}</div>
         </div>

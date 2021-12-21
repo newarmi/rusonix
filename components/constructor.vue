@@ -1,5 +1,5 @@
 <template>
-  <div id='mainPage'>
+  <div>
     <div v-for="block in pageblocks" :key="block.key">
       <Decision v-if="block.layout==='solutions'" :decisions="block.attributes" />
       <LinkArticles v-if="block.layout==='link_articles'" :articles="block.attributes" />
@@ -28,8 +28,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
+
+  
   name: 'ConstructorPage',
   components: {
     'ServiceSection': () => import('~/components/sections/custom/ServiceSection'),
@@ -63,6 +66,22 @@ export default {
         blocks: []
       }
   },
+  computed: {
+    ...mapGetters(['tag'])
+  },
+  mounted() {
+    if(this.tag) {
+     const block = document.querySelector(this.tag)
+      if(block) {  
+        block.scrollIntoView()
+        this.resetTag()
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['resetTag'])
+  },
+    
 }
 </script>
 

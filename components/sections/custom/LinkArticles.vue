@@ -1,5 +1,5 @@
 <template>
-  <section class="advantage">
+  <section :id="blocks.tag" class="advantage">
     <div class="container">
       <h1 class="advantage__title title">{{ blocks.title }}</h1>
       <div class="advantage__wrapper">
