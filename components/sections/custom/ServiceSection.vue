@@ -8,19 +8,21 @@
       </div>
       <div class="license__sertificates">
         <div v-for="item in services.services" :key="item.key" class="license__sertificate-wrap">
-          <nuxt-link :to="'service/' + item.attributes.link">
+         
           <picture class="picture">
             <img
               :src="$config.imgURL + item.attributes.image"
               :srcset="$config.imgURL + item.attributes.image"
               alt="license"
               class="license__img"
+              @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, 'service/' + item.attributes.link)"
             />
           </picture>
-          </nuxt-link>
-          <nuxt-link class="nl__black" :to="'service/' + item.attributes.link">
-            <div class="license__sertificate-title">{{ item.attributes.title }} </div>
-          </nuxt-link>
+         
+          <div class="nl__black">
+            <div class="license__sertificate-title"
+            @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, 'service/' + item.attributes.link)">{{ item.attributes.title }} </div>
+          </div>
         </div>
       </div>
     </div>
@@ -28,6 +30,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   name: 'ServiceSection',
   props: {
@@ -37,13 +41,17 @@ export default {
     }
   }, 
   computed: {
-    // serviceItem() {
-    //   const items  = this.page.sections
-    //   items.forEach(element => {
-    //     element.imageLink = this.$config.imgURL + '' + element.image
-    //   });
-    //   return items
-    // }
+
+  },
+  methods: {
+    ...mapActions('universal', ['setFilter']),
+    ...mapActions(['setTag']),
+    setSslFilter(filterType, filterValue, tag, route) {
+      if(filterValue)
+      this.setFilter({filterType, filterValue})
+      this.setTag(tag)
+      this.$router.push({path: route, hash: tag})
+    }
   }
 }
 </script>
@@ -87,6 +95,7 @@ export default {
   width: 391px;
   height: 200px;
   margin-bottom: 24px;
+  cursor: pointer;
 }
 .license__sertificate-title {
   font-family: "Graphik", sans-serif;
@@ -96,6 +105,7 @@ export default {
   line-height: 32px;
   letter-spacing: 0px;
   text-align: left;
+  cursor: pointer;
 }
 
 @media (max-width: 992px) {

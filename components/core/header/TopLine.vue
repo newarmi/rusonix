@@ -190,8 +190,8 @@ export default {
               }
             }
        } else {
-        this.setTag(id)
-        this.$router.push(route)
+        // this.setTag(id)
+        this.$router.push({path: route, hash: id})
        }
     },
   },

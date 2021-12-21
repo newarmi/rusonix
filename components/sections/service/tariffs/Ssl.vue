@@ -1,19 +1,20 @@
 <template>
-  <section class="sertificate">
+  <section :id="ssl.tag" class="sertificate">
     <div class="container">
       <div class="sertificate__title title">{{ title }}</div>
       <div class="sertificate__wrapper">
+
         <div class="sertificate__wrapper-first">
           <div class="sertificate__wrapper-left">
             <div class="sertificate__wrap-left">
-              <div class="sertificate__left-title">{{filters[0]}}</div>
+              <div class="sertificate__mode-title">{{filters[0]}}</div>
               <div class="sertificate__custom-radio">
                 <div v-for="radio, i in ssl.filter1" :key="radio.key" class="sertificate__custom-radio-wrap">
-                  <input :id="'custom-radio-first-' + i" v-model="filter1" class="custom-radio" type="radio" name="custom-radio-1" :value="radio.attributes.filterValue" />
+                  <input :id="'custom-radio-first-' + i" v-model="filterValues[0].filter" class="custom-radio" type="radio" name="custom-radio-1" :value="radio.attributes.filterValue" />
                   <label class="custom__radio-label" :for="'custom-radio-first-' + i">{{ radio.attributes.filterValue }}</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
-                  <input id="custom-radio-first-all" v-model="filter1" class="custom-radio" type="radio" name="custom-radio-1" value="all" checked="checked" />
+                  <input id="custom-radio-first-all" v-model="filterValues[0].filter" class="custom-radio" type="radio" name="custom-radio-1" value="all" checked="checked" />
                   <label class="custom__radio-label" for="custom-radio-first-all">Любое</label>
                 </div>
               </div>
@@ -22,14 +23,14 @@
 
           <div class="sertificate__wrapper-right">
             <div class="sertificate__wrap-right">
-              <div class="sertificate__right-title">{{filters[1]}}</div>
+              <div class="sertificate__mode-title">{{filters[1]}}</div>
               <div class="sertificate__custom-radio">
                 <div v-for="radio, i in ssl.filter2" :key="radio.key"  class="sertificate__custom-radio-wrap">
-                  <input :id="'custom-radio-second-' + i" v-model="filter2" class="custom-radio" type="radio" name="custom-radio-2" :value="radio.attributes.filterValue" />
+                  <input :id="'custom-radio-second-' + i" v-model="filterValues[1].filter" class="custom-radio" type="radio" name="custom-radio-2" :value="radio.attributes.filterValue" />
                   <label class="custom__radio-label" :for="'custom-radio-second-' + i">{{ radio.attributes.filterValue }}</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
-                  <input id="custom-radio-second-all" v-model="filter2" class="custom-radio" type="radio" name="custom-radio-2" value="all" checked="checked" />
+                  <input id="custom-radio-second-all" v-model="filterValues[1].filter" class="custom-radio" type="radio" name="custom-radio-2" value="all" checked="checked" />
                   <label class="custom__radio-label" for="custom-radio-second-all">Любой</label>
                 </div>
               </div>
@@ -40,14 +41,14 @@
         <div class="sertificate__wrapper-second">
           <div class="sertificate__wrapper-left">
             <div class="sertificate__wrap-left">
-              <div class="sertificate__left-title">{{filters[2]}}</div>
+              <div class="sertificate__mode-title">{{filters[2]}}</div>
               <div class="sertificate__custom-radio">
                 <div v-for="radio, i in ssl.filter3" :key="radio.key" class="sertificate__custom-radio-wrap">
-                  <input :id="'custom-radio-third-' + i" v-model="filter3" class="custom-radio" type="radio" name="custom-radio-3" :value="radio.attributes.filterValue" />
+                  <input :id="'custom-radio-third-' + i" v-model="filterValues[2].filter" class="custom-radio" type="radio" name="custom-radio-3" :value="radio.attributes.filterValue" />
                   <label class="custom__radio-label" :for="'custom-radio-third-' + i">{{ radio.attributes.filterValue }}</label>
                 </div>
                 <div class="sertificate__custom-radio-wrap">
-                  <input id="custom-radio-third-all" v-model="filter3" class="custom-radio" type="radio" name="custom-radio-3" value="all" checked="checked" />
+                  <input id="custom-radio-third-all" v-model="filterValues[2].filter" class="custom-radio" type="radio" name="custom-radio-3" value="all" checked="checked" />
                   <label class="custom__radio-label" for="custom-radio-third-all">Любой</label>
                 </div>
               </div>
@@ -56,14 +57,14 @@
 
           <div class="sertificate__wrapper-right">
             <div class="sertificate__wrap-right">
-              <div class="sertificate__right-title">{{filters[3]}}</div>
+              <div class="sertificate__mode-title">{{filters[3]}}</div>
               <div class="sertificate__custom-radio">
                 <div v-for="radio, i in ssl.filter4" :key="radio.key" class="sertificate__custom-radio-wrap">
-                  <input :id="'custom-radio-fourth-' + i" v-model="filter4" class="custom-radio" type="radio" name="custom-radio-4" :value="radio.attributes.filterValue" />
+                  <input :id="'custom-radio-fourth-' + i" v-model="filterValues[3].filter" class="custom-radio" type="radio" name="custom-radio-4" :value="radio.attributes.filterValue" />
                   <label class="custom__radio-label" :for="'custom-radio-fourth-' + i">{{ radio.attributes.filterValue }}</label>
                 </div>           
                 <div class="sertificate__custom-radio-wrap">
-                  <input id="custom-radio-fourth-all" v-model="filter4" class="custom-radio" type="radio" name="custom-radio-4" value="all" checked="checked" />
+                  <input id="custom-radio-fourth-all" v-model="filterValues[3].filter" class="custom-radio" type="radio" name="custom-radio-4" value="all" checked="checked" />
                   <label class="custom__radio-label" for="custom-radio-fourth-all">Любой</label>
                 </div>
               </div>
@@ -83,6 +84,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Lines',
   components: {
@@ -98,13 +101,11 @@ export default {
     return {
       mainOptions: ['Сертификат', 'Поставщик', 'Уровень', 'Стоимость за 1 год'],
       filters: ['Для чего подходит сертификат', 'Уровень доверия', 'Сертификационный центр', 'Дополнительные домены'],
-      filter1: 'all',
-      filter2: 'all',
-      filter3: 'all',
-      filter4: 'all'
+      filterValues: [{filter: 'all'}, {filter: 'all'}, {filter: 'all'}, {filter: 'all'}]
     }
   },
   computed: {
+      ...mapGetters('universal', ['filterType', 'filterValue']),
       allBilling() {
         return this.$store.getters['universal/billingTariffs']
       },
@@ -153,10 +154,10 @@ export default {
       filtered () {
         let filtered = this.certificates
         const finish = [];
-        if(this.filter3!=='all') filtered = filtered.filter(certificates => this.filter3 === certificates.attributes.provider)
-        if(this.filter2!=='all') filtered = filtered.filter(certificates => this.filter2 === certificates.attributes.level)
-        if(this.filter1!=='all') filtered = filtered.filter(certificates => this.filter1 === certificates.attributes.forWhat)
-        if(this.filter4!=='all') filtered = filtered.filter(certificates => this.filter4 === certificates.attributes.domains)
+        if(this.filterValues[0].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[0].filter === certificates.attributes.forWhat)
+        if(this.filterValues[1].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[1].filter === certificates.attributes.level)
+        if(this.filterValues[2].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[2].filter === certificates.attributes.provider)
+        if(this.filterValues[3].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[3].filter === certificates.attributes.domains)
 
         filtered.forEach(element => {
           if(element.attributes.oldPrice)
@@ -172,6 +173,11 @@ export default {
       }
       
   },
+  created() {
+        if(this.filterValue) {
+           this.filterValues[this.filterType].filter = this.filterValue
+        }
+  },
 }
 </script>
 
@@ -184,8 +190,7 @@ export default {
 .sertificate__title {
   margin-bottom: 36px;
 }
-.sertificate__left-title,
-.sertificate__right-title {
+.sertificate__mode-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -472,12 +477,7 @@ export default {
 .sertificate__buy-info--active {
   display: block;
 }
-/* .show__sertificate-content {
-  display: flex;
-}
-.hide__sertificate-content {
-  display: none;
-} */
+
 @media (max-width: 1315px) {
   .sertificate__info-wrap {
     gap: 20px;
