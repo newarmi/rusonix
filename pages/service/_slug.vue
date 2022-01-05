@@ -9,20 +9,23 @@
       <Support v-if="block.layout=='questions'"/>
     </div>
 
-    <div v-for="tariff, j in tariffs" :key="tariff.layout + '' + j">
-      
-      <div v-if="tariff.layout=='billing'">
-        <BillingCards v-if="tariff.attributes.view=='cards'" :tariff="tariff.attributes" />
-        <BillingLines v-if="tariff.attributes.view=='lines'" :lines="tariff.attributes" />
-      </div>
+    <div id="tariff">
+      <div v-for="tariff, j in tariffs" :key="tariff.layout + '' + j">
+        
+        <div v-if="tariff.layout=='billing'">
+          <BillingCards v-if="tariff.attributes.view=='cards'" :tariff="tariff.attributes" />
+          <BillingLines v-if="tariff.attributes.view=='lines'" :lines="tariff.attributes" />
+        </div>
 
-      <Cards v-if="tariff.layout=='cards'" :cards="tariff.attributes" />
-      <Lines v-if="tariff.layout=='lines'" :lines="tariff.attributes" />
-      <OneLine v-if="tariff.layout=='oneLine'" :lines="tariff.attributes" />
-      <Additions v-if="tariff.layout=='additions'" :addition="tariff.attributes" />
-      <Ssl v-if="tariff.layout=='filters'" :ssl="tariff.attributes" />
-      <Calculate v-if="tariff.layout=='calculate'" :data="tariff.attributes" />
-      <Solutions v-if="tariff.layout=='solutions'" :data="tariff.attributes" />
+        <Cards v-if="tariff.layout=='cards'" :cards="tariff.attributes" />
+        <Lines v-if="tariff.layout=='lines'" :lines="tariff.attributes" />
+        <OneLine v-if="tariff.layout=='oneLine'" :lines="tariff.attributes" />
+        <Additions v-if="tariff.layout=='additions'" :addition="tariff.attributes" />
+        <Ssl v-if="tariff.layout=='filters'" :ssl="tariff.attributes" />
+        <Calculate v-if="tariff.layout=='calculate'" :data="tariff.attributes" />
+        <Solutions v-if="tariff.layout=='solutions'" :data="tariff.attributes" />
+        <SolutionsClear v-if="tariff.layout=='clearSolutions'" :data="tariff.attributes" />
+      </div>
     </div>
 
   </div>
@@ -44,6 +47,7 @@ export default {
     'Ssl': () => import('~/components/sections/service/tariffs/Ssl'),
     'Calculate': () => import('~/components/sections/service/tariffs/Calculate'),
     'Solutions': () => import('~/components/sections/service/tariffs/Solutions'),
+    'SolutionsClear': () => import('~/components/sections/service/tariffs/SolutionsClear'),
     
     'BillingCards': () => import('~/components/sections/service/billing/Cards'),
     'BillingLines': () => import('~/components/sections/service/billing/SimpleLines'),

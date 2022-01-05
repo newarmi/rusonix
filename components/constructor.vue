@@ -7,8 +7,9 @@
       <ServiceSection v-if="block.layout==='services'" :services="block.attributes" />
       <ImagesBottom v-if="block.layout==='imagesBottom'" :images="block.attributes" />
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
+      <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
+      <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
 
-      <Knowledge v-if="block.layout==='knowledge'" />
       <Advice v-if="block.layout==='advice'" />
       <History v-if="block.layout==='history'" />
       <Billing v-if="block.layout==='billing'" />
@@ -17,8 +18,8 @@
       <Career v-if="block.layout==='career'" />
       <Contacts v-if="block.layout==='contacts'" />
       <Requisites v-if="block.layout==='requisites'"/>
-      <Partner v-if="block.layout==='partner'" />
-      <Form v-if="block.layout==='form'" />
+      <Partner v-if="block.layout==='partner'" :title="block.attributes.title" :description="block.attributes.description"/>
+      <Form v-if="block.layout==='form'" :title="block.attributes.title" />
       <Domains v-if="block.layout==='domains'" />
       <Journal v-if="block.layout==='journal'" 
             :navigation="block.attributes.navigation"
@@ -35,6 +36,8 @@ export default {
   
   name: 'ConstructorPage',
   components: {
+    'Youtube': () => import('~/components/sections/custom/Youtube'),
+    'TextBlock': () => import('~/components/sections/custom/TextBlock'),
     'ServiceSection': () => import('~/components/sections/custom/ServiceSection'),
     'Domains': () => import('~/components/sections/general/domains/Domains'),
     'Decision': () => import('~/components/sections/custom/Decision'),
@@ -52,7 +55,6 @@ export default {
     'ImagesInside': () => import('~/components/sections/custom/ImagesInside'),
     'Partner': () => import('~/components/sections/general/Partner'),
     'Form': () => import('~/components/sections/general/Form'),
-    'Knowledge': () => import('~/components/sections/general/Knowledge'),
     'Advice': () => import('~/components/sections/general/Advice'),
   },
   props: {
@@ -70,13 +72,7 @@ export default {
     ...mapGetters(['tag'])
   },
   mounted() {
-    if(this.tag) {
-     const block = document.querySelector(this.tag)
-      if(block) {  
-        block.scrollIntoView()
-        this.resetTag()
-      }
-    }
+    
   },
   methods: {
     ...mapActions(['resetTag'])

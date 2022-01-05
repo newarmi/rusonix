@@ -190,7 +190,9 @@ export default {
               }
             }
        } else {
-        // this.setTag(id)
+        if(id==='#null') {
+          id=''
+        }
         this.$router.push({path: route, hash: id})
        }
     },
@@ -461,15 +463,7 @@ export default {
   color: #ffffff;
 }
 
-.header__decor {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 20px;
-  background-color: #ffffff;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
+
 
 @media (max-width: 992px) {
   .start__title {

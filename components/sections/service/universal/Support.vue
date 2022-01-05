@@ -1,6 +1,5 @@
 <template>
-  <section class="support">
-    <a :name="support.tag"></a>
+  <section id="questions" class="support">
     <div class="container">
       <div class="support__title title">{{ support.blockTitle }}</div>
       <div class="support__text text" v-html="support.blockDescription">

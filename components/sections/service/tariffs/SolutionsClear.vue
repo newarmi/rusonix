@@ -7,13 +7,8 @@
           <div class="tariff__text text" v-html="data.description" >
           </div>
         </div>
-        <div class="tariff__tab">
-          <div class="tariff__tab-links" :class="{'tariff__tab-links--active': tab}" @click="showTab(1)">{{ data.firstButton }}</div>
-          <div class="tariff__tab-links" :class="{'tariff__tab-links--active': !tab}" @click="showTab(2)">{{ data.secondButton }}</div>
-        </div>
       </div>
-
-      <div v-if="tab" class="tariff__common-wrapper tariff__common-wrapper--active">
+      <div class="tariff__common-wrapper tariff__common-wrapper--active">
         <div v-for="solution, s in solutionConfigs" :key="'solution-' + s" class="ready__cofiguration">
           <div class="tariff__wrapper-sample">
             <div class="tariff__wrap-tab">
@@ -48,7 +43,7 @@
                 <ul class="tariff__dropdown-content">
                   <li v-for="onePeriod, p in data.periods" :key="onePeriod.key"
                       :dropText="onePeriod.attributes.period"
-                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p)">{{ onePeriod.attributes.period }}</li>
+                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p, onePeriod.attributes.month)">{{ onePeriod.attributes.period }}</li>
                 </ul>
               </div>
             </div>
@@ -65,63 +60,25 @@
               </div>
             </div>
           </div>
-
           <div data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
+
             <div class="tariff__configuration">
               <SolutionCard v-for="item, i in solutionGroup[s].solution" :key="item.key"
                             :title="item.attributes.title"
                             :price="item.attributes.periodPrice[period[s].periodNumber].price + ' ₽'"
                             :options="item.attributes.options"
                             :choose="selectCards[s][tabIndex[s].tab][i].select"
-                            @chooseCard="chooseCard(s, i)" />
+                            @chooseCard="chooseCard(s, i, item)" />
             </div>
 
             <div v-if="solutionConfigs.length-s===1" class="tariff__wrapper-right">
-              <div class="tariff__total">
-                <div class="tarif__total-title">Итого</div>
-                <div class="tariff__wrapper-total-text">
-                  <div class="tariff__total-wrap-text">
-                    <div class="tariff__total-card-text">CPU: 6 шт</div>
-                    <div class="tariff__total-card-text">RAM: 8 GB</div>
-                    <div class="tariff__total-card-text">SSD: 136 GB</div>
-                  </div>
-                  <div class="tariff__total-wrap-price">
-                    <div class="tariff__total-card-text">4600 ₽</div>
-                    <div class="tariff__total-card-text">9300 ₽</div>
-                    <div class="tariff__total-card-text">7700 ₽</div>
-                  </div>
-                </div>
-                <div class="tariff__total-wrap">
-                  <div class="tariff__total-card-text">
-                    <span class="tariff__total-card-text--mod">169 000 ₽</span>
-                    / месяц
-                  </div>
-                  <div class="tariff__total-card-text">
-                    <span class="tariff__total-card-text--mod">5 633,33 ₽</span>
-                    / день
-                  </div>
-                </div>
-                <button class="tariff__btn">Подключиться</button>
-                <button class="tariff__btn-download">
-                  <svg class="clip__icon" width="9" height="18">
-                    <use xlink:href="@/assets/img/sprites.svg#clip"></use>
-                  </svg>
-                  Скачать PDF с расчетом
-                </button>
-              </div>
-              <div v-if="bonus" class="tariff__total-bottom">
-                <div class="tariff__total-bottom-title">{{ bonus.title }}</div>
-                <ul class="tariff__total-list">
-                  <li v-for="bonusItem in bonus.bonuses" :key="bonusItem.key + 'solutions'" class="tariff__total-item">{{ bonusItem.attributes.title }}</li>
-                </ul>
-              </div>
+              <Total :total="totalMonth" :bonus="bonuses" :mobile="false" :items="items" />
             </div>
           </div>
           <div v-if="solutionConfigs.length-s===1" class="calculate__wrapper-btn-add btn_mobile_hide">
             <button class="calculate__btn-add" @click="addSolution(s)">+ добавить конфигурацию</button>
             <button v-if="solutionConfigs.length>1" class="calculate__btn-add" @click="removeSolution">- убрать конфигурацию</button>
           </div>
-          <!-- END Tariff total NVMe + Intel Xeon Gold -->
 
           <div class="tariff__wrapper-slider">
              <SolutionSlider :solutions="solutionGroup[s].solution" :period="period" :example="s" />
@@ -132,88 +89,10 @@
           </div>
         </div>
       </div>
+
     </div>
-
-    <!-- content 2  -->
-    <div class="container__tab-2">
-      <div v-if="!tab" class="calculate__wrapper">
-        <div v-for="config, c in configValues" :key="'config' + c" class="calculate__wrapper-left">
-            <div class="calculate__configuration">
-              <form action="#" class="calculate__form">
-                <div class="calculate__form-title">Конфигурация</div>
-                <div v-for="item, k in fields" :key="item.key + 'topField'">
-
-                  <div v-if="item.layout==='listOption'" class="calculate__input-text">{{ item.attributes.option }}
-                    <div class="calculate__input-select">
-                      <select class="calculate__select">
-                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.listItem">{{ option.attributes.listItem }}</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div v-if="item.layout==='setting'" class="calculate__input-text">{{ item.attributes.title }}
-                    <div class="calculate__input">
-                      <input v-model="config.settings[item.attributes.index]" class="calculate__input-number" type="number"  />
-                      <Slider v-model="config.settings[item.attributes.index]"
-                              :min="Number(item.attributes.min)"
-                              :max="Number(item.attributes.max)" />
-                    </div>
-                  </div>
-
-                  <div v-if="item.layout==='radio'" class="calculate__input-text">{{item.attributes.title}}
-                    <div class="calculate-input-radio">
-                      <div v-for="radio, i  in item.attributes.list" :key="radio.key" class="radio__wrapper-btn-1">
-                          <input :id="'radio-' + i + k + c" class="radio__btn" type="radio" :name="'radio' + k + c" :value="radio.attributes.listItem" :checked="i===0" />
-                          <label class="radio__lebel" :for="'radio-' + i + k + c">{{ radio.attributes.listItem }}</label>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div v-if="item.layout==='checkbox'" class="calculate__wrap-chechbox">
-                    <label v-for="checkbox in item.attributes.checkboxes" :key="checkbox.key"
-                     class="calculate__checkbox">{{ checkbox.attributes.title }}
-                      <input class="calculate__checkbox-input" type="checkbox" />
-                      <span class="calculate__checkmark"></span>
-                      <div v-if="checkbox.attributes.help" class="calculate__checkbox-helper">
-                        <div class="calculate__checkbox-helper-wrap">
-                          <div class="calculate__checkbox-helper-box">
-                            <p class="calculate__checkbox-helper-text">
-                              {{ checkbox.attributes.help }}
-                            </p>
-                            <a v-if="checkbox.attributes.linkName" :href="checkbox.attributes.link" class="calculate__checkbox-helper-link">
-                              {{ checkbox.attributes.linkName }}
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </label>
-                  </div>
-
-                  <div v-if="item.layout==='field'" class="calculate__input-text calculate__last-configuration">
-                    <div class="calculate__input-wrap-text">{{ item.attributes.title }}
-                    </div>
-                    <div class="calculate__input--mod">
-                      <input class="calculate__input-write" type="text" :value="item.attributes.default" />
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="calculate__wrapper-right">
-            <Total :total="100" :bonus="{}" :mobile="false" />
-          </div>
-
-        </div>
-        <div v-if="!tab" class="calculate__wrapper-btn-add">
-            <button class="calculate__btn-add" @click="addConfig()">+ добавить конфигурацию</button>
-            <button v-if="configValues.length>1" class="calculate__btn-add" @click="removeConfig()">- убрать конфигурацию</button>
-        </div>
-
-        <div class="calculate__total-tablet">
-          <Total :total="100" :bonus="{}" :mobile="true" />
-        </div>
+    <div class="calculate__total-tablet">
+      <Total :total="totalMonth" :bonus="bonuses" :mobile="true" :items="items"/>
     </div>
   </section>
 </template>
@@ -221,15 +100,12 @@
 <script>
 
 import 'swiper/css/swiper.min.css'
-import Slider from 'primevue/slider';
-
 
 export default {
   components: {
     'SolutionCard': () => import('~/components/sections/service/tariffs/SolutionCard'),
     'SolutionSlider': () => import('~/components/sections/service/tariffs/SolutionSlider'),
     'Total': () => import('~/components/sections/service/tariffs/Total'),
-    Slider
   },
   props: {
     data: {
@@ -239,25 +115,42 @@ export default {
   },
   data () {
     return {
+        items: [{item: null}],
         solutionConfigs: [0],
         solutionGroup: [],
         servers: [],
         selectCards: [[[]]],
-        firstCards: [],
-        secondCards: [],
         activeTab: [{tab: this.data.firstDisk}],
         tabIndex: [{tab:0}],
         tab: true,
         dropdown: [{show: false}],
-        period: [{period: this.data.periods[0].attributes.period, periodNumber: 0}],
-        setting: {settings: []},
-        configValues: [{settings: []}],
-        bonus: null
+        period: [{period: this.data.periods[0].attributes.period, periodNumber: 0, month: this.data.periods[0].attributes.month}],
     }
   },
   computed: {
+      total() {
+        const result = this.items.reduce((accum, a, i) => {
+          if(a.item)
+          return accum + Number(a.item.periodPrice[this.period[i].periodNumber].price)
+          return accum + 0
+        }, 0)
+
+        return Math.round(result)
+      },
+
+      totalMonth() {
+        const result = this.items.reduce((accum, a, i) => {
+          if(a.item)
+          return accum + Number(a.item.periodPrice[this.period[i].periodNumber].price) / this.period[i].month
+          return accum
+        }, 0)
+        return Math.round(result)
+      },
       allBilling() {
         return this.$store.getters['universal/billingTariffs']
+      },
+      bonuses() {
+        return this.data.bonus[0].attributes
       },
       billingClear() {
         return this.allBilling.map(item => {
@@ -265,15 +158,15 @@ export default {
           const options = item.options[0]
 
           return {
-            layout: options.layout, 
+            layout: options.layout,
             key: options.key,
             attributes: {
-                          "oldPrice": options.attributes.oldPrice,
-                          "options": options.attributes.options,
-                          "title": options.attributes.title ? options.attributes.title : item.name,
-                          "diskType": options.attributes.diskType,
-                          "price": Math.round(item.periods[0].amount) + ' ₽ / месяц',
-                          "periodPrice": item.periods.map(period => {
+                          oldPrice: options.attributes.oldPrice,
+                          options: options.attributes.options,
+                          title: options.attributes.title ? options.attributes.title : item.name,
+                          diskType: options.attributes.diskType,
+                          price: Math.round(item.periods[0].amount) + ' ₽ / месяц',
+                          periodPrice: item.periods.map(period => {
                             return {period: period.period, price: Math.round(period.amount)}
                           })
                         }
@@ -284,7 +177,6 @@ export default {
       },
       solutions() {
         const clearSolutions = this.data.solutions.map(item => {
-
           return {
             layout: item.layout,
             key: item.key,
@@ -298,9 +190,7 @@ export default {
                 })
             }
           }
-
         })
-
         return clearSolutions.concat(this.billingClear)
       },
       firstSolutions() {
@@ -309,48 +199,25 @@ export default {
       secondSolutions() {
         return this.solutions.filter(solution => solution.attributes.diskType===this.data.secondDisk)
       },
-      cards() {
-        if(this.activeTab===this.data.firstDisk)
-          return this.firstCards
-        return this.secondCards
-      },
-      fields() {
-        return this.data.fields
-      },
       activeTabIndex() {
         if(this.activeTab===this.data.firstDisk) return 0
         return 1
       }
   },
   created() {
-
     this.servers.push({servers: Number(this.data.serverNumber), word: this.serversWord(Number(this.data.serverNumber))})
 
     this.selectCards[0].push([])
 
     this.firstSolutions.forEach(element => {
         this.selectCards[0][0].push({select: false})
-        this.firstCards.push({select: false})
     })
 
     this.secondSolutions.forEach(element => {
         this.selectCards[0][1].push({select: false})
-        this.secondCards.push({select: false})
     })
 
     this.solutionGroup.push({solution: this.firstSolutions})
-
-    let i=0;
-    this.fields.forEach(element => {
-      if(element.layout==='bonus') {
-        this.bonus = element.attributes
-      }
-      if(element.layout==='setting') {
-          element.attributes.index=i
-          this.configValues[0].settings.push(Number(element.attributes.default))
-          i++
-      }
-    });
   },
   methods: {
       serversWord(number) {
@@ -373,16 +240,16 @@ export default {
 
           this.firstSolutions.forEach(element => {
               this.selectCards[index+1][0].push({select: false})
-              this.firstCards.push({select: false})
           })
 
           this.secondSolutions.forEach(element => {
               this.selectCards[index+1][1].push({select: false})
-              this.secondCards.push({select: false})
           })
 
           this.activeTab.push({tab: this.data.firstDisk})
           this.tabIndex.push({tab:0})
+
+          this.items.push({item: null})
 
       },
       removeSolution() {
@@ -394,25 +261,18 @@ export default {
           this.activeTab.pop()
           this.solutionGroup.pop()
           this.tabIndex.pop()
+          this.items.pop()
       },
-      addConfig(){
-        this.configValues.push({settings: []})
 
-        this.fields.forEach(element => {
-        if(element.layout==='setting') {
-          this.configValues[this.configValues.length-1].settings.push(Number(element.attributes.default))
-         }
-        });
-      },
-      removeConfig() {
-        this.configValues.pop()
-      },
-      chooseCard(s, i) {
-        this.selectCards[s][this.tabIndex[s].tab].forEach(element => {
+      chooseCard(solutionNumber, i, item) {
+        this.selectCards[solutionNumber][this.tabIndex[solutionNumber].tab].forEach(element => {
           element.select=false
         })
-        this.selectCards[s][this.tabIndex[s].tab][i].select=true
+        this.selectCards[solutionNumber][this.tabIndex[solutionNumber].tab][i].select=true
+
+        this.items[solutionNumber].item = item.attributes
       },
+
       changeDiscTab(index, tab) {
         this.activeTab[index].tab=tab
 
@@ -423,6 +283,17 @@ export default {
         }
 
         this.solutionGroup[index].solution=this.solutions.filter(solution => solution.attributes.diskType===tab)
+
+        this.selectCards[index][this.tabIndex[index].tab].forEach((item, i) => {
+          if(item.select===true) {
+            this.items[index].item = this.solutionGroup[index].solution[i].attributes
+          }
+        })
+
+        if(this.selectCards[index][this.tabIndex[index].tab].every(item => item.select === false)) {
+            this.items[index].item = null
+        }
+
       },
       showTab(tab) {
         if(tab===1)
@@ -443,9 +314,10 @@ export default {
       showDropdown(index) {
         this.dropdown[index].show = !this.dropdown[index].show
       },
-      choosePeriod(index, period, p) {
+      choosePeriod(index, period, periodNumber, month) {
         this.period[index].period=period
-        this.period[index].periodNumber=p
+        this.period[index].periodNumber=periodNumber
+        this.period[index].month=month
       }
   },
 }
@@ -485,6 +357,7 @@ export default {
   background-color: #ede7e2;
   border-radius: 8px;
 }
+
 .tariff__tab-links {
   font-family: 'Graphik', sans-serif;
   font-size: 18px;
@@ -1132,7 +1005,7 @@ export default {
 .calculate__btn-download {
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  margin: 0 10px;
   font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -1517,6 +1390,10 @@ export default {
     padding: 0;
   }
   .calculate__wrapper-right {
+    display: none;
+  }
+
+  .tariff__wrapper-right {
     display: none;
   }
   .calculate__total-tablet {

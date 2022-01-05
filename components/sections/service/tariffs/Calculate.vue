@@ -1,36 +1,37 @@
 <template>
    <section class="calculate">
-        <div class="container">
-          <h1 class="calculate__title title">{{data.title}}</h1>
-        </div>
+    <div class="container">
+      <h1 class="calculate__title title">{{data.title}}</h1>
+    </div>
         <div class="calculate__wrapper">
           <div v-for="config, c in configValues" :key="'config' + c" class="calculate__wrapper-left">
+            <!-- <pre>{{configValues}}</pre> -->
             <div class="calculate__configuration">
               <form action="#" class="calculate__form">
                 <div class="calculate__form-title">Конфигурация</div>
-                <div v-for="item in data.fields" :key="item.key + 'topField'">   
+                <div v-for="item in data.fields" :key="item.key + 'topField'">
 
                   <div v-if="item.layout==='listOption'" class="calculate__input-text">{{ item.attributes.option }}
                     <div class="calculate__input-select">
-                      <select class="calculate__select">
-                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.listItem">{{ option.attributes.listItem }}</option>
+                      <select v-model="config.selects[item.attributes.index].value" class="calculate__select" >
+                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.price">{{ option.attributes.listItem }}</option>
                       </select>
                     </div>
                   </div>
 
                   <div v-if="item.layout==='setting'" class="calculate__input-text">{{ item.attributes.title }}
                     <div class="calculate__input">
-                      <input v-model="config.settings[item.attributes.index]" class="calculate__input-number" type="number"  />
-                      <Slider v-model="config.settings[item.attributes.index]" 
+                      <input v-model="config.settings[item.attributes.index].value" class="calculate__input-number" type="number"  />
+                      <Slider v-model="config.settings[item.attributes.index].value" 
                               :min="Number(item.attributes.min)" 
                               :max="Number(item.attributes.max)" />
                     </div>
                   </div>
 
                   <div v-if="item.layout==='checkbox'" class="calculate__wrap-chechbox">
-                    <label v-for="checkbox in item.attributes.checkboxes" :key="checkbox.key" 
+                    <label v-for="checkbox, i in item.attributes.checkboxes" :key="checkbox.key" 
                      class="calculate__checkbox">{{ checkbox.attributes.title }}
-                      <input class="calculate__checkbox-input" type="checkbox" />
+                      <input v-model="config.flags[i].isTrue" class="calculate__checkbox-input" type="checkbox" />
                       <span class="calculate__checkmark"></span>
                       <div v-if="checkbox.attributes.help" class="calculate__checkbox-helper">
                         <div class="calculate__checkbox-helper-wrap">
@@ -51,9 +52,10 @@
                     <div class="calculate__input-wrap-text">{{ item.attributes.title }}
                     </div>
                     <div class="calculate__input--mod">
-                      <input class="calculate__input-write" type="text" :value="item.attributes.default" />
+                      <input v-model="config.fields[item.attributes.index].value" class="calculate__input-write" type="text" />
                     </div>
                   </div>
+                  
                 </div>
 
                 <div v-for="item in data.fields" :key="item.key + 'diskField'">
@@ -65,7 +67,8 @@
                             <div v-if="field.layout==='radio'" class="calculate__input-text">{{field.attributes.title}}
                                 <div class="calculate-input-radio">
                                     <div v-for="radio, i  in field.attributes.list" :key="radio.key" class="radio__wrapper-btn-1">
-                                        <input :id="'radio-' + i + k + c" class="radio__btn" type="radio" :name="'radio' + k + c" :value="radio.attributes.listItem" :checked="i===0" />
+                                        <input :id="'radio-' + i + k + c" v-model="config.disks[k].price"
+                                               class="radio__btn" type="radio" :name="'radio' + k + c" :value="radio.attributes.price" :checked="i===0" />
                                         <label class="radio__lebel" :for="'radio-' + i + k + c">{{ radio.attributes.listItem }}</label>
                                     </div>
                                 </div>
@@ -73,8 +76,8 @@
                             
                             <div v-if="field.layout==='setting'" class="calculate__input-text">{{ field.attributes.title }}
                                 <div class="calculate__input">
-                                    <input v-model="config.disks[k][field.attributes.index]" class="calculate__input-number" type="number"  />
-                                    <Slider v-model="config.disks[k][field.attributes.index]" 
+                                    <input v-model="config.disks[k].amount" class="calculate__input-number" type="number"  />
+                                    <Slider v-model="config.disks[k].amount" 
                                             :min="Number(field.attributes.min)" 
                                             :max="Number(field.attributes.max)"/>
                                 </div>
@@ -89,50 +92,10 @@
               </form>
             </div>           
           </div>
-       
           <div class="calculate__wrapper-right">
-            <div class="calculate__total">
-              <div class="calculate__total-title">Итого</div>
-              <div class="calculate__wrapper-total-text">
-                <div class="calculate__total-wrap-text">
-                  <div class="calculate__total-card-text">Intel Cascade Lake. 100% vCPU</div>
-                  <div class="calculate__total-card-text">Intel Cascade Lake. RAM</div>
-                  <div class="calculate__total-card-text">Быстрое сетевое хранилище (SSD)</div>
-                </div>
-                <div class="calculate__total-wrap-price">
-                  <div class="calculate__total-card-text">4600 ₽</div>
-                  <div class="calculate__total-card-text">9300 ₽</div>
-                  <div class="calculate__total-card-text">7700 ₽</div>
-                </div>
-              </div>
-              <div class="calculate__total-wrap">
-                <div class="calculate__total-card-text">
-                  <span class="calculate__total-card-text--mod">169 000 ₽</span>
-                  / месяц
-                </div>
-                <div class="calculate__total-card-text">
-                  <span class="calculate__total-card-text--mod">5 633,33 ₽</span>
-                  / день
-                </div>
-              </div>
-              <button class="calculate__btn">Подключиться</button>
-              <button class="calculate__btn-download">
-                <svg class="clip__icon" width="9" height="18">
-                  <use xlink:href="@/assets/img/sprites.svg#clip"></use>
-                </svg>
-                Скачать PDF с расчетом
-              </button>
-            </div>
-
-            <div v-if="bonus" class="calculate__total-bottom">
-              <div class="calculate__total-bottom-title">
-                {{ bonus.title }}
-              </div>
-              <ul class="calculate__total-list">
-                <li v-for="item in bonus.bonuses" :key="item.key" class="calculate__total-item">{{ item.attributes.title }}</li>
-              </ul>
-            </div>
+            <Total :total="total" :bonus="bonus" :mobile="false" />
           </div>
+
         </div>
         <div class="calculate__wrapper-btn-add">
             <button class="calculate__btn-add" @click="addConfiguration()">+ добавить конфигурацию</button>
@@ -140,44 +103,8 @@
         </div>
 
         <div class="calculate__total-tablet">
-          <div class="calculate__total-tablet-container">
-            <div class="calculate__total-tablet-title calculate__total-title">
-              Итого
-            </div>
-            <div class="calculate__wrapper-total-text">
-              <div class="calculate__total-wrap-text">
-                <div class="calculate__total-card-text">Intel Cascade Lake. 100% vCPU</div>
-                <div class="calculate__total-card-text">Intel Cascade Lake. RAM</div>
-                <div class="calculate__total-card-text">Быстрое сетевое хранилище (SSD)</div>
-              </div>
-              <div class="calculate__total-wrap-price">
-                <div class="calculate__total-card-text">4600 ₽</div>
-                <div class="calculate__total-card-text">9300 ₽</div>
-                <div class="calculate__total-card-text">7700 ₽</div>
-              </div>
-            </div>
-            <div class="calculate__total-wrap calculate__total-wrap-tablet">
-              <div class="calculate__total-card-text">
-                <span class="calculate__total-card-text--mod">169 000 ₽</span> /
-                месяц
-              </div>
-              <div class="calculate__total-card-text">
-                <span class="calculate__total-card-text--mod">5 633,33 ₽</span>
-                / день
-              </div>
-            </div>
-            <div class="calculate__total-wrap-tablet-btn">
-              <button class="calculate__btn">Подключиться</button>
-              <button class="calculate__btn-download">
-                <svg class="clip__icon" width="9" height="18">
-                  <use xlink:href="@/assets/img/sprites.svg#clip"></use>
-                </svg>
-                Скачать PDF с расчетом
-              </button>
-            </div>
-          </div>
+          <Total :total="total" :bonus="bonus" :mobile="true" />
         </div>
-
       </section>
 </template>
 
@@ -186,21 +113,25 @@ import Slider from 'primevue/slider';
 
 export default {
   name: 'Calculate',
+  components: {
+    Slider,
+    'Total': () => import('~/components/sections/service/tariffs/Total'),
+  },
   props: {
     data: {
       type: Object,
       required: true,
     },
   },
-  componenmts: {
-    Slider
-  },
   data () {
     return {
         firstDisk: null,
         configValues: [{
+          selects: [],
+          flags: [],
+          fields: [],
           settings: [],
-          disks:[[]]
+          disks:[]
         }],
         bonus: null
     }
@@ -208,38 +139,120 @@ export default {
   computed: {
       fields() {
         return this.data.fields
+      },
+      key(){
+        return this.fields[0]
+      },
+      total() {
+        let selects 
+        let flags
+        let settings
+        let disks
+        let fields
+        let total=0
+
+        this.configValues.forEach(item => {
+          selects = item.selects.reduce((accum, a) => {
+            return accum + Number(a.value)
+          }, 0)
+
+          fields = item.fields.reduce((accum, a) => {
+            return accum + Number(a.value)
+          }, 0)
+
+          flags = item.flags.reduce((accum, a) => {
+            if(a.isTrue) { 
+              return accum + a.value
+            } 
+            return accum
+          }, 0)
+
+          settings = item.settings.reduce((accum, a) => {
+              return accum + (a.value * a.price)
+          }, 0)
+
+          disks = item.disks.reduce((accum, a) => {
+              return accum + (a.amount * a.price)
+          }, 0)
+
+          total+=Number(selects) + Number(flags) + Number(settings) + Number(disks) + Number(fields)
+        })
+
+        return Number(this.data.basePrice) + Number(total)
+      },
+      totalDay() {
+        return Math.round(this.total / 30)
+      }
+  },
+  watch: {
+      key(){
+        this.init()
       }
   },
   created() {
-    let i=0
-    let j=0
-    this.fields.forEach(field => {
-      if(field.layout==='bonus') {
-        this.bonus = field.attributes
-      }
-      if(field.layout==='setting') {
-        field.attributes.index=i
-        this.configValues[0].settings.push(Number(field.attributes.default))
-        i++
-       }
-       if(field.layout==='disk') {
-         this.firstDisk = field.attributes.fields
-         this.firstDisk.forEach(disk => {
-           if(disk.layout==='setting') {
-             disk.attributes.index=j
-             this.configValues[0].disks[0].push(Number(disk.attributes.default))
-             j++
-           }
-         })
-       }
-    });
+    this.init()
   },
   methods: {
+    init() {
+          let i=0
+          let j=0
+          let k=0
+          let f=0
+
+          this.fields.forEach(field => {
+            if(field.layout==='bonus') {
+              this.bonus = field.attributes
+            }
+
+            if(field.layout==='listOption') {
+              field.attributes.index=k
+              this.configValues[0].selects.push({value: Number(field.attributes.list[0].attributes.price)})
+              k++
+            }
+
+            if(field.layout==='field') {
+              field.attributes.index=f
+              this.configValues[0].fields.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+              f++
+            }
+
+            if(field.layout==='checkbox') {
+              field.attributes.checkboxes.forEach(item => {
+                this.configValues[0].flags.push({value: Number(item.attributes.price), isTrue: false})
+              })
+            }
+
+            if(field.layout==='setting') {
+              field.attributes.index=i
+              this.configValues[0].settings.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+              i++
+            }
+
+            if(field.layout==='disk') {
+              let price
+              this.firstDisk = field.attributes.fields
+              this.firstDisk.forEach(disk => {
+                if(disk.layout==='radio') {
+                  price = disk.attributes.list[0].attributes.price
+                }
+
+                if(disk.layout==='setting') {
+                  disk.attributes.index=j
+                  this.configValues[0].disks.push({amount: Number(disk.attributes.default), price})
+                  j++
+                }
+              })
+            }
+          });
+    },
     addDisk(index) {
-      this.configValues[index].disks.push([])
+      let price
       this.firstDisk.forEach(disk => {
+            if(disk.layout==='radio') {
+              price = disk.attributes.list[0].attributes.price
+            }
            if(disk.layout==='setting') {
-             this.configValues[index].disks[this.configValues[index].disks.length-1].push(Number(disk.attributes.default))
+             this.configValues[index].disks.push({amount: Number(disk.attributes.default), price})
            }
       })
     },
@@ -247,27 +260,50 @@ export default {
       this.configValues[index].disks.pop()
     },
     addConfiguration() {
-      this.configValues.push({settings: [], disks: [[]]})
-
+      let lastIndex
+      this.configValues.push({selects: [], flags: [], fields: [], settings: [], disks: []})
+      
         this.fields.forEach(field => {   
-        if(field.layout==='setting') {
-          this.configValues[this.configValues.length-1].settings.push(Number(field.attributes.default))
-        }
-        if(field.layout==='disk') {
-          this.firstDisk = field.attributes.fields
-          this.firstDisk.forEach(disk => {
+          lastIndex = this.configValues.length-1
+
+          if(field.layout==='listOption') {
+            this.configValues[lastIndex].selects.push({value: Number(field.attributes.list[0].attributes.price)})  
+          }
+
+          if(field.layout==='setting') {
+            this.configValues[lastIndex].settings.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+          }
+
+          if(field.layout==='field') {
+            this.configValues[lastIndex].fields.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+          }
+
+          if(field.layout==='checkbox') {
+                field.attributes.checkboxes.forEach(item => {
+                this.configValues[lastIndex].flags.push({value: Number(item.attributes.price), isTrue: false})
+            })
+          }
+
+          if(field.layout==='disk') {  
+            let price
+            this.firstDisk = field.attributes.fields
+            this.firstDisk.forEach(disk => {
+            if(disk.layout==='radio') {
+              price = disk.attributes.list[0].attributes.price
+            }
+
             if(disk.layout==='setting') {
-              this.configValues[this.configValues.length-1].disks[0].push(Number(disk.attributes.default))
+              this.configValues[lastIndex].disks.push({amount: Number(disk.attributes.default), price})
             }
           })
-        }
+          }
       });
 
     },
     removeConfiguration() {
       this.configValues.pop()
     }
-  },
+  }
 }
 </script>
 

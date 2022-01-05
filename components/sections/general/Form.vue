@@ -1,45 +1,34 @@
 <template>
   <section id="form" class="form">
         <div class="container">
-          <div class="form__title title">Анкета для регистрации в партнерской программе</div>
+          <div class="form__title title">{{title}}</div>
         </div>
         <div class="form__wrapper">
             <form class="partner__form">
               <div class="form__card">
                 <div v-show="!formSent">
-                <div class="form__card-input-field">Ваше имя
+                <div class="form__card-input-field">{{fields.title}}
                   <div class="form__card-input-wrap">
                     <input v-model="name" type="text" class="form__card-input" value="" />
                   </div>
                 </div>
 
-                <div class="form__card-input-field">Email
+                <div class="form__card-input-field">{{fields.alt_title}}
                   <div class="form__card-input-wrap">
                     <input v-model="email" type="text" class="form__card-input" value="" />
                   </div>
                 </div>
 
-                <div class="form__card-input-field">Телефон
+                <div class="form__card-input-field">{{fields.image}}
                   <div class="form__card-input-wrap">
                     <input v-model="phone" type="text" class="form__card-input" value="" />
                   </div>
                 </div>
 
-                <div class="form__card-input-field">Ваша отрасль
+                <div class="form__card-input-field">{{fields.link_name}}
                   <div class="form__card-select">
-                    <select v-model="department" class="form__select">
-                      <option value="Представитель digital агентства">
-                        Представитель digital агентства
-                      </option>
-                      <option value="Интегратор">
-                        Интегратор 
-                      </option>
-                      <option value="Аутсорс компания">
-                        Аутсорс компания 
-                      </option>
-                      <option value="IT-блоггер">
-                        IT-блоггер
-                      </option>
+                    <select v-model="department" class="form__select">                     
+                      <option v-for="item in list" :key="item.key" :value="item.attributes.item">{{item.attributes.item}}</option>
                     </select>
                   </div>
                 </div>
@@ -60,6 +49,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Form',
+  props: {
+    title: {
+      type: String,
+      default: "Заявка на партнерство"
+    }
+  },
   data() {
     return {
       formSent: false,
@@ -70,7 +65,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['form'])
+    ...mapGetters(['form']),
+    fields() {
+      return this.form.sections[0]
+    },
+    list() {
+      return JSON.parse(this.fields.content)
+    }
   },
   methods: {
     addPartner() {

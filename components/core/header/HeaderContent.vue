@@ -1,8 +1,9 @@
 <template>
 <div>
-  <div v-if="$route.fullPath!=='/support'" class="header-content__wrapper" :class="`header-content__${$route.name}`">
+  <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
     <div class="container">
       <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
+      <Search v-if="header.search"/>
       <h1 v-if="isJournal" class="start__title start__title-cscard" v-html="topArticles.top_journal.name"></h1>
       <ul v-if="header.tags" class="start__list">
             <li class="start__item">
@@ -13,21 +14,31 @@
             </li>
           </ul>
       <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></div>
-      <button v-if="button" class="start__cscard-btn">{{ button }}</button>
+      <button v-if="button" class="start__cscard-btn" @click="buttonAction">{{ button }}</button>
     </div>
     
   </div>
-  <div v-if="isDecor" class="header__decor"></div>
+  <div v-if="isDecor" class="header__decor" :class="{ 'header__decor__color' : isKnowledgeCategory}"></div>
 </div>
 </template>
 
 <script>
+import Search from '@/components/core/header/Search'
 
 export default {
   name: 'HeaderContent',
+  components: {
+    Search
+  },
   computed: {
+    isKnowledgeCategory () {
+        return this.$route.name==='knowledge-category'||this.$route.name==='knowledge-search'
+    },
     isArticle() {
         return this.$route.name==='journal-article'
+    },
+    isPost() {
+      return this.$route.name==='knowledge-category-post'
     },
     isDocument() {
         return this.$route.name==='company-document'
@@ -35,11 +46,7 @@ export default {
     isJournal() {
         return this.$route.name==='journal'
     },
-    header() {
-      if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-        return this.$store.getters.header
-      } 
-            
+    header() {           
       if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/header']
       }
@@ -49,10 +56,11 @@ export default {
       }
 
       if(this.isArticle) {
-        const articleHeader =  this.$store.getters['journal/header']
+        const articleHeader = this.$store.getters['journal/header']
         return articleHeader
       }
-       return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
+
+      return this.$store.getters.header
     },
     topArticles() {
       return this.$store.getters.topArticles
@@ -64,7 +72,25 @@ export default {
       return this.header.header_button
     },
     isDecor() {
-      return !this.isArticle&&!this.isDocument;
+      return !this.isArticle&&!this.isDocument&&!this.isPost;
+    }
+  },
+  methods: {
+    buttonAction() {
+      if(this.header.page_type==='this') {
+        const block = document.querySelector('#' + this.header.anchor)
+        if(block)
+          block.scrollIntoView({ behavior: 'smooth' })
+      } else {
+
+      let tab = this.header.tab
+
+      if(tab==='null') {
+          tab=''
+      }
+
+      this.$router.push({path: this.header.page_type + this.header.link, hash: tab})  
+      }
     }
   }
 }
@@ -72,7 +98,20 @@ export default {
 </script>
 
 <style scoped>
+.header__decor {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #ffffff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
 
+.header__decor__color {
+  background-color: #FCF7F2;
+}
 
 .header-content__wrapper {
   padding-top: 310px;

@@ -20,7 +20,7 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchPage({commit}, slug) {   
+  async fetchPage({commit}, slug) {
     const page = await this.$axios.$get(slug)
     commit('setPage', page)
   },
@@ -62,4 +62,6 @@ export const getters = {
     
   buttons: state => state.page.buttons,
   header: state => state.page.header,
+
+  quickSearch: state => state.page.quickSearch,
 }

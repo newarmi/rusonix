@@ -1,5 +1,5 @@
 <template>
-  <div id='company'>
+  <div id='knowledge'>
       <Constructor :pageblocks="pageBlocks" />     
   </div>
 </template>
@@ -13,8 +13,8 @@ export default {
     'Constructor': () => import('~/components/constructor'),
   },
   async asyncData({store}) {
-    await store.dispatch('fetchPage', 'company')
-
+    await store.dispatch('fetchPage', 'knowledge')
+    await store.dispatch('knowledge/getData')
   },
   computed: {
     ...mapGetters(['pageBlocks'])

@@ -1,6 +1,5 @@
 <template>
-  <section class="reviews">
-    <a name="reviews"></a>
+  <section id="reviews" class="reviews">
     <div class="container">
       <h1 class="reviews__title title">{{ title }}</h1>
       <Slider />

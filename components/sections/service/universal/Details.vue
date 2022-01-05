@@ -1,6 +1,5 @@
 <template>
-  <section class="details">
-    <a :name="details.tag"></a>
+  <section id="billing" class="details">
     <div class="container">
       <h1 class="details__title title">
         {{details.title}}

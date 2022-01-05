@@ -1,106 +1,50 @@
 <template>
   <section id="partner" class="conditions">
     <div class="container">
-      <div class="conditions__title title">Условия</div>
+      <div class="conditions__title title">{{title}}</div>
       <div class="conditions__title-wrap-text">
-        <div class="conditions__title-text">
-          В любой системе финансового мониторинга Русоникс имеет наивысший
-          рейтинг.
-        </div>
-        <div class="conditions__title-text">
-          Это значит, что мы выполняем все обязательства перед партнерами и
-          клиентами. И так уже 25 лет.
-        </div>
+        <div class="conditions__title-text" v-html="description"></div>
       </div>
       <div class="conditions__wrap">
         <div class="conditions__info-wrap">
           <div class="conditions__info-title">Клиент покупает</div>
           <div class="conditions__info-title">Вы зарабатываете</div>
         </div>
-        <div class="conditions__content-wrap">
-          <div class="conditions__content-title">Виртуальный хостинг</div>
+
+        <div v-for="item in service" :key="item.title" class="conditions__content-wrap">
+          <div class="conditions__content-title">{{item.title}}</div>
           <div class="conditions__circle-top">
-            <div class="conditions__circle-left">50%</div>
-            <div class="conditions__circle-right">25%</div>
+            <div class="conditions__circle-left" :style="'background-color:' + item.link_name">{{item.alt_title}}</div>
+            <div class="conditions__circle-right" :style="'background-color:' + item.link_name">{{item.image}}</div>
           </div>
-          <div class="conditions__content-text">
-            50% за первый год обслуживания: Приведенный Вами клиент оплачивает
-            услуги. В течение первого года обслуживания Вы получаете до 50% от
-            оплаченной суммы. Чем больше будет сумма платежей за год, тем больше
-            Вы заработаете!
-          </div>
+          <div class="conditions__content-text" v-html="item.content"></div>
         </div>
-        <div class="conditions__content-wrap">
-          <div class="conditions__content-title">Облако / VPS / VDS</div>
-          <div class="conditions__circle-bottom">
-            <div class="conditions__circle-left conditions__circle-left--mod">
-              25%
-            </div>
-            <div class="conditions__circle-right conditions__circle-right--mod">
-              20%
-            </div>
-          </div>
-          <div class="conditions__content-text">
-            25% за весь последующий период: Вы будете получать до 25% от
-            платежей за весь период обслуживания. Комиссионное вознаграждение
-            начисляется сразу, как только поступит оплата от привлеченного
-            клиента.
-          </div>
-        </div>
+
       </div>
       <!-- slider -->
       <div class="conditions__slider-wrap">
         <div class="conditions__slider-info-top">Клиент покупает</div>
         <div class="swiper partner-nav-swiper">
           <div class="swiper-wrapper">
-            <div class="swiper-slide partner__navigation-content partner__navigation-content--active"
-              data-tab-target="#partner-link-1">
-              Виртуальный хостинг
+            <div v-for="item, i in service" :key="item.key" 
+                  class="swiper-slide partner__navigation-content"
+                  :class="{ 'partner__navigation-content--active' : i===tabNumber }" 
+                  @click="changeTab(i)">{{item.title}}
             </div>
-            <div class="swiper-slide partner__navigation-content"
-              data-tab-target="#partner-link-2">
-              Облако / VPS / VDS
-            </div>
-          </div>
-        </div>
-        <div class="conditions__slider-info-bottom">Вы зарабатываете</div>
-        <div id="partner-link-1"
-          class="conditions__content-wrap-slider
-                 conditions__content-wrap-slider--active"
-          data-tab-content>
-          <div class="conditions__circle-top-slider">
-            <div class="conditions__circle-left-slider">50%</div>
-            <div class="conditions__circle-right-slider">25%</div>
-          </div>
-          <div class="conditions__content-text-slider">
-            50% за первый год обслуживания: Приведенный Вами клиент оплачивает
-            услуги. В течение первого года обслуживания Вы получаете до 50% от
-            оплаченной суммы. Чем больше будет сумма платежей за год, тем больше
-            Вы заработаете!
           </div>
         </div>
 
-        <div
-          id="partner-link-2"
-          class="conditions__content-wrap-slider"
-          data-tab-content>
+        <div class="conditions__slider-info-bottom">Вы зарабатываете</div>
+
+        <div class="conditions__content-wrap-slider conditions__content-wrap-slider--active">
           <div class="conditions__circle-top-slider">
-            <div class="conditions__circle-left-slider
-                        conditions__circle-left-slider--mod">
-              25%
-            </div>
-            <div class="conditions__circle-right-slider
-                        conditions__circle-right-slider--mod">
-              20%
-            </div>
+            <div class="conditions__circle-left-slider" :style="'background-color:' + activeTab.link_name">{{activeTab.alt_title}}</div>
+            <div class="conditions__circle-right-slider" :style="'background-color:' + activeTab.link_name">{{activeTab.image}}</div>
           </div>
-          <div class="conditions__content-text-slider">
-            25% за весь последующий период: Вы будете получать до 25% от
-            платежей за весь период обслуживания. Комиссионное вознаграждение
-            начисляется сразу, как только поступит оплата от привлеченного
-            клиента.
+          <div class="conditions__content-text-slider" v-html="activeTab.content">
           </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -112,8 +56,29 @@ import { mapGetters } from 'vuex';
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 export default {
+  props: {
+    title: {
+      type: String,
+      default: 'Условия'
+    },
+    description: {
+      type: String,
+      default: ''
+    }
+  },
+  data() {
+    return {
+      tabNumber: 0
+    }
+  },
   computed: {
-    ...mapGetters(['partner'])
+    ...mapGetters(['partner']),
+    service() {
+      return this.partner.sections
+    },
+    activeTab() {
+      return this.service[this.tabNumber]
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -129,26 +94,11 @@ export default {
         },
       })
     })
-
-    const partnerTabsNav = document.querySelectorAll("[data-tab-target]");
-const partnerTabContentsNav = document.querySelectorAll("[data-tab-content]");
-
-partnerTabsNav.forEach((tab) => {
-  tab?.addEventListener("click", () => {
-    const target = document.querySelector(tab.dataset.tabTarget);
-    console.log(tab.dataset);
-    partnerTabContentsNav.forEach((partnerTabContentNav) => {
-      partnerTabContentNav.classList.remove(
-        "conditions__content-wrap-slider--active"
-      );
-    });
-    target.classList.add("conditions__content-wrap-slider--active");
-    partnerTabsNav.forEach((tab) => {
-      tab.classList.remove("partner__navigation-content--active");
-    });
-    tab.classList.add("partner__navigation-content--active");
-  });
-});
+  },
+  methods: {
+    changeTab(index) {
+      this.tabNumber = index
+    }
   },
 }
 </script>

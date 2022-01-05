@@ -1,6 +1,5 @@
 <template>
-    <section class="bitrix__advantage">
-      <a :name="benefits.tag"></a>
+    <section id="benefits" class="bitrix__advantage">
         <div class="container">
           <div class="bitrix__advantage-title title">{{ benefits.blockTitle }}</div>
           <div class="bitrix__advantage-text text" v-html="benefits.blockDescription">

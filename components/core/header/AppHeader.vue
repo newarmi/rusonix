@@ -1,7 +1,6 @@
 <template>
   <header class="header" :style="bgImage">
-    <TopLine />
-    <Search v-if="header.search"/>
+    <TopLine />   
     <HeaderContent />
     <Slider v-if="$route.fullPath==='/'"/>
   </header>
@@ -12,25 +11,19 @@ import TopLine from '@/components/core/header/TopLine'
 
 import HeaderContent from '@/components/core/header/HeaderContent'
 import Slider from '@/components/core/header/Slider'
-import Search from '@/components/core/header/Search'
 
 export default {
   name: "AppHeader",
   components: {
     TopLine,
     HeaderContent,
-    Slider,
-    Search
+    Slider
   },
   data: () => ({
 
   }),
   computed: {
     header() {
-      if(this.$route.name==='page'||this.$route.name==='journal'||this.$route.name==='company') {
-        return this.$store.getters.header
-      } 
-
       if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/header']
       }
@@ -43,7 +36,7 @@ export default {
         return this.$store.getters['requisites/header']
       }
 
-      return this.$store.getters[this.$route.fullPath.replace(/^\//, '') + '/header']
+      return this.$store.getters.header
     },
     bgImage () {
       return `background-image: url(${this.$config.imgURL}${this.header.image});`

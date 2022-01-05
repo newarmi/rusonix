@@ -2,33 +2,55 @@
   <div class="start__screen">
     <div class="container">
       <div class="start__screen-search">
-        <input class="start__screen-input" type="text" placeholder="Поиск по ресурсам службы поддержки" />
+        <input v-model="searchString" class="start__screen-input" type="text" placeholder="Поиск по ресурсам службы поддержки" @keyup.enter="search"/>
         <label for="" class="start__screen-input-icon">
-          <img src="@/assets/img/search__support.png" alt="search" />
+          <img src="@/assets/img/search__support.png" alt="search" @click="search" />
         </label>
       </div>
       <div class="start__screen-search-descr">
-        <div class="start__screen-descr-text">Проблема с доступом к серверу</div>
-        <div class="start__screen-descr-text">Ошибка 404</div>
-        <div class="start__screen-descr-text">Как привязать домен к хостингу</div>
-        <div class="start__screen-descr-text">Зачем нужен SSL сертификат</div>
-        <div class="start__screen-descr-text">Что делать если изменились реквизиты</div>
+        <div v-for="item in quickSearch" :key="item" class="start__screen-descr-text" @click="quick(item)">{{item}}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 
+
+export default {
+  name: 'Slider',
+  data() {
+    return {
+      searchString: ''
+    }
+  },
+  computed: {
+    ...mapGetters(['quickSearch'])
+  },  
+  methods: {
+   ...mapActions('knowledge', ['setSearch']),
+   quick(item) {
+     this.searchString = item
+     this.search()
+   },
+   search() {
+     if(this.searchString!=='') {
+      this.setSearch(this.searchString)
+      this.$router.push({path: '/knowledge/search'})
+     }
+   }
+  },
+}
 </script>
 
 <style scoped>
 .start__screen {
   display: flex;
   justify-content: center;
-  padding-top: 230px;
+  padding-top: 30px;
   padding-bottom: 0px;
-  margin-bottom: 203px;
+  margin-bottom: 0px;
 }
 .start__screen-search {
   display: flex;

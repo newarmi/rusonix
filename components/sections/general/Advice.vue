@@ -1,271 +1,69 @@
 <template>
-  <section id="advice" class="advice" >
-    <div class="container">
-      <div class="advice__wrapper">
-        <div class="advice__title">Популярные советы</div>
-
-        <div class="advice__list-wrap">
-          <ul class="advice__list-left">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как настроить собственный VPN сервер</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link">Что такое SSL сертификат</a>
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#
-              " class="advice__link"
-                >Как восстановить работу сайта на Битриксе</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Топ 10 ошибок безопасности в VPS серверах</a
-              >
-            </li>
-          </ul>
-
-          <ul class="advice__list-right">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как восстановить работу сайта на Битриксе</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Топ 10 ошибок безопасности в VPS серверах</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как настроить собственный VPN сервер</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link">Что такое SSL сертификат</a>
-            </li>
-          </ul>
+  <div>
+     <section class="knowledge">
+        <div class="container">
+            <div class="knowledge__wrapper">
+                <div v-for="item in categories" :key="item.title" class="knowledge__wrap">
+                    <h4 class="knowledge__title" @click="openSubmenu(item.slug)">{{ item.title }}</h4>
+                    <ul class="knowledge__list">
+                        <li v-for="post in item.posts" :key="post.title" class="knowledge__item"><span class="knowledge__item-img">
+                          <img src="@/assets/img/contact-icon.png" alt=""></span>
+                          <div class="knowledge__link" @click="openPost(item.slug, post.slug)">{{ post.title }}</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="advice__wrapper">
-        <div class="advice__title">VPS Серверы</div>
-
-        <div class="advice__list-wrap">
-          <ul class="advice__list-left">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Почему нужно выбрать VPS сервер, а не виртуальный хостинг</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Страх потери – настраиваем автоматические бэкапы</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как обновить версию Ubuntu c 16 до 18</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Можно ли установить Windows Server на VPS</a
-              >
-            </li>
-          </ul>
-
-          <ul class="advice__list-right">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как обновить версию Ubuntu c 16 до 18</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Можно ли установить Windows Server на VPS</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Почему нужно выбрать VPS сервер, а не виртуальный хостинг</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Страх потери – настраиваем автоматические бэкапы</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="advice__wrapper">
-        <div class="advice__title">
-          Современная разработка для самых любознательных
-        </div>
-
-        <div class="advice__list-wrap">
-          <ul class="advice__list-left">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как сменить пароль root пользователя</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Что нужно сделать сразу после установки сервера</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Обзор 10 популярных headless cms</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Зачем нужно использовать Docker</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Кодь как боженька и используй GitFlow</a
-              >
-            </li>
-          </ul>
-
-          <ul class="advice__list-right">
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Пробрасываем роуты через бедро в Redux Store</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link">GraphQL – новый взгляд на API</a>
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Server Side Rendering или Single Page Application для To-do
-                листа</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Почемы вы никогда не закроете задачу с универсальной
-                модалкой</a
-              >
-            </li>
-            <li class="advice__item">
-              <span class="advice__item-img"
-                ><img src="@/assets/img/advice__support.png" alt="advice img"
-              /></span>
-              <a href="#" class="advice__link"
-                >Как объяснить маме что я Javascript разработчик</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    <TopPosts />
+  </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
+export default {
+  name: 'Advice',
+  components: {
+    'TopPosts': () => import('~/components/sections/general/TopPosts'),
+  },
+  data() {
+    return {
+ 
+    }
+  },
+  computed: {
+   ...mapGetters('knowledge', ['posts', 'categories'])
+  },
+  methods: {
+    openSubmenu(slug) {
+      this.$router.push({path: '/knowledge/' + slug})
+    },
+    openPost(category, post) {
+      this.$router.push({path: '/knowledge/' + category + '/' + post})
+    }
+  },
+
+}
+
 
 </script>
 
 <style scoped>
-.advice {
-  background-color: #fcf7f2;
-  padding-top: 72px;
-  padding-bottom: 72px;
+.knowledge {
+  background-color: #FCF7F2;
+  padding-top: 75px;
+  padding-bottom: 75px;
 }
-.advice__wrapper {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 72px;
+
+@media (max-width: 768px) {
+  .knowledge {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
 }
-.advice__wrapper:last-child {
-  margin-bottom: 0;
-}
-.advice__title {
+
+.knowledge__title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
@@ -273,61 +71,90 @@
   line-height: 32px;
   letter-spacing: 0px;
   text-align: left;
-
   margin-bottom: 48px;
+  cursor: pointer;
 }
-.advice__list-wrap {
+
+@media (max-width: 768px) {
+  .knowledge__title {
+    margin-bottom: 24px;
+  }
+}
+
+.knowledge__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
-.advice__list-left,
-.advice__list-right {
-  flex: 1 1 50%;
+
+@media (max-width: 860px) {
+  .knowledge__wrapper {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
-.advice__item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
+
+.knowledge__wrap {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%;
+  margin-bottom: 75px;
 }
-.advice__item:last-child {
+
+@media (max-width: 768px) {
+  .knowledge__wrap {
+    margin-bottom: 48px;
+  }
+}
+
+.knowledge__wrap:last-child {
   margin-bottom: 0;
 }
-.advice__item-img img {
+
+.knowledge__item {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.knowledge__item:last-child {
+  margin-bottom: 0;
+}
+
+.knowledge__item-img {
+  position: absolute;
+
+}
+.knowledge__item-img>img{
   max-width: none;
 }
-.advice__link {
-  padding-left: 8px;
 
+.knowledge__link {
   font-family: "Graphik", sans-serif;
   font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 20px;
   letter-spacing: 0px;
   text-align: left;
-  color: #000;
+  color: #000000;
   opacity: 0.6;
+  margin-left: 28px;
+  display: block;
+  width: 100%;
+  max-width: 352px;
+  cursor: pointer;
 }
-@media (max-width: 992px) {
-  .advice__link {
-    max-width: 343px;
-  }
-}
-@media (max-width: 768px) {
-  .advice__wrapper {
-    margin-bottom: 48px;
-  }
-  .advice__title {
-    margin-bottom: 24px;
-  }
 
-  .advice__list-left,
-  .advice__list-right {
-    margin-bottom: 24px;
-  }
-}
-@media (max-width: 760px) {
-  .advice__list-wrap {
-    flex-direction: column;
+@media (max-width: 576px) {
+  .knowledge__link {
+    max-width: 260px;
   }
 }
 
