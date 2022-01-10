@@ -9,6 +9,7 @@
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
+      <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
 
       <Advice v-if="block.layout==='advice'" />
       <History v-if="block.layout==='history'" />
@@ -41,6 +42,7 @@ export default {
     'ServiceSection': () => import('~/components/sections/custom/ServiceSection'),
     'Domains': () => import('~/components/sections/general/domains/Domains'),
     'Decision': () => import('~/components/sections/custom/Decision'),
+    'ImageSlider': () => import('~/components/sections/custom/imageSlider/ImageSlider'),
     'Billing': () => import('~/components/sections/general/Billing'),
     'LinkArticles': () => import('~/components/sections/custom/LinkArticles'),
     'Trust': () => import('~/components/sections/general/Trust'),

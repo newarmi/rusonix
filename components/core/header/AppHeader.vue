@@ -53,7 +53,6 @@ export default {
   background-position: center;
   position: relative;
   padding-bottom: 120px;
-  /* min-height: 100vh; */
 }
 
 </style>

@@ -35,7 +35,6 @@
         </div>
 
         <div class="conditions__slider-info-bottom">Вы зарабатываете</div>
-
         <div class="conditions__content-wrap-slider conditions__content-wrap-slider--active">
           <div class="conditions__circle-top-slider">
             <div class="conditions__circle-left-slider" :style="'background-color:' + activeTab.link_name">{{activeTab.alt_title}}</div>
@@ -223,6 +222,7 @@ export default {
   letter-spacing: 0px;
   text-align: center;
 }
+
 .conditions__circle-right {
   display: flex;
   justify-content: center;
