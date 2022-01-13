@@ -585,12 +585,13 @@ export default {
   left: 0;
   z-index: 2;
   width: 100%;
-  height: 100vh;
+  height: calc(100% - 53px);
   background-color: #000;
+  padding-bottom: 48px;
 
   transform: translateX(-150vw);
   overflow-x: hidden;
-  overflow: auto;
+  overflow-y: auto;
   transition: all 0.4s;
 }
 .navigation__mobile.open {
