@@ -81,7 +81,7 @@
           </div>
 
           <div class="tariff__wrapper-slider">
-             <SolutionSlider :solutions="solutionGroup[s].solution" :period="period" :example="s" />
+             <SolutionSlider :solutions="solutionGroup[s].solution" :period="period" :example="s" @chooseCard="chooseMobileCard($event, s)"/>
           </div>
           <div v-if="solutionConfigs.length-s===1" class="tariff__ready-configuration-btn-slider btn_desktop_hide">
              <button class="tariff__btn-add" @click="addSolution(s)">+ добавить конфигурацию</button>
@@ -272,7 +272,9 @@ export default {
 
         this.items[solutionNumber].item = item.attributes
       },
-
+      chooseMobileCard(item, solutionNumber) {
+        this.items[solutionNumber].item = item.attributes
+      },
       changeDiscTab(index, tab) {
         this.activeTab[index].tab=tab
 

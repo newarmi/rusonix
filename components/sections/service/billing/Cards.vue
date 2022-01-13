@@ -44,8 +44,11 @@
                     class="license__card-total-descr">
                     {{ card.options[0].attributes.priceComment }}
                 </div>
-              </div>        
+              </div>      
+
+              <div class="license__btn-wrap">  
                 <a href="#" class="license__btn">{{card.options[0].attributes.buttonName}}</a>
+              </div>
             </div>
           </div>
         </div>
@@ -79,6 +82,18 @@ export default {
 </script>
 
 <style scoped>
+.license__btn-wrap {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #830f1e;
+  margin-bottom: 24px;
+}
+
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
@@ -197,7 +212,24 @@ export default {
   margin-bottom: 48px;
 }
 .license__btn {
+  width: 100%;
+  max-width: 354px;
+  padding: 14px 60px;
+  background: #830f1e;
+  border-radius: 6px;
+
   font-family: 'Graphik', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+
+
+  /* font-family: 'Graphik', sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -209,7 +241,7 @@ export default {
   border-radius: 6px;
   padding: 19px 141px 18px 144px;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 30px; */
 }
 .license__btn:hover {
   background-color: #660915;

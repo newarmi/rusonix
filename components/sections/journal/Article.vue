@@ -78,6 +78,7 @@ export default {
   padding: 72px 87px;
   background-color: #fff;
   border-radius: 20px;
+  overflow: hidden;
 }
 .secret__date {
   display: flex;

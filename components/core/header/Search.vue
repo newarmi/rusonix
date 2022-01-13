@@ -129,4 +129,10 @@ export default {
     margin-bottom: 24px;
   }
 }
+
+@media (max-width: 390px) {
+  .start__screen-input {
+    font-size: 12px;
+  }
+}
 </style>

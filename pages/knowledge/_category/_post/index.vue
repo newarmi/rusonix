@@ -93,6 +93,7 @@ export default {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background-color: #FFFFFF;
+  overflow: hidden;
   width: 100%;
   max-width: 1121px;
 
@@ -109,7 +110,7 @@ export default {
 
 @media (max-width: 576px) {
   .payers__wrapper {
-    padding: 48px 16px;
+    padding: 48px 26px;
   }
 }
 

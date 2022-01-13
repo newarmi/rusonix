@@ -9,7 +9,7 @@
               :price="item.attributes.periodPrice[period[example].periodNumber].price + ' ₽'"
               :options="item.attributes.options"
               :choose="cards[i].select"
-              @chooseCard="chooseCard(i)"
+              @chooseCard="chooseCard(i, item)"
             />
           </div>
         </div>
@@ -72,11 +72,13 @@ export default {
       })     
     },
     methods: {
-      chooseCard(i) {
+      chooseCard(i, item) {
           this.cards.forEach(element => {
               element.select=false
           })
           this.cards[i].select=true
+          
+          this.$emit('chooseCard', item)
       }
     }
 }
