@@ -590,7 +590,7 @@ export default {
 
   transform: translateX(-150vw);
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow: auto;
   transition: all 0.4s;
 }
 .navigation__mobile.open {
