@@ -273,6 +273,22 @@ export default {
   display: block;
 }
 
+ .magazine__img-big{
+   width: 100%;
+   width: 808px;
+   height: 390px;
+   border-radius: 6px;
+   object-fit: cover;
+  
+ }
+ .magazine__img-small{
+  width: 100%;
+  max-width: 431px;
+  height: 390px;
+  border-radius: 6px; 
+  object-fit: cover;
+ }
+
 @media (max-width: 1250px) {
   .magazine__right {
     max-width: none;
@@ -308,20 +324,10 @@ export default {
     flex-direction: column;
     margin-bottom: 24px;
   }
+  .magazine__img-small {
+    max-width: none;
+  }
 }
 
- .magazine__img-big{
-   width: 100%;
-   width: 808px;
-   height: 390px;
-   border-radius: 6px;
-   /* object-fit: cover; */
-  
- }
- .magazine__img-small{
-  width: 100%;
-  max-width: 431px;
-  height: 390px;
-  border-radius: 6px; 
- }
+
 </style>

@@ -4,9 +4,7 @@
       <h1 class="details__title title">
         {{details.title}}
       </h1>
-      <p class="details__text text">
-        {{details.description}}
-      </p>
+      <div class="details__text text" v-html="details.description"></div>
       <div class="details__wrapper-img">
         <div class="details__img-desk">
           <picture class="picture">
