@@ -14,7 +14,7 @@
 import Slider from '@/components/sections/custom/imageSlider/Slider'
 
 export default {
-  name: 'History',
+  name: 'ImageSlider',
   components: {
     Slider
   },

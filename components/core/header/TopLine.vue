@@ -16,7 +16,7 @@
           </li>
           <li class="contacts__search">
             <label for="search" class="search">
-              <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" />
+              <input id="search" v-model="searchInput" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" @keyup.enter="searchIt"/>
               <svg class="search__icon" :class="isActive" width="17" height="17"
                 viewbox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"  @click="openSearch" >
                 <path d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
@@ -25,7 +25,7 @@
             </label>
           </li>
           <li>
-            <nuxt-link to="/support">База знаний</nuxt-link>
+            <nuxt-link to="/knowledge">База знаний</nuxt-link>
           </li>
           <li class="contact__auth">
             <nuxt-link to="/login">Личный кабинет
@@ -51,8 +51,9 @@
         </nuxt-link>
         <nav class="navigation">
           <ul class="navigation__list">
-            <li v-for="item, i in menu" :key="item.id + item.title" class="navigation__item">
-              <nuxt-link :to="'/' + item.link" class="navigation__link">{{ item.title }}</nuxt-link>
+            <li v-for="item, i in menu" :key="item.id + item.title" class="navigation__item" 
+                :class="{'open_submenu' : getOpenMenu}" @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
+              <nuxt-link :to="'/' + item.link" class="navigation__link" >{{ item.title }}</nuxt-link>
               <ul class="navigation__dropdown">
                 <div class="navigation__container-dropdown">
                   <li v-for="subMenu in item.menu_items" :key="subMenu.id + subMenu.title" class="navigation__dropdown-item">
@@ -108,8 +109,7 @@
       <ul class="contacts__mobile search">
         <li class="contacts__search-mobile">
           <a href="#" class="contacts__search-link" @click="openSearch">{{ searchWord }}</a>
-
-          <input id="search" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" />
+          <input id="search" v-model="searchInput" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" @keyup.enter="searchIt"/>
           <svg class="search__icon" :class="isActive" width="17" height="17" viewbox="0 0 17 17"
             fill="none" xmlns="http://www.w3.org/2000/svg" @click="openSearch" >
             <path d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"
@@ -134,11 +134,12 @@ export default {
       isMenuOpen: false,
       isOpenSubmenu: [],
       navigationDropdown: 'navigation__dropdown',
+      searchInput: ''
     }
   },
 
   computed: {
-    ...mapGetters(['footer', 'menu', 'topArticles']),
+    ...mapGetters(['footer', 'menu', 'topArticles', 'getOpenMenu']),
     isActive() {
       if (this.search) return 'active'
       return ''
@@ -161,7 +162,18 @@ export default {
       });
   },
   methods: {
-    ...mapActions(['setTag']),
+    ...mapActions(['setTag', 'setOpenMenuFalse', 'setOpenMenuTrue', 'setSearchQuery']),
+    searchIt() {
+      if(this.searchInput) {
+        this.setSearchQuery(this.searchInput)
+        if(this.$route.fullPath==='/search') {
+          this.$store.dispatch('search')
+          this.isMenuOpen = false
+        } else {
+          this.$router.push({path: '/search' })
+        }
+      }
+    },
     openSubmenu(index, link) {
       if (this.isOpenSubmenu[index].open) {
         this.scrollTo('', link)
@@ -173,7 +185,11 @@ export default {
       }
     },
     openSearch() {
-      this.search = !this.search
+      if(this.search&&this.searchInput) {
+        this.searchIt()
+      } else {
+        this.search = !this.search
+      }
     },
     scrollTo(id, route, index) {
        if(route[0]!=='/') {
@@ -354,11 +370,17 @@ export default {
   border-bottom: 4px solid #ffffff;
 }
 
-.navigation__item:hover > .navigation__dropdown {
-  transition: 0.3s ease-in-out;
+.open_submenu:hover > .navigation__dropdown {
+  transition: 0.1s ease-in-out;
   opacity: 0.9;
   visibility: visible;
 }
+
+/* .navigation__item:hover > .navigation__dropdown {
+  transition: 0.1s ease-in-out;
+  opacity: 0.9;
+  visibility: visible;
+} */
 
 .navigation__link {
   color: #ffffff;
@@ -404,7 +426,7 @@ export default {
   backdrop-filter: blur(38.0559px);
   opacity: 0;
   visibility: hidden;
-  transition: 0.5s;
+  transition: 0.1s;
 }
 
 .dropdown__link {

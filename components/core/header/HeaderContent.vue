@@ -114,7 +114,7 @@ export default {
 }
 
 .header-content__wrapper {
-  padding-top: 310px;
+  padding-top: 250px;
   padding-bottom: 72px;
 }
 
@@ -125,18 +125,18 @@ export default {
   }
 }
 
-.header-content__wrapper.header-content__company,
+/* .header-content__wrapper.header-content__company,
 .header-content__wrapper.header-content__services {
   padding-top: 296px;
   padding-bottom: 200px;
-}
+} */
 
 @media (max-width: 992px) {
-  .header-content__wrapper.header-content__company,
+  /* .header-content__wrapper.header-content__company,
   .header-content__wrapper.header-content__services {
     padding-top: 215px;
     padding-bottom: 200px;
-  }
+  } */
 }
 
 .start__title {

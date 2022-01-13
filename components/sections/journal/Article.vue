@@ -117,6 +117,7 @@ export default {
   color: #202a89;
   text-transform: uppercase;
 }
+
 .secret__title {
   font-family: "Graphik", sans-serif;
   font-size: 34px;
@@ -127,6 +128,7 @@ export default {
   text-align: left;
   margin-bottom: 24px;
 }
+
 .secret__title-text {
   font-family: "Graphik", sans-serif;
   font-size: 24px;
@@ -263,6 +265,10 @@ export default {
   }
 }
 @media (max-width: 576px) {
+  .secret__title {
+  font-size: 24px;
+
+}
   .secret__wrapper {
     padding: 48px 16px;
   }

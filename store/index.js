@@ -1,7 +1,10 @@
 export const state = () => ({
   page: {},
   basic: {},
-  tag: ''
+  tag: '',
+  openMenu: true,
+  searchQuery: '',
+  searchResult: {}
 })
 
 export const mutations = {
@@ -16,7 +19,20 @@ export const mutations = {
   },
   resetTag(state) {
     state.tag = ''
-  }
+  },
+  setOpenMenuFalse(state) {
+    state.openMenu = false
+  },
+  setOpenMenuTrue(state) {
+    state.openMenu = true
+  },
+  setSearchQuery(state, search) {
+    state.searchQuery = search
+  },
+  setSearchResult(state, searchResult) {
+    state.searchResult = searchResult
+  },
+
 }
 
 export const actions = {
@@ -28,11 +44,27 @@ export const actions = {
     const basic = await this.$axios.$get('page/basics')
     commit('setBasic', basic)
   },
+  async search({commit, state}) {
+    let searchResult = [];
+    if(state.searchQuery.length!==0) {
+      searchResult = await this.$axios.$post('page/search', {search: state.searchQuery})
+    }
+    commit('setSearchResult', searchResult)
+  },
   setTag({commit}, tag) {
     commit('setTag', tag)
   },
   resetTag({commit}) {
     commit('resetTag')
+  },
+  setOpenMenuFalse({commit}) {
+    commit('setOpenMenuFalse')
+  },
+  setOpenMenuTrue({commit}) {
+    commit('setOpenMenuTrue')
+  },
+  setSearchQuery({commit}, search) {
+    commit('setSearchQuery', search)
   }
 }
 
@@ -40,6 +72,9 @@ export const getters = {
   footer: state => state.basic.footer,
   menu: state => state.basic.menu,
   topArticles: state => state.basic.articles,
+  getOpenMenu: state => state.openMenu,
+  search: state => state.searchQuery,
+  searchResult: state => state.searchResult,
 
   tag: state => state.tag,
 
