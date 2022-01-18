@@ -52,7 +52,7 @@ export default {
   background-size: cover;
   background-position: center;
   position: relative;
-  padding-bottom: 120px;
+  padding-bottom: 80px;
 }
 
 </style>

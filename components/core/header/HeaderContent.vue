@@ -132,7 +132,7 @@ export default {
 
 .header-content__wrapper {
   padding-top: 250px;
-  padding-bottom: 72px;
+  padding-bottom: 35px;
 }
 
 @media (max-width: 992px) {
@@ -259,6 +259,7 @@ export default {
 }
 
 .start__cscard-btn {
+  min-width: 195px;
   font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
@@ -271,7 +272,7 @@ export default {
   background-color: #0f7f69;
   border-radius: 8px;
   cursor: pointer;
-  margin-right: 10px;
+  margin: 10px 10px;
 }
 
 .start__cscard-btn:hover {
