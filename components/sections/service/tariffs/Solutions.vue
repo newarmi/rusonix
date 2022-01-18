@@ -1,5 +1,5 @@
 <template>
-  <section class="tariff">
+  <section :id="data.tag" class="tariff">
     <div class="container">
       <div class="tariff__title title">{{ data.title }}</div>
       <div class="tariff__wrapper">

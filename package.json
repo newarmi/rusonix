@@ -13,8 +13,11 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "core-js": "^3.15.1",
+    "fs": "0.0.1-security",
+    "jspdf": "^2.5.0",
     "lodash": "^4.17.21",
     "nuxt": "^2.15.7",
+    "pdfkit": "^0.13.0",
     "primeicons": "^5.0.0",
     "primevue": "^2.6.0",
     "swiper": "5.4.5",

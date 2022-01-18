@@ -4,7 +4,8 @@ export const state = () => ({
   tag: '',
   openMenu: true,
   searchQuery: '',
-  searchResult: {}
+  searchResult: {},
+  activeRubric: 'all'
 })
 
 export const mutations = {
@@ -32,6 +33,9 @@ export const mutations = {
   setSearchResult(state, searchResult) {
     state.searchResult = searchResult
   },
+  setRubric(state, rubric) {
+    state.activeRubric = rubric
+  }
 
 }
 
@@ -65,6 +69,9 @@ export const actions = {
   },
   setSearchQuery({commit}, search) {
     commit('setSearchQuery', search)
+  },
+  setRubric({commit}, rubric) {
+    commit('setRubric', rubric)
   }
 }
 
@@ -83,6 +90,7 @@ export const getters = {
   journal: state => state.page.journal,
   rubrics: state => state.page.rubrics,
   domainTarriff: state => state.page.domains,
+  activeRubric: state => state.activeRubric,
 
   billing: state => state.page.general.billing,
   trust: state => state.page.general.trust,

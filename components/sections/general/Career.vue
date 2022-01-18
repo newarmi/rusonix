@@ -1,5 +1,5 @@
 <template>
-  <section id="career" class="career">
+  <section :id="tag" class="career">
     <div class="container">
       <h1 class="career__title title">{{ careerItems.title }}</h1>
       <div class="career__wrapper">
@@ -26,6 +26,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Career',
+  props: {
+    tag: {
+      type: String,
+      default: 'career'
+    }
+  },
   computed: {
     ...mapGetters(['career']),
     careerItems() {

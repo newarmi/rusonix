@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <section class="license__storage">
+  <div :id="lines.tag">
+    <section class="license__storage" >
       <div class="container">
         <div class="license__title title">
           {{ lines.tariffTitle }}

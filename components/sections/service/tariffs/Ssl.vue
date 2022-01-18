@@ -1,5 +1,5 @@
 <template>
-  <section :id="ssl.tag" class="sertificate">
+  <section :id="ssl.tag" class="sertificate" :class="ssl.tag">
     <div class="container">
       <div class="sertificate__title title">{{ title }}</div>
       <div class="sertificate__wrapper">

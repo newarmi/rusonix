@@ -1,5 +1,5 @@
 <template>
-  <section class="license">
+  <section :id="cards.tag" class="license">
 
     <div class="container">
       <div class="license__title title">{{ cards.tariffTitle }}</div>

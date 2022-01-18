@@ -1,5 +1,5 @@
 <template>
-  <section id="reviews" class="reviews">
+  <section :id="tag" class="reviews">
     <div class="container">
       <h1 class="reviews__title title">{{ title }}</h1>
       <Slider />
@@ -12,8 +12,15 @@ import Slider from '~/components/sections/service/universal/reviews/Slider'
 
 export default {
   name: 'Reviews',
+
   components: {
     Slider
+  },
+  props: {
+      tag: {
+        type: String,
+        default: 'reviews'
+      }
   },
   computed: {
     reviews() {

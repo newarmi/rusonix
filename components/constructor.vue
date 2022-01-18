@@ -11,20 +11,23 @@
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
       <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
 
-      <Advice v-if="block.layout==='advice'" />
-      <History v-if="block.layout==='history'" />
-      <Billing v-if="block.layout==='billing'" />
-      <Trust v-if="block.layout==='trust'" />
-      <Reviews v-if="block.layout==='reviews'" />
-      <Career v-if="block.layout==='career'" />
-      <Contacts v-if="block.layout==='contacts'" />
-      <Requisites v-if="block.layout==='requisites'"/>
-      <Partner v-if="block.layout==='partner'" :title="block.attributes.title" :description="block.attributes.description"/>
-      <Form v-if="block.layout==='form'" :title="block.attributes.title" />
-      <Domains v-if="block.layout==='domains'" />
+      <Advice v-if="block.layout==='advice'" :tag="block.attributes.tag" />
+      <History v-if="block.layout==='history'" :tag="block.attributes.tag" />
+      <Billing v-if="block.layout==='billing'" :tag="block.attributes.tag" />
+      <Trust v-if="block.layout==='trust'" :tag="block.attributes.tag" />
+      <Reviews v-if="block.layout==='reviews'" :tag="block.attributes.tag" />
+      <Career v-if="block.layout==='career'" :tag="block.attributes.tag" />
+      <Contacts v-if="block.layout==='contacts'" :tag="block.attributes.tag" />
+      <Requisites v-if="block.layout==='requisites'" :tag="block.attributes.tag" />
+      <Partner v-if="block.layout==='partner'" :title="block.attributes.title" 
+                                               :description="block.attributes.description"
+                                               :tag="block.attributes.tag"  />
+      <Form v-if="block.layout==='form'" :title="block.attributes.title" :tag="block.attributes.tag" />
+      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" />
       <Journal v-if="block.layout==='journal'" 
             :navigation="block.attributes.navigation"
-            :title="block.attributes.title" :lines="block.attributes.linesNumber" /> 
+            :title="block.attributes.title" :lines="block.attributes.linesNumber" 
+            :tag="block.attributes.tag" /> 
     </div>
   </div>
 </template>

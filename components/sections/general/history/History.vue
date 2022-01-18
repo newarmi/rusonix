@@ -1,5 +1,5 @@
 <template>
-  <section id="history" class="history">
+  <section :id="tag" class="history">
     <div class="container">
       <h1 class="history__title title">{{ history.title }}</h1>
     </div>
@@ -18,6 +18,13 @@ export default {
   components: {
     Slider
   },
+  props: {
+    tag: {
+      type: String,
+      default: 'history'
+    }
+  },
+
   computed: {
     ...mapGetters(['history'])
   }

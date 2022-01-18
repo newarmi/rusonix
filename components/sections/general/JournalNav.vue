@@ -2,8 +2,10 @@
   <div class="container__magazine-navigation">
     <div class="swiper magazine-swiper">
       <div class="swiper-wrapper navigation__magazine">
-        <div v-for="rubric, i in rubrics" :key="rubric.slug" class="swiper-slide navigation__magazine-link" :class="{'navigation__magazine-link--active':(i==0)}"
-          :data-tab-target="'#magazine-link-' + (i+1)" @click="$emit('filter', rubric.slug)">{{rubric.title}}
+        <div v-for="rubric in navRubrics" :key="rubric.slug" 
+             class="swiper-slide navigation__magazine-link" 
+             :class="{'navigation__magazine-link--active': rubric.isActive}"
+             @click="filter(rubric.slug)">{{rubric.title}}
         </div>
       </div>
     </div>
@@ -13,13 +15,23 @@
 <script>
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters([
-      'rubrics'
-    ])
+    ...mapGetters(['rubrics', 'activeRubric']),
+    navRubrics() {
+      const rubrics = this.rubrics.map(item => {
+      const active = item.slug === this.activeRubric
+      return {
+        isActive: active,
+        title: item.title,
+        slug: item.slug
+      }
+    })
+
+      return rubrics
+    }
   },
   mounted() {
     this.$nextTick(() => {
@@ -54,8 +66,16 @@ export default {
     })
   },
   methods: {
-    filterArticles(rubric) {
-      this.$emits.filterArticles(rubric)
+    ...mapActions(['setRubric']),
+    filter(rubric) {
+       this.navRubrics.forEach(element => {
+         if(element.rubric===rubric) {
+           element.isActive=true
+         } else {
+          element.isActive=false
+         }
+       })
+       this.setRubric(rubric)
     }
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <section id="billing" class="details">
+  <section :id="tag" class="details billing">
     <div class="container">
       <h1 class="details__title title">
         {{details.title}}
@@ -34,6 +34,12 @@
 <script>
 export default {
   name: 'Details',
+  props: {
+      tag: {
+        type: String,
+        default: 'billing'
+      }
+    },
   computed: {
       details() {
         const details = this.$store.getters['universal/billing'];

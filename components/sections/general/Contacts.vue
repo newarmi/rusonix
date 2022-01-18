@@ -1,5 +1,5 @@
 <template>
-  <section id="contacts" class="contact">
+  <section :id="tag" class="contact">
     <div class="container">
       <div class="contact__title title">{{ contacts.title }}</div>
     </div>
@@ -57,6 +57,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Contacts',
+  props: {
+    tag: {
+      type: String,
+      default: 'contacts'
+    }
+  },
   computed: {
     ...mapGetters([
       'contacts',

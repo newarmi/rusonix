@@ -1,5 +1,5 @@
 <template>
-    <section id="benefits" class="bitrix__advantage">
+    <section :id="tag" class="bitrix__advantage" :class="benefits.tag">
         <div class="container">
           <div class="bitrix__advantage-title title">{{ benefits.blockTitle }}</div>
           <div class="bitrix__advantage-text text" v-html="benefits.blockDescription">
@@ -57,6 +57,12 @@
 <script>
 
 export default {
+    props: {
+      tag: {
+        type: String,
+        default: 'benefits'
+      }
+    },
     computed: {
       benefits() {
         const benefits = this.$store.getters['universal/benefits']

@@ -24,9 +24,9 @@
               </svg>
             </label>
           </li>
-          <li>
+          <!-- <li>
             <nuxt-link to="/knowledge">База знаний</nuxt-link>
-          </li>
+          </li> -->
           <li class="contact__auth">
             <nuxt-link to="/login">Личный кабинет
               <svg class="auth__icon" width="15" height="18">
@@ -51,16 +51,16 @@
         </nuxt-link>
         <nav class="navigation">
           <ul class="navigation__list">
-            <li v-for="item, i in menu" :key="item.id + item.title" class="navigation__item" 
+            <li v-for="item in menu" :key="item.id + item.title" class="navigation__item" 
                 :class="{'open_submenu' : getOpenMenu}" @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
-              <nuxt-link :to="'/' + item.link" class="navigation__link" >{{ item.title }}</nuxt-link>
+              <a class="navigation__link" @click="buttonAction(item, item.type[0])">{{ item.type[0].attributes.title }}</a>
               <ul class="navigation__dropdown">
                 <div class="navigation__container-dropdown">
-                  <li v-for="subMenu in item.menu_items" :key="subMenu.id + subMenu.title" class="navigation__dropdown-item">
-                    <a class="dropdown__link" @click="scrollTo('#' + subMenu.tab, subMenu.type + subMenu.link, i)">{{ subMenu.title }}</a>
+                  <li v-for="subMenu in item.subitem" :key="subMenu.key" class="navigation__dropdown-item">
+                    <a class="dropdown__link" @click="buttonAction(item.type[0], subMenu)">{{ subMenu.attributes.title }}</a>
                     <ul class="dropdown__submenu-navigation">
-                      <li v-for="link in subMenu.menu_sections" :key="link.title + link.link" class="dropdown__submenu-item">
-                        <a class="dropdown__submenu-link" @click="scrollTo('#' + link.tab, link.type + link.link, i)">{{link.title}}</a>
+                      <li v-for="link in subMenu.attributes.subitem" :key="link.key" class="dropdown__submenu-item">
+                        <a class="dropdown__submenu-link" @click="buttonAction(item.type[0], link)">{{link.attributes.title}}</a>
                       </li>
                     </ul>
                   </li>
@@ -96,16 +96,18 @@
       </nuxt-link>
     </div>
     <nav class="navigation__mobile" :class="{ open: isMenuOpen }">
+
       <ul class="navigation__list-mobile">
         <li v-for="item, i in menu" :key="item.id + item.title + 'mob'" class="navigation__item-mobile">
-          <a class="navigation__link-mobile dropdown-submenu" @click="openSubmenu(i, item.link)">{{ item.title }}</a>
+          <a class="navigation__link-mobile dropdown-submenu" @click="openSubmenu(i, item.type[0].attributes.page)">{{ item.type[0].attributes.title }}</a>
           <ul class="dropdown-submenu__list-mobile" :class="{'show_submenu' : isOpenSubmenu[i].open}">
-            <li v-for="subMenu in item.menu_items" :key="subMenu.id + subMenu.title + 'mob'" class="dropdown-submenu__item-mobile">
-              <a class="dropdown-submenu__link" @click="scrollTo('#' + subMenu.tab, subMenu.type + subMenu.link, i)">{{ subMenu.title }}</a>
+            <li v-for="subMenu in item.subitem" :key="subMenu.key" class="dropdown-submenu__item-mobile">
+              <a class="dropdown-submenu__link" @click="buttonAction(item.type[0], subMenu)">{{ subMenu.attributes.title }}</a>
             </li>
           </ul>
         </li>
       </ul>
+
       <ul class="contacts__mobile search">
         <li class="contacts__search-mobile">
           <a href="#" class="contacts__search-link" @click="openSearch">{{ searchWord }}</a>
@@ -162,7 +164,9 @@ export default {
       });
   },
   methods: {
-    ...mapActions(['setTag', 'setOpenMenuFalse', 'setOpenMenuTrue', 'setSearchQuery']),
+    ...mapActions(['setTag', 'setOpenMenuFalse', 
+                   'setOpenMenuTrue', 'setSearchQuery',
+                   'setRubric']),
     searchIt() {
       if(this.searchInput) {
         this.setSearchQuery(this.searchInput)
@@ -189,6 +193,57 @@ export default {
         this.searchIt()
       } else {
         this.search = !this.search
+      }
+    },
+    buttonAction(parent, button) {
+      if(button.layout==='tab') {
+        if(this.$route.fullPath==='/' + parent.attributes.page) {
+          this.scrollToBlock(button.attributes.tab)
+          this.isMenuOpen = !this.isMenuOpen
+        } else {
+          this.isMenuOpen = !this.isMenuOpen
+          this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
+        }
+      } 
+     
+      if(button.layout==='journal') {
+        this.$router.push({path: '/journal/' + button.attributes.page})  
+      } 
+
+      if(button.layout==='rubric') {
+        this.setRubric(button.attributes.page)
+        this.$router.push({path: '/journal'})  
+      }
+
+      if(button.layout==='main') {
+        this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab})  
+      }
+
+      if(button.layout==='category') {
+        this.$router.push({path: '/knowledge/' + button.attributes.page})  
+      }
+
+      if(button.layout==='post') {
+        this.$router.push({path: '/knowledge/post/' + button.attributes.page})  
+      }
+
+      if(button.layout==='service') {
+        this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab})  
+      }
+
+      if(button.layout==='document') {
+        this.$router.push({path: '/company/' + button.attributes.page})  
+      }
+
+      if(button.layout==='link') {
+        window.open(button.attributes.link, '_blank');
+      } 
+    },
+    scrollToBlock(tag) {
+      if(tag) {
+      const block = document.querySelector('#' + tag)
+        if(block)
+          block.scrollIntoView({ behavior: 'smooth' })
       }
     },
     scrollTo(id, route, index) {
@@ -391,6 +446,7 @@ export default {
   line-height: 22px;
   letter-spacing: 0px;
   text-align: left;
+  cursor: pointer;
 }
 
 .navigation__item:last-child {

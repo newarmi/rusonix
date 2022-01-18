@@ -1,5 +1,5 @@
 <template>
-<section id="trust" class="confidents">
+<section :id="tag" class="confidents">
   <div class="container">
           <h1 class="confidents__title title">{{ title }}</h1>
         </div>
@@ -88,6 +88,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Trust',
+  props: {
+    tag: {
+      type: String,
+      default: 'trust'
+    }
+  },
   computed: {
     ...mapGetters(['trust']),
     title() {

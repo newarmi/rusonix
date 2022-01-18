@@ -1,12 +1,12 @@
 <template>
   <div>
     <div v-for="block, i in blocks" :key="block.layout + '' + i">
-      <Benefits v-if="block.layout=='benefits'"/>
-      <Possibilities v-if="block.layout=='tabs'" />
-      <Details v-if="block.layout=='billing'" />
-      <Reviews v-if="block.layout=='reviews'" />
-      <Technologies v-if="block.layout=='technologies'"/>
-      <Support v-if="block.layout=='questions'"/>
+      <Benefits v-if="block.layout=='benefits'" :tag="block.attributes.tag" />
+      <Possibilities v-if="block.layout=='tabs'" :tag="block.attributes.tag" />
+      <Details v-if="block.layout=='billing'" :tag="block.attributes.tag" />
+      <Reviews v-if="block.layout=='reviews'" :tag="block.attributes.tag" />
+      <Technologies v-if="block.layout=='technologies'" :tag="block.attributes.tag" />
+      <Support v-if="block.layout=='questions'" :tag="block.attributes.tag" />
     </div>
 
     <div id="tariff">

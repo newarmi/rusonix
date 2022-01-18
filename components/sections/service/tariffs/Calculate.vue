@@ -1,11 +1,13 @@
 <template>
-   <section class="calculate">
+   <section :id="data.tag" class="calculate" :class="data.tag" >
     <div class="container">
       <h1 class="calculate__title title">{{data.title}}</h1>
     </div>
         <div class="calculate__wrapper">
           <div v-for="config, c in configValues" :key="'config' + c" class="calculate__wrapper-left">
+            <!-- <pre>{{data.fields}}</pre> -->
             <!-- <pre>{{configValues}}</pre> -->
+            <!-- <pre>{{clearFields}}</pre> -->
             <div class="calculate__configuration">
               <form action="#" class="calculate__form">
                 <div class="calculate__form-title">Конфигурация</div>
@@ -13,8 +15,8 @@
 
                   <div v-if="item.layout==='listOption'" class="calculate__input-text">{{ item.attributes.option }}
                     <div class="calculate__input-select">
-                      <select v-model="config.selects[item.attributes.index].value" class="calculate__select" >
-                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.price">{{ option.attributes.listItem }}</option>
+                      <select v-model="config.selects[item.attributes.index]" class="calculate__select" >
+                        <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes">{{ option.attributes.listItem }}</option>
                       </select>
                     </div>
                   </div>
@@ -93,7 +95,8 @@
             </div>           
           </div>
           <div class="calculate__wrapper-right">
-            <Total :total="total" :bonus="bonus" :mobile="false" />
+            <Total :total="total" :bonus="bonus" :mobile="false" 
+                   :items="clearFields" @createPDF="createPdf"/>
           </div>
 
         </div>
@@ -103,12 +106,14 @@
         </div>
 
         <div class="calculate__total-tablet">
-          <Total :total="total" :bonus="bonus" :mobile="true" />
+          <Total :total="total" :bonus="bonus" :mobile="true" 
+                 :items="clearFields" @createPDF="createPdf"/>
         </div>
       </section>
 </template>
 
 <script>
+import { jsPDF as JsPDF  } from "jspdf";
 import Slider from 'primevue/slider';
 
 export default {
@@ -137,6 +142,52 @@ export default {
     }
   },
   computed: {
+      clearFields() {
+        return this.configValues.map(config => {
+          let options = []
+          
+          const selects = config.selects.map(select => {
+            return {
+              option: select.listItem
+            }
+          })
+
+          const fields = config.fields.map(field => {
+            return {
+              option: field.name + ': ' + field.value
+            }
+          })
+
+          const flags = config.flags.map(flag => {
+            if(flag.isTrue) {
+            return {
+              option: flag.name
+            }
+            } else {
+              return {}
+            }
+          }).filter(item => Object.keys(item).length)
+
+          const settings = config.settings.map(setting => {
+            return {
+              option: setting.name + ': ' + setting.value
+            }
+          })
+
+          const disks = config.disks.map(disk => {
+            return {
+              option: ' ' + disk.title + ': ' + disk.amount
+            }
+          })
+
+          options = options.concat(selects, settings, flags, fields, disks)
+
+          return {
+            title: 'Конфигурация',
+            options
+          }
+        })
+      },
       fields() {
         return this.data.fields
       },
@@ -144,16 +195,16 @@ export default {
         return this.fields[0]
       },
       total() {
-        let selects 
-        let flags
-        let settings
-        let disks
-        let fields
-        let total=0
+        let selects = 0
+        let flags = 0
+        let settings = 0
+        let disks = 0
+        let fields = 0
+        let total = 0
 
         this.configValues.forEach(item => {
           selects = item.selects.reduce((accum, a) => {
-            return accum + Number(a.value)
+            return accum + Number(a.price)
           }, 0)
 
           fields = item.fields.reduce((accum, a) => {
@@ -180,70 +231,101 @@ export default {
 
         return Number(this.data.basePrice) + Number(total)
       },
-      totalDay() {
-        return Math.round(this.total / 30)
-      }
+
   },
   watch: {
-      key(){
-        this.init()
-      }
+    key(){
+      this.init()
+    }
   },
   created() {
     this.init()
   },
   methods: {
+    createPdf() {
+          const doc = new JsPDF()
+          doc.setFont('PTSans-Regular', 'normal');
+          doc.setFontSize(22);
+          doc.text('RUSONYX', 90, 10)
+          doc.setFontSize(14);
+          doc.text('Расчет стоимости тарифа', 80, 20)
+          let offset = 25
+          this.clearFields.forEach(element => {
+              doc.setLineWidth(0.5);
+              doc.line(10, offset, 200, offset);
+              offset+=10
+              doc.text(element.title, 10, offset)
+              element.options.forEach(option => {
+                offset+=5
+                doc.text(option.option, 15, offset)
+              })
+              offset+=10
+            })
+            doc.line(10, offset, 200, offset);            
+            offset+=10
+            doc.text('Оплата: ' + this.total + ' ₽', 10, offset)       
+            doc.save("rusonyx.pdf")
+    },
     init() {
-          let i=0
-          let j=0
-          let k=0
-          let f=0
+      let i=0
+      let j=0
+      let k=0
+      let f=0
 
-          this.fields.forEach(field => {
-            if(field.layout==='bonus') {
-              this.bonus = field.attributes
+      this.fields.forEach(field => {
+        if(field.layout==='bonus') {
+          this.bonus = field.attributes
+        }
+
+        if(field.layout==='listOption') {
+          field.attributes.index=k
+          this.configValues[0].selects.push({ price: Number(field.attributes.list[0].attributes.price), 
+                                              listItem: field.attributes.list[0].attributes.listItem})              
+          k++
+        }
+
+        if(field.layout==='field') {
+          field.attributes.index=f
+          this.configValues[0].fields.push({value: Number(field.attributes.default), 
+                                            price: Number(field.attributes.price), 
+                                            name: field.attributes.title})
+          f++
+        }
+
+        if(field.layout==='checkbox') {
+          field.attributes.checkboxes.forEach(item => {
+            this.configValues[0].flags.push({value: Number(item.attributes.price), 
+                                              isTrue: false, 
+                                              name: item.attributes.title})
+          })
+        }
+
+        if(field.layout==='setting') {
+          field.attributes.index=i
+          this.configValues[0].settings.push({value: Number(field.attributes.default), 
+                                              price: Number(field.attributes.price),
+                                              name: field.attributes.title})
+          i++
+        }
+
+        if(field.layout==='disk') {
+          let price
+          this.firstDisk = field.attributes.fields
+          this.firstDisk.forEach(disk => {
+            if(disk.layout==='radio') {
+              price = disk.attributes.list[0].attributes.price
             }
 
-            if(field.layout==='listOption') {
-              field.attributes.index=k
-              this.configValues[0].selects.push({value: Number(field.attributes.list[0].attributes.price)})
-              k++
+            if(disk.layout==='setting') {
+              disk.attributes.index=j
+              this.configValues[0].disks.push({amount: Number(disk.attributes.default), 
+                                               title: disk.attributes.title,
+                                               price})
+              j++
             }
-
-            if(field.layout==='field') {
-              field.attributes.index=f
-              this.configValues[0].fields.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
-              f++
-            }
-
-            if(field.layout==='checkbox') {
-              field.attributes.checkboxes.forEach(item => {
-                this.configValues[0].flags.push({value: Number(item.attributes.price), isTrue: false})
-              })
-            }
-
-            if(field.layout==='setting') {
-              field.attributes.index=i
-              this.configValues[0].settings.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
-              i++
-            }
-
-            if(field.layout==='disk') {
-              let price
-              this.firstDisk = field.attributes.fields
-              this.firstDisk.forEach(disk => {
-                if(disk.layout==='radio') {
-                  price = disk.attributes.list[0].attributes.price
-                }
-
-                if(disk.layout==='setting') {
-                  disk.attributes.index=j
-                  this.configValues[0].disks.push({amount: Number(disk.attributes.default), price})
-                  j++
-                }
-              })
-            }
-          });
+          })
+        }
+      });
     },
     addDisk(index) {
       let price
@@ -252,7 +334,9 @@ export default {
               price = disk.attributes.list[0].attributes.price
             }
            if(disk.layout==='setting') {
-             this.configValues[index].disks.push({amount: Number(disk.attributes.default), price})
+             this.configValues[index].disks.push({amount: Number(disk.attributes.default), 
+                                                  title: disk.attributes.title,
+                                                  price})
            }
       })
     },
@@ -267,20 +351,28 @@ export default {
           lastIndex = this.configValues.length-1
 
           if(field.layout==='listOption') {
-            this.configValues[lastIndex].selects.push({value: Number(field.attributes.list[0].attributes.price)})  
+            this.configValues[lastIndex].selects.push({ 
+                                                        price: Number(field.attributes.list[0].attributes.price),
+                                                        listItem: field.attributes.list[0].attributes.listItem})  
           }
 
           if(field.layout==='setting') {
-            this.configValues[lastIndex].settings.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+            this.configValues[lastIndex].settings.push({value: Number(field.attributes.default), 
+                                                        price: Number(field.attributes.price),
+                                                        name: field.attributes.title})
           }
 
           if(field.layout==='field') {
-            this.configValues[lastIndex].fields.push({value: Number(field.attributes.default), price: Number(field.attributes.price)})
+            this.configValues[lastIndex].fields.push({value: Number(field.attributes.default), 
+                                                      price: Number(field.attributes.price), 
+                                                      name: field.attributes.title})
           }
 
           if(field.layout==='checkbox') {
                 field.attributes.checkboxes.forEach(item => {
-                this.configValues[lastIndex].flags.push({value: Number(item.attributes.price), isTrue: false})
+                this.configValues[lastIndex].flags.push({value: Number(item.attributes.price), 
+                                                         isTrue: false, 
+                                                         name: item.attributes.title})
             })
           }
 
@@ -293,7 +385,9 @@ export default {
             }
 
             if(disk.layout==='setting') {
-              this.configValues[lastIndex].disks.push({amount: Number(disk.attributes.default), price})
+              this.configValues[lastIndex].disks.push({amount: Number(disk.attributes.default), 
+                                                       title: disk.attributes.title,
+                                                       price})
             }
           })
           }

@@ -1,10 +1,8 @@
 <template>
   <section id="journal" class="magazine">
-    <Navigation v-if="navigation" :rubrics="rubrics" @filter="filterArticles"/>
+    <Navigation v-if="navigation" :rubrics="rubrics" />
     <div class="container">
-      <h1 v-if="!navigation" class="magazine__title title">{{ title }}</h1>
-      <div v-for="rubric, k in rubrics" :id="'magazine-link-' + (k+1)" :key="rubric.slug" data-tab-content 
-           class="magazine__tabs-wrapper" :class="{'magazine__tabs-wrapper--active':(k==0)}">
+      <h1 v-if="!navigation" class="magazine__title title">{{ title }}</h1>        
         <div v-for="item, i in articlesArray" :key="'item' + i" class="magazine__wrapper">
           <div v-for="article, j in item" :key="article.title" :class="leftRight(i, j)">
             <nuxt-link :to="'journal/' + article.slug" class="picture">
@@ -21,7 +19,7 @@
           </div>
         </div>
       </div>
-    </div>
+    
   </section>
 </template>
 
@@ -49,15 +47,23 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    }
-  },
-  data() {
-    return {
-      filter: []
+    },
+    tag: {
+      type: String,
+      default: 'journal'
     }
   },
   computed: {
-    ...mapGetters(['journal', 'rubrics']),
+    ...mapGetters(['journal', 'rubrics', 'activeRubric']),
+    filter() {
+      let filter = this.activeRubric
+      if(this.activeRubric==='all') {
+        this.rubrics.forEach((element) => {
+        filter += ' ' + element.slug
+        })
+      } 
+      return filter
+    },
     articles() {
       const articles = this.journal
       articles.forEach((element) => {
@@ -81,41 +87,9 @@ export default {
       articlesArray.push(this.articles.slice(2,4)) 
       articlesArray.push(this.articles.slice(4,6))
       return articlesArray
-    },
-  },
-  created() {
-    this.rubrics.forEach((element) => {
-        this.filter += ' ' + element.slug
-      })
-  },
-  mounted() {
-    const magazineTabs = document.querySelectorAll('[data-tab-target]')
-    const magazineTabContents = document.querySelectorAll('[data-tab-content]')
-
-    magazineTabs.forEach((tab) => {
-      tab?.addEventListener('click', () => {
-        const target = document.querySelector(tab.dataset.tabTarget)
-        magazineTabContents.forEach((magazineTabContent) => {
-          magazineTabContent.classList.remove('magazine__tabs-wrapper--active')
-        })
-        target.classList.add('magazine__tabs-wrapper--active')
-        magazineTabs.forEach((tab) => {
-          tab.classList.remove('navigation__magazine-link--active')
-        })
-        tab.classList.add('navigation__magazine-link--active')
-      })
-    })
+    }
   },
   methods: {
-    filterArticles(rubric) {
-      this.filter = rubric
-
-      if(rubric==='all') {
-        this.rubrics.forEach((element) => {
-        this.filter += ' ' + element.slug
-        })
-      }
-    },
     timeConverter(unixTimestamp) {
       const a = new Date(unixTimestamp)
       const months = [

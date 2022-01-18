@@ -1,5 +1,5 @@
 <template>
-  <section id="requisites" class="requisites">
+  <section :id="tag" class="requisites">
     <div class="container">
       <div class="requisites__title title">
         {{ requisites.title }}
@@ -30,6 +30,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Requisites',
+  props: {
+    tag: {
+      type: String,
+      default: 'requisities'
+    }
+  },
   computed: {
     ...mapGetters(['requisites']),
     requisitesItems () {

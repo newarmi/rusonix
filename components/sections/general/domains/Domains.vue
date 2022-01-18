@@ -1,5 +1,5 @@
 <template >
-  <section id="domains" class="domain">
+  <section :id="tag" class="domain">
     <div class="container">
       <div class="domain__title title">{{ domains.title }}</div>
       <div class="domain__text-wrap">
@@ -48,6 +48,13 @@ export default {
   components: {
     Sliders
   },
+  props: {
+    tag: {
+      type: String,
+      default: 'domains'
+    }
+  },
+
   computed: {
     ...mapGetters(['domains', 'domainTarriff']),
     domainItems() {

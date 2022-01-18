@@ -1,5 +1,5 @@
 <template>
-  <section id="form" class="form">
+  <section :id="tag" class="form">
         <div class="container">
           <div class="form__title title">{{title}}</div>
         </div>
@@ -53,6 +53,10 @@ export default {
     title: {
       type: String,
       default: "Заявка на партнерство"
+    },
+    tag: {
+      type: String,
+      default: 'form'
     }
   },
   data() {

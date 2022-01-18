@@ -1,5 +1,5 @@
 <template>
-      <section id="benefits" class="possibilities">
+      <section :id="tag" class="possibilities" :class="tabs.tag">
         <div class="container">
           <div class="possibilities__title title">{{tabs.blockTitle}}</div>
         </div>
@@ -33,6 +33,12 @@ import 'swiper/css/swiper.min.css'
 
 export default {
   name: 'Possibilities',
+  props: {
+      tag: {
+        type: String,
+        default: 'possibilities'
+      }
+  },
   computed: {
       tabs() {
         return this.$store.getters['universal/tabs']

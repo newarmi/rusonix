@@ -6,15 +6,15 @@
       <Search v-if="header.search"/>
       <h1 v-if="isJournal" class="start__title start__title-cscard" v-html="topArticles.top_journal.name"></h1>
       <ul v-if="header.tags" class="start__list">
-            <li class="start__item">
-              <a class="start__link" href="#">Обзор</a>
-            </li>
-            <li class="start__item">
-              <a class="start__link" href="#">Стоимость</a>
+            <li v-for="tag in tags" :key="tag.key" class="start__item">
+              <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{tag.attributes.name}}</div>
             </li>
           </ul>
       <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></div>
-      <button v-if="button" class="start__cscard-btn" @click="buttonAction">{{ button }}</button>
+      <div v-if="isButtonPage">
+        <button v-for="button in headerButtons" :key="button.key" 
+                class="start__cscard-btn" @click="buttonAction(button)">{{ button.attributes.title }}</button>
+      </div>
     </div>
     
   </div>
@@ -46,6 +46,9 @@ export default {
     isJournal() {
         return this.$route.name==='journal'
     },
+    isButtonPage() {
+      return  !this.isArticle
+    },
     header() {           
       if(this.$route.name==='service-slug') {
         return this.$store.getters['universal/header']
@@ -62,35 +65,49 @@ export default {
 
       return this.$store.getters.header
     },
+    headerButtons() {
+      return this.header.header_button
+    },
+    tags() {
+      return this.header.tags
+    },
     topArticles() {
       return this.$store.getters.topArticles
       },
-    button() {
-      if(this.isArticle) {
-        return false
-      }
-      return this.header.header_button
-    },
     isDecor() {
       return !this.isArticle&&!this.isDocument&&!this.isPost;
     }
   },
   methods: {
-    buttonAction() {
-      if(this.header.page_type==='this') {
-        const block = document.querySelector('#' + this.header.anchor)
+    buttonAction(button) {
+      if(button.layout==='tab') {
+        this.scrollToBlock(button.attributes.tab)
+      } 
+      
+      if(button.layout==='journal') {
+        this.$router.push({path: '/journal/' + button.attributes.page})  
+      } 
+
+      if(button.layout==='main') {
+        this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab})  
+      }
+
+      if(button.layout==='service') {
+        this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab})  
+      }
+
+      if(button.layout==='document') {
+        this.$router.push({path: '/company/' + button.attributes.page})  
+      }
+
+      if(button.layout==='link') {
+        window.open(button.attributes.link, '_blank');
+      } 
+    },
+    scrollToBlock(tag) {
+      const block = document.querySelector('#' + tag)
         if(block)
           block.scrollIntoView({ behavior: 'smooth' })
-      } else {
-
-      let tab = this.header.tab
-
-      if(tab==='null') {
-          tab=''
-      }
-
-      this.$router.push({path: this.header.page_type + this.header.link, hash: tab})  
-      }
     }
   }
 }
@@ -187,6 +204,7 @@ export default {
   letter-spacing: 0px;
   text-align: left;
   color: #fff;
+  cursor: pointer;
 }
 
 .start__title-descr.header-content__services {
@@ -253,6 +271,7 @@ export default {
   background-color: #0f7f69;
   border-radius: 8px;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .start__cscard-btn:hover {

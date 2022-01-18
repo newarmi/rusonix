@@ -1,5 +1,5 @@
 <template>
-  <section id="questions" class="support">
+  <section :id="tag" class="support" :class="support.tag">
     <div class="container">
       <div class="support__title title">{{ support.blockTitle }}</div>
       <div class="support__text text" v-html="support.blockDescription">
@@ -52,6 +52,12 @@
 <script>
 export default {
   name: 'Support',
+  props: {
+      tag: {
+        type: String,
+        default: 'questions'
+      }
+  },
   computed: {
       support () {
         return this.$store.getters['universal/questions']

@@ -1,5 +1,5 @@
 <template>
-  <section id="partner" class="conditions">
+  <section :id="tag" class="conditions">
     <div class="container">
       <div class="conditions__title title">{{title}}</div>
       <div class="conditions__title-wrap-text">
@@ -63,6 +63,10 @@ export default {
     description: {
       type: String,
       default: ''
+    },
+    tag: {
+      type: String,
+      default: 'partner'
     }
   },
   data() {

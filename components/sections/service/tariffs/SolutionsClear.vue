@@ -1,5 +1,5 @@
 <template>
-  <section class="tariff">
+  <section :id="data.tag" class="tariff">
     <div class="container">
       <div class="tariff__title title">{{ data.title }}</div>
       <div class="tariff__wrapper">
@@ -61,7 +61,6 @@
             </div>
           </div>
           <div data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
-
             <div class="tariff__configuration">
               <SolutionCard v-for="item, i in solutionGroup[s].solution" :key="item.key"
                             :title="item.attributes.title"
@@ -72,7 +71,8 @@
             </div>
 
             <div v-if="solutionConfigs.length-s===1" class="tariff__wrapper-right">
-              <Total :total="totalMonth" :bonus="bonuses" :mobile="false" :items="items" />
+              <Total :total="totalMonth" :bonus="bonuses" :mobile="false" 
+                     :items="clearItems" @createPDF="createPdf"/>
             </div>
           </div>
           <div v-if="solutionConfigs.length-s===1" class="calculate__wrapper-btn-add btn_mobile_hide">
@@ -92,13 +92,14 @@
 
     </div>
     <div class="calculate__total-tablet">
-      <Total :total="totalMonth" :bonus="bonuses" :mobile="true" :items="items"/>
+      <Total :total="totalMonth" :bonus="bonuses" :mobile="true" 
+             :items="clearItems" @createPDF="createPdf"/>
     </div>
   </section>
 </template>
 
 <script>
-
+import { jsPDF as JsPDF  } from "jspdf";
 import 'swiper/css/swiper.min.css'
 
 export default {
@@ -128,6 +129,25 @@ export default {
     }
   },
   computed: {
+      clearItems() {       
+          return this.items.map(item => {
+            if(item.item) {  
+            const options = item.item.options.map(option => {
+              return {
+                option: option.attributes.option
+              }
+            })
+            
+            return {
+              title: item.item.title,
+              options
+            }
+          } else {
+            return {}
+          }
+          })
+        
+      },
       total() {
         const result = this.items.reduce((accum, a, i) => {
           if(a.item)
@@ -142,6 +162,14 @@ export default {
         const result = this.items.reduce((accum, a, i) => {
           if(a.item)
           return accum + Number(a.item.periodPrice[this.period[i].periodNumber].price) / this.period[i].month
+          return accum
+        }, 0)
+        return Math.round(result)
+      },
+      totalAll() {
+        const result = this.items.reduce((accum, a, i) => {
+          if(a.item)
+          return accum + Number(a.item.periodPrice[this.period[i].periodNumber].price)
           return accum
         }, 0)
         return Math.round(result)
@@ -220,6 +248,45 @@ export default {
     this.solutionGroup.push({solution: this.firstSolutions})
   },
   methods: {
+      createPdf() {
+        if(this.items[0].item) {
+          const doc = new JsPDF()
+          doc.setFont('PTSans-Regular', 'normal');
+          doc.setFontSize(22);
+          doc.text('RUSONYX', 90, 10)
+          doc.setFontSize(14);
+          doc.text('Расчет стоимости тарифа', 80, 20)
+          let offset = 25
+          this.items.forEach((element, index) => {
+            if(element.item) {
+              doc.setLineWidth(0.5);
+              doc.line(10, offset, 200, offset);
+              offset+=10
+              doc.text('Тип диска: ' + element.item.diskType, 10, offset)
+              offset+=5
+              doc.text('Период: ' + this.period[index].month + ' мес.', 10, offset)
+              offset+=5
+              doc.text('Количество серверов: ' + this.servers[index].servers, 10, offset)
+              offset+=5
+              doc.text('Тариф: ' + element.item.title, 10, offset)
+              offset+=5            
+              element.item.options.forEach(option => {
+                doc.text(option.attributes.option, 15, offset)
+                offset+=5
+              })
+              doc.text(element.item.price, 10, offset)
+              offset+=5
+              }
+              
+            })
+            doc.line(10, offset, 200, offset);            
+            offset+=10
+            doc.text('Итого: ' + this.totalMonth + ' ₽ / месяц', 10, offset)
+            offset+=5
+            doc.text('Оплата: ' + this.totalAll + ' ₽', 10, offset)       
+          doc.save("rusonyx.pdf")
+        }
+      },
       serversWord(number) {
         switch(true) {
           case (number===1||(number>19&&number%10===1)): return 'сервер'
@@ -234,7 +301,7 @@ export default {
           this.servers.push({servers: Number(this.data.serverNumber),
                              word: this.serversWord(Number(this.data.serverNumber))})
           this.dropdown.push({show: false})
-          this.period.push({period: this.data.periods[0].attributes.period, periodNumber: 0})
+          this.period.push({period: this.data.periods[0].attributes.period, periodNumber: 0, month: 1})
 
           this.selectCards.push([[],[]])
 
@@ -250,7 +317,6 @@ export default {
           this.tabIndex.push({tab:0})
 
           this.items.push({item: null})
-
       },
       removeSolution() {
           this.solutionConfigs.pop()

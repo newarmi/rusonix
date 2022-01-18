@@ -1,5 +1,5 @@
 <template>
-  <section id="reviews" class="reviews">
+  <section :id="tag" class="reviews">
     <div class="container">
       <h1 class="reviews__title title">{{ reviews.title }}</h1>
       <Slider :reviews="reviews"/>
@@ -16,6 +16,12 @@ export default {
   name: 'Reviews',
   components: {
     Slider
+  },
+  props: {
+    tag: {
+      type: String,
+      default: 'reviews'
+    }
   },
   computed: {
     ...mapGetters(['reviews']),

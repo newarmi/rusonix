@@ -1,8 +1,7 @@
 <template>
-  <section id="tech" class="technologies">
+  <section :id="tag" class="technologies" :class="technologies.tag">
     <div class="container">
       <div class="technologies__title title">{{ technologies.blockTitle }}</div>
-
       <div class="technologies__text-wrap">
         <div class="technologies__text text" v-html="technologies.blockDescription">
         </div>
@@ -23,10 +22,16 @@
 <script>
 export default {
   name: 'Technologies',
+  props: {
+    tag: {
+      type: String,
+      default: 'tech'
+    }
+  }, 
   computed: {
-      technologies () {
-        return this.$store.getters['universal/technologies']
-      }
+    technologies () {
+      return this.$store.getters['universal/technologies']
+    }
   },
 }
 </script>

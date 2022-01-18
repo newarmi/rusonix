@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :id="tag">
      <section class="knowledge">
         <div class="container">
             <div class="knowledge__wrapper">
@@ -26,6 +26,12 @@ export default {
   name: 'Advice',
   components: {
     'TopPosts': () => import('~/components/sections/general/TopPosts'),
+  },
+  props: {
+    tag: {
+      type: String,
+      default: 'knowledge'
+    }
   },
   data() {
     return {

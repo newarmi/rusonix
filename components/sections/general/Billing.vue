@@ -1,5 +1,5 @@
 <template>
-  <section id="billing" class="details">
+  <section :id="tag" class="details">
     <div class="container">
       <h1 class="details__title title">
         {{billing.title}}
@@ -36,6 +36,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Billing',
+  props: {
+    tag: {
+      type: String,
+      default: 'billing'
+    }
+  },
   data() {
     return {
       imageDesktop: null,
