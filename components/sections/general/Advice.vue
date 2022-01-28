@@ -1,19 +1,19 @@
 <template>
   <div :id="tag">
-     <section class="knowledge">
-        <div class="container">
-            <div class="knowledge__wrapper">
-                <div v-for="item in categories" :key="item.title" class="knowledge__wrap">
-                    <h4 class="knowledge__title" @click="openSubmenu(item.slug)">{{ item.title }}</h4>
-                    <ul class="knowledge__list">
-                        <li v-for="post in item.posts" :key="post.title" class="knowledge__item"><span class="knowledge__item-img">
-                          <img src="@/assets/img/contact-icon.png" alt=""></span>
-                          <div class="knowledge__link" @click="openPost(item.slug, post.slug)">{{ post.title }}</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <section class="knowledge">
+      <div class="container">
+        <div class="knowledge__wrapper">
+          <div v-for="item in categories" :key="item.title" class="knowledge__wrap">
+            <h4 class="knowledge__title" @click="openSubmenu(item.slug)">{{ item.title }}</h4>
+            <ul class="knowledge__list">
+              <li v-for="post in item.posts" :key="post.title" class="knowledge__item"><span class="knowledge__item-img">
+                <img src="@/assets/img/contact-icon.png" alt=""></span>
+                <div class="knowledge__link" @click="openPost(item.slug, post.slug)">{{ post.title }}</div>
+              </li>
+            </ul>
+          </div>
         </div>
+      </div>
     </section>
     <TopPosts />
   </div>
@@ -33,11 +33,6 @@ export default {
       default: 'knowledge'
     }
   },
-  data() {
-    return {
- 
-    }
-  },
   computed: {
    ...mapGetters('knowledge', ['posts', 'categories'])
   },
@@ -51,7 +46,6 @@ export default {
   },
 
 }
-
 
 </script>
 

@@ -89,8 +89,6 @@ export default {
 }
 
 .swiper-scrollbar-drag {
-  /*height: 100%;*/
-  /*width: 100%;*/
   position: relative;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -99,7 +97,6 @@ export default {
   top: -6px;
   background: #ffffff;
   box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .07);
-  /*border-radius: 13px;*/
 }
 
 .scrollbar__img {

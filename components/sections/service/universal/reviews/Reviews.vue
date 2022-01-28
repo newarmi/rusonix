@@ -8,13 +8,12 @@
 </template>
 
 <script>
-import Slider from '~/components/sections/service/universal/reviews/Slider'
 
 export default {
   name: 'Reviews',
 
   components: {
-    Slider
+    Slider: () => import('~/components/sections/service/universal/reviews/Slider')
   },
   props: {
       tag: {

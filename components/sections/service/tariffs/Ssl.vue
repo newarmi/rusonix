@@ -3,7 +3,6 @@
     <div class="container">
       <div class="sertificate__title title">{{ title }}</div>
       <div class="sertificate__wrapper">
-
         <div class="sertificate__wrapper-first">
           <div class="sertificate__wrapper-left">
             <div class="sertificate__wrap-left">
@@ -118,16 +117,18 @@ export default {
               layout: options.layout,
               key: options.key,
               attributes: {
-                            "logo": options.attributes.logo,
-                            "provider": options.attributes.provider,
-                            "forWhat": options.attributes.forWhat,
-                            "domains": options.attributes.domains,
-                            "level": options.attributes.level,
-                            "oldPrice": options.attributes.oldPrice,
-                            "description": options.attributes.description,
-                            "options": options.attributes.options,
-                            "title": item.title ? item.title : item.name,
-                            "price": Math.round(item.periods[0].amount) + ' ₽',
+                            type: item.type,
+                            billing_id: item.billing_id,
+                            logo: options.attributes.logo,
+                            provider: options.attributes.provider,
+                            forWhat: options.attributes.forWhat,
+                            domains: options.attributes.domains,
+                            level: options.attributes.level,
+                            description: options.attributes.description,
+                            options: options.attributes.options,
+                            title: item.title ? item.title : item.name,
+                            price: Math.round(item.periods[0].amount) + ' ₽',
+                            oldPrice: item.periods[0].percent==="0%" ? '' : Math.round(item.periods[0].full_cost) + ' ₽'
                         }
             }
           } else {
@@ -139,7 +140,9 @@ export default {
         return this.ssl.filterTitle
       },
       certificates() {
+        if(this.ssl.certificates.length)
         return this.ssl.certificates[0].attributes.certificates.concat(this.billingClear)
+        return this.billingClear
       },
       filterDomens () {
         if(this.filter4==='all') {

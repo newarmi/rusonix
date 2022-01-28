@@ -1,81 +1,113 @@
 <template>
-  <div>
-    <section class="license__storage">
-      <div class="container">
-        <div class="license__title title">
-          {{ lines.tariffTitle }}
-        </div>
-
-        <div class="license__wrapper" :class="wrapper">
-          <div class="license__wrapper-top" :class="titleWrapper">
-            <div class="license__top-title" :class="titleText">Сертификат</div>
+  <section class="license__storage">
+    <div class="container">
+      <div class="license__title title">
+        {{ lines.tariffTitle }}
+      </div>
+      <div class="license__wrapper" :class="wrapper">
+        <div class="license__wrapper-top" :class="titleWrapper">
+          <div class="license__top-title" :class="titleText">Сертификат</div>
             <div v-for="option in lines.options" :key="option.key" class="license__top-title" :class="titleText">
               {{ option.attributes.title }}
             </div>
-            <div class="license__top-title" :class="titleText">Стоимость</div>
-          </div>
-
-          <div v-for="line in billingTariffs" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
-
-            <div class="license__wrap-text">{{ line.name }}</div>
-
-            <div v-for="item in line.options[0].attributes.options" :key="item.key">
-              <div v-if="item.layout === 'list'" class="license__wrap-select">
-                <select class="license__select license__select--mod">
-                  <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
-                    {{ option.attributes.item }}
-                  </option>
-                </select>
-              </div>
-
-              <div v-if="item.layout === 'field'" class="license__input">
-                <input class="license__input-text" type="number" :value="item.attributes.value" />
-              </div>
-
-              <div v-if="item.layout === 'text'" class="license__wrap-text">
-                {{ item.attributes.value }}
-              </div>
-            </div>
-
-            <div class="license__wrap-total-box">
-              <div class="license__total">{{ Math.round(line.periods[0].amount)}} ₽</div>
-              <button class="license__btn">{{ line.options[0].attributes.buttonName }}</button>
-            </div>
-          </div>
+          <div class="license__top-title" :class="titleText">Период</div>
+          <div class="license__top-title" :class="titleText">Стоимость</div>
         </div>
 
-        <!-- tablet  -->
-        <div class="license__tablet-wrapper">
-          <div v-for="line in billingTariffs" :key="line.key" class="license__tablet" >
-            <div class="license__tablet-title">{{ line.name }}</div>
+        <div v-for="line, ind in billingTariffs" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
 
-            <div v-for="item, i in line.options[0].attributes.options" :key="item.key" class="license__tablet-wrap--tablet" >
-              <div class="license__tablet-text">{{ options[i].title }}</div>
+          <div class="license__wrap-text">{{ line.title ? line.title : line.name }}</div>
 
-              <div v-if="item.layout === 'field'" class="license__input">
-                <input class="license__input-text" type="number" :value="item.attributes.value" />
-              </div>
+          <div v-for="item in line.options[0].attributes.options" :key="item.key">
 
-              <div v-if="item.layout === 'list'" class="license__wrap-select">
-                <select class="license__select license__select-tablet license__select-tablet--mod" >
-                  <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
-                    {{ option.attributes.item }}
-                  </option>
-                </select>
-              </div>
-
-              <div v-if="item.layout === 'text'" class="license__tablet-text license__tablet-text--mod" >
-                {{ item.attributes.value }}
-              </div>
+            <div v-if="item.layout === 'list'" class="license__wrap-select">
+              <select class="license__select license__select--mod">
+                <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
+                  {{ option.attributes.item }}
+                </option>
+              </select>
             </div>
 
-            <div class="license__total license__total--tablet">{{ Math.round(line.periods[0].amount)}} ₽</div>
-            <button class="license__btn license__btn--tablet">{{ line.options[0].attributes.buttonName }}</button>
+            <div v-if="item.layout === 'field'" class="license__input">
+              <input class="license__input-text" type="number" :value="item.attributes.value" />
+            </div>
+
+            <div v-if="item.layout === 'text'" class="license__wrap-text">
+              {{ item.attributes.value }}
+            </div>
+          </div>
+
+          <div class="license__wrap-select">
+              <div v-if="line.periods.length===1" class="license__wrap-text">
+                {{ periodToText(line.periods[0].period) }}
+              </div>
+              <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
+                <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                        :value="i">
+                  {{ periodToText(period.period) }}
+                </option>
+              </select>
+          </div>
+
+          <div class="license__wrap-total-box">
+            <div class="license__total">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
+            <button class="license__btn" 
+                    @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
+                    {{ line.options[0].attributes.buttonName }}</button>
           </div>
         </div>
       </div>
-    </section>
-  </div>
+
+      <!-- tablet  -->
+      <div class="license__tablet-wrapper">
+        <div v-for="line, ind in billingTariffs" :key="line.key" class="license__tablet" >
+          <div class="license__tablet-title">{{ line.name }}</div>
+
+          <div v-for="item, i in line.options[0].attributes.options" :key="item.key" class="license__tablet-wrap--tablet" >
+            <div class="license__tablet-text">{{ options[i].title }}</div>
+
+            <div v-if="item.layout === 'field'" class="license__input">
+              <input class="license__input-text" type="number" :value="item.attributes.value" />
+            </div>
+
+            <div v-if="item.layout === 'list'" class="license__wrap-select">
+              <select class="license__select license__select-tablet license__select-tablet--mod" >
+                <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
+                  {{ option.attributes.item }}
+                </option>
+              </select>
+            </div>
+
+            <div v-if="item.layout === 'text'" class="license__tablet-text license__tablet-text--mod" >
+              {{ item.attributes.value }}
+            </div>
+
+          
+          </div>
+          <div class="license__tablet-wrap--tablet" >
+
+          <div class="license__tablet-text">Период</div>
+            <div class="license__wrap-select">
+                <div v-if="line.periods.length===1" class="license__wrap-text">
+                  {{ periodToText(line.periods[0].period) }}
+                </div>
+                <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
+                  <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                          :value="i">
+                    {{ periodToText(period.period) }}
+                  </option>
+                </select>
+            </div>
+          </div>
+
+          <div class="license__total license__total--tablet">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
+          <button class="license__btn license__btn--tablet" 
+                  @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
+                  {{ line.options[0].attributes.buttonName }}</button>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -87,6 +119,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      periods: []
+    }
+  },
   computed: {
     allBillingTariffs () {
       return this.$store.getters['universal/billingTariffs']
@@ -97,7 +134,6 @@ export default {
       }
       return this.allBillingTariffs
     },
-
     options() {
       const options = []
       this.lines.options.forEach((element) => {
@@ -109,32 +145,70 @@ export default {
       return this.lines.options.length
     },
     wrapper() {
-      return {'license__wrapper-one': this.optionNumber === 1,
-              'license__wrapper-two': this.optionNumber === 2,
-              'license__wrapper-three': this.optionNumber === 3,}
+      return {'license__wrapper-two': this.optionNumber === 1,
+              'license__wrapper-three': this.optionNumber === 2,
+              }
     },
     titleWrapper() {
       return {
-        'license__wrapper-top-one': this.optionNumber === 1,
-        'license__wrapper-top-two': this.optionNumber === 2,
-        'license__wrapper-top-three': this.optionNumber === 3,
+        'license__wrapper-top-two': this.optionNumber === 1,
+        'license__wrapper-top-three': this.optionNumber === 2,
+        
       }
     },
     titleText() {
       return {
-        'license__top-title-one': this.optionNumber === 1,
-        'license__top-title-two': this.optionNumber === 2,
-        'license__top-title-three': this.optionNumber === 3,
+        'license__top-title-two': this.optionNumber === 1,
+        'license__top-title-three': this.optionNumber === 2,
+        
       }
     },
     wrapperBottom() {
       return {
-        'license__wrapper-bottom-one': this.optionNumber === 1,
-        'license__wrapper-bottom-two': this.optionNumber === 2,
-        'license__wrapper-bottom-three': this.optionNumber === 3,
+        'license__wrapper-bottom-two': this.optionNumber === 1,
+        'license__wrapper-bottom-three': this.optionNumber === 2,
+
       }
     },
   },
+  watch: {
+    allBillingTariffs() {
+      this.init()
+    }
+  },
+  created() {
+      this.init()
+  },
+  methods: {
+    init() {
+      this.billingTariffs.forEach(() => {
+        this.periods.push({period: 0})
+      })
+    },
+    choosePeriod(line, period) {
+      this.periods[line].period = period
+    },
+    goToBilling(id, type, period) {
+     window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+                   + id + `&period=` + period + `&project=3`, '_blank')
+    },
+    periodToText(period) {
+      const periodNumber = Number(period)
+      if(periodNumber===1) {
+        return period + ' месяц'
+      }
+      if(periodNumber>1&&periodNumber<5) {
+        return period + ' месяца'
+      } 
+      if(periodNumber<12) {
+        return period + ' месяцев'
+      }
+      if(periodNumber===12) return '1 год'
+      if(periodNumber===24) return '2 года'
+      if(periodNumber===36) return '3 года'
+    }
+  }
 }
 </script>
 
@@ -403,7 +477,7 @@ export default {
 }
 @media (max-width: 1200px) {
   .license__input-text {
-    max-width: 201px;
+    max-width: 185px;
   }
 }
 

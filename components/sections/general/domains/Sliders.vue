@@ -120,6 +120,7 @@ export default {
   background-color: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09);
   margin-bottom: 24px;
+  cursor: pointer;
 }
 
 .domain__card-title {

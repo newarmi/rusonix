@@ -5,7 +5,8 @@ export const state = () => ({
   openMenu: true,
   searchQuery: '',
   searchResult: {},
-  activeRubric: 'all'
+  activeRubric: 'all',
+  domain: null
 })
 
 export const mutations = {
@@ -35,8 +36,10 @@ export const mutations = {
   },
   setRubric(state, rubric) {
     state.activeRubric = rubric
+  },
+  setDomain(state, domain) {
+    state.domain = domain
   }
-
 }
 
 export const actions = {
@@ -54,6 +57,11 @@ export const actions = {
       searchResult = await this.$axios.$post('page/search', {search: state.searchQuery})
     }
     commit('setSearchResult', searchResult)
+  },
+  async checkBillingDomain({commit}, domain) {
+    const domains = await this.$axios.$post('domain/check', {domain})
+    commit('setDomain', domains)
+    return ''
   },
   setTag({commit}, tag) {
     commit('setTag', tag)
@@ -82,6 +90,7 @@ export const getters = {
   getOpenMenu: state => state.openMenu,
   search: state => state.searchQuery,
   searchResult: state => state.searchResult,
+  domainAnswer: state => state.domain,
 
   tag: state => state.tag,
 

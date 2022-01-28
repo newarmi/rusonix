@@ -4,7 +4,6 @@
     <div class="container">
       <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
       <Search v-if="header.search"/>
-      <h1 v-if="isJournal" class="start__title start__title-cscard" v-html="topArticles.top_journal.name"></h1>
       <ul v-if="header.tags" class="start__list">
             <li v-for="tag in tags" :key="tag.key" class="start__item">
               <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{tag.attributes.name}}</div>
@@ -15,20 +14,17 @@
         <button v-for="button in headerButtons" :key="button.key" 
                 class="start__cscard-btn" @click="buttonAction(button)">{{ button.attributes.title }}</button>
       </div>
-    </div>
-    
+    </div>    
   </div>
   <div v-if="isDecor" class="header__decor" :class="{ 'header__decor__color' : isKnowledgeCategory}"></div>
 </div>
 </template>
 
 <script>
-import Search from '@/components/core/header/Search'
-
 export default {
   name: 'HeaderContent',
   components: {
-    Search
+    Search: () => import('@/components/core/header/Search')
   },
   computed: {
     isKnowledgeCategory () {
@@ -49,20 +45,12 @@ export default {
     isButtonPage() {
       return  !this.isArticle
     },
-    header() {           
-      if(this.$route.name==='service-slug') {
-        return this.$store.getters['universal/header']
+    header() {
+      switch(this.$route.name) {
+        case('service-slug'): return this.$store.getters['universal/header']
+        case('company-document'): return this.$store.getters['requisites/header']
+        case('journal-article'): return this.$store.getters['journal/header']
       }
-
-      if(this.$route.name==='company-document') {
-        return this.$store.getters['requisites/header']
-      }
-
-      if(this.isArticle) {
-        const articleHeader = this.$store.getters['journal/header']
-        return articleHeader
-      }
-
       return this.$store.getters.header
     },
     headerButtons() {
@@ -73,41 +61,28 @@ export default {
     },
     topArticles() {
       return this.$store.getters.topArticles
-      },
+    },
     isDecor() {
       return !this.isArticle&&!this.isDocument&&!this.isPost;
     }
   },
   methods: {
     buttonAction(button) {
-      if(button.layout==='tab') {
-        this.scrollToBlock(button.attributes.tab)
-      } 
-      
-      if(button.layout==='journal') {
-        this.$router.push({path: '/journal/' + button.attributes.page})  
-      } 
-
-      if(button.layout==='main') {
-        this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab})  
+      switch(button.layout) {
+        case('tab'): this.scrollToBlock(button.attributes.tab); break;
+        case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
+        case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
+        case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
+        case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
+        case('link'):  window.open(button.attributes.link, '_blank'); break;
       }
-
-      if(button.layout==='service') {
-        this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab})  
-      }
-
-      if(button.layout==='document') {
-        this.$router.push({path: '/company/' + button.attributes.page})  
-      }
-
-      if(button.layout==='link') {
-        window.open(button.attributes.link, '_blank');
-      } 
     },
     scrollToBlock(tag) {
       const block = document.querySelector('#' + tag)
-        if(block)
-          block.scrollIntoView({ behavior: 'smooth' })
+      if(block)
+        block.scrollIntoView({behavior: 'smooth'})
     }
   }
 }
@@ -140,20 +115,6 @@ export default {
     padding-top: 100px;
     padding-bottom: 24px;
   }
-}
-
-/* .header-content__wrapper.header-content__company,
-.header-content__wrapper.header-content__services {
-  padding-top: 296px;
-  padding-bottom: 200px;
-} */
-
-@media (max-width: 992px) {
-  /* .header-content__wrapper.header-content__company,
-  .header-content__wrapper.header-content__services {
-    padding-top: 215px;
-    padding-bottom: 200px;
-  } */
 }
 
 .start__title {

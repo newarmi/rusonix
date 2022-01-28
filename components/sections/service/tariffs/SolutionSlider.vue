@@ -6,7 +6,10 @@
           <div v-for="(item, i) in solutions" :key="item.key" class="swiper-slide">
             <SolutionCard
               :title="item.attributes.title"
-              :price="item.attributes.periodPrice[period[example].periodNumber].price + ' ₽'"
+              :price="item.attributes.periodPrice[period[example].periodNumber].price"
+              :sale="item.attributes.periodPrice[period[example].periodNumber].sale"
+              :oldprice="item.attributes.periodPrice[period[example].periodNumber].oldPrice"
+              :economy="item.attributes.periodPrice[period[example].periodNumber].economy"
               :options="item.attributes.options"
               :choose="cards[i].select"
               @chooseCard="chooseCard(i, item)"

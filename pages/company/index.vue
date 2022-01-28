@@ -1,6 +1,6 @@
 <template>
   <div id='company'>
-      <Constructor :pageblocks="pageBlocks" />     
+    <Constructor :pageblocks="pageBlocks" />     
   </div>
 </template>
 
@@ -14,12 +14,10 @@ export default {
   },
   async asyncData({store}) {
     await store.dispatch('fetchPage', 'company')
-
   },
   computed: {
     ...mapGetters(['pageBlocks'])
   },
-
 }
 </script>
 

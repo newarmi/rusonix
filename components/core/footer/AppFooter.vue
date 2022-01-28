@@ -34,7 +34,7 @@
         <nav class="navigation navigation__footer">
           <ul class="navigation__list">
             <li v-for="item in menu" :key="item.title + item.id + 'footer'" class="navigation__item navigation__item-footer">
-              <nuxt-link :to="'/' + item.link" class="navigation__link">{{ item.title }}</nuxt-link>
+              <a class="navigation__link" @click="buttonAction(item, item.type[0])">{{ item.type[0].attributes.title }}</a>
             </li>
           </ul>
         </nav>
@@ -55,12 +55,47 @@ export default {
   name: 'AppFooter',
   computed: {
     ...mapGetters(['footer', 'menu'])
+  },
+  methods: {
+    scrollToBlock(tag) {
+      const block = document.querySelector('#' + tag)
+      if(block)
+        block.scrollIntoView({behavior: 'smooth'})
+    },
+    buttonAction(parent, button) {
+      switch(button.layout) {
+        case('tab'): {
+          if(this.$route.fullPath==='/' + parent.attributes.page) {
+            this.scrollToBlock(button.attributes.tab)
+            this.isMenuOpen = !this.isMenuOpen
+          } else {
+            this.isMenuOpen = !this.isMenuOpen
+            this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
+          }
+            break;
+          }
+        case('rubric'): {
+          this.setRubric(button.attributes.page)
+          this.$router.push({path: '/journal'})  
+          break
+        }
+        case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
+        case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
+        case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
+        case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
+        case('link'):  window.open(button.attributes.link, '_blank'); break;
+      }
+    },
   }
 }
 </script>
 
 <style scoped>
-
+.navigation__link {
+  cursor: pointer;
+}
 .footer {
   background-color: #242424;
 }

@@ -1,30 +1,25 @@
 <template>
-    <section class="payers">
-        <div class="container">
-            <div class="payers__wrapper">
-                <div class="wrap__stap-back">
-                    <a href="#" class="btn__step-back" @click="back">
-                      <span class="arrow__step-back">
-                        <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
-                      </span>
-                    Назад</a>
+  <section class="payers">
+      <div class="container">
+          <div class="payers__wrapper">
+              <div class="wrap__stap-back">
+                  <a href="#" class="btn__step-back" @click="back">
+                    <span class="arrow__step-back">
+                      <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
+                    </span>
+                  Назад</a>
 
-                    <div class="date__stap-back">
-                        {{timeConverter(content.created_at)}}
-                    </div>
-                </div>
+                  <div class="date__stap-back">
+                      {{timeConverter(content.created_at)}}
+                  </div>
+              </div>
 
-
-                <h3 class="payers__title">
-                    {{content.title}}
-                </h3>
-                <div class="payers__wrap-content" v-html="content.content"></div>
-                
-                <p v-if="content.author!=='NULL'&&content.author" class="payers__publication">Опубликовано: {{content.author}}</p>
-            </div>
-
-        </div>
-    </section>
+              <h1 class="payers__title">{{content.title}}</h1>
+              <div class="payers__wrap-content" v-html="content.content"></div>          
+              <p v-if="content.author!=='NULL'&&content.author" class="payers__publication">Опубликовано: {{content.author}}</p>
+          </div>
+      </div>
+  </section>
 </template>
 
 <script>
@@ -34,6 +29,18 @@ export default {
   async asyncData({ store, params }) {    
     await store.dispatch('fetchPage', 'knowledge')
     await store.dispatch('knowledge/getContent', params.post)
+  },
+  head() {
+    return {
+        title: this.content.meta_title,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.content.meta_description,
+            }
+        ],
+    }
   },
   computed: {
     ...mapGetters('knowledge', ['content']),

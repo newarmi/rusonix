@@ -4,7 +4,7 @@
       <div class="calculate__total-title-wrap" :class="wrapClass">
         <div class="calculate__total-title" :class="totalClass">Итого</div>
       </div>
-      <div v-for="item in items" :key="item.title" class="calculate__wrapper-total-text">
+      <div v-for="item, i in items" :key="item.title + i" class="calculate__wrapper-total-text">
         <div v-if="item" class="calculate__total-wrap-text">
           <div class="calculate__total-card-text title_bold">{{item.title}}</div>
           <div v-for="option in item.options" :key="option.key" class="calculate__total-card-text">{{option.option}}</div>
@@ -17,18 +17,22 @@
       </div>
 
       <div class="calculate__total-wrap" :class="wrapClass">
-        <div class="calculate__total-card-text">
-          <span class="calculate__total-card-text--mod">{{ total }} ₽</span>
-          / месяц
+        <div class="calculate__total-wrap-inside">
+          <div class="calculate__total-card-text">
+            <span class="calculate__total-card-text--mod">Итого: {{ total }} ₽</span>
+          </div>
+          <div class="calculate__total-card-text">
+            <span class="calculate__total-card-text--mod">{{ totalmonth }} ₽</span>
+            / месяц
+          </div>
         </div>
-        <div class="calculate__total-card-text">
-          <span class="calculate__total-card-text--mod">{{ totalDay }} ₽</span>
-          / день
-        </div>
+        <p v-if="economy!==0" class="license__card-total-economy">Экономия {{economy}} рублей</p>
       </div>
+      
+      
 
       <div :class="buttonClass">
-        <button class="calculate__btn">Подключиться</button>
+        <button class="calculate__btn" @click="goToLink">{{ button }}</button>
         <button class="calculate__btn-download" type="button" @click="$emit('createPDF')">
           <svg class="clip__icon" width="9" height="18">
             <use xlink:href="@/assets/img/sprites.svg#clip"></use>
@@ -62,6 +66,14 @@ export default {
       type: Number,
       required: true,
     },
+    economy: {
+      type: Number,
+      default: 0,
+    },
+    totalmonth: {
+      type: Number,
+      required: true,
+    },
     bonus: {
       type: Object,
       default: () => {},
@@ -73,6 +85,14 @@ export default {
     items: {
       type: Array,
       default: () => []
+    },
+    button: {
+      type: String,
+      default: 'Подключиться'
+    },
+    link: {
+      type: String,
+      required: true
     }
   },
   computed: {
@@ -96,12 +116,27 @@ export default {
     },
   },
   methods: {
-
+      goToLink() {
+        if(this.link)
+        window.open(this.link, '_blank')
+      }
   }
 }
 </script>
 
 <style scoped>
+.license__card-total-economy {
+  margin-top: 5px;
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #830f1e;
+}
+
 .total_card {
   width: 390px;
 }
@@ -144,10 +179,15 @@ export default {
   color: #7c7c7c;
   margin-bottom: 16px;
 }
+
 .calculate__total-wrap {
-  display: flex;
   gap: 29px;
   margin-bottom: 48px;
+}
+
+.calculate__total-wrap-inside {
+  display: flex;
+  justify-content: space-around;
 }
 
 .calculate__total-title-wrap {

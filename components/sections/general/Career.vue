@@ -1,7 +1,7 @@
 <template>
   <section :id="tag" class="career">
     <div class="container">
-      <h1 class="career__title title">{{ careerItems.title }}</h1>
+      <h2 class="career__title title">{{ careerItems.title }}</h2>
       <div class="career__wrapper">
         <div v-for="item in careerItems.sections" :key="item.title" class="career__wrap-card" >
           <picture class="picture">

@@ -1,30 +1,31 @@
 <template>
-    <section class="category">
-        <div class="container">
-            <a class="btn__step-back" @click="back">
-                <span class="arrow__step-back">
-                    <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
-                </span>Назад</a>
+  <section class="category">
+    <div class="container">
+      <a class="btn__step-back" @click="back">
+          <span class="arrow__step-back">
+              <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
+          </span>Назад</a>
 
-            <h3 class="category__title">Результаты поиска по запросу "{{searchQuery}}"</h3>
-            <ul class="category__list">
-                <li v-for="result in posts" :key="result.slug" class="category__item">
-                    <div class="category__item-wrap">
-                        <span class="category__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
-                        <div class="category__link" @click="openPage(result.slug)">{{result.title}}</div>
-                    </div>
-                    <p class="category__item-descr">{{result.text}}</p>
-                </li>
-            </ul>
-        </div>
-    </section>
+      <h3 class="category__title">Результаты поиска по запросу "{{searchQuery}}"</h3>
+      <ul class="category__list">
+          <li v-for="result in posts" :key="result.slug" class="category__item">
+              <div class="category__item-wrap">
+                  <span class="category__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
+                  <div class="category__link" @click="openPage(result.slug)">{{result.title}}</div>
+              </div>
+              <p class="category__item-descr">{{result.text}}</p>
+          </li>
+      </ul>
+    </div>
+  </section>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
 
 export default {
-    async asyncData({ store }) {
+  name: 'KnowledgeSearch',
+  async asyncData({ store }) {
     await store.dispatch('fetchPage', 'knowledge')
   },
   computed: {
@@ -49,7 +50,6 @@ export default {
       this.$router.back()
     }
   }
-
 }
 
 </script>

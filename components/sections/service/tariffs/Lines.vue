@@ -12,10 +12,11 @@
             <div v-for="option in lines.options" :key="option.key" class="license__top-title" :class="titleText">
               {{ option.attributes.title }}
             </div>
+            <div class="license__top-title" :class="titleText">Период</div>
             <div class="license__top-title" :class="titleText">Стоимость</div>
           </div>
 
-          <div v-for="line in lines.lines" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
+          <div v-for="line, ind in lines.lines" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
 
             <div class="license__wrap-text">{{ line.attributes.title }}</div>
 
@@ -37,10 +38,22 @@
               </div>
             </div>
 
+            <div class="license__wrap-select">
+              <div v-if="line.attributes.periodPrice.length===1" class="license__wrap-text">
+                {{ periodToText(line.attributes.periodPrice[0].attributes.period) }}
+              </div>
+              <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
+                <option v-for="period, i in line.attributes.periodPrice" :key="'period' + period.attributes.period + period.attributes.price" 
+                        :value="i">
+                  {{ periodToText(period.attributes.period) }}
+                </option>
+              </select>
+            </div>
+
             <div class="license__wrap-total-box">
-              <div class="license__total">{{ line.attributes.price }}</div>
-              <button class="license__btn">
-                {{ line.attributes.buttonName }}
+              <div class="license__total">{{ line.attributes.periodPrice[periods[ind].period].attributes.price }} ₽</div>
+              <button class="license__btn" @click="goToLink(line.attributes.buttonLink)">
+                {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
               </button>
             </div>
           </div>
@@ -48,7 +61,7 @@
 
         <!-- tablet  -->
         <div class="license__tablet-wrapper">
-          <div v-for="line in lines.lines" :key="line.key" class="license__tablet" >
+          <div v-for="line, ind in lines.lines" :key="line.key" class="license__tablet" >
             <div class="license__tablet-title">{{ line.attributes.title }}</div>
 
             <div v-for="(item, i) in line.attributes.options" :key="item.key" class="license__tablet-wrap--tablet" >
@@ -71,11 +84,26 @@
               </div>
             </div>
 
-            <div class="license__total license__total--tablet">
-              {{ line.attributes.price }}
+            <div class="license__tablet-wrap--tablet" >
+              <div class="license__tablet-text">Период</div>
+              <div class="license__wrap-select">  
+                <div v-if="line.attributes.periodPrice.length===1" class="license__wrap-text">
+                  {{ periodToText(line.attributes.periodPrice[0].attributes.period) }}
+                </div>
+                <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
+                  <option v-for="period, i in line.attributes.periodPrice" :key="'periodTablet' + period.attributes.period + period.attributes.price" 
+                          :value="i">
+                    {{ periodToText(period.attributes.period) }}
+                  </option>
+                </select>
+              </div>
             </div>
-            <button class="license__btn license__btn--tablet">
-              {{ line.attributes.buttonName }}
+
+            <div class="license__total license__total--tablet">
+              {{ line.attributes.periodPrice[periods[ind].period].attributes.price }} ₽
+            </div>
+            <button class="license__btn license__btn--tablet" @click="goToLink(line.attributes.buttonLink)">
+              {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
             </button>
           </div>
         </div>
@@ -93,6 +121,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      periods: []
+    }
+  },
   computed: {
     options() {
       const options = []
@@ -105,30 +138,60 @@ export default {
       return this.lines.options.length
     },
     wrapper() {
-      return {'license__wrapper-one': this.optionNumber === 1,
-              'license__wrapper-two': this.optionNumber === 2,
-              'license__wrapper-three': this.optionNumber === 3,}
+      return {'license__wrapper-two': this.optionNumber === 1,
+              'license__wrapper-three': this.optionNumber === 2,
+              }
     },
     titleWrapper() {
       return {
-        'license__wrapper-top-one': this.optionNumber === 1,
-        'license__wrapper-top-two': this.optionNumber === 2,
-        'license__wrapper-top-three': this.optionNumber === 3,
+        'license__wrapper-top-two': this.optionNumber === 1,
+        'license__wrapper-top-three': this.optionNumber === 2,
+        
       }
     },
     titleText() {
       return {
-        'license__top-title-one': this.optionNumber === 1,
-        'license__top-title-two': this.optionNumber === 2,
-        'license__top-title-three': this.optionNumber === 3,
+        'license__top-title-two': this.optionNumber === 1,
+        'license__top-title-three': this.optionNumber === 2,
+        
       }
     },
     wrapperBottom() {
       return {
-        'license__wrapper-bottom-one': this.optionNumber === 1,
-        'license__wrapper-bottom-two': this.optionNumber === 2,
-        'license__wrapper-bottom-three': this.optionNumber === 3,
+        'license__wrapper-bottom-two': this.optionNumber === 1,
+        'license__wrapper-bottom-three': this.optionNumber === 2,
+
       }
+    },
+  },
+  created() {
+     this.lines.lines.forEach(() => {
+        this.periods.push({period: 0})
+      })
+    
+  },
+  methods: {
+    periodToText(period) {
+      const periodNumber = Number(period)
+      if(periodNumber===1) {
+        return period + ' месяц'
+      }
+      if(periodNumber>1&&periodNumber<5) {
+        return period + ' месяца'
+      } 
+      if(periodNumber<12) {
+        return period + ' месяцев'
+      }
+      if(periodNumber===12) return '1 год'
+      if(periodNumber===24) return '2 года'
+      if(periodNumber===36) return '3 года'
+    },
+  
+  choosePeriod(line, period) {
+    this.periods[line].period = period
+  },
+  goToLink(link) {
+     window.open(link, '_blank')
     },
   },
 }
@@ -161,6 +224,8 @@ export default {
   border-radius: 8px;
   margin-bottom: 8px;
 }
+
+
 
 .license__wrap-title {
   display: flex;
@@ -399,7 +464,7 @@ export default {
 }
 @media (max-width: 1200px) {
   .license__input-text {
-    max-width: 201px;
+    max-width: 185px;
   }
 }
 

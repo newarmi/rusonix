@@ -1,7 +1,7 @@
 <template>
     <section :id="images.tag" class="advantage">
         <div class="container">
-          <div class="advantage__title title">{{images.title}}</div>
+          <h2 class="advantage__title title">{{images.title}}</h2>
           <div class="advantage__title-text" v-html="images.description"></div>
           <div class="advantage__wrapper-cards">
             <div v-for="article in articles" :key="article.key" class="advantage__card">

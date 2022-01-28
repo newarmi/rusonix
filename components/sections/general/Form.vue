@@ -1,46 +1,45 @@
 <template>
   <section :id="tag" class="form">
-        <div class="container">
-          <div class="form__title title">{{title}}</div>
+    <div class="container">
+      <h2 class="form__title title">{{title}}</h2>
+    </div>
+    <div class="form__wrapper">
+      <form class="partner__form">
+        <div class="form__card">
+          <div v-show="!formSent">
+          <div class="form__card-input-field">{{fields.title}}
+            <div class="form__card-input-wrap">
+              <input v-model="name" type="text" class="form__card-input" value="" />
+            </div>
+          </div>
+
+          <div class="form__card-input-field">{{fields.alt_title}}
+            <div class="form__card-input-wrap">
+              <input v-model="email" type="text" class="form__card-input" value="" />
+            </div>
+          </div>
+
+          <div class="form__card-input-field">{{fields.image}}
+            <div class="form__card-input-wrap">
+              <input v-model="phone" type="text" class="form__card-input" value="" />
+            </div>
+          </div>
+
+          <div class="form__card-input-field">{{fields.link_name}}
+            <div class="form__card-select">
+              <select v-model="department" class="form__select">                     
+                <option v-for="item in list" :key="item.key" :value="item.attributes.item">{{item.attributes.item}}</option>
+              </select>
+            </div>
+          </div>
+          <button class="form__btn-registration" type="button" @click="addPartner()">Зарегистрироваться</button>
         </div>
-        <div class="form__wrapper">
-            <form class="partner__form">
-              <div class="form__card">
-                <div v-show="!formSent">
-                <div class="form__card-input-field">{{fields.title}}
-                  <div class="form__card-input-wrap">
-                    <input v-model="name" type="text" class="form__card-input" value="" />
-                  </div>
-                </div>
-
-                <div class="form__card-input-field">{{fields.alt_title}}
-                  <div class="form__card-input-wrap">
-                    <input v-model="email" type="text" class="form__card-input" value="" />
-                  </div>
-                </div>
-
-                <div class="form__card-input-field">{{fields.image}}
-                  <div class="form__card-input-wrap">
-                    <input v-model="phone" type="text" class="form__card-input" value="" />
-                  </div>
-                </div>
-
-                <div class="form__card-input-field">{{fields.link_name}}
-                  <div class="form__card-select">
-                    <select v-model="department" class="form__select">                     
-                      <option v-for="item in list" :key="item.key" :value="item.attributes.item">{{item.attributes.item}}</option>
-                    </select>
-                  </div>
-                </div>
-                <button class="form__btn-registration" type="button" @click="addPartner()">Зарегистрироваться</button>
-              </div>
-              <div v-show="formSent" class="decision__card-title">
-               Заявка на партнерство отправлена
-              </div>
-              </div>
-              
-            </form>
+        <div v-show="formSent" class="decision__card-title">
+          Заявка на партнерство отправлена
         </div>
+        </div> 
+      </form>
+    </div>
   </section>
 </template>
 

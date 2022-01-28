@@ -12,6 +12,7 @@
               class="license__top-title" :class="titleText">
               {{ option.attributes.title }}
             </div>
+            <div class="license__top-title" :class="titleText">Период</div>
             <div class="license__top-title" :class="titleText">Стоимость</div>
           </div>
 

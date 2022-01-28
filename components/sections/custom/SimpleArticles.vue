@@ -1,7 +1,7 @@
 <template>
   <section :id="articles.tag" class="advantage">
     <div class="container">
-      <h1 class="advantage__title title">{{ articles.title }}</h1>
+      <h2 class="advantage__title title">{{ articles.title }}</h2>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ articles.article[0].attributes.title }}</div>

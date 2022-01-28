@@ -6,7 +6,13 @@
         {{ option.attributes.option }}
       </div>
     </div>
-    <div class="tariff__configuration-card-total" :class="{'tariff__configuration-card-total--mod':choose}">{{ price }}</div>
+    <div>
+      <div v-if="sale" class="license__card-oldprice">
+        <div class="license__card-oldprice-text" :class="{'tariff__configuration-card-total--mod':choose}">{{ oldprice }} ₽</div>
+      </div>
+      <div class="tariff__configuration-card-total" :class="{'tariff__configuration-card-total--mod':choose}">{{ price }} ₽</div>
+      <p v-if="sale" class="license__card-total-economy" :class="{'license__card-total-economy--mod':choose}">Экономия {{economy}} рублей</p>
+    </div>
   </div>
 </template>
 
@@ -22,23 +28,75 @@ export default {
       required: true,
     },
     price: {
-      type: String,
+      type: Number,
       required: true,
     },
     choose: {
         type: Boolean,
         required: true,
+    },
+    sale: {
+      type: Boolean,
+      default: false
+    },
+    oldprice: {
+      type: Number,
+      default: 0,
+    },
+    economy: {
+      type: Number,
+      default: 0,
     }
   },
   methods: {
-      clickOnCard() {
-          this.$emit('chooseCard')
-      }
+    clickOnCard() {
+        this.$emit('chooseCard')
+    }
   }
 }
 </script>
 
 <style scoped>
+.license__card-oldprice-text {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  opacity: 0.5;
+}
+.license__card-oldprice {
+  position: relative;
+  margin-right: 20px;
+}
+.license__card-oldprice::after {
+    content: "";
+    position: absolute;
+    background-color: #830f1e;
+    width: 80px;
+    height: 2px;
+    left: 29px;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+}
+.license__card-total-economy {
+  margin-top: 5px;
+  font-family: "Graphik", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #830f1e;
+}
+
+.license__card-total-economy--mod {
+  color: white;
+}
+
 .tariff__configuration-card {
   cursor: pointer;
   background-color: #fff;

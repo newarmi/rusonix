@@ -29,8 +29,7 @@ export default {
         slug: item.slug
       }
     })
-
-      return rubrics
+    return rubrics
     }
   },
   mounted() {

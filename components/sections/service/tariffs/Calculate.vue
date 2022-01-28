@@ -96,7 +96,9 @@
           </div>
           <div class="calculate__wrapper-right">
             <Total :total="total" :bonus="bonus" :mobile="false" 
-                   :items="clearFields" @createPDF="createPdf"/>
+                   :items="clearFields" 
+                   :button="data.button" :link="data.link"
+                   @createPDF="createPdf"/>
           </div>
 
         </div>
@@ -107,7 +109,9 @@
 
         <div class="calculate__total-tablet">
           <Total :total="total" :bonus="bonus" :mobile="true" 
-                 :items="clearFields" @createPDF="createPdf"/>
+                 :items="clearFields"  
+                 :button="data.button" :link="data.link"
+                 @createPDF="createPdf" />
         </div>
       </section>
 </template>

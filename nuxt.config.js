@@ -2,14 +2,12 @@ export default {
   target: 'server',
 
   head: {
-    title: 'rusonyx',
     htmlAttrs: {
       lang: 'ru'
     },
     meta: [
       { charset: 'utf-8' }, {accept: 'application/json'},
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [

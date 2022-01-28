@@ -1,29 +1,29 @@
 <template>
-        <section class="article">
-        <div class="container">
-            <div class="article__wrapper">
-                <div class="article__wrap">
-                    <h3 class="article__title">Наиболее популярные статьи</h3>
-                    <ul class="article__list">
-                        <li v-for="item in topPosts" :key="item.slug" class="article__item">
-                            <span class="article__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
-                            <nuxt-link :to="'/knowledge/top/' + item.slug" class="article__link">{{item.title}}</nuxt-link>
-                        </li>
-                    </ul>
-                </div>
+  <section class="article">
+    <div class="container">
+      <div class="article__wrapper">
+          <div class="article__wrap">
+              <h3 class="article__title">Наиболее популярные статьи</h3>
+              <ul class="article__list">
+                  <li v-for="item in topPosts" :key="item.slug" class="article__item">
+                      <span class="article__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
+                      <nuxt-link :to="'/knowledge/top/' + item.slug" class="article__link">{{item.title}}</nuxt-link>
+                  </li>
+              </ul>
+          </div>
 
-                <div class="article__wrap">
-                    <h3 class="article__title">Последние добавления статьи</h3>
-                    <ul class="article__list">
-                        <li v-for="item in lastPosts" :key="item.slug" class="article__item">
-                            <span class="article__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
-                            <nuxt-link :to="'/knowledge/last/' + item.slug" class="article__link">{{item.title}}</nuxt-link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+          <div class="article__wrap">
+              <h3 class="article__title">Последние добавления статьи</h3>
+              <ul class="article__list">
+                  <li v-for="item in lastPosts" :key="item.slug" class="article__item">
+                      <span class="article__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
+                      <nuxt-link :to="'/knowledge/last/' + item.slug" class="article__link">{{item.title}}</nuxt-link>
+                  </li>
+              </ul>
+          </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

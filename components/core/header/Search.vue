@@ -2,7 +2,8 @@
   <div class="start__screen">
     <div class="container">
       <div class="start__screen-search">
-        <input v-model="searchString" class="start__screen-input" type="text" placeholder="Поиск по ресурсам службы поддержки" @keyup.enter="search"/>
+        <input v-model="searchString" class="start__screen-input" type="text" 
+               placeholder="Поиск по ресурсам службы поддержки" @keyup.enter="search"/>
         <label for="" class="start__screen-input-icon">
           <img src="@/assets/img/search__support.png" alt="search" @click="search" />
         </label>
@@ -16,7 +17,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-
 
 export default {
   name: 'Slider',

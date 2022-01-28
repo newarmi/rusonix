@@ -2,10 +2,8 @@
   <div :id="items.tag">
     <section class="contact">
         <div class="container">
-          <h3 class="contact__title title">{{items.title}}</h3>
-
+          <h2 class="contact__title title">{{items.title}}</h2>
             <div v-for="block in blocks" :key="block.key">
-
                 <div v-if="block.layout==='simpleText'" class="support__text text" v-html="block.attributes.text">
                 </div>
 

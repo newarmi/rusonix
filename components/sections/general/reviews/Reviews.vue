@@ -1,7 +1,7 @@
 <template>
   <section :id="tag" class="reviews">
     <div class="container">
-      <h1 class="reviews__title title">{{ reviews.title }}</h1>
+      <h2 class="reviews__title title">{{ reviews.title }}</h2>
       <Slider :reviews="reviews"/>
     </div>
   </section>
@@ -9,13 +9,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Slider from '~/components/sections/general/reviews/Slider'
-
 
 export default {
   name: 'Reviews',
   components: {
-    Slider
+    Slider: () => import('~/components/sections/general/reviews/Slider')
   },
   props: {
     tag: {
@@ -25,9 +23,6 @@ export default {
   },
   computed: {
     ...mapGetters(['reviews']),
-    title() {
-      return this.reviews.title
-    }
   }
 }
 </script>

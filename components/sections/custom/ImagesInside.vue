@@ -1,24 +1,24 @@
 <template>
     <section :id="images.tag" class="program">
-        <div class="container">
-          <div class="program__title title">{{ images.title }}</div>
-          <div class="program__title-wrap-text">
-            <div class="program__title-text" v-html="images.description"></div>
-          </div>
-          <div class="program__wrapper-cards">
-            <div v-for="article in articles" :key="article.key" class="program__card">
-              <picture class="picture">
-                <img
-                  :src="$config.imgURL + article.attributes.image"
-                  :srcset="$config.imgURL + article.attributes.image"
-                  class="program__img"
-                  alt="program 1" />
-              </picture>
-              <div class="program__card-title">{{ article.attributes.title }}</div>
-            </div>
+      <div class="container">
+        <h2 class="program__title title">{{ images.title }}</h2>
+        <div class="program__title-wrap-text">
+          <div class="program__title-text" v-html="images.description"></div>
+        </div>
+        <div class="program__wrapper-cards">
+          <div v-for="article in articles" :key="article.key" class="program__card">
+            <picture class="picture">
+              <img
+                :src="$config.imgURL + article.attributes.image"
+                :srcset="$config.imgURL + article.attributes.image"
+                class="program__img"
+                alt="program 1" />
+            </picture>
+            <div class="program__card-title">{{ article.attributes.title }}</div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 </template>
 
 <script>

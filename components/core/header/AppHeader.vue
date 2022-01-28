@@ -7,35 +7,33 @@
 </template>
 
 <script>
-import TopLine from '@/components/core/header/TopLine'
-
-import HeaderContent from '@/components/core/header/HeaderContent'
-import Slider from '@/components/core/header/Slider'
 
 export default {
   name: "AppHeader",
   components: {
-    TopLine,
-    HeaderContent,
-    Slider
+    TopLine: () => import('@/components/core/header/TopLine'),
+    HeaderContent: () => import('@/components/core/header/HeaderContent'),
+    Slider: () => import('@/components/core/header/Slider')
   },
-  data: () => ({
-
-  }),
+  head() {
+    return {
+        title: this.header.meta_title,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.header.meta_description,
+            }
+        ],
+    }
+  },
   computed: {
     header() {
-      if(this.$route.name==='service-slug') {
-        return this.$store.getters['universal/header']
+      switch(this.$route.name) {
+        case('service-slug'): return this.$store.getters['universal/header']
+        case('company-document'): return this.$store.getters['requisites/header']
+        case('journal-article'): return this.$store.getters['journal/header']
       }
-
-      if(this.$route.name==='journal-article') {
-        return this.$store.getters['journal/header']
-      }
-
-      if(this.$route.name==='company-document') {
-        return this.$store.getters['requisites/header']
-      }
-
       return this.$store.getters.header
     },
     bgImage () {
@@ -46,7 +44,6 @@ export default {
 </script>
 
 <style scoped>
-
 .header {
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,5 +51,4 @@ export default {
   position: relative;
   padding-bottom: 80px;
 }
-
 </style>

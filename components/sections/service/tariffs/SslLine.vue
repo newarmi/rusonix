@@ -16,7 +16,7 @@
             <span v-if="certificateData.oldPrice" class="sertificate__total-old--mod"></span>
             <div v-if="certificateData.oldPrice" class="sertificate__total-old">{{ certificateData.oldPrice }}</div>
           </div>
-          <button class="sertificate__btn">Заказать</button>
+          <button class="sertificate__btn" @click="goToBilling()">Заказать</button>
         </div>
 
         <div class="sertificate__buy-wrapper-info" :class="showClass">
@@ -127,7 +127,16 @@ export default{
     },
     methods: {
         openSubmenu() {
-            this.showInfo = !this.showInfo
+          this.showInfo = !this.showInfo
+        },
+        goToBilling() {
+          this.showInfo = !this.showInfo
+          const type = this.certificateData.type
+          const id = this.certificateData.billing_id
+          const period = 12
+          window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+                   + id + `&period=` + period + `&project=3`, '_blank')
         }
     },
 }

@@ -52,8 +52,10 @@
         <nav class="navigation">
           <ul class="navigation__list">
             <li v-for="item in menu" :key="item.id + item.title" class="navigation__item" 
-                :class="{'open_submenu' : getOpenMenu}" @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
-              <a class="navigation__link" @click="buttonAction(item, item.type[0])">{{ item.type[0].attributes.title }}</a>
+                :class="{'open_submenu' : getOpenMenu}" 
+                @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
+              <a class="navigation__link" @click="buttonAction(item, item.type[0])"
+                 @mouseover="showStatus">{{ item.type[0].attributes.title }}</a>
               <ul class="navigation__dropdown">
                 <div class="navigation__container-dropdown">
                   <li v-for="subMenu in item.subitem" :key="subMenu.key" class="navigation__dropdown-item">
@@ -167,6 +169,9 @@ export default {
     ...mapActions(['setTag', 'setOpenMenuFalse', 
                    'setOpenMenuTrue', 'setSearchQuery',
                    'setRubric']),
+    showStatus() {
+      window.status = 'wdefewfw'
+    },
     searchIt() {
       if(this.searchInput) {
         this.setSearchQuery(this.searchInput)
@@ -196,48 +201,31 @@ export default {
       }
     },
     buttonAction(parent, button) {
-      if(button.layout==='tab') {
-        if(this.$route.fullPath==='/' + parent.attributes.page) {
-          this.scrollToBlock(button.attributes.tab)
-          this.isMenuOpen = !this.isMenuOpen
-        } else {
-          this.isMenuOpen = !this.isMenuOpen
-          this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
+      switch(button.layout) {
+        case('tab'): {
+          if(this.$route.fullPath==='/' + parent.attributes.page) {
+            this.scrollToBlock(button.attributes.tab)
+            this.isMenuOpen = !this.isMenuOpen
+          } else {
+            this.isMenuOpen = !this.isMenuOpen
+            this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
+          }
+            break;
+          }
+        case('rubric'): {
+          this.setRubric(button.attributes.page)
+          this.$router.push({path: '/journal'})  
+          break
         }
-      } 
-     
-      if(button.layout==='journal') {
-        this.$router.push({path: '/journal/' + button.attributes.page})  
-      } 
+        case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
+        case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
+        case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
+        case('link'):  window.open(button.attributes.link, '_blank'); break;
+        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
 
-      if(button.layout==='rubric') {
-        this.setRubric(button.attributes.page)
-        this.$router.push({path: '/journal'})  
       }
-
-      if(button.layout==='main') {
-        this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab})  
-      }
-
-      if(button.layout==='category') {
-        this.$router.push({path: '/knowledge/' + button.attributes.page})  
-      }
-
-      if(button.layout==='post') {
-        this.$router.push({path: '/knowledge/post/' + button.attributes.page})  
-      }
-
-      if(button.layout==='service') {
-        this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab})  
-      }
-
-      if(button.layout==='document') {
-        this.$router.push({path: '/company/' + button.attributes.page})  
-      }
-
-      if(button.layout==='link') {
-        window.open(button.attributes.link, '_blank');
-      } 
     },
     scrollToBlock(tag) {
       if(tag) {
@@ -431,11 +419,6 @@ export default {
   visibility: visible;
 }
 
-/* .navigation__item:hover > .navigation__dropdown {
-  transition: 0.1s ease-in-out;
-  opacity: 0.9;
-  visibility: visible;
-} */
 
 .navigation__link {
   color: #ffffff;
@@ -462,16 +445,18 @@ export default {
   margin-bottom: 13px;
   cursor: pointer;
 }
+
 .navigation__container-dropdown {
   display: flex;
   justify-content: space-between;
 
   width: calc(100vw - 17px);
-  height: 15vh;
-  max-width: 1440px;
-  padding: 0 26px;
-  margin: 10% auto;
+height: 330px;
+    max-width: 1440px;
+    padding: 0 26px;
+    margin: 150px auto 0;
 }
+
 .navigation__dropdown {
   position: absolute;
   width: 100%;
@@ -497,7 +482,7 @@ export default {
   cursor: pointer;
 }
 .dropdown__submenu-navigation {
-  margin-top: 48px;
+  margin-top: 25px;
 }
 
 .dropdown__submenu-item {

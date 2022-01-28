@@ -1,26 +1,29 @@
 <template >
   <section :id="tag" class="domain">
     <div class="container">
-      <div class="domain__title title">{{ domains.title }}</div>
+      <h2 class="domain__title title">{{ title }}</h2>
       <div class="domain__text-wrap">
-        <div class="domain__text text" v-html="domains.description"></div>
+        <div class="domain__text text" v-html="description"></div>
       </div>
-
       <div class="domain__search">
         <div class="domain__search-wrap">
-          <input type="text" placeholder="Введите имя домена, которое хотите зарегистрировать" class="domain__search-input" />
-          <svg class="domain__icon" width="20" height="20">
+          <input v-model="domainString" type="text" placeholder="Введите имя домена, которое хотите зарегистрировать" 
+                 class="domain__search-input" @keyup.enter="ckeckIfnotNull" />
+          <svg class="domain__icon" width="20" height="20" @click="ckeckIfnotNull">
             <use xlink:href="@/assets/svg/sprites.svg#search-domain"></use>
           </svg>
+          <p class="error__message" :class="{'error__show':error}">Ошибка запроса</p>
         </div>
       </div>
-
       <div class="domain__cards-wrapp">
         <div class="domain__cards">
-          <div v-for="item in domainItems" :key="item.title" class="domain__card">
+          <div v-for="item in domainItems" :key="item.title" 
+               class="domain__card" :class="{'card__busy': item.status!=='free'}"
+               @click="goToBilling(item.href)">
             <div class="domain__card-content">
               <span class="domain__card-title">{{ item.title }}</span>
-              <span class="domain__card-text">{{ item.price | toTypePrice }}</span>
+              <span v-if="item.status==='free'" class="domain__card-text">{{ item.price | toTypePrice }}</span>
+              <span v-if="domainAnswer" class="domain__card-status">{{ convertStatus(item.status) }}</span>
             </div>
           </div>
         </div>
@@ -35,8 +38,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Sliders from '@/components/sections/general/domains/Sliders'
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Domains',
@@ -46,24 +48,91 @@ export default {
     }
   },
   components: {
-    Sliders
+    Sliders: () => import('@/components/sections/general/domains/Sliders')
   },
   props: {
     tag: {
       type: String,
       default: 'domains'
+    },
+    title: {
+      type: String,
+      default: 'Домены'
+    },
+    description: {
+      type: String,
+      default: 'Описание'
     }
   },
-
+  data() {
+    return {
+      domainString: '',
+      dom: '',
+    }
+  },
   computed: {
-    ...mapGetters(['domains', 'domainTarriff']),
-    domainItems() {
-      const item = this.domainTarriff
-      item.forEach(element => {
-        element.price = Math.floor(element.periods.find(Boolean).base_cost)
-      })
-      return item
+    ...mapGetters(['domainTarriff', 'domainAnswer']),
+    error() {
+      if(this.domainAnswer) return this.domainAnswer.error
+      return this.domainAnswer
     },
+    domainItems() {
+      const domains = this.domainTarriff.map(item => {
+        return {
+          title: item.title ? item.title : item.name,
+          price: Math.floor(item.periods.find(Boolean).base_cost),
+          status: 'free',
+          href: 'https://my.rusonyx.ru/billmgr#/domain/order/register?page=pick',
+          billing_id: item.billing_id
+        }
+      })
+
+      if(this.domainAnswer&&!this.domainAnswer.error) {     
+        
+        const filterDomains = this.domainAnswer.pricelist.map(item => {
+
+            const el = domains.find(obj => obj.billing_id === item.id);
+            let href = ''
+            if(item.status==='free') 
+              href = 'https://my.rusonyx.ru/billmgr#/domain/order/register?domainName=' + this.dom + '&page=pick'
+            return {
+                  status: item.status,
+                  price: item.price.period[0].cost,
+                  href, 
+                  title: this.dom + el.title,
+            }
+          })
+        return filterDomains
+      }
+      
+      return domains
+    },
+  },
+  methods: {
+    ...mapActions(['checkBillingDomain']),
+    ckeckIfnotNull() {
+      if(this.domainString) {
+        this.checkDomain()
+      }
+    },
+    checkDomain() { 
+      this.domainString=this.domainString.trim().replaceAll(/ +/g, '-')
+      const point = this.domainString.indexOf('.')
+      if(point!==-1)
+      this.domainString = this.domainString.slice(0, point)
+      this.checkBillingDomain(this.domainString).then(() => {
+        console.log(this.domainAnswer)
+        this.dom = this.domainString
+      })
+    },
+    convertStatus(status) {
+      return status==='free' ? 'Купить' : 'Занят'
+    },
+    goToBilling(href) {
+      if(href) {
+         window.open(href, '_blank');
+      }
+    }
   }
 }
 </script>
@@ -108,6 +177,26 @@ export default {
   border-radius: 25px;
   padding: 15px 24px;
 }
+
+.error__message {
+  font-family: "Graphik", sans-serif;
+  font-size: 12px;
+  color: crimson;
+  margin: 5px 40%;
+  display: none;
+}
+
+.error__show {
+  display: block;
+}
+
+@media (max-width: 500px) {
+  .error__message {
+    margin: 5px 35%;
+  }
+}
+
+
 .domain__search-input::placeholder {
   font-size: 14px;
   line-height: 20px;
@@ -136,7 +225,7 @@ export default {
 
 .domain__cards {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -150,6 +239,12 @@ export default {
   background-color: #fff;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.09);
   margin-bottom: 24px;
+  cursor: pointer;
+  word-break: break-all;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 26px;
+  color: #000000;
 }
 
 @media (max-width: 1150px) {
@@ -170,7 +265,7 @@ export default {
 
   .domain__card {
     max-width: 228px;
-    margin-left: 33px;
+    margin-left: 26px;
     flex-basis: calc((100% - 99px) / 3);
   }
 
@@ -198,6 +293,18 @@ export default {
   letter-spacing: 0px;
   text-align: center;
 }
+.domain__card-status {
+  display: block;
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: center;
+  margin-top: 24px;
+}
+
 
 @media (max-width: 768px) {
   .domain {
@@ -223,6 +330,11 @@ export default {
   .domain__sliders-wrapp {
     display: block;
   }
+}
+
+.card__busy {
+  background-color: #FCF7F2;
+  cursor: default;
 }
 
 

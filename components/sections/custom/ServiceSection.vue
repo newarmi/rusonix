@@ -1,7 +1,7 @@
 <template>
   <section :id="services.tag" class="license">
     <div class="container">
-      <div class="license__title title">{{ services.title }}</div>
+      <h2 class="license__title title">{{ services.title }}</h2>
       <div class="license__text-descr">
         <div class="license__text text" v-html="services.description">
         </div>

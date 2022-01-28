@@ -1,7 +1,7 @@
 <template>
   <section :id="blocks.tag" class="advantage">
     <div class="container">
-      <h1 class="advantage__title title">{{ blocks.title }}</h1>
+      <h2 class="advantage__title title">{{ blocks.title }}</h2>
       <div class="advantage__wrapper">
         <div class="advantage__section-text">
           <div class="advantage__title-text">
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: 'Articles',
+  name: 'LinkArticles',
   props: {
     articles: {
       type: Object,

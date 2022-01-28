@@ -1,7 +1,7 @@
 <template>
   <section :id="blocks.tag" class="decision">
     <div class="container">
-      <h1 class="decision__title title">{{blocks.title}}</h1>
+      <h2 class="decision__title title">{{blocks.title}}</h2>
       <div class="decision__wrapper-cards">
         <div v-for="card in blocks.cards" :key="card.key" class="decision__card" >
           <div class="decision__card-title"><nuxt-link class="black-link" :to="'service/' + card.attributes.link">{{card.attributes.title}}</nuxt-link></div>

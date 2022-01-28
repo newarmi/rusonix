@@ -1,12 +1,10 @@
 <template>
   <section :id="tag" class="requisites">
     <div class="container">
-      <div class="requisites__title title">
-        {{ requisites.title }}
-      </div>
+      <h2 class="requisites__title title">{{ requisites.title }}</h2>
       <div class="requisites__wrapper">
         <div v-for="item in requisitesItems" :key="item.title" class="requisites__info">
-          <a href="#" class="requisites__link">
+          <nuxt-link :to="'/company/' + item.link" class="requisites__link">
             <picture class="picture">
               <img
                 :src="item.imageLink"
@@ -15,7 +13,7 @@
                 class="requisites__img"
               />
             </picture>
-          </a>
+          </nuxt-link>
           <div class="requisites__info-title">
             <nuxt-link :to="'/company/' + item.link" class="nl__black">{{ item.title }}</nuxt-link>
           </div>
@@ -33,7 +31,7 @@ export default {
   props: {
     tag: {
       type: String,
-      default: 'requisities'
+      default: 'requisites'
     }
   },
   computed: {

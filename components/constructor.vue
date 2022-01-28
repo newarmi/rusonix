@@ -5,6 +5,7 @@
       <LinkArticles v-if="block.layout==='link_articles'" :articles="block.attributes" />
       <SimpleArticles v-if="block.layout==='simple_articles'" :articles="block.attributes" />
       <ServiceSection v-if="block.layout==='services'" :services="block.attributes" />
+      <ServiceSection v-if="block.layout==='ssl'" :services="block.attributes" />
       <ImagesBottom v-if="block.layout==='imagesBottom'" :images="block.attributes" />
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
@@ -23,7 +24,9 @@
                                                :description="block.attributes.description"
                                                :tag="block.attributes.tag"  />
       <Form v-if="block.layout==='form'" :title="block.attributes.title" :tag="block.attributes.tag" />
-      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" />
+      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" 
+                                               :title="block.attributes.title" 
+                                               :description="block.attributes.description" />
       <Journal v-if="block.layout==='journal'" 
             :navigation="block.attributes.navigation"
             :title="block.attributes.title" :lines="block.attributes.linesNumber" 
@@ -35,32 +38,30 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-export default {
-
-  
-  name: 'ConstructorPage',
+export default {  
+  name: 'Constructor',
   components: {
-    'Youtube': () => import('~/components/sections/custom/Youtube'),
-    'TextBlock': () => import('~/components/sections/custom/TextBlock'),
-    'ServiceSection': () => import('~/components/sections/custom/ServiceSection'),
-    'Domains': () => import('~/components/sections/general/domains/Domains'),
-    'Decision': () => import('~/components/sections/custom/Decision'),
-    'ImageSlider': () => import('~/components/sections/custom/imageSlider/ImageSlider'),
-    'Billing': () => import('~/components/sections/general/Billing'),
-    'LinkArticles': () => import('~/components/sections/custom/LinkArticles'),
-    'Trust': () => import('~/components/sections/general/Trust'),
-    'Reviews': () => import('~/components/sections/general/reviews/Reviews'),
-    'Journal': () => import('~/components/sections/general/Journal'),
-    'SimpleArticles': () => import('~/components/sections/custom/SimpleArticles'),
-    'History': () => import('~/components/sections/general/history/History'),
-    'Career': () => import('~/components/sections/general/Career'),
-    'Contacts': () => import('~/components/sections/general/Contacts'),
-    'Requisites': () => import('~/components/sections/general/Requisites'),
-    'ImagesBottom': () => import('~/components/sections/custom/ImagesBottom'),
-    'ImagesInside': () => import('~/components/sections/custom/ImagesInside'),
-    'Partner': () => import('~/components/sections/general/Partner'),
-    'Form': () => import('~/components/sections/general/Form'),
-    'Advice': () => import('~/components/sections/general/Advice'),
+    Youtube: () => import('~/components/sections/custom/Youtube'),
+    TextBlock: () => import('~/components/sections/custom/TextBlock'),
+    ServiceSection: () => import('~/components/sections/custom/ServiceSection'),
+    Domains: () => import('~/components/sections/general/domains/Domains'),
+    Decision: () => import('~/components/sections/custom/Decision'),
+    ImageSlider: () => import('~/components/sections/custom/imageSlider/Images'),
+    Billing: () => import('~/components/sections/general/Billing'),
+    LinkArticles: () => import('~/components/sections/custom/LinkArticles'),
+    Trust: () => import('~/components/sections/general/Trust'),
+    Reviews: () => import('~/components/sections/general/reviews/Reviews'),
+    Journal: () => import('~/components/sections/general/Journal'),
+    SimpleArticles: () => import('~/components/sections/custom/SimpleArticles'),
+    History: () => import('~/components/sections/general/history/History'),
+    Career: () => import('~/components/sections/general/Career'),
+    Contacts: () => import('~/components/sections/general/Contacts'),
+    Requisites: () => import('~/components/sections/general/Requisites'),
+    ImagesBottom: () => import('~/components/sections/custom/ImagesBottom'),
+    ImagesInside: () => import('~/components/sections/custom/ImagesInside'),
+    Partner: () => import('~/components/sections/general/Partner'),
+    Form: () => import('~/components/sections/general/Form'),
+    Advice: () => import('~/components/sections/general/Advice'),
   },
   props: {
     pageblocks: {
@@ -68,25 +69,15 @@ export default {
       required: true
     }
   },
-  data() {
-      return {
-        blocks: []
-      }
-  },
   computed: {
     ...mapGetters(['tag'])
   },
-  mounted() {
-    
-  },
   methods: {
     ...mapActions(['resetTag'])
-  },
-    
+  },    
 }
 </script>
 
 <style scoped>
-
 
 </style>

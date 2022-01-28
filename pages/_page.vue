@@ -1,6 +1,6 @@
 <template>
   <div id='mainPage'>
-      <Constructor  :pageblocks="pageBlocks" />     
+    <Constructor  :pageblocks="pageBlocks" />     
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  name: 'MainPPages',
+  name: 'MainPages',
   components: {
     'Constructor': () => import('~/components/constructor'),
   },

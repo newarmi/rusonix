@@ -13,29 +13,16 @@
 </template>
 
 <script>
-import AppHeader from '@/components/core/header/AppHeader'
-import Footer from '@/components/core/footer/AppFooter'
-
 
 export default {
   name: 'Default',
   components: {
-   AppHeader,
-   Footer
+   AppHeader: () => import('@/components/core/header/AppHeader'),
+   Footer: () => import('@/components/core/footer/AppFooter')
   },
 }
 </script>
 
 <style>
-
-
-/* Анимация появления Header`a при смене роутов*/
-
-/* .fade-enter-active, .fade-leave-active {
-  transition: opacity .2s
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-} */
 
 </style>

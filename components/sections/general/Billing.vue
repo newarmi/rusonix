@@ -1,9 +1,7 @@
 <template>
   <section :id="tag" class="details">
     <div class="container">
-      <h1 class="details__title title">
-        {{billing.title}}
-      </h1>
+      <h2 class="details__title title">{{billing.title}}</h2>
       <div class="details__text text" v-html="billing.description"></div>
       <div class="details__wrapper-img">
         <div class="details__img-desk">

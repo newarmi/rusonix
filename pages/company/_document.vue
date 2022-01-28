@@ -15,12 +15,12 @@
 export default {
   name: 'Requisites',
   async asyncData({store, params}) {
-      await store.dispatch('requisites/fetchPage', '/' + params.document)
+    await store.dispatch('requisites/fetchPage', '/' + params.document)
   },
   computed: {
-      content() {
-        return JSON.parse(this.$store.getters['requisites/content'])
-      }  
+    content() {
+      return JSON.parse(this.$store.getters['requisites/content'])
+    }  
   },
 }
 </script>

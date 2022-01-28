@@ -1,27 +1,27 @@
 <template>
-    <div class="secret__container">
-          <div class="secret__wrapper">
-            <div class="secret__date">
-              <div class="secret__date-text">{{data}}</div>
-              <div class="secret__security">{{ rubric.title }}</div>
-            </div>
+  <div class="secret__container">
+    <div class="secret__wrapper">
+      <div class="secret__date">
+        <div class="secret__date-text">{{data}}</div>
+        <div class="secret__security">{{ rubric.title }}</div>
+      </div>
 
-            <div class="secret__title">{{ article.title }}</div>
+      <h1 class="secret__title">{{ article.title }}</h1>
 
-            <div v-for="item in article.content" :key="item.key">
-                <div v-if="item.layout==='description'" class="secret__title-text" v-html="item.attributes.description"></div>
-                <div v-if="item.layout==='text'" class="secret__text secret__text-bottom" v-html="item.attributes.text"></div>
-                <div v-if="item.layout==='title'" class="secret__title secret__title-second" v-html="item.attributes.title"></div>
-                <picture v-if="item.layout==='image'" class="magazine__picture">
-                  <img
-                    :src="$config.imgURL + item.attributes.image"
-                    :srcset="$config.imgURL + item.attributes.image"
-                    class="magazine__img"
-                    alt="post img" />
-                </picture>
-            </div>
-          </div>
-        </div>
+      <div v-for="item in article.content" :key="item.key">
+          <div v-if="item.layout==='description'" class="secret__title-text" v-html="item.attributes.description"></div>
+          <div v-if="item.layout==='text'" class="secret__text secret__text-bottom" v-html="item.attributes.text"></div>
+          <h2 v-if="item.layout==='title'" class="secret__title secret__title-second" v-html="item.attributes.title"></h2>
+          <picture v-if="item.layout==='image'" class="magazine__picture">
+            <img
+              :src="$config.imgURL + item.attributes.image"
+              :srcset="$config.imgURL + item.attributes.image"
+              class="magazine__img"
+              alt="post img" />
+          </picture>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -79,6 +79,9 @@ export default {
   background-color: #fff;
   border-radius: 20px;
   overflow: hidden;
+  width: 100%;
+    margin: 0 auto;
+    max-width: 1121px;
 }
 .secret__date {
   display: flex;

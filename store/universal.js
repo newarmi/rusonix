@@ -44,6 +44,4 @@ export const state = () => ({
     tariffs: state => state.page.tariffs,
 
     billingTariffs: state => state.page.billingTariffs,
-      
-  
 }

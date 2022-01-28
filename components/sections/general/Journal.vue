@@ -2,7 +2,7 @@
   <section id="journal" class="magazine">
     <Navigation v-if="navigation" :rubrics="rubrics" />
     <div class="container">
-      <h1 v-if="!navigation" class="magazine__title title">{{ title }}</h1>        
+      <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>        
         <div v-for="item, i in articlesArray" :key="'item' + i" class="magazine__wrapper">
           <div v-for="article, j in item" :key="article.title" :class="leftRight(i, j)">
             <nuxt-link :to="'journal/' + article.slug" class="picture">
@@ -25,12 +25,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Navigation from '~/components/sections/general/JournalNav'
 
 export default {
   name: 'Journal',
   components: {
-    Navigation,
+    Navigation: () => import('~/components/sections/general/JournalNav'),
   },
   props: {
     title: {

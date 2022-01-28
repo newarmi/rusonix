@@ -22,9 +22,6 @@
 
 <script>
 export default {
-  components: {
-      
-  },
   layout: 'auth',
 }
 </script>

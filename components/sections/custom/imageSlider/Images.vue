@@ -1,7 +1,7 @@
 <template>
   <section :id="items.tag" class="history" :style="color">
     <div class="container">
-      <h1 class="history__title title">{{ items.title }}</h1>
+      <h2 class="history__title title">{{ items.title }}</h2>
     </div>
     <div class="container__history-slider">
       <Slider :items="items"/>
@@ -11,12 +11,10 @@
 
 <script>
 
-import Slider from '@/components/sections/custom/imageSlider/Slider'
-
 export default {
-  name: 'ImageSlider',
+  name: 'Images',
   components: {
-    Slider
+    Slider: () => import('@/components/sections/custom/imageSlider/Slider')
   },
   props: {
     items: {

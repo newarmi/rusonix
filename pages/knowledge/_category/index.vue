@@ -1,41 +1,39 @@
 <template>
 <div>
-    <section class="subcategories">
-        <div class="container">
-            <a href="#" class="btn__step-back" @click="back">
-                <span class="arrow__step-back">
-                    <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
-                </span>
-                Назад</a>
+  <section class="subcategories">
+      <div class="container">
+          <a href="#" class="btn__step-back" @click="back">
+              <span class="arrow__step-back">
+                  <img class="arrow__step-back-img" src="@/assets/img/arrow-step-back.png" alt="arrow step back">
+              </span>
+              Назад</a>
 
-            <div class="subcategories__wrapper">
-                <div v-for="item in categories" :key="item.title" class="subcategories__wrap">
-                    <h4 class="subcategories__title" @click="openSubmenu(item.slug)">{{ item.title }}</h4>
-                    <ul class="subcategories__list">
-                        <li v-for="post in item.posts" :key="post.title" class="subcategories__item">
-                            <span class="subcategories__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
-                            <div class="subcategories__link" @click="openPost(item.slug, post.slug)">{{ post.title }}</div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    
-      <div class="container mt-30">
-        <ul class="category__list">
-          <li v-for="post in posts" :key="post.title" class="category__item">
-              <div class="category__item-wrap">
-                  <span class="category__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
-                  <div class="category__link" @click="openPost(0, post.slug)">{{ post.title }}</div>
+          <div class="subcategories__wrapper">
+              <div v-for="item in categories" :key="item.title" class="subcategories__wrap">
+                  <h4 class="subcategories__title" @click="openSubmenu(item.slug)">{{ item.title }}</h4>
+                  <ul class="subcategories__list">
+                      <li v-for="post in item.posts" :key="post.title" class="subcategories__item">
+                          <span class="subcategories__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
+                          <div class="subcategories__link" @click="openPost(item.slug, post.slug)">{{ post.title }}</div>
+                      </li>
+                  </ul>
               </div>
-              <p class="category__item-descr">{{ post.text }}</p>
-          </li>
-        </ul>
+          </div>
       </div>
-    </section>
-    <TopPosts />
-
-
+  
+    <div class="container mt-30">
+      <ul class="category__list">
+        <li v-for="post in posts" :key="post.title" class="category__item">
+            <div class="category__item-wrap">
+                <span class="category__item-img"><img src="@/assets/img/contact-icon.png" alt=""></span>
+                <div class="category__link" @click="openPost(0, post.slug)">{{ post.title }}</div>
+            </div>
+            <p class="category__item-descr">{{ post.text }}</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <TopPosts />
 </div>
 </template>
 
@@ -48,11 +46,24 @@ export default {
   },
   async asyncData({ store, params }) {
     await store.dispatch('fetchPage', 'knowledge')
+    await store.dispatch('knowledge/getData')
     await store.dispatch('knowledge/getSubcategory', params.category)
   },
   data() {
     return {
 
+    }
+  },
+  head() {
+    return {
+        title: this.subcategory.meta_title,
+        meta: [
+            {
+                hid: 'description',
+                name: 'description',
+                content: this.subcategory.meta_description,
+            }
+        ],
     }
   },
   computed: {

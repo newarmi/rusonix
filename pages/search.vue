@@ -18,7 +18,8 @@
 <script>
 import { mapGetters } from 'vuex';
 
-export default {    
+export default {
+  name: 'Search',    
   async asyncData({store}) {
     await store.dispatch('fetchPage', 'search')
     await store.dispatch('search')

@@ -48,7 +48,7 @@
           </div>
 
           <div class="license__btn-wrap">
-            <a href="#" class="license__btn">{{ card.attributes.buttonName }}</a>
+            <div class="license__btn" @click="goToLink(card.attributes.buttonLink)">{{ card.attributes.buttonName }}</div>
           </div>
         </div>
       </div>
@@ -68,6 +68,11 @@ export default {
   computed: {
 
   },
+  methods: {
+    goToLink(link) {
+     window.open(link, '_blank')
+    },
+  }
 }
 </script>
 
@@ -87,7 +92,8 @@ export default {
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
-  padding-bottom: 10px;
+  padding-bottom: 72px;
+  
 }
 .license__title {
   margin-bottom: 72px;

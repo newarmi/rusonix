@@ -1,7 +1,7 @@
 <template>
   <section :id="tag" class="conditions">
     <div class="container">
-      <div class="conditions__title title">{{title}}</div>
+      <h2 class="conditions__title title">{{title}}</h2>
       <div class="conditions__title-wrap-text">
         <div class="conditions__title-text" v-html="description"></div>
       </div>

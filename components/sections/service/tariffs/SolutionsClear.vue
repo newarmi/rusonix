@@ -15,18 +15,20 @@
               <p class="tariff__tab-text">Тип диска</p>
               <div class="tariff__tab-sample">
                 <div class="tariff__tab-sample-links"
-                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab}"
+                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab, 
+                              'ml-13' : !data.secondDisk}"
                     @click="changeDiscTab(s, data.firstDisk)">{{ data.firstDisk }}</div>
-                <div class="tariff__tab-sample-links"
+                <div v-if="data.secondDisk" class="tariff__tab-sample-links"
                     :class="{'tariff__tab-sample-links--active': data.secondDisk===activeTab[s].tab}"
                     @click="changeDiscTab(s, data.secondDisk)">{{ data.secondDisk }}</div>
               </div>
 
               <div class="tariff__tab-sample tariff__tab-sample--mobile">
                 <div class="tariff__tab-sample-links"
-                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab}"
+                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab,
+                              'ml-13' : !data.secondDisk}"
                     @click="changeDiscTab(s, data.firstDisk)">{{ data.firstDisk }}</div>
-                <div class="tariff__tab-sample-links"
+                <div v-if="data.secondDisk" class="tariff__tab-sample-links"
                     :class="{'tariff__tab-sample-links--active': data.secondDisk===activeTab[s].tab}"
                     @click="changeDiscTab(s, data.secondDisk)">{{ data.secondDisk }}</div>
               </div>
@@ -43,7 +45,8 @@
                 <ul class="tariff__dropdown-content">
                   <li v-for="onePeriod, p in data.periods" :key="onePeriod.key"
                       :dropText="onePeriod.attributes.period"
-                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p, onePeriod.attributes.month)">{{ onePeriod.attributes.period }}</li>
+                      class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p, onePeriod.attributes.month)">
+                      {{ onePeriod.attributes.period }}</li>
                 </ul>
               </div>
             </div>
@@ -64,15 +67,19 @@
             <div class="tariff__configuration">
               <SolutionCard v-for="item, i in solutionGroup[s].solution" :key="item.key"
                             :title="item.attributes.title"
-                            :price="item.attributes.periodPrice[period[s].periodNumber].price + ' ₽'"
+                            :price="item.attributes.periodPrice[period[s].periodNumber].price"
+                            :sale="item.attributes.periodPrice[period[s].periodNumber].sale"
+                            :oldprice="item.attributes.periodPrice[period[s].periodNumber].oldPrice"
+                            :economy="item.attributes.periodPrice[period[s].periodNumber].economy"
                             :options="item.attributes.options"
                             :choose="selectCards[s][tabIndex[s].tab][i].select"
                             @chooseCard="chooseCard(s, i, item)" />
             </div>
 
             <div v-if="solutionConfigs.length-s===1" class="tariff__wrapper-right">
-              <Total :total="totalMonth" :bonus="bonuses" :mobile="false" 
-                     :items="clearItems" @createPDF="createPdf"/>
+              <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="false" 
+                     :items="clearItems" :link="link" :total="total" :economy="economy"
+                      @createPDF="createPdf"/>
             </div>
           </div>
           <div v-if="solutionConfigs.length-s===1" class="calculate__wrapper-btn-add btn_mobile_hide">
@@ -92,8 +99,9 @@
 
     </div>
     <div class="calculate__total-tablet">
-      <Total :total="totalMonth" :bonus="bonuses" :mobile="true" 
-             :items="clearItems" @createPDF="createPdf"/>
+      <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="true" 
+             :items="clearItems" :link="link" :total="total" :economy="economy"
+              @createPDF="createPdf"/>
     </div>
   </section>
 </template>
@@ -129,6 +137,23 @@ export default {
     }
   },
   computed: {
+      link() {
+        if(this.items.length>1) {
+          return 'https://my.rusonyx.ru/billmgr#/vds/order/list/basic'
+        }
+        if(!this.items[0].item) {
+          return ''
+        } 
+        if(this.items.length===1) {
+          const type = this.items[0].item.type
+          const period = this.period[0].month
+          const id = this.items[0].item.billing_id
+          return `https://my.rusonyx.ru/billmgr?startpage=` 
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+                   + id + `&period=` + period + `&project=3`
+        }
+        return ''
+      },
       clearItems() {       
           return this.items.map(item => {
             if(item.item) {  
@@ -136,17 +161,17 @@ export default {
               return {
                 option: option.attributes.option
               }
-            })
-            
+            })          
             return {
               title: item.item.title,
-              options
+              biling_id: item.item.billing_id,
+              type: item.item.type,
+              options,
             }
           } else {
             return {}
           }
-          })
-        
+          })  
       },
       total() {
         const result = this.items.reduce((accum, a, i) => {
@@ -157,6 +182,16 @@ export default {
 
         return Math.round(result)
       },
+      economy() {
+        const result = this.items.reduce((accum, a, i) => {
+          if(a.item)
+          return accum + Number(a.item.periodPrice[this.period[i].periodNumber].economy)
+          return accum + 0
+        }, 0)
+
+        return Math.round(result)
+      },
+
 
       totalMonth() {
         const result = this.items.reduce((accum, a, i) => {
@@ -177,25 +212,54 @@ export default {
       allBilling() {
         return this.$store.getters['universal/billingTariffs']
       },
+      mode() {
+        const tariffs = this.$store.getters['universal/tariffs']
+        let mode  = ''
+        tariffs.forEach(item => {
+          if(item.layout === 'billing')
+            mode =  item.attributes.mode
+        })
+        return mode
+      },
+
       bonuses() {
-        return this.data.bonus[0].attributes
+        if(this.data.bonus.length) {
+          return this.data.bonus[0].attributes
+        }
+        return {}
       },
       billingClear() {
-        return this.allBilling.map(item => {
-        if(item.options) {
+        let billings = this.allBilling.filter(()=>{ return true })
+
+        if(this.mode) {
+          billings = billings.filter(item => {
+            return item.mode?.find(obj => obj.attributes.title === this.mode)
+          })
+        }
+
+        return billings.map(item => {
+          
+        if(item.options.length) {
           const options = item.options[0]
 
-          return {
+          return { 
             layout: options.layout,
             key: options.key,
             attributes: {
+                          billing_id: item.billing_id,
+                          type: item.type,
                           oldPrice: options.attributes.oldPrice,
                           options: options.attributes.options,
                           title: options.attributes.title ? options.attributes.title : item.name,
                           diskType: options.attributes.diskType,
                           price: Math.round(item.periods[0].amount) + ' ₽ / месяц',
                           periodPrice: item.periods.map(period => {
-                            return {period: period.period, price: Math.round(period.amount)}
+                            return { 
+                                    period: period.period, 
+                                    price: Math.round(period.amount),
+                                    sale: period.percent!=='0%',
+                                    oldPrice: Math.round(period.full_cost),
+                                    economy: Math.round(period.full_cost) - Math.round(period.amount)}
                           })
                         }
           }
@@ -204,7 +268,9 @@ export default {
       }).filter(item => Object.keys(item).length)
       },
       solutions() {
-        const clearSolutions = this.data.solutions.map(item => {
+        let clearSolutions = []
+        if(this.data.solutions.length)
+        clearSolutions = this.data.solutions.map(item => {
           return {
             layout: item.layout,
             key: item.key,
@@ -214,7 +280,11 @@ export default {
                 options: item.attributes.options,
                 price: item.attributes.periods[0].attributes.amount,
                 periodPrice: item.attributes.periods.map(period => {
-                    return {period: period.attributes.period, price: Math.round(period.attributes.amount)}
+                    return {period: period.attributes.period, 
+                            price: Math.round(period.attributes.amount),
+                            sale: period.percent!=='0%',
+                            oldPrice: Math.round(period.full_cost),
+                            economy: Math.round(period.full_cost) - Math.round(period.amount)}
                 })
             }
           }
@@ -392,6 +462,7 @@ export default {
 </script>
 
 <style scoped>
+
 .btn_desktop_hide {
   display: none;
 }
@@ -1285,7 +1356,9 @@ export default {
   padding: 48px 29px;
 }
 
-
+.ml-13 {
+  margin-left: 13px;
+}
 
 @media (max-width: 992px) {
   .tariff {

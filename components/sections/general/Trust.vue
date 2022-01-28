@@ -1,8 +1,8 @@
 <template>
 <section :id="tag" class="confidents">
-  <div class="container">
-          <h1 class="confidents__title title">{{ title }}</h1>
-        </div>
+    <div class="container">
+      <h2 class="confidents__title title">{{ title }}</h2>
+    </div>
         <div class="confidents__partners">
           <picture v-for="(logo, i) in firstLine" :key="'fl:' + i + logo.image" class="picture">
             <img

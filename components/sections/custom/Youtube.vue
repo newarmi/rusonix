@@ -1,18 +1,18 @@
 <template>
-    <section :id="items.tag" class="channel">
-        <div class="container">
-            <h3 class="channel__title title">{{items.title}}</h3>
-            <div class="channel__wrapper">
-                <div class="channel__video">
-                    <iframe class="channel__video-frame" :src="items.link"
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen></iframe>
-                </div>
-                <div class="channel__text" v-html="items.text"></div>
-            </div>
-        </div>
-    </section>
+  <section :id="items.tag" class="channel">
+    <div class="container">
+      <h2 class="channel__title title">{{items.title}}</h2>
+      <div class="channel__wrapper">
+          <div class="channel__video">
+              <iframe class="channel__video-frame" :src="items.link"
+                      title="YouTube video player" frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen></iframe>
+          </div>
+          <div class="channel__text" v-html="items.text"></div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
