@@ -17,7 +17,7 @@ export default {
   },
   head() {
     return {
-        title: this.header.meta_title,
+        title: this.$route.name !== 'knowledge-category-post' ? this.header.meta_title : this.$store.getters['knowledge/metaTitle'],
         meta: [
             {
                 hid: 'description',
@@ -39,6 +39,9 @@ export default {
     bgImage () {
       return `background-image: url(${this.$config.imgURL}${this.header.image});`
     }
+  },
+  created() {
+    console.log(this.$route.name)
   }
 }
 </script>

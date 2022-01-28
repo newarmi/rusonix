@@ -55,6 +55,7 @@ export const getters = {
     posts: state => state.knowledge.posts,
     categories: state => state.knowledge.categories,
     subcategory: state => state.subcategory,
+    metaTitle: state => state.content.meta_title,
 
     category: state => state.category,
     content: state => state.content,
