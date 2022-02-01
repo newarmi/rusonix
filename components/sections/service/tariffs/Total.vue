@@ -21,7 +21,7 @@
           <div class="calculate__total-card-text">
             <span class="calculate__total-card-text--mod">Итого: {{ total }} ₽</span>
           </div>
-          <div class="calculate__total-card-text">
+          <div v-if="totalmonth!==0" class="calculate__total-card-text">
             <span class="calculate__total-card-text--mod">{{ totalmonth }} ₽</span>
             / месяц
           </div>
@@ -72,7 +72,7 @@ export default {
     },
     totalmonth: {
       type: Number,
-      required: true,
+      default: 0
     },
     bonus: {
       type: Object,

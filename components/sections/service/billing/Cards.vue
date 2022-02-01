@@ -5,7 +5,10 @@
 
       <div class="license__wrapper-cards">
         <div v-for="card, ind in cards" :key="card.key" class="license__wrap-card">
-          <div class="license__card-title">{{ card.title ? card.title : card.name }}</div>
+          <div class="license__wrap-card--title">
+          <div class="license__card-title">{{ card.title ? card.title : card.name }}
+
+          </div>
               <div v-if="card.options.length>0" class="license__card-content">
                 <div class="license__card-left">
                   <div v-for="option in card.options[0].attributes.options" :key="option.key">
@@ -24,7 +27,7 @@
                   </div>
                 </div>
               </div>
-
+            </div> 
               <div v-if="card.periods.length>1">
                 <div class="license__card-selection-title">
                   Период
@@ -214,6 +217,13 @@ display: flex;
 
   background-color: #fff;
   border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.license__wrap-card--title{
+  
 }
 .license__card-title {
   font-family: "Graphik", sans-serif;
@@ -331,6 +341,11 @@ display: flex;
 }
 .license__btn:hover {
   background-color: #660915;
+}
+@media(max-width:576px){
+  .license__btn{
+    padding: 14px 40px;
+  }
 }
 
 .license__card-oldprice-text {

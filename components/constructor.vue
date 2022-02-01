@@ -72,9 +72,22 @@ export default {
   computed: {
     ...mapGetters(['tag'])
   },
-  methods: {
-    ...mapActions(['resetTag'])
+  mounted() {
+    this.scroll()
   },    
+  methods: {
+    ...mapActions(['resetTag']),
+    scroll() {
+      if(this.tag) {
+      
+      const block = document.querySelector('#' + this.tag)
+        if(block)
+          block.scrollIntoView({ behavior: 'smooth' })
+          this.resetTag()
+      }
+    }
+  },
+
 }
 </script>
 

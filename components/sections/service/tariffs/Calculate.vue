@@ -5,9 +5,7 @@
     </div>
         <div class="calculate__wrapper">
           <div v-for="config, c in configValues" :key="'config' + c" class="calculate__wrapper-left">
-            <!-- <pre>{{data.fields}}</pre> -->
-            <!-- <pre>{{configValues}}</pre> -->
-            <!-- <pre>{{clearFields}}</pre> -->
+      
             <div class="calculate__configuration">
               <form action="#" class="calculate__form">
                 <div class="calculate__form-title">Конфигурация</div>

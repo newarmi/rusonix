@@ -16,7 +16,7 @@ export const state = () => ({
   
   export const actions = {
     async fetchPage({commit}, slug) {   
-      const page = await this.$axios.$get('services/' + slug)
+      const page = await this.$axios.$get(slug)
       commit('setPage', page)
     },
     setFilter({commit}, {filterType, filterValue}) {

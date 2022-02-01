@@ -15,13 +15,13 @@
               :srcset="$config.imgURL + item.attributes.image"
               alt="license"
               class="license__img"
-              @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, 'service/' + item.attributes.link)"
+              @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, item.attributes.link)"
             />
           </picture>
          
           <div class="nl__black">
             <div class="license__sertificate-title"
-            @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, 'service/' + item.attributes.link)">{{ item.attributes.title }} </div>
+            @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, item.attributes.link)">{{ item.attributes.title }} </div>
           </div>
         </div>
       </div>

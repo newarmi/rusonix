@@ -14,7 +14,7 @@ export default {
 
   async asyncData({ params, store }) {
     const slug = params.slug
-    await store.dispatch('universal/fetchPage', 'service/' + slug)
+    await store.dispatch('universal/fetchPage', 'license/' + slug)
   },
 }
 </script>

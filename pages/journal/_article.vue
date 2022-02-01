@@ -7,7 +7,11 @@
     </main>
 </template>
 
+<script type="application/ld+json">
+</script>
+
 <script>
+
 
 export default {
   name: 'JournalArticle',

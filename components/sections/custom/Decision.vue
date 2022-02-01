@@ -4,7 +4,7 @@
       <h2 class="decision__title title">{{blocks.title}}</h2>
       <div class="decision__wrapper-cards">
         <div v-for="card in blocks.cards" :key="card.key" class="decision__card" >
-          <div class="decision__card-title"><nuxt-link class="black-link" :to="'service/' + card.attributes.link">{{card.attributes.title}}</nuxt-link></div>
+          <div class="decision__card-title"><nuxt-link class="black-link" :to="card.attributes.link">{{card.attributes.title}}</nuxt-link></div>
           <div class="decision__card-text" v-html="card.attributes.description"></div>
           <ul class="decision__list">
             <label class="decision__item" v-html="card.attributes.services"></label>

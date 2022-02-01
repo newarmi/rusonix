@@ -203,23 +203,42 @@ export default {
     buttonAction(parent, button) {
       switch(button.layout) {
         case('tab'): {
-          if(this.$route.fullPath==='/' + parent.attributes.page) {
-            this.scrollToBlock(button.attributes.tab)
-            this.isMenuOpen = !this.isMenuOpen
-          } else {
-            this.isMenuOpen = !this.isMenuOpen
-            this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
-          }
-            break;
+            if(this.$route.fullPath==='/' + parent.attributes.page) {
+              this.scrollToBlock(button.attributes.tab)
+              this.isMenuOpen = !this.isMenuOpen
+              break;
+            } else {
+              this.isMenuOpen = !this.isMenuOpen
+              this.setTag(button.attributes.tab)
+              this.$router.push({path: '/' + parent.attributes.page})  
+              break;
+            }
           }
         case('rubric'): {
           this.setRubric(button.attributes.page)
           this.$router.push({path: '/journal'})  
           break
         }
-        case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('main'): {        
+          if(this.$route.fullPath==='/'&&button.attributes.page==='index') {
+            this.scrollToBlock(button.attributes.tab)
+            this.isMenuOpen = !this.isMenuOpen
+            break;
+          }
+
+          this.setTag(button.attributes.tab)
+          if(button.attributes.page==='index') {
+            this.$router.push({path: '/'}); break; 
+          }
+
+          this.$router.push({path: '/' + button.attributes.page}); break; 
+        }
         case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
-        case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
+        case('service'): {
+          this.setTag(button.attributes.tab)
+          this.$router.push({path: '/' + button.attributes.page}); 
+          break;
+          }
         case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
         case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
         case('link'):  window.open(button.attributes.link, '_blank'); break;
@@ -234,6 +253,7 @@ export default {
           block.scrollIntoView({ behavior: 'smooth' })
       }
     },
+
     scrollTo(id, route, index) {
        if(route[0]!=='/') {
          route = '/' + route
@@ -252,7 +272,7 @@ export default {
         if(id==='#null') {
           id=''
         }
-        this.$router.push({path: route, hash: id})
+        this.$router.push({path: route})
        }
     },
   },
@@ -451,10 +471,10 @@ export default {
   justify-content: space-between;
 
   width: calc(100vw - 17px);
-height: 330px;
-    max-width: 1440px;
-    padding: 0 26px;
-    margin: 150px auto 0;
+  height: 330px;
+  max-width: 1440px;
+  padding: 0 26px;
+  margin: 150px auto 0;
 }
 
 .navigation__dropdown {

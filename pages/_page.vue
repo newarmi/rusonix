@@ -5,10 +5,11 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'MainPages',
+  
   components: {
     'Constructor': () => import('~/components/constructor'),
   },
@@ -18,12 +19,10 @@ export default {
     await store.dispatch('fetchPage', page)
   },
   computed: {
-    ...mapGetters(['pageBlocks', 'tag'])
-  },
-  methods: {
-    ...mapActions(['resetTag'])
+    ...mapGetters(['pageBlocks'])
   },
 }
+
 </script>
 
 <style scoped>

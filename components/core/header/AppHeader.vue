@@ -30,7 +30,8 @@ export default {
   computed: {
     header() {
       switch(this.$route.name) {
-        case('service-slug'): return this.$store.getters['universal/header']
+        case('service-slug'): case('license-slug'): case('hosting-slug'): 
+          return this.$store.getters['universal/header']
         case('company-document'): return this.$store.getters['requisites/header']
         case('journal-article'): return this.$store.getters['journal/header']
       }
@@ -39,9 +40,6 @@ export default {
     bgImage () {
       return `background-image: url(${this.$config.imgURL}${this.header.image});`
     }
-  },
-  created() {
-    console.log(this.$route.name)
   }
 }
 </script>
