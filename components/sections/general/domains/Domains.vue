@@ -12,7 +12,8 @@
           <svg class="domain__icon" width="20" height="20" @click="ckeckIfnotNull">
             <use xlink:href="@/assets/svg/sprites.svg#search-domain"></use>
           </svg>
-          <p class="error__message" :class="{'error__show':error}">Ошибка запроса</p>
+          <p class="info__message" :class="{'msg__show':load}">Подождите несколько секунд</p>
+          <p class="error__message" :class="{'msg__show':error}">Ошибка запроса</p>
         </div>
       </div>
       <div class="domain__cards-wrapp">
@@ -68,11 +69,13 @@ export default {
     return {
       domainString: '',
       dom: '',
+      load: false
     }
   },
   computed: {
     ...mapGetters(['domainTarriff', 'domainAnswer']),
     error() {
+      if(this.load) return false
       if(this.domainAnswer) return this.domainAnswer.error
       return this.domainAnswer
     },
@@ -116,14 +119,19 @@ export default {
       }
     },
     checkDomain() { 
+      
       this.domainString=this.domainString.trim().replaceAll(/ +/g, '-')
       const point = this.domainString.indexOf('.')
       if(point!==-1)
       this.domainString = this.domainString.slice(0, point)
-      this.checkBillingDomain(this.domainString).then(() => {
-        console.log(this.domainAnswer)
-        this.dom = this.domainString
-      })
+
+      if(this.dom !== this.domainString) {
+        this.load = true
+        this.checkBillingDomain(this.domainString).then(() => {
+          this.dom = this.domainString
+          this.load = false
+        })
+      }
     },
     convertStatus(status) {
       return status==='free' ? 'Купить' : 'Занят'
@@ -185,14 +193,25 @@ export default {
   margin: 5px 40%;
   display: none;
 }
+.info__message {
+  font-family: "Graphik", sans-serif;
+  font-size: 12px;
+  color: black;
+  margin: 5px 30%;
+  display: none;
+}
 
-.error__show {
+
+.msg__show {
   display: block;
 }
 
 @media (max-width: 500px) {
   .error__message {
     margin: 5px 35%;
+  }
+  .info__message {
+    margin: 5px 20%;
   }
 }
 

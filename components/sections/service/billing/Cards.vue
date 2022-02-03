@@ -99,26 +99,7 @@ export default {
   data() {
     return {
       periods: [],
-    }
-  },
-  computed: {
-    allCards() {
-      return this.$store.getters['universal/billingTariffs']
-    },
-    cards() {
-      let cards = this.allCards.map(item=>item)
-      
-      if(this.tariff.mode) {
-          cards = cards.filter(item => {
-            return item.mode?.find(obj => obj.attributes.title === this.tariff.mode)
-        })
-      }
-
-      cards = cards.sort((a ,b) => {
-          return a.periods[0].amount-b.periods[0].amount
-      })
-
-      return cards
+      cards: null
     }
   },
   watch: {
@@ -130,8 +111,20 @@ export default {
     this.init()
   }, 
   methods: {
-      init() {
-        this.cards.forEach(() => {
+    init() {
+      this.cards = this.$store.getters['universal/billingTariffs'].map(item=>item)
+      
+      if(this.tariff.mode) {
+          this.cards = this.cards.filter(item => {
+            return item.mode?.find(obj => obj.attributes.title === this.tariff.mode)
+        })
+      }
+
+      this.cards = this.cards.sort((a ,b) => {
+          return a.periods[0].amount-b.periods[0].amount
+      })
+
+      this.cards.forEach(() => {
         this.periods.push({period: 0})
       });
     },

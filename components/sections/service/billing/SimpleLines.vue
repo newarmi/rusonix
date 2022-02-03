@@ -1,5 +1,5 @@
 <template>
-  <section class="license__storage">
+  <section :id="lines.tag" class="license__storage">
     <div class="container">
       <div class="license__title title">
         {{ lines.tariffTitle }}
@@ -130,9 +130,9 @@ export default {
     },
     billingTariffs() {
       if(this.lines.mode) {
-        return this.allCards.filter(item => item.mode===this.lines.mode)
+        return this.allBillingTariffs.filter(item => item.mode===this.lines.mode).filter(item => item.options)
       }
-      return this.allBillingTariffs
+      return this.allBillingTariffs.filter(item => item.options)
     },
     options() {
       const options = []

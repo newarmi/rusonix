@@ -77,6 +77,7 @@ export default {
   methods: {
     ...mapActions(['resetTag']),
     scroll() {
+        console.log(this.tag)
       if(this.tag) {
       
       const block = document.querySelector('#' + this.tag)

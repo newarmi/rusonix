@@ -1,11 +1,9 @@
 <template>
   <section :id="cards.tag" class="license">
-
     <div class="container">
       <div class="license__title title">{{ cards.tariffTitle }}</div>
       <div class="license__wrapper-cards">
-
-        <div v-for="card in cards.cards" :key="card.key" class="license__wrap-card">
+        <div v-for="card, index in cards.cards" :key="card.key" class="license__wrap-card">
           <div class="license__card-title">{{ card.attributes.cardTitle }}</div>
               <div class="license__card-content">
                 <div class="license__card-left">
@@ -48,8 +46,15 @@
           </div>
 
           <div class="license__btn-wrap">
-            <div class="license__btn" @click="goToLink(card.attributes.buttonLink)">{{ card.attributes.buttonName }}</div>
+            <div v-if="card.attributes.modal" 
+                 class="license__btn" 
+                 @click="showPopup(index)">{{ card.attributes.buttonName }}</div>
+            <div v-else 
+                 class="license__btn" 
+                 @click="goToLink(card.attributes.buttonLink)">{{ card.attributes.buttonName }}</div>
           </div>
+          <Modal v-if="card.attributes.modal" :title="card.attributes.cardTitle"
+                 :show-popup="is_show[index].show" @closePopup="closePopup(index)" />
         </div>
       </div>
     </div>
@@ -59,18 +64,41 @@
 <script>
 export default {
   name: 'Cards',
+  components: {
+    Modal: () => import('~/components/sections/general/Modal'),
+  },
   props: {
     cards: {
       type: Object,
       required: true
     }
   },
+  data() {
+    return {
+      is_show: []
+    }
+  },
   computed: {
 
+  },
+  created() {
+    this.cards.cards.forEach(() => {
+      this.is_show.push({ show: false })
+    })
   },
   methods: {
     goToLink(link) {
      window.open(link, '_blank')
+    },
+    showPopup(i) {
+      this.is_show[i].show = true
+      document.body.style.overflow = 'hidden'
+      // document.body.style.position = 'fixed'
+    },
+    closePopup(i) {
+      this.is_show[i].show = false
+      document.body.style.overflow = 'auto'
+      document.body.style.position = '';
     },
   }
 }

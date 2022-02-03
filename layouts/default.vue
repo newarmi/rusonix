@@ -19,7 +19,7 @@ export default {
   components: {
    AppHeader: () => import('@/components/core/header/AppHeader'),
    Footer: () => import('@/components/core/footer/AppFooter')
-  },
+  },  
 }
 </script>
 

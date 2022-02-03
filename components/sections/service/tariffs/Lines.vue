@@ -52,9 +52,14 @@
 
             <div class="license__wrap-total-box">
               <div class="license__total">{{ line.attributes.periodPrice[periods[ind].period].attributes.price }} ₽</div>
-              <button class="license__btn" @click="goToLink(line.attributes.buttonLink)">
+              <button v-if="line.attributes.modal" class="license__btn" @click="showPopup(ind)">
                 {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
               </button>
+              <button v-else class="license__btn" @click="goToLink(line.attributes.buttonLink)">
+                {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
+              </button>
+              <Modal v-if="line.attributes.modal" :title="line.attributes.title"
+                 :show-popup="is_show[ind].show" @closePopup="closePopup(ind)" />
             </div>
           </div>
         </div>
@@ -102,9 +107,14 @@
             <div class="license__total license__total--tablet">
               {{ line.attributes.periodPrice[periods[ind].period].attributes.price }} ₽
             </div>
-            <button class="license__btn license__btn--tablet" @click="goToLink(line.attributes.buttonLink)">
+            <button v-if="line.attributes.modal" class="license__btn" @click="showPopup(ind)">
+                {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
+            </button>
+            <button v-else class="license__btn license__btn--tablet" @click="goToLink(line.attributes.buttonLink)">
               {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}
             </button>
+            <Modal v-if="line.attributes.modal" :title="line.attributes.title"
+                 :show-popup="is_show[ind].show" @closePopup="closePopup(ind)" />
           </div>
         </div>
       </div>
@@ -115,6 +125,9 @@
 <script>
 export default {
   name: 'Lines',
+  components: {
+    Modal: () => import('~/components/sections/general/Modal'),
+  },
   props: {
     lines: {
       type: Object,
@@ -123,7 +136,8 @@ export default {
   },
   data() {
     return {
-      periods: []
+      periods: [],
+      is_show: []
     }
   },
   computed: {
@@ -167,6 +181,7 @@ export default {
   created() {
      this.lines.lines.forEach(() => {
         this.periods.push({period: 0})
+        this.is_show.push({ show: false })
       })
     
   },
@@ -192,6 +207,16 @@ export default {
   },
   goToLink(link) {
      window.open(link, '_blank')
+    },
+  showPopup(i) {
+      this.is_show[i].show = true
+      document.body.style.overflow = 'hidden'
+     // document.body.style.position = 'fixed'
+    },
+  closePopup(i) {
+      this.is_show[i].show = false
+      document.body.style.overflow = 'auto'
+      document.body.style.position = '';
     },
   },
 }

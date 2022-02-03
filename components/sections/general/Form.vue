@@ -7,35 +7,42 @@
       <form class="partner__form">
         <div class="form__card">
           <div v-show="!formSent">
-          <div class="form__card-input-field">{{fields.title}}
+          <div class="form__card-input-field">{{allFields.title}}*
             <div class="form__card-input-wrap">
-              <input v-model="name" type="text" class="form__card-input" value="" />
+              <input v-model="fields[0].value" type="text" class="form__card-input" 
+                     value="" @keyup="checkFields()" />
+              <p v-if="fields[0].error" class="error__msg">Это поле необходимо заполнить</p>
+            </div>
+          </div>
+          <div class="form__card-input-field">{{allFields.alt_title}}*
+            <div class="form__card-input-wrap">
+              <input v-model="fields[1].value" type="text" class="form__card-input" 
+                     value="" @keyup="checkFields()" />
+              <p v-if="fields[1].error&&!isEmailValid" class="error__msg">Это поле необходимо заполнить</p>
+              <p v-if="isEmailValid" class="error__msg">Введите корректный адрес электронной почты</p>
             </div>
           </div>
 
-          <div class="form__card-input-field">{{fields.alt_title}}
+          <div class="form__card-input-field">{{allFields.image}}*
             <div class="form__card-input-wrap">
-              <input v-model="email" type="text" class="form__card-input" value="" />
+              <input v-model="fields[2].value" type="text" class="form__card-input" 
+                     value="" @keyup="checkFields()" />
+              <p v-if="fields[2].error" class="error__msg">Это поле необходимо заполнить</p>
             </div>
           </div>
 
-          <div class="form__card-input-field">{{fields.image}}
-            <div class="form__card-input-wrap">
-              <input v-model="phone" type="text" class="form__card-input" value="" />
-            </div>
-          </div>
-
-          <div class="form__card-input-field">{{fields.link_name}}
+          <div class="form__card-input-field">{{allFields.link_name}}
             <div class="form__card-select">
-              <select v-model="department" class="form__select">                     
-                <option v-for="item in list" :key="item.key" :value="item.attributes.item">{{item.attributes.item}}</option>
+              <select v-model="list[0].attributes.item" class="form__select">                     
+                <option v-for="item, i in list" :key="item.key" :value="item.attributes.item" :selected="i===0">{{item.attributes.item}}</option>
               </select>
             </div>
           </div>
           <button class="form__btn-registration" type="button" @click="addPartner()">Зарегистрироваться</button>
         </div>
         <div v-show="formSent" class="decision__card-title">
-          Заявка на партнерство отправлена
+          <div class="form__answer title">Спасибо!</div>
+          <div class="form__text">Мы приняли Вашу заявку, а наши менеджеры будут готовы связаться с Вами в ближайшее время</div>
         </div>
         </div> 
       </form>
@@ -61,38 +68,77 @@ export default {
   data() {
     return {
       formSent: false,
-      name: '',
-      email: '',
-      phone: '',
-      department: 'Представитель digital агентства'
+      errors: [false, false, false],
+      firstTry: false,
+      fields: [{value: '', error: false},
+               {value: '', error: false},
+               {value: '', error: false}]
     }
   },
   computed: {
     ...mapGetters(['form']),
-    fields() {
+    allFields() {
       return this.form.sections[0]
     },
     list() {
-      return JSON.parse(this.fields.content)
-    }
+      return JSON.parse(this.allFields.content)
+    },
+    isFieldsFull () {
+      return this.fields.every(item => !item.error)&&!this.isEmailValid
+    },
+    isEmailValid() {
+      if(this.firstTry) {
+        if(this.fields[1].value==='') {
+          return false 
+          } else {
+            return !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(this.fields[1].value)
+          }
+      }     
+      return false
+    },
+
   },
   methods: {
     addPartner() {
+      this.firstTry = true
+      this.checkFields()
+
+      if(this.isFieldsFull) {
+
       this.$axios.$post(this.$config.siteURL + 'api/addPartner', {
-        name: this.name,
-        email: this.email,
-        phone: this.phone,
-        department: this.department
+        name: this.fields[0].value,
+        email: this.fields[1].value,
+        phone: this.fields[2].value,
+        department: this.list[0].attributes.item
       }).then(function (response) {
           
        })
        this.formSent = true
+      }
+    },
+    checkFields() {
+      if(this.firstTry) {
+      this.fields.forEach(item => {
+        if(item.value) {
+          item.error = false
+        } else {
+          item.error = true
+        }
+      })
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+
+.error__msg {
+  font-size: 12px;
+  color: #830f1e;
+  text-align: center;
+}
+
 .decision__card-title {
   font-family: "Graphik", sans-serif;
   font-size: 25px;
@@ -109,8 +155,22 @@ export default {
   padding-top: 72px;
   padding-bottom: 72px;
 }
+
 .form__title {
   margin-bottom: 96px;
+  text-align: center;
+}
+
+.form__answer {
+  font-size: 24px;
+  text-align: center;
+}
+
+.form__text {
+  font-family: "Graphik", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  margin: 30px;
 }
 .form__wrapper {
   display: flex;

@@ -50,7 +50,7 @@ export default {
       if(filterValue)
       this.setFilter({filterType, filterValue})
       this.setTag(tag)
-      this.$router.push({path: route, hash: tag})
+      this.$router.push({path: route})
     }
   }
 }
