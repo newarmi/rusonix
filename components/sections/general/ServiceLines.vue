@@ -1,72 +1,18 @@
 <template>
-    <div class="sertificate__buy-wrapper" @click="openSubmenu">
-        <div class="sertificate__buy-wrapper-content">
-          <div class="sertificate__content-title">{{ title }}</div>
-          <div class="sertificate__content">
-            <picture v-if="certificateData.logo" class="picture">
-              <img 
-                :src="logo"
-                :srcset="logo"
-                alt="global" class="sertificate-global-img" />
-            </picture>
-            <div class="sertificate__content-text">{{ certificateData.level }}</div>
-          </div>
-          <div class="sertificate__content-total">
-            <div class="sertificate__total">{{ certificateData.price }}</div>
-            <span v-if="certificateData.oldPrice" class="sertificate__total-old--mod"></span>
-            <div v-if="certificateData.oldPrice" class="sertificate__total-old">{{ certificateData.oldPrice }}</div>
-          </div>
-          <button class="sertificate__btn" @click="goToBilling()">Заказать</button>
-        </div>
-
-        <div class="sertificate__buy-wrapper-info" :class="showClass">
-          <div class="sertificate__info-text" v-html="certificateData.description"></div>
-          
-          <!-- Left side -->
-          <div class="sertificate__info-wrap">
-            <div class="sertificate__info-wrap-left">
-              <div class="sertificate__info-left">
-                <div v-for="option  in leftOptions" :key="option.key" class="sertificate__info-left-text">
-                  {{ option.attributes.option }}
-                </div>
-              </div>
-              <div class="sertificate__info-right">
-                <div v-for="option  in leftOptions" :key="option.key" class="sertificate__info-right-text">
-                  {{ option.attributes.value }}
-                </div>
-              </div>
-            </div>
-
-            <!-- Right side -->
-            <div class="sertificate__info-wrap-right">
-              <div class="sertificate__info-left">
-                <div v-for="option in rightOptions" :key="option.key" class="sertificate__info-left-text"> 
-                  {{ option.attributes.option }}
-                </div>
-              </div>
-              <div class="sertificate__info-right">
-                <div v-for="option in rightOptions" :key="option.key" class="sertificate__info-right-text">
-                    {{ option.attributes.value }}
-                </div>
-              </div>
-            </div>
-
-            <!-- Left side mobile -->
-            <div class="sertificate__info-wrap-left--mobile">
-              <div v-for="option  in leftOptions" :key="option.key" class="sertificate__info-mobile-left">
-                <div class="sertificate__info-left-text sertificate__info-left-text--mobile">{{ option.attributes.option }}</div>
-                <div class="sertificate__info-right-text">{{ option.attributes.value }}</div>
-              </div>
-            </div>
-            <!-- Right side mobile -->
-            <div class="sertificate__info-wrap-right--mobile">
-              <div v-for="option in rightOptions" :key="option.key" class="sertificate__info-mobile-right">
-                <div class="sertificate__info-left-text sertificate__info-right-text--mobile">{{ option.attributes.option }}</div>
-                <div class="sertificate__info-right-text">{{ option.attributes.value }}</div>
-              </div>
+    <div class="container">
+      <div class="title__container">
+        <h2 class="form__title title">{{items.title}}</h2>
+      </div>
+      <div class="sertificate__global-wrapper">
+      <div class="sertificate__buy-wrapper">
+          <div v-for="service in items.services" :key="service.key" class="sertificate__buy-wrapper-content">
+            <div class="sertificate__content-title">{{service.attributes.title}}</div>
+            <div class="sertificate__content-total">
+              <div class="sertificate__total">{{ service.attributes.price }}</div>
             </div>
           </div>
-        </div>
+      </div>
+      </div>
     </div>
 </template>
 
@@ -74,75 +20,36 @@
 
 export default{
     props: {
-        certificate: {
-                type: Object,
-                required: true,
-        }
+      items: {
+              type: Object,
+              required: true,
+             },
     },
     data() {
         return {
-            showInfo: false
+
         }
     },
     computed: {
-            certificateData () {
-                return this.certificate.attributes
-            },
-            title () {
-                return this.certificateData.title
-            },
-            logo () {
-                return this.$config.imgURL + this.certificateData.logo
-            },
-            options () {
-                return this.certificateData.options
-            },
-            optionNumber () {
-                if(this.options)
-                return this.options.length
-                return 0
-            },
-            leftOptions () {
-                if(this.optionNumber===0) return 0
-
-                if(this.optionNumber%2===0) {
-                    return this.options.slice(0, this.optionNumber/2)
-                }
-                return this.options.slice(0, this.optionNumber/2+1)
-            },
-            rightOptions () {
-                if(this.optionNumber===0) return 0
-
-                if(this.optionNumber%2===0) {
-                    return this.options.slice(this.optionNumber/2, this.optionNumber)
-                }
-                return this.options.slice(this.optionNumber/2+1, this.optionNumber)
-            },
-            showClass() {
-                if(!this.showInfo) 
-                return 'hide__sertificate__buy-wrapper-info'
-                return ''
-            }
+          
 
     },
     methods: {
-        openSubmenu() {
-          this.showInfo = !this.showInfo
-        },
-        goToBilling() {
-          this.showInfo = !this.showInfo
-          const type = this.certificateData.type
-          const id = this.certificateData.billing_id
-          const period = 12
-          window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
-                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
-                   + id + `&period=` + period + `&project=3`, '_blank')
-        }
+
     },
 }
 </script>
 
 <style scoped>
+.title__container {
+  margin: 30px 0;
+}
+
+.sertificate__global-wrapper {
+  margin: 20px 0;
+  background-color: #FCF7F2;
+  padding: 10px;
+}
 
 .sertificate-global-img {
   width: 125px;
@@ -236,29 +143,15 @@ export default{
   opacity: 0.6;
 }
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(1) {
-  flex: 0 0 30%;
+  flex: 0 0 62%;
  
-}
-.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(2) {
-  flex: 0 1 18%;
-}
-.sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(3) {
-  flex: 0 1 14%;
 }
 
 .sertificate__buy-wrapper {
   margin-bottom: 8px;
+  
 }
-.sertificate__buy-wrapper-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  background-color: #fff;
-  padding: 12px 24px;
-  cursor: pointer;
-  border-radius: 8px;
-}
 .sertificate__content-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -351,14 +244,11 @@ export default{
 .hide__sertificate__buy-wrapper-info {
   display: none;
 }
-
 .sertificate__info-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 60px;
-  /* justify-content: start; */
+  gap: 80px;
 }
-
 .sertificate__info-text {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -382,17 +272,16 @@ export default{
 }
 .sertificate__info-wrap-left {
   display: flex;
-  gap: 40px;
+  gap: 60px;
 }
 .sertificate__info-wrap-right {
   display: flex;
-  gap: 40px;
+  gap: 47px;
 }
 
 .sertificate__info-left {
   display: flex;
   flex-direction: column;
-  max-width: 265px;
 }
 .sertificate__info-left-text {
   font-family: "Graphik", sans-serif;
@@ -404,7 +293,6 @@ export default{
   text-align: left;
   opacity: 0.6;
   margin-bottom: 20px;
-  min-width: 286px;
 }
 .sertificate__info-left-text:last-child {
   margin-bottom: 0;
@@ -452,7 +340,6 @@ export default{
 @media (max-width: 1315px) {
   .sertificate__info-wrap {
     gap: 20px;
-    justify-content: start;
   }
 }
 @media (max-width: 1300px) {
@@ -516,11 +403,17 @@ export default{
 
   background-color: #fff;
   padding: 15px 24px;
-  cursor: pointer;
+  margin: 10px 0;
+
   border-radius: 8px;
 
   flex: 0 1 35%;
 }
+
+.sertificate__buy-wrapper-content:hover {
+  background-color: #FCF7F2;
+}
+
 .sertificate__content-title {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -530,7 +423,7 @@ export default{
   letter-spacing: 0px;
   text-align: left;
 
-  flex: 0 1 30%;
+  flex: 1;
 }
 .sertificate__content {
   display: flex;  
@@ -621,8 +514,11 @@ export default{
 .hide__sertificate__buy-wrapper-info {
   display: none;
 }
-
-
+.sertificate__info-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+}
 .sertificate__info-text {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
@@ -644,8 +540,19 @@ export default{
   text-align: left;
   opacity: 0.8;
 }
+.sertificate__info-wrap-left {
+  display: flex;
+  gap: 60px;
+}
+.sertificate__info-wrap-right {
+  display: flex;
+  gap: 47px;
+}
 
-
+.sertificate__info-left {
+  display: flex;
+  flex-direction: column;
+}
 .sertificate__info-left-text {
   font-family: "Graphik", sans-serif;
   font-size: 16px;
@@ -663,7 +570,6 @@ export default{
 .sertificate__info-right {
   display: flex;
   flex-direction: column;
-  max-width: 265px;
 }
 .sertificate__info-right-text {
   font-family: "Graphik", sans-serif;
@@ -675,12 +581,14 @@ export default{
   text-align: left;
   opacity: 0.6;
   margin-bottom: 20px;
-  max-width: 275px;
 }
 .sertificate__info-right-text:last-child {
   margin-bottom: 0;
 }
-
+.sertificate__info-wrap-left--mobile,
+.sertificate__info-wrap-right--mobile {
+  display: none;
+}
 .sertificate__info-left-text--mobile,
 .sertificate__info-right-text--mobile {
   margin-bottom: 0;

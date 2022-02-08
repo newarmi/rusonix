@@ -1,15 +1,14 @@
 <template>
-  <section :id="tag" class="technologies" :class="technologies.tag">
+  <section :id="items.tag" class="technologies">
     <div class="container">
-      <div class="technologies__title title">{{ technologies.blockTitle }}</div>
+      <div class="technologies__title title">{{ items.blockTitle }}</div>
       <div class="technologies__text-wrap">
-        <div class="technologies__text text" v-html="technologies.blockDescription">
-        </div>
+        <div class="technologies__text text" v-html="items.blockDescription"></div>
       </div>
     </div>
     <div class="technologies__container">
       <div class="technologies__cards">
-        <div v-for="card in technologies.blocks" :key="card.key" class="technologies__card-wrap">
+        <div v-for="card in items.blocks" :key="card.key" class="technologies__card-wrap">
           <div class="technologies__card-title">{{card.attributes.textTitle}}</div>
           <div class="technologies__card-text" v-html="card.attributes.text">
           </div>
@@ -23,20 +22,13 @@
 export default {
   name: 'Technologies',
   props: {
-    tag: {
-      type: String,
-      default: 'tech'
+    items: {
+      type: Object,
+      required: true
     }
   }, 
-  computed: {
-    technologies () {
-      return this.$store.getters['universal/technologies']
-    }
-  },
 }
 </script>
-
-
 
 <style scoped>
 .technologies {

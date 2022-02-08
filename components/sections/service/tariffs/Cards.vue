@@ -46,12 +46,12 @@
           </div>
 
           <div class="license__btn-wrap">
-            <div v-if="card.attributes.modal" 
-                 class="license__btn" 
-                 @click="showPopup(index)">{{ card.attributes.buttonName }}</div>
-            <div v-else 
-                 class="license__btn" 
-                 @click="goToLink(card.attributes.buttonLink)">{{ card.attributes.buttonName }}</div>
+            <div v-if="card.attributes.modal" class="license__btn" 
+                 @click="showPopup(index)">
+                 {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать'}}</div>
+            <div v-else class="license__btn" 
+                 @click="goToLink(card.attributes.buttonLink)">
+                 {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать' }}</div>
           </div>
           <Modal v-if="card.attributes.modal" :title="card.attributes.cardTitle"
                  :show-popup="is_show[index].show" @closePopup="closePopup(index)" />

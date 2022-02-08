@@ -16,7 +16,9 @@
       </div>
     </div>    
   </div>
-  <div v-if="isDecor" class="header__decor" :class="{ 'header__decor__color' : isKnowledgeCategory}"></div>
+  <div v-if="isDecor" class="header__decor" 
+       :class="{ 'header__decor__color' : isKnowledgeCategory}"
+       :style="'background-color:' + header.color"></div>
 </div>
 </template>
 
@@ -47,7 +49,7 @@ export default {
     },
     header() {
       switch(this.$route.name) {
-        case('service-slug'): case('license-slug'): case('hosting-slug'): 
+        case('service-slug'): case('license-slug'): case('hosting-slug'): case('support-slug'): 
           return this.$store.getters['universal/header']
         case('company-document'): return this.$store.getters['requisites/header']
         case('journal-article'): return this.$store.getters['journal/header']
@@ -139,7 +141,7 @@ export default {
     text-align: left;
     color: #fff;
     opacity: 0.6;
-    max-width: 460px;
+    /* max-width: 460px; */
     margin-bottom: 72px;
 }
 

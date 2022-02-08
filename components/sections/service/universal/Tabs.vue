@@ -1,5 +1,5 @@
 <template>
-      <section :id="tag" class="possibilities" :class="tabs.tag">
+      <section :id="items.tag" class="possibilities" :class="tabs.tag">
         <div class="container">
           <div class="possibilities__title title">{{tabs.blockTitle}}</div>
         </div>
@@ -32,17 +32,17 @@ import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 
 export default {
-  name: 'Possibilities',
+  name: 'Tabs',
   props: {
-      tag: {
-        type: String,
-        default: 'possibilities'
+      items: {
+        type: Object,
+        required: true
       }
   },
   computed: {
-      tabs() {
-        return this.$store.getters['universal/tabs']
-      }
+    tabs() {
+      return this.items
+    }
   },
   mounted() {
     this.$nextTick(() => {

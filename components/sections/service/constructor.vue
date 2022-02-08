@@ -1,14 +1,21 @@
 <template>
   <div>
     <div v-for="block, i in blocks" :key="block.layout + '' + i">
-      <Benefits v-if="block.layout=='benefits'" :tag="block.attributes.tag" />
-      <Possibilities v-if="block.layout=='tabs'" :tag="block.attributes.tag" />
+      <Benefits v-if="block.layout=='benefits'" :items="block.attributes" />
+      <Tabs v-if="block.layout=='tabs'" :items="block.attributes" />
       <Details v-if="block.layout=='billing'" :tag="block.attributes.tag" />
       <Reviews v-if="block.layout=='reviews'" :tag="block.attributes.tag" />
-      <Technologies v-if="block.layout=='technologies'" :tag="block.attributes.tag" />
-      <Support v-if="block.layout=='questions'" :tag="block.attributes.tag" />
+      <Technologies v-if="block.layout=='technologies'" :items="block.attributes" />
+      <Support v-if="block.layout=='questions'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
+      <SimpleForm v-if="block.layout==='simpleForm'" :items="block.attributes" />
+      <Faq v-if="block.layout==='faq'" :key="block.key" :items="block.attributes" />
+      <SupportForm v-if="block.layout==='supportForm'" :key="block.key" :items="block.attributes" />
+      <HelpForm v-if="block.layout==='helpForm'" :key="block.key" :items="block.attributes" />
+      <ServiceLines v-if="block.layout==='serviceLines'" :key="block.key" :items="block.attributes" />
+      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" :title="block.attributes.title" 
+                                               :description="block.attributes.description" />
     </div>
 
     <div id="tariff">
@@ -16,6 +23,7 @@
         <div v-if="tariff.layout=='billing'">
           <BillingCards v-if="tariff.attributes.view=='cards'" :tariff="tariff.attributes" />
           <BillingLines v-if="tariff.attributes.view=='lines'" :lines="tariff.attributes" />
+          <BillingOneLine v-if="tariff.attributes.view=='oneLine'" :lines="tariff.attributes" />
         </div>
 
         <Cards v-if="tariff.layout=='cards'" :cards="tariff.attributes" />
@@ -45,7 +53,7 @@ export default {
     Reviews: () => import('~/components/sections/service/universal/reviews/Reviews'),
     Technologies: () => import('~/components/sections/service/universal/Technologies'),
     Support: () => import('~/components/sections/service/universal/Support'),
-    Possibilities: () => import('~/components/sections/service/universal/Possibilities'),
+    Tabs: () => import('~/components/sections/service/universal/Tabs'),
     Cards: () => import('~/components/sections/service/tariffs/Cards'),
     Lines: () => import('~/components/sections/service/tariffs/Lines'),
     OneLine: () => import('~/components/sections/service/tariffs/OneLine'),
@@ -54,9 +62,16 @@ export default {
     Calculate: () => import('~/components/sections/service/tariffs/Calculate'),
     Solutions: () => import('~/components/sections/service/tariffs/Solutions'),
     SolutionsClear: () => import('~/components/sections/service/tariffs/SolutionsClear'),
+    SimpleForm: () => import('~/components/sections/general/SimpleForm'),
+    SupportForm: () => import('~/components/sections/general/SupportForm'),
+    ServiceLines: () => import('~/components/sections/general/ServiceLines'),
+    HelpForm: () => import('~/components/sections/general/HelpForm'),
+    Faq: () => import('~/components/sections/service/universal/FAQ'),
+    Domains: () => import('~/components/sections/general/domains/Domains'),
     
     BillingCards: () => import('~/components/sections/service/billing/Cards'),
     BillingLines: () => import('~/components/sections/service/billing/SimpleLines'),
+    BillingOneLine: () => import('~/components/sections/service/billing/OneLine'),
   },
 
   computed: {

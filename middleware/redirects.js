@@ -56,6 +56,10 @@ export default function(req, res, next) {
         from: "/x-cart/hosting", 
         to: "/hosting/x-cart"
       },
+      {
+        from: "/domains/register", 
+        to: "/service/domains"
+      },
     ]
     const redirect = redirects.find((r) => {
       let url = req.url

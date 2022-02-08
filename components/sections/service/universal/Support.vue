@@ -1,5 +1,5 @@
 <template>
-  <section :id="tag" class="support" :class="support.tag">
+  <section :id="items.tag" class="support">
     <div class="container">
       <div class="support__title title">{{ support.blockTitle }}</div>
       <div class="support__text text" v-html="support.blockDescription">
@@ -53,14 +53,14 @@
 export default {
   name: 'Support',
   props: {
-      tag: {
-        type: String,
-        default: 'questions'
-      }
+    items: {
+      type: Object,
+      required: true
+    }
   },
   computed: {
       support () {
-        return this.$store.getters['universal/questions']
+        return this.items
       },
       image () {
         return this.$config.imgURL + '' + this.support.blockImage

@@ -1,10 +1,8 @@
 <template>
-    <section :id="tag" class="bitrix__advantage" :class="benefits.tag">
+    <section :id="items.tag" class="bitrix__advantage" :class="benefits.tag">
         <div class="container">
-          <div class="bitrix__advantage-title title">{{ benefits.blockTitle }}</div>
-          <div class="bitrix__advantage-text text" v-html="benefits.blockDescription">
-            
-          </div>
+          <div class="bitrix__advantage-title title">{{ items.blockTitle }}</div>
+          <div class="bitrix__advantage-text text" v-html="items.blockDescription"></div>
           <div class="bitrix__advantage-img-info--mod">
             <picture class="picture">
               <source
@@ -26,8 +24,7 @@
               <div class="bitrix__advantage-card-title">{{ article.textTitle }}</div>
               <div class="bitrix__advantage-card-text" v-html="article.text">
               </div>
-              <a href="#" class="bitrix__advantage-card-link"
-                >{{ article.linkName }}</a>
+              <a :href="article.link" class="bitrix__advantage-card-link">{{ article.linkName }}</a>
             </div>
           </div>
 
@@ -58,20 +55,20 @@
 
 export default {
     props: {
-      tag: {
-        type: String,
-        default: 'benefits'
+      items: {
+        type: Object,
+        required: true
       }
     },
     computed: {
       benefits() {
-        const benefits = this.$store.getters['universal/benefits']
-        benefits.image = this.$config.imgURL + '' + benefits.blockImage
+        const benefits = this.items.blocks.map(item => item)
+        benefits.image = this.$config.imgURL + '' + this.items.blockImage
         return benefits
       },
       articlesWithLink() {
         const articles = []
-        this.benefits.blocks.forEach(element => {
+        this.benefits.forEach(element => {
           if(element.layout==='textWithLink') {
             articles.push(element.attributes)
           }
@@ -80,7 +77,7 @@ export default {
       },
       simpleArticles() {
         const simpleArticles = []
-        this.benefits.blocks.forEach(element => {
+        this.benefits.forEach(element => {
           if(element.layout==='simpleText') {
             simpleArticles.push(element.attributes)
           }

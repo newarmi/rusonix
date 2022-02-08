@@ -157,7 +157,16 @@ export default {
       filtered () {
         let filtered = this.certificates
         const finish = [];
-        if(this.filterValues[0].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[0].filter === certificates.attributes.forWhat)
+
+        if(this.filterValues[0].filter!=='all') {
+          filtered = filtered.filter(certificates => { 
+              if(Array.isArray(certificates.attributes.forWhat)) {
+                return certificates.attributes.forWhat.some(item => this.filterValues[0].filter === item.attributes.option)
+              }
+              return false
+            })
+        } 
+
         if(this.filterValues[1].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[1].filter === certificates.attributes.level)
         if(this.filterValues[2].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[2].filter === certificates.attributes.provider)
         if(this.filterValues[3].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[3].filter === certificates.attributes.domains)

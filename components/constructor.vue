@@ -8,6 +8,7 @@
       <ServiceSection v-if="block.layout==='ssl'" :services="block.attributes" />
       <ImagesBottom v-if="block.layout==='imagesBottom'" :images="block.attributes" />
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
+      <ImagesLink v-if="block.layout==='imagesLinks'" :images="block.attributes" />
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
       <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
@@ -59,6 +60,7 @@ export default {
     Requisites: () => import('~/components/sections/general/Requisites'),
     ImagesBottom: () => import('~/components/sections/custom/ImagesBottom'),
     ImagesInside: () => import('~/components/sections/custom/ImagesInside'),
+    ImagesLink: () => import('~/components/sections/custom/ImageLink'),
     Partner: () => import('~/components/sections/general/Partner'),
     Form: () => import('~/components/sections/general/Form'),
     Advice: () => import('~/components/sections/general/Advice'),

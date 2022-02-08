@@ -3,12 +3,12 @@
     <section class="license__storage" >
       <div class="container">
         <div class="license__title title">
-          {{ lines.tariffTitle }}
+          {{ title }}
         </div>
 
         <div class="license__wrapper" :class="wrapper">
           <div class="license__wrapper-top" :class="titleWrapper">
-            <div v-for="option in lines.options" :key="option.key"
+            <div v-for="option in optionTitles" :key="option.key"
               class="license__top-title" :class="titleText">
               {{ option.attributes.title }}
             </div>
@@ -16,9 +16,8 @@
             <div class="license__top-title" :class="titleText">Стоимость</div>
           </div>
 
-          <div v-for="line in lines.lines" :key="line.key"
-            class="license__wrapper-bottom" :class="wrapperBottom">
-            <div v-for="item in line.attributes.options" :key="item.key">
+          <div class="license__wrapper-bottom" :class="wrapperBottom">
+            <div v-for="item in options" :key="item.key">
               <div v-if="item.layout === 'list'" class="license__wrap-select">
                 <select class="license__select license__select--mod">
                   <option v-for="option in item.attributes.list" :key="option.key"
@@ -45,20 +44,33 @@
               </div>
 
             </div>
+
+            <div class="license__wrap-select">
+              <div v-if="line.periods.length===1" class="license__wrap-text">
+                {{ periodToText(line.periods[0].period) }}
+              </div>
+              <select v-else class="license__select license__select--mod" @change="choosePeriod($event.target.value)">
+                <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                        :value="i">
+                  {{ periodToText(period.period) }}
+                </option>
+              </select>
+            </div>
+
             <div class="license__wrap-total-box">
-              <div class="license__total">{{ line.attributes.price }}</div>
-              <button class="license__btn" @click="openModal()">
-                {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}</button>
+              <div class="license__total">{{ Math.round(line.periods[currentPeriod].amount)}} ₽</div>
+              <button class="license__btn" @click="goToBilling(line.billing_id, line.type)">{{ line.button ? line.button : 'Заказать'}}</button>
             </div>
           </div>
         </div>
 
-        <!-- tablet -->
-        <div v-for="line in lines.lines" :key="line.key" class="antispam__tablet">
 
-          <div v-for="(item, i) in line.attributes.options" :key="item.key">
+        <!-- tablet -->
+        <div class="antispam__tablet">
+
+          <div v-for="(item, i) in options" :key="item.key">
             <div class="antispam__text antispam__text--tablet">
-               {{ options[i].title }}
+              {{ optionTitles[i].attributes.title }}
             </div>
 
             <div v-if="item.layout === 'radio'" class="license__communigate-radio license__communigate-radio--tablet">
@@ -84,28 +96,38 @@
             </div>
           </div>
 
+          <div class="antispam__text">Период</div>
+            <div class="license__wrap-select">
+                <div v-if="line.periods.length===1" class="antispam__month antispam__month--tablet">
+                  {{ periodToText(line.periods[0].period) }}
+                </div>
+                <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
+                  <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                          :value="i">
+                    {{ periodToText(period.period) }}
+                  </option>
+                </select>
+            </div>
+          <!-- </div> -->
+
+
           <div class="license__total license__total--tablet">
-            {{ line.attributes.price }}
+            {{ Math.round(line.periods[currentPeriod].amount)}} ₽
           </div>
-          <button class="license__btn license__btn--tablet" @click="openModal()">
-            {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать' }}
-          </button>          
+          <button class="license__btn license__btn--tablet"
+                  @click="goToBilling(line.billing_id, line.type)">
+                  {{ line.button ? line.button : 'Заказать'}}
+          </button>        
         </div>
 
       </div>
-
-      <Modal v-if="lines.lines[0].attributes.modal" :title="lines.tariffTitle"
-                 :show-popup="is_show" @closePopup="closePopup()" />
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Lines',
-  components: {
-    Modal: () => import('~/components/sections/general/Modal'),
-  },
+  name: 'OneLine',
   props: {
     lines: {
       type: Object,
@@ -114,19 +136,24 @@ export default {
   },
   data() {
     return {
-      is_show: false
+        line: null,
+        currentPeriod: 0
     }
   },
   computed: {
+    title() {
+      return this.line.title ? this.line.title : this.line.name
+    },
+    optionTitles() {
+      return this.line.options[0].attributes.optionsTitles
+    },
+
+
     options() {
-      const options = []
-      this.lines.options.forEach((element) => {
-        options.push(element.attributes)
-      })
-      return options
+       return this.line.options[0].attributes.options
     },
     optionNumber() {
-      return this.lines.options.length
+      return this.options.length
     },
     wrapper() {
       return {
@@ -153,15 +180,43 @@ export default {
       }
     },
   },
+  created() {
+    this.init()
+  }, 
   methods: {
-    openModal() {
-      this.is_show = true
-      document.body.style.overflow = 'hidden'
+    init() {
+      this.line = this.$store.getters['universal/billingTariffs'].map(item=>item)
+      
+      if(this.lines.mode) {
+          this.line = this.line.filter(item => {
+             return item.mode?.find(obj => obj.attributes.title === this.lines.mode)
+         })
+      }
+
+      this.line = this.line[0]
+  },
+  periodToText(period) {
+      const periodNumber = Number(period)
+      if(periodNumber===1) {
+        return period + ' месяц'
+      }
+      if(periodNumber>1&&periodNumber<5) {
+        return period + ' месяца'
+      } 
+      if(periodNumber<12) {
+        return period + ' месяцев'
+      }
+      if(periodNumber===12) return '1 год'
+      if(periodNumber===24) return '2 года'
+      if(periodNumber===36) return '3 года'
     },
-    closePopup() {
-      this.is_show = false
-      document.body.style.overflow = 'auto'
-      document.body.style.position = '';
+    choosePeriod(period) {
+      this.currentPeriod = period
+    },
+    goToBilling(id, type) {
+     window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+                   + id + `&period=` + this.line.periods[this.currentPeriod].period + `&project=3`, '_blank')
     },
   }
 }

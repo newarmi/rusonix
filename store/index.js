@@ -90,6 +90,8 @@ export const getters = {
   getOpenMenu: state => state.openMenu,
   search: state => state.searchQuery,
   searchResult: state => state.searchResult,
+
+  domainTarriff: state => state.page.domains,
   domainAnswer: state => state.domain,
 
   tag: state => state.tag,
@@ -98,7 +100,6 @@ export const getters = {
   articles: state => state.page.articles,
   journal: state => state.page.journal,
   rubrics: state => state.page.rubrics,
-  domainTarriff: state => state.page.domains,
   activeRubric: state => state.activeRubric,
 
   billing: state => state.page.general.billing,

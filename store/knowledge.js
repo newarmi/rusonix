@@ -31,21 +31,21 @@ export const mutations = {
   
 export const actions = {
     async getData({commit}) {   
-      const page = await this.$axios.$get('support')
+      const page = await this.$axios.$get('knowledgeBase')
       commit('setPage', page)
     },
     async getSubcategory({commit}, slug) {   
-        const page = await this.$axios.$get('support/' + slug)
+        const page = await this.$axios.$get('knowledgeBase/' + slug)
         commit('setSubcategory', page)
         commit('setCategory', slug)
     },
     async getContent({commit}, slug) {   
-        const content = await this.$axios.$get('support/post/' + slug)
+        const content = await this.$axios.$get('knowledgeBase/post/' + slug)
         commit('setContent', content)
     },
     async setSearch({commit}, search) {
         commit('setSearch', search)
-        const searchResult = await this.$axios.$post('support/search/', {search})
+        const searchResult = await this.$axios.$post('knowledgeBase/search/', {search})
         commit('setSearchResult', searchResult)
     }
 

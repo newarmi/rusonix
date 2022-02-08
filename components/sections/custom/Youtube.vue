@@ -1,7 +1,7 @@
 <template>
   <section :id="items.tag" class="channel">
     <div class="container">
-      <h2 class="channel__title title">{{items.title}}</h2>
+      <h2 v-if="items.title" class="channel__title title">{{items.title}}</h2>
       <div class="channel__wrapper">
           <div class="channel__video">
               <iframe class="channel__video-frame" :src="items.link"

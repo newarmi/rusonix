@@ -32,12 +32,10 @@ export const state = () => ({
 
     filterType: state => state.filterType, 
     filterValue: state => state.filterValue, 
+    domainTarriff: state => state.page.domains,
 
     blocks: state => state.page.blocks,
-    tabs: state => state.page.blocks.tabs.attributes,
-    benefits: state => state.page.blocks.benefits.attributes,
-    questions: state => state.page.blocks.questions.attributes,
-    technologies: state => state.page.blocks.technologies.attributes,
+
     reviews: state => state.page.reviews,
     billing: state => state.page.billing,
 

@@ -11,6 +11,9 @@
                     <li v-for="item in block.attributes.list" :key="item.key" class="contact__item" v-html="item.attributes.text"></li>
                 </ul>
 
+                <Images v-if="block.layout==='images'" :items="block.attributes" />
+                <Links v-if="block.layout==='files'" :items="block.attributes" />
+
                 <div v-if="block.layout==='posts'" class="contact__list contact__list--mod">
                     <ul class="contact__list-content">
                       <div v-for="post, i in block.attributes.post" :key="post.key">
@@ -44,6 +47,10 @@ export default {
       type: Object,
       required: true
     }
+  },
+  components: {
+    Images: () => import('~/components/sections/general/Images'),
+    Links: () => import('~/components/sections/general/Links'),
   },
   computed: {
     blocks() {
@@ -118,7 +125,7 @@ export default {
 }
 
 .contact {
-  padding-bottom: 75px;
+  padding-bottom: 30px;
 }
 
 @media (max-width: 768px) {

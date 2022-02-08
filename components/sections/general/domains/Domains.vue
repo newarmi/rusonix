@@ -74,13 +74,18 @@ export default {
   },
   computed: {
     ...mapGetters(['domainTarriff', 'domainAnswer']),
+    universalDomains() {
+      return this.$store.getters['universal/domainTarriff']
+    },
     error() {
       if(this.load) return false
       if(this.domainAnswer) return this.domainAnswer.error
       return this.domainAnswer
     },
     domainItems() {
-      const domains = this.domainTarriff.map(item => {
+      let domains = this.domainTarriff ? this.domainTarriff : this.universalDomains
+
+      domains = domains.map(item => {
         return {
           title: item.title ? item.title : item.name,
           price: Math.floor(item.periods.find(Boolean).base_cost),

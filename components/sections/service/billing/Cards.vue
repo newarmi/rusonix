@@ -28,7 +28,7 @@
                 </div>
               </div>
             </div> 
-              <div v-if="card.periods.length>1">
+            <div v-if="card.periods.length>1">
                 <div class="license__card-selection-title">
                   Период
                 </div>
@@ -77,7 +77,7 @@
               <div class="license__btn-wrap">  
                 <div class="license__btn" 
                 @click="goToBilling(card.billing_id, card.type, card.periods[periods[ind].period].period)">
-                  {{card.options[0].attributes.buttonName}}</div>
+                  {{card.button ? card.button : 'Заказать'}}</div>
               </div>
             </div>
           </div>

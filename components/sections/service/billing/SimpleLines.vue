@@ -53,7 +53,7 @@
             <div class="license__total">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
             <button class="license__btn" 
                     @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
-                    {{ line.options[0].attributes.buttonName }}</button>
+                    {{ line.button ? line.button : 'Заказать' }}</button>
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@
           <div class="license__total license__total--tablet">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
           <button class="license__btn license__btn--tablet" 
                   @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
-                  {{ line.options[0].attributes.buttonName }}</button>
+                  {{ line.button ? line.button : 'Заказать'}}</button>
         </div>
       </div>
     </div>
