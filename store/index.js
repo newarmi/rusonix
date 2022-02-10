@@ -37,6 +37,9 @@ export const mutations = {
   setRubric(state, rubric) {
     state.activeRubric = rubric
   },
+  resetRubric(state) {
+    state.activeRubric = 'all'
+  },
   setDomain(state, domain) {
     state.domain = domain
   }
@@ -80,6 +83,9 @@ export const actions = {
   },
   setRubric({commit}, rubric) {
     commit('setRubric', rubric)
+  },
+  resetRubric({commit}) {
+    commit('resetRubric')
   }
 }
 
@@ -112,7 +118,7 @@ export const getters = {
   domains: state => state.page.general.domains,
   partner: state => state.page.general.partner,
   form: state => state.page.general.form,
-    
+
   buttons: state => state.page.buttons,
   header: state => state.page.header,
 

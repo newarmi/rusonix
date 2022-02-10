@@ -2,16 +2,16 @@
   <section id="journal" class="magazine">
     <Navigation v-if="navigation" :rubrics="rubrics" />
     <div class="container">
-      <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>        
-        <div v-for="item, i in articlesArray" :key="'item' + i" class="magazine__wrapper">
-          <div v-for="article, j in item" :key="article.title" :class="leftRight(i, j)">
+      <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>
+        <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
+          <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">
             <nuxt-link :to="'journal/' + article.slug" class="picture">
               <source media="(max-width: 1250px)" :src="article.imgMobileLink" :srcset="article.imgMobileLink"/>
               <img :src="article.imgDesktopLink" :srcset="article.imgDesktopLink" :class="smallBigImg(i, j)" alt="magazine"/>
             </nuxt-link>
             <div class="magazine__left-about">
               <div class="magazine__wrap-text">
-                <p href="#" class="magazine__link">{{ article.rubricName}}</p>
+                <p class="magazine__link" @click="goToRubric(article.rubricSlug)">{{ article.rubricName }}</p>
                 <p class="magazine__text">{{ article.date }}</p>
               </div>
               <nuxt-link :to="'journal/' + article.slug" class="magazine__text-title magazine__link-to-post">{{ article.title }}</nuxt-link>
@@ -19,12 +19,12 @@
           </div>
         </div>
       </div>
-    
+
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'Journal',
@@ -54,14 +54,10 @@ export default {
   },
   computed: {
     ...mapGetters(['journal', 'rubrics', 'activeRubric']),
-    filter() {
-      let filter = this.activeRubric
-      if(this.activeRubric==='all') {
-        this.rubrics.forEach((element) => {
-        filter += ' ' + element.slug
-        })
-      } 
-      return filter
+    currentRubric() {
+      if(this.$route.name!=='journal')
+      return 'all'
+      return this.activeRubric
     },
     articles() {
       const articles = this.journal
@@ -69,47 +65,43 @@ export default {
         element.imgDesktopLink = this.$config.imgURL + '' + element.img_desktop
         element.imgMobileLink = this.$config.imgURL + '' + element.img_mobile
         element.rubricName = element.rubric.title
+        element.rubricSlug = element.rubric.slug
         element.date = this.timeConverter(element.created_at)
       })
-
-      return articles.filter(article => this.filter.includes(article.rubric.slug))
+      if(this.currentRubric==='all') return articles
+      return articles.filter(article => this.currentRubric.includes(article.rubric.slug))
     },
     articlesArray() {
       const articlesArray = []
       if(this.lines==='two') {
         articlesArray.push(this.articles.slice(0,2))
-        articlesArray.push(this.articles.slice(2,4)) 
+        articlesArray.push(this.articles.slice(2,4))
         return articlesArray
       }
 
       articlesArray.push(this.articles.slice(0,2))
-      articlesArray.push(this.articles.slice(2,4)) 
+      articlesArray.push(this.articles.slice(2,4))
       articlesArray.push(this.articles.slice(4,6))
       return articlesArray
     }
   },
   methods: {
+    ...mapActions(['setRubric', 'resetRubric']),
+    goToRubric(rubric){
+      this.setRubric(rubric)
+      this.$router.push({path: '/journal'})
+    },
     timeConverter(unixTimestamp) {
       const a = new Date(unixTimestamp)
       const months = [
-        'Января',
-        'Февраля',
-        'Марта',
-        'Апреля',
-        'Мая',
-        'Июня',
-        'Июля',
-        'Августа',
-        'Сентября',
-        'Октября',
-        'Ноября',
-        'Декабря',
+        'Января', 'Февраля', 'Марта', 'Апреля',
+        'Мая', 'Июня', 'Июля', 'Августа',
+        'Сентября', 'Октября', 'Ноября', 'Декабря',
       ]
       const year = a.getFullYear()
       const month = months[a.getMonth()]
       const date = a.getDate()
-      const time = date + ' ' + month + ' ' + year
-      return time
+      return date + ' ' + month + ' ' + year
     },
     leftRight(i, j) {
       if (i !== 1) {
@@ -137,32 +129,6 @@ export default {
 .magazine__title {
   padding-top: 72px;
   margin-bottom: 72px;
-}
-
-
-.start__screen {
-  padding-top: 138px;
-  padding-bottom: 118px;
-}
-.start__title-magazine {
-  margin-bottom: 48px;
-}
-.start__magazine-btn {
-  font-family: 'Graphik', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0px;
-  text-align: center;
-  color: #fff;
-  padding: 15px 33px;
-  background-color: #0f7f69;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.start__magazine-btn:hover {
-  background: #065848;
 }
 
 .magazine__wrapper {
@@ -195,6 +161,7 @@ export default {
   text-align: left;
   text-transform: uppercase;
   margin-right: 52px;
+  cursor: pointer;
 }
 
 .magazine__text {
@@ -217,9 +184,7 @@ export default {
   letter-spacing: 0px;
   text-align: left;
 }
-.magazine__text-title--mod {
-  max-width: 400px;
-}
+
 .magazine__text::before {
   display: block;
   content: '';
@@ -252,13 +217,13 @@ export default {
    height: 390px;
    border-radius: 6px;
    object-fit: cover;
-  
+
  }
  .magazine__img-small{
   width: 100%;
   max-width: 431px;
   height: 390px;
-  border-radius: 6px; 
+  border-radius: 6px;
   object-fit: cover;
  }
 

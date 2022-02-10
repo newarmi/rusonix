@@ -19,6 +19,7 @@ export const state = () => ({
       const page = await this.$axios.$get(slug)
       commit('setPage', page)
     },
+
     setFilter({commit}, {filterType, filterValue}) {
       commit('setFilter', {filterType, filterValue})
     },

@@ -13,6 +13,7 @@
 
                 <Images v-if="block.layout==='images'" :items="block.attributes" />
                 <Links v-if="block.layout==='files'" :items="block.attributes" />
+                <Pages v-if="block.layout==='links'" :items="block.attributes" />
 
                 <div v-if="block.layout==='posts'" class="contact__list contact__list--mod">
                     <ul class="contact__list-content">
@@ -42,27 +43,27 @@
 
 <script>
 export default {
+  components: {
+    Images: () => import('~/components/sections/general/Images'),
+    Links: () => import('~/components/sections/general/Links'),
+    Pages: () => import('~/components/sections/general/Pages'),
+  },
   props: {
     items: {
       type: Object,
       required: true
     }
   },
-  components: {
-    Images: () => import('~/components/sections/general/Images'),
-    Links: () => import('~/components/sections/general/Links'),
-  },
   computed: {
     blocks() {
       return this.items.block
     },
-
-  },
-  
+  }, 
 }
 </script>
 
 <style scoped>
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -78,7 +79,7 @@ export default {
 
 @media (max-width: 575.98px) {
   .container {
-    padding: 0 16px;
+    padding: 0 24px;
   }
 }
 
@@ -119,7 +120,7 @@ export default {
 }
 
 .support__text {
-  opacity: 0.6;
+  opacity: 0.8;
   width: 100%;
   max-width: 1070px;
 }

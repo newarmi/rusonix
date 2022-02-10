@@ -206,9 +206,9 @@ export default {
       if(periodNumber<12) {
         return period + ' месяцев'
       }
-      if(periodNumber===12) return '1 год'
-      if(periodNumber===24) return '2 года'
-      if(periodNumber===36) return '3 года'
+      if(periodNumber===12) return '12 месяцев'
+      if(periodNumber===24) return '24 месяца'
+      if(periodNumber===36) return '36 месяцев'
     },
     choosePeriod(period) {
       this.currentPeriod = period

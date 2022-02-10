@@ -2,10 +2,10 @@
   <div class="container__magazine-navigation">
     <div class="swiper magazine-swiper">
       <div class="swiper-wrapper navigation__magazine">
-        <div v-for="rubric in navRubrics" :key="rubric.slug" 
-             class="swiper-slide navigation__magazine-link" 
+        <div v-for="rubric in navRubrics" :key="rubric.slug"
+             class="swiper-slide navigation__magazine-link"
              :class="{'navigation__magazine-link--active': rubric.isActive}"
-             @click="filter(rubric.slug)">{{rubric.title}}
+             @click="filter(rubric.slug)">{{ rubric.title }}
         </div>
       </div>
     </div>
@@ -22,14 +22,14 @@ export default {
     ...mapGetters(['rubrics', 'activeRubric']),
     navRubrics() {
       const rubrics = this.rubrics.map(item => {
-      const active = item.slug === this.activeRubric
-      return {
-        isActive: active,
-        title: item.title,
-        slug: item.slug
-      }
-    })
-    return rubrics
+        const active = item.slug === this.activeRubric
+        return {
+          isActive: active,
+          title: item.title,
+          slug: item.slug
+        }
+      })
+      return rubrics
     }
   },
   mounted() {
@@ -46,7 +46,7 @@ export default {
             slidesPerView: 3.5,
           },
           576: {
-            slidesPerView: 4.2,     
+            slidesPerView: 4.2,
           },
           768: {
             slidesPerView: 4.5,
@@ -87,7 +87,7 @@ export default {
 
 .container__magazine-navigation {
   display: flex;
-  justify-content: left; 
+  justify-content: left;
   align-items: center;
 
   width: 100%;
@@ -107,7 +107,7 @@ export default {
   letter-spacing: 0px;
   text-align: left;
   width: auto !important;
-  
+
 }
 .navigation__magazine-link--active {
   color: #202a89;

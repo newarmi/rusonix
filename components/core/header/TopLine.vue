@@ -24,9 +24,6 @@
               </svg>
             </label>
           </li>
-          <!-- <li>
-            <nuxt-link to="/knowledge">База знаний</nuxt-link>
-          </li> -->
           <li class="contact__auth">
             <nuxt-link to="/login">Личный кабинет
               <svg class="auth__icon" width="15" height="18">
@@ -51,8 +48,8 @@
         </nuxt-link>
         <nav class="navigation">
           <ul class="navigation__list">
-            <li v-for="item in menu" :key="item.id + item.title" class="navigation__item" 
-                :class="{'open_submenu' : getOpenMenu}" 
+            <li v-for="item in menu" :key="item.id + item.title" class="navigation__item"
+                :class="{'open_submenu' : getOpenMenu}"
                 @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
               <a class="navigation__link" @click="buttonAction(item, item.type[0])"
                  @mouseover="showStatus">{{ item.type[0].attributes.title }}</a>
@@ -68,7 +65,7 @@
                   </li>
                 </div>
               </ul>
-            </li>                
+            </li>
             <button class="navigation__btn" type="button">
               Протестировать
             </button>
@@ -166,7 +163,7 @@ export default {
       });
   },
   methods: {
-    ...mapActions(['setTag', 'setOpenMenuFalse', 
+    ...mapActions(['setTag', 'setOpenMenuFalse',
                    'setOpenMenuTrue', 'setSearchQuery',
                    'setRubric']),
     showStatus() {
@@ -210,16 +207,16 @@ export default {
             } else {
               this.isMenuOpen = !this.isMenuOpen
               this.setTag(button.attributes.tab)
-              this.$router.push({path: '/' + parent.attributes.page})  
+              this.$router.push({path: '/' + parent.attributes.page})
               break;
             }
           }
         case('rubric'): {
           this.setRubric(button.attributes.page)
-          this.$router.push({path: '/journal'})  
+          this.$router.push({path: '/journal'})
           break
         }
-        case('main'): {        
+        case('main'): {
           if(this.$route.fullPath==='/'&&button.attributes.page==='index') {
             this.scrollToBlock(button.attributes.tab)
             this.isMenuOpen = !this.isMenuOpen
@@ -228,15 +225,15 @@ export default {
 
           this.setTag(button.attributes.tab)
           if(button.attributes.page==='index') {
-            this.$router.push({path: '/'}); break; 
+            this.$router.push({path: '/'}); break;
           }
 
-          this.$router.push({path: '/' + button.attributes.page}); break; 
+          this.$router.push({path: '/' + button.attributes.page}); break;
         }
         case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
         case('service'): {
           this.setTag(button.attributes.tab)
-          this.$router.push({path: '/' + button.attributes.page}); 
+          this.$router.push({path: '/' + button.attributes.page});
           break;
           }
         case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
@@ -262,7 +259,7 @@ export default {
        if(this.$route.fullPath===route) {
           if(id) {
             const block = document.querySelector(id)
-              if(block) {  
+              if(block) {
                 block.scrollIntoView()
                 this.isMenuOpen = false
                 this.isOpenSubmenu[index].open = false

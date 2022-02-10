@@ -12,7 +12,7 @@
           />
         </nuxt-link>
         <div class="additionally__date">
-          <div class="additionally__security">{{ card.rubric.title }}</div>
+          <div class="additionally__security" @click="goToRubric(card.rubric.slug)">{{ card.rubric.title }}</div>
           <div class="additionally__text">{{ time(card.created_at) }}</div>
         </div>
         <nuxt-link :to="'/journal/' + card.slug" class="additionally__title nl_black">{{ card.title }}</nuxt-link>
@@ -22,13 +22,18 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   computed: {
     ...mapGetters('journal', ['bottom']),
   },
   methods: {
+    ...mapActions(['setRubric']),
+    goToRubric(rubric){
+      this.setRubric(rubric)
+      this.$router.push({path: '/journal'})
+    },
     time(unixTimestamp) {
       const a = new Date(unixTimestamp)
       const months = [
@@ -97,6 +102,7 @@ export default {
   text-align: left;
   text-transform: uppercase;
   color: #636aac;
+  cursor: pointer;
 }
 .additionally__text {
   font-family: "Graphik", sans-serif;
