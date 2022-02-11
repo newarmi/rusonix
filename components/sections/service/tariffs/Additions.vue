@@ -2,30 +2,19 @@
   <section class="license">
     <div class="container">
       <div class="addition__wrapper">
-        <div class="addition__wrap">
-          <span class="plus-minus__plesk"></span>
+        <div class="addition__wrap" @click="showContent">
+          <span class="plus-minus__plesk" :class="{ 'plus-minus__plesk--mod': showAdditions }"></span>
           <div class="addition__wrapper-title">
             {{ addition.additionTitle }}
           </div>
         </div>
-        <div class="addition__wrap-content hide__addition__wrap-content">
+        <div v-show="showAdditions" class="addition__wrap-content ">
           <div class="addition__wrap-title">
             <div class="addition__text">Редакция</div>
             <div class="addition__text">Период</div>
             <div class="addition__text">Стоимость</div>
           </div>
-
-          <div v-for="item in addition.additions" :key="item.key" class="addition__wrap-item">
-            <div class="addition__item-text">{{ item.attributes.title }}</div>
-            <div class="addition__item-select">
-              <select class="addition__select">
-                <option v-for="period in item.attributes.period" :key="period.key" value="24 месяца">{{ period.attributes.item }}</option>
-              </select>
-            </div>
-            <div class="addition__total">{{ item.attributes.price }}</div>
-            <button class="addition__btn">{{ item.attributes.buttonName }}</button>
-          </div>
-
+          <AdditionLine v-for="item in addition.additions" :key="item.key" :addition="item.attributes" />
         </div>
       </div>
     </div>
@@ -33,38 +22,24 @@
 </template>
 
 <script>
+import AdditionLine from "~/components/sections/service/tariffs/AdditionLine";
 export default {
+  components: {AdditionLine},
   props: {
     addition: {
       type: Object,
       required: true
     }
   },
-  mounted() {
-    const pleskAdditionWrapper = document.querySelectorAll(
-      '.addition__wrapper '
-    )
-    // const pleskAdditionContent = document.querySelectorAll(".addition__wrap-content");
-    // const pleskAdditionWrap = document.querySelectorAll(".addition__wrap");
-
-    pleskAdditionWrapper.forEach((elem) => {
-      elem?.addEventListener('click', (e) => {
-        const targetContent = elem.querySelector('.addition__wrap-content')
-        const targetPlusMinus = elem.querySelector('.plus-minus__plesk')
-        // stopPropagation();
-        targetPlusMinus.classList.toggle('plus-minus__plesk--mod')
-        targetContent.classList.toggle('hide__addition__wrap-content')
-      })
-    })
-    pleskAdditionWrapper.forEach((item) => {
-      const itemContent = item.querySelectorAll('.addition__wrap-content')
-      console.dir(itemContent)
-      itemContent.forEach((it) => {
-        it.addEventListener('click', (e) => {
-          e.stopPropagation()
-        })
-      })
-    })
+  data() {
+    return {
+      showAdditions: false
+    }
+  },
+  methods: {
+    showContent() {
+      this.showAdditions = !this.showAdditions
+    }
   },
 }
 </script>
@@ -76,142 +51,14 @@ export default {
   padding-top: 10px;
   padding-bottom: 36px;
 }
-.license__second {
-  padding-top: 36px;
-}
-.license__title {
-  margin-bottom: 72px;
-}
-.license__wrapper-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 48px 33px;
-  margin-bottom: 24px;
-}
-.license__card {
-  padding: 40px 24px 24px;
-  background-color: #fff;
-  border-radius: 8px;
 
-  flex: 1 1 calc((100% / 3) - 33px);
-  max-width: 402px;
-}
-.license__card-title {
-  font-family: 'Graphik', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin-bottom: 48px;
-}
-.license__card-content {
-  margin-bottom: 48px;
-}
-.license__card-left {
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-}
-.license__card-left-text {
-  font-family: 'Graphik', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin-bottom: 20px;
-  opacity: 0.6;
-}
-.license__card-right-text {
-  font-family: 'Graphik', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin-bottom: 20px;
-  opacity: 0.6;
-}
-.license__card-left-text:last-child,
-.license__card-right-text:last-child {
-  margin-bottom: 0;
-}
-.license__card-total-wrap {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-.license__card-total {
-  font-family: 'Graphik', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: center;
-  color: #830f1e;
-}
-.license__card-total-descr {
-  font-family: 'Graphik', sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: center;
-  opacity: 0.6;
-}
-.license__btn {
-  width: 100%;
-  max-width: 354px;
-  padding: 14px 60px;
-  background: #830f1e;
-  border-radius: 6px;
-
-  font-family: 'Graphik', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0px;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-}
-@media (max-width: 992px) {
-  .license__wrapper-cards {
-    gap: 48px 20px;
-  }
-  .license__card {
-    flex: 1 1 calc((100% / 2) - 33px);
-    max-width: 343px;
-  }
-}
 @media (max-width: 768px) {
   .license {
     padding-top: 48px;
     padding-bottom: 48px;
   }
-  .license__card-left {
-    flex-direction: column;
-    margin-bottom: 12px;
-    width: 230px;
-  }
-  .license__card-left-text {
-    margin-bottom: 0;
-  }
 }
-@media (max-width: 576px) {
-  .license__wrapper-cards {
-    gap: 24px 20px;
-  }
-}
+
 /* addition */
 .addition__wrapper {
   background-color: #fff;
@@ -222,14 +69,6 @@ export default {
   align-items: center;
   padding: 28px 24px;
   cursor: pointer;
-}
-.addition__wrap-item {
-  display: flex;
-  align-items: center;
-  padding-left: 24px;
-  padding-right: 24px;
-  padding-bottom: 24px;
-  gap: 60px;
 }
 
 .plus-minus__plesk {
@@ -262,24 +101,6 @@ export default {
 
   border-radius: 2px;
 }
-.show__addition__wrap-content {
-  display: block;
-}
-.hide__addition__wrap-content {
-  display: none;
-}
-.addition__wrap-content-second {
-  display: none;
-}
-.addition__wrap-item > * {
-  flex: 0 1 auto;
-}
-.addition__wrap-item > div:nth-child(1) {
-  flex: 0 0 30%;
-}
-.addition__wrap-item > div:nth-child(2) {
-  flex: 0 0 30%;
-}
 
 .addition__wrapper-title {
   font-family: 'Graphik', sans-serif;
@@ -299,9 +120,11 @@ export default {
 .addition__wrap-title > div {
   flex: 1 1 auto;
 }
-.addition__wrap-title > div:nth-child(1),
+.addition__wrap-title > div:nth-child(1) {
+  flex: 0 0 35%;
+}
 .addition__wrap-title > div:nth-child(2) {
-  flex: 0 0 30%;
+  flex: 0 0 25%;
 }
 @media (max-width: 1240px) {
   .addition__wrap-title > div:nth-child(2) {
@@ -311,15 +134,7 @@ export default {
     flex: 1 0 auto;
   }
 }
-/* .addition__wrap-title > div:nth-child(1) {
-  flex: 0 1 30%;
-}
-.addition__wrap-title > div:nth-child(2) {
-  flex: 0 1 30%;
-}
-.addition__wrap-title > div:last-child {
-  flex: 0 1 40%;
-} */
+
 .addition__text {
   font-family: 'Graphik', sans-serif;
   font-size: 18px;
@@ -330,87 +145,10 @@ export default {
   text-align: left;
   opacity: 0.6;
 }
-.addition__item-text {
-  font-family: 'Graphik', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-}
-.addition__select {
-  width: 100%;
-  max-width: 343px;
-  border: 1px solid #ede7e2;
-  border-radius: 8px;
-  -webkit-appearance: none;
-  appearance: none;
-  font-family: 'Graphik', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  padding: 20px 24px;
-  background: url(@/assets/img/arrow-select.png) no-repeat right;
-  background-position-x: 95%;
-  cursor: pointer;
-  outline: none;
-}
-.addition__total {
-  font-family: 'Graphik', sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #830f1e;
-  min-width: 87px;
-}
-.addition__btn {
-  width: 100%;
-  max-width: 207px;
-  margin-left: auto;
-  background: #830f1e;
-  border-radius: 6px;
-  font-family: 'Graphik', sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0px;
-  text-align: center;
-  padding: 14px 37px;
-  color: #fff;
-  cursor: pointer;
-}
-.addition__btn:hover {
-  background: #660915;
-}
+
 @media (max-width: 1250px) {
   .addition__wrap-title {
     display: none;
-  }
-  .addition__wrap-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-    padding-bottom: 48px;
-    padding-top: 15px;
-  }
-  .addition__item-select {
-    width: 100%;
-    max-width: 672px;
-  }
-  .addition__select {
-    max-width: 672px;
-  }
-  .addition__btn {
-    margin: 0 auto;
-    max-width: 293px;
   }
 }
 </style>

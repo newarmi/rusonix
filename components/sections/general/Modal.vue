@@ -8,16 +8,19 @@
           </svg>
         </div>
     <section v-if="!isFormSent" class="form">
-      <div class="container">
+    <div class="container">
       <div class="form__title title">Ваш выбор:</div>
       <div class="form__title title">{{title}}</div>
+
     </div>
+
     <div class="form__wrapper">
       <div class="partner__form">
+        <div v-if="period" class="form__options">Период: {{period}}</div>
         <div class="form__card">
           <div class="form__card-input-field">{{ fields[0].title }}
             <div class="form__card-select">
-              <select v-model="fields[0].value" class="form__select">                     
+              <select v-model="fields[0].value" class="form__select">
                 <option value="Физическое лицо">Физическое лицо</option>
                 <option value="Юридическое лицо">Юридическое лицо</option>
               </select>
@@ -61,13 +64,13 @@
           <div class="form__text">Мы приняли Вашу заявку, а наши менеджеры будут готовы связаться с Вами в ближайшее время</div>
           <button class="form__btn-registration" type="button" @click="$emit('closePopup')">Ок</button>
         </div>
-      </div> 
-    </div> 
+      </div>
+    </div>
   </section>
       </div>
     </div>
   </div>
-    
+
 </template>
 
 <script>
@@ -81,6 +84,10 @@ export default {
         title: {
             type: String,
             required: true
+        },
+        period: {
+          type: String,
+          default: ''
         }
   },
   data() {
@@ -102,16 +109,16 @@ export default {
     isEmailValid() {
       if(this.firstTry) {
         if(this.fields[2].value==='') {
-          return false 
+          return false
           } else {
             return !/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(this.fields[2].value)
           }
-      }     
+      }
       return false
     },
   },
-  methods: {  
-    
+  methods: {
+
     sendForm() {
       this.firstTry = true
       this.checkFields()
@@ -124,16 +131,16 @@ export default {
         email: this.fields[2].value,
         company: this.fields[3].value,
         phone: this.fields[4].value,
-       
+
       }).then(function (response) {
-          
+
       })
 
       this.isFormSent = true
       }
 
     },
-  
+
   checkFields() {
     if(this.firstTry) {
     this.fields.forEach(item => {
@@ -166,9 +173,6 @@ export default {
   overflow-y: scroll;
 }
 
-.body-scroll {
-  overflow-y: hidden;
-}
 .popup-show {
   display: block;
   width: 100vw;
@@ -191,54 +195,7 @@ export default {
   margin: 0 auto;
   position: relative;
 }
-.popup-feature-title {
-  font-family: "Graphik", sans-serif;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
 
-  margin-bottom: 48px;
-}
-.popup-feature-text {
-  font-family: "Graphik", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  opacity: 0.6;
-  max-width: 720px;
-}
-.popup-feature-text {
-  font-family: "Graphik", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  opacity: 0.6;
-  max-width: 770px;
-}
-.popup-feature-text {
-  font-family: "Graphik", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  opacity: 0.6;
-  max-width: 785px;
-}
-.popup-feature-wrap-text {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
 .popup__close-feature {
   position: absolute;
   right: -60px;
@@ -256,39 +213,7 @@ export default {
   text-align: left;
   margin-bottom: 24px;
 }
-.popup-feature__wrapper-content {
-  margin-bottom: 48px;
-}
-.popup-feature__wrapper-content:last-child {
-  margin-bottom: 0;
-}
-.popup__img {
-  margin-top: 24px;
-  margin-bottom: 24px;
-}
-.popup__btn {
-  font-family: "Graphik", sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 22px;
-  letter-spacing: 0px;
-  text-align: center;
 
-  color: #ffffff;
-  background-color: #0f7f69;
-  border-radius: 6px;
-  padding: 15px 50px;
-  margin-bottom: 48px;
-  cursor: pointer;
-}
-.popup__btn:hover {
-  background-color: #065848;
-}
-.popup-feature-wrap-text {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
 @media (max-width: 1200px) {
   .popup-container {
     padding: 10px 120px;
@@ -309,20 +234,7 @@ export default {
   .popup-feature-wrap {
     padding: 32px 20px;
   }
-  .popup-feature1 {
-    overflow-y: scroll;
-  }
-}
 
-.decision__card-title {
-  font-family: "Graphik", sans-serif;
-  font-size: 25px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: center;
-  margin: 15px auto;
 }
 
 .form {
@@ -331,6 +243,14 @@ export default {
 .form__title {
   font-size: 24px;
   text-align: center;
+}
+
+.form__options {
+  margin-top: 10px;
+  padding-left: 24px;
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  text-align: left;
 }
 
 .form__text {

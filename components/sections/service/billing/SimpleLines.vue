@@ -42,7 +42,7 @@
                 {{ periodToText(line.periods[0].period) }}
               </div>
               <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
-                <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                <option v-for="period, i in line.periods" :key="'period' + period.id"
                         :value="i">
                   {{ periodToText(period.period) }}
                 </option>
@@ -51,7 +51,7 @@
 
           <div class="license__wrap-total-box">
             <div class="license__total">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
-            <button class="license__btn" 
+            <button class="license__btn"
                     @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
                     {{ line.button ? line.button : 'Заказать' }}</button>
           </div>
@@ -82,7 +82,7 @@
               {{ item.attributes.value }}
             </div>
 
-          
+
           </div>
           <div class="license__tablet-wrap--tablet" >
 
@@ -92,7 +92,7 @@
                   {{ periodToText(line.periods[0].period) }}
                 </div>
                 <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
-                  <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                  <option v-for="period, i in line.periods" :key="'period' + period.id"
                           :value="i">
                     {{ periodToText(period.period) }}
                   </option>
@@ -101,7 +101,7 @@
           </div>
 
           <div class="license__total license__total--tablet">{{ Math.round(line.periods[periods[ind].period].amount)}} ₽</div>
-          <button class="license__btn license__btn--tablet" 
+          <button class="license__btn license__btn--tablet"
                   @click="goToBilling(line.billing_id, line.type, line.periods[periods[ind].period].period)">
                   {{ line.button ? line.button : 'Заказать'}}</button>
         </div>
@@ -153,14 +153,14 @@ export default {
       return {
         'license__wrapper-top-two': this.optionNumber === 1,
         'license__wrapper-top-three': this.optionNumber === 2,
-        
+
       }
     },
     titleText() {
       return {
         'license__top-title-two': this.optionNumber === 1,
         'license__top-title-three': this.optionNumber === 2,
-        
+
       }
     },
     wrapperBottom() {
@@ -189,8 +189,8 @@ export default {
       this.periods[line].period = period
     },
     goToBilling(id, type, period) {
-     window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
-                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+     window.open(`https://my.rusonyx.ru/billmgr?startpage=`
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=`
                    + id + `&period=` + period + `&project=3`, '_blank')
     },
     periodToText(period) {
@@ -200,7 +200,7 @@ export default {
       }
       if(periodNumber>1&&periodNumber<5) {
         return period + ' месяца'
-      } 
+      }
       if(periodNumber<12) {
         return period + ' месяцев'
       }
@@ -275,7 +275,7 @@ export default {
   line-height: 20px;
   letter-spacing: 0px;
   text-align: left;
-
+  padding-left: 15px;
   width: 100%;
   max-width: 375px;
 }
@@ -511,13 +511,13 @@ export default {
 }
 
 .license__top-title-two:nth-child(1) {
-  flex: 1 2 29%;
+  flex: 1 2 31%;
 }
 .license__top-title-two:nth-child(2) {
-  flex: 1 2 19%;
+  flex: 1 2 15%;
 }
 .license__top-title-two:nth-child(3) {
-  flex: 1 2 19%;
+  flex: 1 2 21%;
 }
 .license__top-title-two:nth-child(4) {
   flex: 1 0 33%;
@@ -561,14 +561,17 @@ export default {
 }
 
 .license__wrapper-bottom-two > div:nth-child(1) {
-  flex: 1 2 29%;
+  flex: 1 2 31%;
 }
+
 .license__wrapper-bottom-two > div:nth-child(2) {
-  flex: 1 2 19%;
+  flex: 1 2 15%;
 }
+
 .license__wrapper-bottom-two > div:nth-child(3) {
-  flex: 1 2 19%;
+  flex: 1 2 21%;
 }
+
 .license__wrapper-bottom-two > div:nth-child(4) {
   flex: 1 0 33%;
 }

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="license__title title">{{ cards.tariffTitle }}</div>
       <div class="license__wrapper-cards">
-        <div v-for="card, index in cards.cards" :key="card.key" class="license__wrap-card">
+        <div v-for="(card, index) in cards.cards" :key="card.key" class="license__wrap-card">
           <div class="license__card-title">{{ card.attributes.cardTitle }}</div>
               <div class="license__card-content">
                 <div class="license__card-left">
@@ -38,23 +38,23 @@
 
           <div class="license__card-total">
             {{ card.attributes.price }}
-            <div
-              v-show="card.attributes.priceComment"
-              class="license__card-total-descr">
+            <div v-show="card.attributes.priceComment" class="license__card-total-descr">
               {{ card.attributes.priceComment }}
             </div>
           </div>
 
           <div class="license__btn-wrap">
-            <div v-if="card.attributes.modal" class="license__btn" 
+            <div v-if="card.attributes.modal" class="license__btn"
                  @click="showPopup(index)">
-                 {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать'}}</div>
-            <div v-else class="license__btn" 
+              {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать' }}
+            </div>
+            <div v-else class="license__btn"
                  @click="goToLink(card.attributes.buttonLink)">
-                 {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать' }}</div>
+              {{ card.attributes.buttonName ? card.attributes.buttonName : 'Заказать' }}
+            </div>
           </div>
           <Modal v-if="card.attributes.modal" :title="card.attributes.cardTitle"
-                 :show-popup="is_show[index].show" @closePopup="closePopup(index)" />
+                 :show-popup="is_show[index].show" @closePopup="closePopup(index)"/>
         </div>
       </div>
     </div>
@@ -121,7 +121,7 @@ export default {
   background-color: #fcf7f2;
   padding-top: 72px;
   padding-bottom: 72px;
-  
+
 }
 .license__title {
   margin-bottom: 72px;
