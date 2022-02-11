@@ -10,7 +10,7 @@
     <section v-if="!isFormSent" class="form">
     <div class="container">
       <div class="form__title title">Ваш выбор:</div>
-      <div class="form__title title">{{title}}</div>
+      <div class="form__title title" v-html="title"></div>
 
     </div>
 

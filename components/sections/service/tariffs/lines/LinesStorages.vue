@@ -13,7 +13,7 @@
     </div>
     <!-- tablet  -->
     <div class="license__tablet-wrapper">
-<!--      <ContainerTablet v-for="line in lines" :key="line.key" :line="line.attributes"/>-->
+      <StorageTablet v-for="line in lines" :key="line.key" :line="line.attributes"/>
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ export default {
   name: 'LinesStorages',
   components: {
     Storage: () => import('~/components/sections/service/tariffs/lines/Storage'),
-    // ContainerTablet: () => import('~/components/sections/service/tariffs/lines/ContainerTablet'),
+    StorageTablet: () => import('~/components/sections/service/tariffs/lines/StorageTablet'),
   },
   props: {
     lines: {

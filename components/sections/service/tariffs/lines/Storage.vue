@@ -1,6 +1,6 @@
 <template>
   <div class="license__wrapper-bottom license__wrapper-bottom-two">
-    <div class="license__wrap-text">{{ line.title }}</div>
+    <div class="license__wrap-text" v-html="line.title"></div>
 
     <div class="license__input">
       <input v-model="tbytes" class="license__input-text" type="number"
@@ -8,35 +8,37 @@
     </div>
 
     <div class="license__wrap-select">
-      <select v-model="cpuPrice" class="license__select license__select--mod">
-        <option :value="line.cpu2">100</option>
-        <option :value="line.cpu4">200</option>
-        <option :value="line.cpu8">400</option>
-        <option :value="line.cpu8">500</option>
-        <option :value="line.cpu8">600</option>
-        <option :value="line.cpu8">700</option>
-        <option :value="line.cpu8">800</option>
-        <option :value="line.cpu8">900</option>
+      <select v-model="gbytes" class="license__select license__select--mod">
+        <option :value="0">0</option>
+        <option :value="100">100</option>
+        <option :value="200">200</option>
+        <option :value="300">300</option>
+        <option :value="400">400</option>
+        <option :value="500">500</option>
+        <option :value="600">600</option>
+        <option :value="700">700</option>
+        <option :value="800">800</option>
+        <option :value="900">900</option>
       </select>
     </div>
 
     <div class="license__wrap-select">
       <select v-model="sale" class="license__select license__select--mod">
-        <option :value="{ sale: line.sale1, month: 1}">1 месяц</option>
-        <option :value="{ sale: line.sale6, month: 6}">6 месяцев</option>
-        <option :value="{ sale: line.sale12, month: 12}">12 месяцев</option>
-        <option :value="{ sale: line.sale24, month: 24}">24 месяца</option>
+        <option :value="{ sale: line.sale1, month: 1, period: '1 месяц'}">1 месяц</option>
+        <option :value="{ sale: line.sale6, month: 6, period: '6 месяцев'}">6 месяцев</option>
+        <option :value="{ sale: line.sale12, month: 12, period: '12 месяцев'}">12 месяцев</option>
+        <option :value="{ sale: line.sale24, month: 24, period: '24 месяца'}">24 месяца</option>
       </select>
     </div>
 
     <div class="license__wrap-total-box">
       <div class="license__wrap-full-box">
         <div class="license__wrap-price-box">
-          <span v-if="currentSale" class="sertificate__total-old--mod"></span>
-          <div v-if="currentSale" class="sertificate__total-old">{{ total }}</div>
+          <span v-if="currentSale&&isCorrect" class="sertificate__total-old--mod"></span>
+          <div v-if="currentSale&&isCorrect" class="sertificate__total-old">{{ total }}</div>
           <div class="license__total">{{ price }} ₽</div>
         </div>
-        <div v-if="currentSale" class="license__wrap-economy">Экономия: {{ economy }} ₽</div>
+        <div v-if="currentSale&&isCorrect" class="license__wrap-economy">Экономия: {{ economy }} ₽</div>
       </div>
       <button v-if="line.modal" class="license__btn" @click="showPopup()">
         {{ line.buttonName ? line.buttonName : 'Заказать' }}
@@ -46,7 +48,7 @@
       </button>
     </div>
 
-    <Modal v-if="line.modal" :title="line.title"
+    <Modal v-if="line.modal" :title="line.title" :period="sale.period"
            :show-popup="is_show" @closePopup="closePopup()"/>
   </div>
 </template>
@@ -66,8 +68,9 @@ export default {
   data() {
     return {
       tbytes: this.line.min,
+      gbytes: 0,
       cpuPrice: this.line.cpu2,
-      sale: { sale: this.line.sale1, month: 1 } ,
+      sale: { sale: this.line.sale1, month: 1, period: '1 месяц' } ,
       is_show: false
     }
   },
@@ -75,14 +78,34 @@ export default {
     currentSale() {
       return Number(this.sale.sale)
     },
+    isCorrect() {
+      return Number(this.tbytes)<=Number(this.line.max)&&Number(this.tbytes)>=Number(this.line.min)
+    },
     price() {
-      return Math.round(this.cpuPrice * this.sale.month - this.cpuPrice * this.sale.month * (this.sale.sale * 0.01))
+      const tbprice = this.line.price * this.tbytes * this.sale.month
+      const gbprice = this.line.price * this.gbytes * 0.001 * this.sale.month
+      const price = tbprice + gbprice
+      const sale = price * this.sale.sale * 0.01
+      const maxprice = this.line.price * this.line.max * this.sale.month + gbprice
+      const minprice = this.line.price * this.line.min * this.sale.month + gbprice
+
+      if(Number(this.tbytes)>Number(this.line.max))
+
+        return Math.round(maxprice - maxprice * this.sale.sale * 0.01)
+      if(Number(this.tbytes)<Number(this.line.min))
+        return Math.round(minprice - minprice * this.sale.sale * 0.01)
+
+      return Math.round(price - sale)
     },
     total() {
-      return this.cpuPrice * this.sale.month
+      let tbytes = this.tbytes
+      if(Number(this.tbytes)>Number(this.line.max))
+        tbytes = this.line.max
+
+      return (this.line.price * tbytes +  this.line.price * this.gbytes * 0.001) * this.sale.month
     },
     economy() {
-      return Math.round(this.cpuPrice * this.sale.month - this.price)
+      return Math.round(this.total - this.price)
     }
   },
 
@@ -95,22 +118,6 @@ export default {
         this.tbytes = this.line.min
       }
     },
-    periodToText(period) {
-      const periodNumber = Number(period)
-      if (periodNumber === 1) {
-        return period + ' месяц'
-      }
-      if (periodNumber > 1 && periodNumber < 5) {
-        return period + ' месяца'
-      }
-      if (periodNumber < 12) {
-        return period + ' месяцев'
-      }
-      if (periodNumber === 12) return '12 месяцев'
-      if (periodNumber === 24) return '24 месяца'
-      if (periodNumber === 36) return '36 месяцев'
-    },
-
     choosePeriod(line, period) {
       this.periods[line].period = period
     },
@@ -138,7 +145,7 @@ export default {
   font-family: 'Graphik', sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 20px;
   letter-spacing: 0px;
   text-align: left;
@@ -153,6 +160,7 @@ export default {
 .license__input-text::-webkit-inner-spin-button {
   display: none;
 }
+
 @media (max-width: 1200px) {
   .license__input-text {
     max-width: 185px;

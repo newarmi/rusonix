@@ -1,157 +1,128 @@
 <template>
-  <div :id="lines.tag">
-    <section class="license__storage" >
-      <div class="container">
-        <div class="license__title title">
-          {{ lines.tariffTitle }}
-        </div>
+  <div>
+    <div class="license__wrapper-top" :class="titleWrapper">
+      <div class="license__top-title" :class="titleText">Тип лицензии</div>
+      <div class="license__top-title" :class="titleText">Число учетных записей</div>
+      <div class="license__top-title" :class="titleText">Срок действия</div>
+      <div class="license__top-title" :class="titleText">Стоимость</div>
+    </div>
 
-        <div class="license__wrapper" :class="wrapper">
-          <div class="license__wrapper-top" :class="titleWrapper">
-            <div v-for="option in lines.options" :key="option.key"
-              class="license__top-title" :class="titleText">
-              {{ option.attributes.title }}
-            </div>
-            <div class="license__top-title" :class="titleText">Период</div>
-            <div class="license__top-title" :class="titleText">Стоимость</div>
-          </div>
-
-          <div v-for="line in lines.lines" :key="line.key"
-            class="license__wrapper-bottom" :class="wrapperBottom">
-            <div v-for="item in line.attributes.options" :key="item.key">
-              <div v-if="item.layout === 'list'" class="license__wrap-select">
-                <select class="license__select license__select--mod">
-                  <option v-for="option in item.attributes.list" :key="option.key"
-                    :value="option.attributes.item">
-                    {{ option.attributes.item }}
-                  </option>
-                </select>
-              </div>
-
-              <div v-if="item.layout === 'radio'" class="license__communigate-radio">
-                <div v-for="option, k  in item.attributes.list" :key="option.key" class="license__communigate-radio-wrap">
-                  <input :id="'indefinitely-' + k" class="license__communigate-input" type="radio"
-                    name="dron" :value="option.attributes.item" :checked="k===0" />
-                  <label class="license__communigate-label" :for="'indefinitely-' + k" :checked="k===0">{{ option.attributes.item}} </label>
-                </div>
-              </div>
-
-              <div v-if="item.layout === 'field'" class="license__input">
-                <input class="license__input-text" type="number" :value="item.attributes.value" />
-              </div>
-
-              <div v-if="item.layout === 'text'" class="license__wrap-text">
-                {{ item.attributes.value }}
-              </div>
-
-            </div>
-            <div class="license__wrap-total-box">
-              <div class="license__total">{{ line.attributes.price }}</div>
-              <button class="license__btn" @click="openModal()">
-                {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать'}}</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- tablet -->
-        <div v-for="line in lines.lines" :key="line.key" class="antispam__tablet">
-
-          <div v-for="(item, i) in line.attributes.options" :key="item.key">
-            <div class="antispam__text antispam__text--tablet">
-               {{ options[i].title }}
-            </div>
-
-            <div v-if="item.layout === 'radio'" class="license__communigate-radio license__communigate-radio--tablet">
-              <div v-for="option, j  in item.attributes.list" :key="option.key" class="license__communigate-radio-wrap">
-                <input :id="'indefinitely-tablet' + j" class="license__communigate-input"
-                  type="radio" name="drone" value="option.attributes.item" :checked="j===0" />
-                <label class="license__communigate-label" :for="'indefinitely-tablet' + j">{{ option.attributes.item }}</label>
-              </div>
-            </div>
-
-            <div v-if="item.layout === 'field'" class="license__input">
-              <input class="license__input-text" type="number" :value="item.attributes.value"/>
-            </div>
-
-            <select v-if="item.layout === 'list'" class="antispam__select antispam__select--tablet">
-              <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item">
-                {{ option.attributes.item }}
-              </option>
-            </select>
-
-            <div v-if="item.layout === 'text'" class="antispam__month antispam__month--tablet">
-              {{ item.attributes.value }}
-            </div>
-          </div>
-
-          <div class="license__total license__total--tablet">
-            {{ line.attributes.price }}
-          </div>
-          <button class="license__btn license__btn--tablet" @click="openModal()">
-            {{ line.attributes.buttonName ? line.attributes.buttonName : 'Заказать' }}
-          </button>          
-        </div>
-
+    <div class="license__wrapper-bottom" :class="wrapperBottom">
+      <div class="license__wrap-select">
+        <select v-model="lineNumber" class="license__select license__select--mod">
+          <option v-for="(line, i) in lines" :key="line.key" :value="i">
+            {{ line.attributes.title }}
+          </option>
+        </select>
       </div>
 
-      <Modal v-if="lines.lines[0].attributes.modal" :title="lines.tariffTitle"
-                 :show-popup="is_show" @closePopup="closePopup()" />
-    </section>
+      <div class="license__wrap-select">
+        <select v-model="optionsNumbers[lineNumber]" class="license__select license__select--mod">
+          <option v-for="(option, o) in options" :key="option.key" :value="o">
+            {{ option.attributes.number }}
+          </option>
+        </select>
+      </div>
+
+      <div class="license__wrap-text">
+        {{ period }}
+      </div>
+
+      <!--        <div v-if="item.layout === 'radio'" class="license__communigate-radio">-->
+      <!--          <div v-for="(option, k)  in item.attributes.list" :key="option.key" class="license__communigate-radio-wrap">-->
+      <!--            <input :id="'indefinitely-' + k" class="license__communigate-input" type="radio"-->
+      <!--                   name="dron" :value="option.attributes.item" :checked="k===0"/>-->
+      <!--            <label class="license__communigate-label" :for="'indefinitely-' + k"-->
+      <!--                   :checked="k===0">{{ option.attributes.item }} </label>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--        <div v-if="item.layout === 'field'" class="license__input">-->
+      <!--          <input class="license__input-text" type="number" :value="item.attributes.value"/>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+      <div class="license__wrap-total-box">
+        <div class="license__total">{{ price }} ₽</div>
+        <button class="license__btn" @click="openModal()">
+          {{ button.title ? button.title : 'Заказать' }}
+        </button>
+      </div>
+    </div>
+    <Modal v-if="button.modal" :title="currentTitle" :period="period"
+           :show-popup="is_show" @closePopup="closePopup()"/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Lines',
+  name: 'AntivirusDesktop',
   components: {
     Modal: () => import('~/components/sections/general/Modal'),
   },
   props: {
     lines: {
-      type: Object,
+      type: Array,
       required: true,
     },
+    button: {
+      type: Object,
+      required: true,
+    }
   },
   data() {
     return {
-      is_show: false
+      lineNumber: 0,
+      optionNumber: 0,
+      optionsNumbers: [],
+      is_show: false,
+      opr: 2
     }
   },
   computed: {
     options() {
-      const options = []
-      this.lines.options.forEach((element) => {
-        options.push(element.attributes)
-      })
-      return options
+      return this.lines[this.lineNumber].attributes.numberPrice
     },
-    optionNumber() {
-      return this.lines.options.length
+    period() {
+      return this.lines[this.lineNumber].attributes.time
+    },
+    price() {
+      return this.lines[this.lineNumber].attributes.numberPrice[this.currentOption].attributes.price
+    },
+    currentOption() {
+      return this.optionsNumbers[this.lineNumber]
+    },
+    currentTitle() {
+      return this.lines[this.lineNumber].attributes.title
     },
     wrapper() {
       return {
-        'license__wrapper-two': this.optionNumber === 1,
-        'license__wrapper-three': this.optionNumber === 2,
+        'license__wrapper-two': this.opr === 1,
+        'license__wrapper-three': this.opr === 2,
       }
     },
     titleWrapper() {
       return {
-        'license__wrapper-top-two': this.optionNumber === 1,
-        'license__wrapper-top-three': this.optionNumber === 2,
+        'license__wrapper-top-two': this.opr === 1,
+        'license__wrapper-top-three': this.opr === 2,
       }
     },
     titleText() {
       return {
-        'license__top-title-two': this.optionNumber === 1,
-        'license__top-title-three': this.optionNumber === 2,
+        'license__top-title-two': this.opr === 1,
+        'license__top-title-three': this.opr === 2,
       }
     },
     wrapperBottom() {
       return {
-        'license__wrapper-bottom-two': this.optionNumber === 1,
-        'license__wrapper-bottom-three': this.optionNumber === 2,
+        'license__wrapper-bottom-two': this.opr === 1,
+        'license__wrapper-bottom-three': this.opr === 2,
       }
     },
+  },
+  created() {
+    this.lines.forEach(() => {
+      this.optionsNumbers.push(0)
+    })
   },
   methods: {
     openModal() {
@@ -212,12 +183,15 @@ export default {
   color: #000;
   opacity: 0.6;
 }
+
 .license__text:nth-child(1) {
   flex-basis: 38%;
 }
+
 .license__text:nth-child(2) {
   flex-basis: 16%;
 }
+
 .license__text:nth-child(3) {
   flex-basis: 16%;
 }
@@ -234,9 +208,11 @@ export default {
   width: 100%;
   max-width: 375px;
 }
+
 .license__wrap-text--mod {
   max-width: 175px;
 }
+
 .license__select {
   border: 1px solid #ede7e2;
   border-radius: 8px;
@@ -254,12 +230,15 @@ export default {
   background-position-x: 75%;
   cursor: pointer;
 }
+
 .license__select--mod {
   background-position-x: 90%;
 }
+
 .license__select:focus {
   outline: 0;
 }
+
 .license__total {
   font-family: 'Graphik', sans-serif;
   font-size: 18px;
@@ -270,6 +249,7 @@ export default {
   text-align: left;
   color: #830f1e;
 }
+
 .license__btn {
   font-family: 'Graphik', sans-serif;
   font-size: 16px;
@@ -284,6 +264,7 @@ export default {
   padding: 14px 69px 14px;
   cursor: pointer;
 }
+
 .license__btn:hover {
   background-color: #660915;
 }
@@ -309,6 +290,7 @@ export default {
   .license__wrap-title {
     display: none;
   }
+
   .license__wrap {
     display: none;
   }
@@ -327,6 +309,7 @@ export default {
     padding-top: 36px;
   }
 }
+
 @media (max-width: 576px) {
   .license__title {
     margin-bottom: 24px;
@@ -335,9 +318,11 @@ export default {
 
 .license__input {
 }
+
 .license__storage-wrap-text {
   max-width: 320px;
 }
+
 .license__input-text {
   width: 100%;
   max-width: 94px;
@@ -357,9 +342,11 @@ export default {
 
   outline: none;
 }
+
 .license__input-text::-webkit-inner-spin-button {
   display: none;
 }
+
 @media (max-width: 1200px) {
   .license__input-text {
     max-width: 201px;
@@ -378,6 +365,7 @@ export default {
   opacity: 0.6;
   padding: 0 10px;
 }
+
 .license__wrapper-top {
   display: flex;
   padding-left: 24px;
@@ -396,9 +384,11 @@ export default {
 .license__top-title-two:nth-child(1) {
   flex: 1 2 33%;
 }
+
 .license__top-title-two:nth-child(2) {
   flex: 1 2 33%;
 }
+
 .license__top-title-two:nth-child(3) {
   flex: 1 2 33%;
 }
@@ -406,12 +396,15 @@ export default {
 .license__top-title-three:nth-child(1) {
   flex: 1 2 22%;
 }
+
 .license__top-title-three:nth-child(2) {
   flex: 1 2 23%;
 }
+
 .license__top-title-three:nth-child(3) {
   flex: 1 2 22%;
 }
+
 .license__top-title-three:nth-child(4) {
   flex: 1 2 33%;
 }
@@ -424,12 +417,15 @@ export default {
   align-items: center;
   margin: 10px -10px;
 }
+
 .license__wrapper-bottom > div {
   padding: 0 10px;
 }
+
 .license__wrapper-bottom-one > div:nth-child(1) {
   flex: 1 2 67%;
 }
+
 .license__wrapper-bottom-one > div:nth-child(2) {
   flex: 1 2 33%;
 }
@@ -437,9 +433,11 @@ export default {
 .license__wrapper-bottom-two > div:nth-child(1) {
   flex: 1 2 33%;
 }
+
 .license__wrapper-bottom-two > div:nth-child(2) {
   flex: 1 2 33%;
 }
+
 .license__wrapper-bottom-two > div:nth-child(3) {
   flex: 1 2 33%;
 }
@@ -447,12 +445,15 @@ export default {
 .license__wrapper-bottom-three > div:nth-child(1) {
   flex: 1 2 22%;
 }
+
 .license__wrapper-bottom-three > div:nth-child(2) {
   flex: 1 2 23%;
 }
+
 .license__wrapper-bottom-three > div:nth-child(3) {
   flex: 1 2 22%;
 }
+
 .license__wrapper-bottom-three > div:nth-child(4) {
   flex: 1 2 33%;
 }
@@ -661,9 +662,11 @@ export default {
   padding: 14px 69px 14px;
   cursor: pointer;
 }
+
 .antispam-btn:hover {
   background-color: #660915;
 }
+
 .antispam__tablet {
   display: none;
   width: 343px;
@@ -715,9 +718,11 @@ export default {
   .antispam__wrapper {
     display: none;
   }
+
   .antispam__wrap-text {
     display: none;
   }
+
   .antispam__tablet {
     display: block;
   }

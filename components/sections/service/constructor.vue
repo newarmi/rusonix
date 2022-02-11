@@ -55,7 +55,7 @@ export default {
     Tabs: () => import('~/components/sections/service/universal/Tabs'),
     Cards: () => import('~/components/sections/service/tariffs/Cards'),
     Lines: () => import('~/components/sections/service/tariffs/lines/LinesBox'),
-    OneLine: () => import('~/components/sections/service/tariffs/OneLine'),
+    OneLine: () => import('~/components/sections/service/tariffs/license/OneLine'),
     Additions: () => import('~/components/sections/service/tariffs/Additions'),
     Ssl: () => import('~/components/sections/service/tariffs/Ssl'),
     Calculate: () => import('~/components/sections/service/tariffs/Calculate'),

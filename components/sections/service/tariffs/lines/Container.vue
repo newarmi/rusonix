@@ -1,6 +1,6 @@
 <template>
   <div class="license__wrapper-bottom license__wrapper-bottom-two">
-    <div class="license__wrap-text">{{ line.title }}</div>
+    <div class="license__wrap-text" v-html="line.title"></div>
     <div class="license__wrap-select">
       <select v-model="cpuPrice" class="license__select license__select--mod">
         <option :value="line.cpu2">2</option>

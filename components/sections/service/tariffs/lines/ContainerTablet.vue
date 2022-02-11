@@ -1,7 +1,7 @@
 <template>
   <div class="license__tablet">
     <div>
-      <div class="license__tablet-title">{{ line.title }}</div>
+      <div class="license__tablet-title" v-html="line.title"></div>
       <div class="license__tablet-wrap--tablet">
         <div class="license__tablet-text">CPU</div>
         <div class="license__wrap-select">
