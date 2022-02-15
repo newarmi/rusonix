@@ -16,10 +16,16 @@
         </div>
       </div>
 
+      <select v-if="isSale" v-model="periodSale" class="license__select">
+        <option v-for="sale in sales" :key="sale.key" :value="sale">
+          {{periodToText(sale.attributes.period)}}
+        </option>
+      </select>
+
       <div class="calculate__total-wrap" :class="wrapClass">
         <div class="calculate__total-wrap-inside">
           <div class="calculate__total-card-text">
-            <span class="calculate__total-card-text--mod">Итого: {{ total }} ₽</span>
+            <span class="calculate__total-card-text--mod">Итого: {{ totalRound }} ₽</span>
           </div>
           <div v-if="totalmonth!==0" class="calculate__total-card-text">
             <span class="calculate__total-card-text--mod">{{ totalmonth }} ₽</span>
@@ -27,9 +33,8 @@
           </div>
         </div>
         <p v-if="economy!==0" class="license__card-total-economy">Экономия {{economy}} рублей</p>
+        <p v-if="isSale&&saleEconomy!==0" class="license__card-total-economy">Экономия {{saleEconomy}} рублей</p>
       </div>
-      
-      
 
       <div :class="buttonClass">
         <button class="calculate__btn" @click="goToLink">{{ button }}</button>
@@ -40,7 +45,7 @@
           Скачать PDF с расчетом
         </button>
         <div></div>
-      </div>  
+      </div>
     </div>
 
     <div v-if="bonus" class="calculate__total-bottom">
@@ -54,7 +59,7 @@
       </ul>
     </div>
   </div>
-  
+
 </template>
 
 <script>
@@ -86,6 +91,10 @@ export default {
       type: Array,
       default: () => []
     },
+    sales: {
+      type: Array,
+      default: () => []
+    },
     button: {
       type: String,
       default: 'Подключиться'
@@ -95,9 +104,30 @@ export default {
       required: true
     }
   },
+  data() {
+    return {
+      periodSale: null
+    }
+  },
   computed: {
-    totalDay() {
-      return Math.round(this.total / 30)
+    isSale() {
+      return this.sales.length
+    },
+    currentSale() {
+      return this.periodSale.attributes.sale
+    },
+    currentPeriod() {
+      return this.periodSale.attributes.period
+    },
+    saleEconomy() {
+      return Math.round(this.total * this.currentPeriod * this.currentSale * 0.01)
+    },
+    totalRound() {
+      if(this.isSale) {
+        const total = this.total * this.currentPeriod  - this.total * this.currentPeriod * this.currentSale * 0.01
+        return total.toFixed(2)
+      }
+      return this.total.toFixed(2)
     },
     containerClass() {
       return {
@@ -115,16 +145,66 @@ export default {
       return { 'calculate__total-wrap-tablet-btn': this.mobile }
     },
   },
+  created() {
+    if(this.isSale) {
+      this.periodSale = this.sales[0]
+    }
+  },
   methods: {
-      goToLink() {
+    goToLink() {
         if(this.link)
         window.open(this.link, '_blank')
+    },
+    periodToText(period) {
+      const periodNumber = Number(period)
+      if(periodNumber===1) {
+        return period + ' месяц'
       }
+      if(periodNumber>1&&periodNumber<5) {
+        return period + ' месяца'
+      }
+      if(periodNumber<12) {
+        return period + ' месяцев'
+      }
+      if(periodNumber===12) return '12 месяцев'
+      if(periodNumber===24) return '24 месяца'
+      if(periodNumber===36) return '36 месяцев'
+    },
   }
 }
 </script>
 
 <style scoped>
+.license__card-selection {
+  width: 100%;
+  max-width: 343px;
+  margin-bottom: 48px;
+}
+.license__select {
+  width: 100%;
+  max-width: 343px;
+  height: 60px;
+  border: 1px solid #ede7e2;
+  border-radius: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: left;
+
+  padding: 20px 24px;
+  background: url(@/assets/img/arrow-select.png) no-repeat right;
+  background-position-x: 95%;
+  cursor: pointer;
+  outline: none;
+  margin-bottom: 15px;
+}
+
 .license__card-total-economy {
   margin-top: 5px;
   font-family: "Graphik", sans-serif;
@@ -331,7 +411,7 @@ export default {
   .calculate__total-tablet-container {
     padding: 24px 16px;
   }
-  
+
 }
 
 }

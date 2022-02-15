@@ -27,7 +27,7 @@
                   </div>
                 </div>
               </div>
-            </div> 
+            </div>
             <div v-if="card.periods.length>1">
                 <div class="license__card-selection-title">
                   Период
@@ -35,7 +35,7 @@
                 <div class="license__card-selection">
                   <select class="license__select" @change="choosePeriod(ind, $event.target.value)">
                     <option
-                      v-for="period, i in card.periods"
+                      v-for="(period, i) in card.periods"
                       :key="period.key"
                       :value="i">
                       {{periodToText(period.period)}}
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-          <div v-if="card.options.length>0"> 
+          <div v-if="card.options.length>0">
             <div v-for="option in card.options[0].attributes.options" :key="option.key">
               <div v-if="option.layout === 'listOption'">
                 <div class="license__card-selection-title">
@@ -72,10 +72,10 @@
               </div>
               <p v-if="card.periods[periods[ind].period].percent!=='0%'" class="license__card-total-economy">
                 Экономия {{Math.floor(card.periods[periods[ind].period].full_cost - card.periods[periods[ind].period].amount)}} рублей</p>
-            </div>    
+            </div>
 
-              <div class="license__btn-wrap">  
-                <div class="license__btn" 
+              <div class="license__btn-wrap">
+                <div class="license__btn"
                 @click="goToBilling(card.billing_id, card.type, card.periods[periods[ind].period].period)">
                   {{card.button ? card.button : 'Заказать'}}</div>
               </div>
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-    
+
   </section>
 </template>
 
@@ -109,11 +109,11 @@ export default {
   },
   created() {
     this.init()
-  }, 
+  },
   methods: {
     init() {
       this.cards = this.$store.getters['universal/billingTariffs'].map(item=>item)
-      
+
       if(this.tariff.mode) {
           this.cards = this.cards.filter(item => {
             return item.mode?.find(obj => obj.attributes.title === this.tariff.mode)
@@ -132,8 +132,8 @@ export default {
       this.periods[card].period = period
     },
     goToBilling(id, type, period) {
-      window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
-                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+      window.open(`https://my.rusonyx.ru/billmgr?startpage=`
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=`
                    + id + `&period=` + period + `&project=3`, '_blank')
     },
     periodToText(period) {
@@ -143,7 +143,7 @@ export default {
       }
       if(periodNumber>1&&periodNumber<5) {
         return period + ' месяца'
-      } 
+      }
       if(periodNumber<12) {
         return period + ' месяцев'
       }
@@ -216,7 +216,7 @@ display: flex;
   justify-content: space-between;
 }
 .license__wrap-card--title{
-  
+
 }
 .license__card-title {
   font-family: "Graphik", sans-serif;
