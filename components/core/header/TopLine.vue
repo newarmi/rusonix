@@ -49,10 +49,10 @@
         <nav class="navigation">
           <ul class="navigation__list">
             <li v-for="item in menu" :key="item.id + item.title" class="navigation__item"
-                :class="{'open_submenu' : getOpenMenu}"
-                @mouseleave="setOpenMenuTrue" @click="setOpenMenuFalse">
-              <a class="navigation__link" @click="buttonAction(item, item.type[0])"
-                 @mouseover="showStatus">{{ item.type[0].attributes.title }}</a>
+                :class="{'open_submenu' : getOpenMenu&&item.submenu}"
+                @mouseleave="setOpenMenuTrue()" @click="setOpenMenuFalse()">
+              <a class="navigation__link" @click="buttonAction(item, item.type[0])">
+                {{ item.type[0].attributes.title }}</a>
               <ul class="navigation__dropdown">
                 <div class="navigation__container-dropdown">
                   <li v-for="subMenu in item.subitem" :key="subMenu.key" class="navigation__dropdown-item">
@@ -166,9 +166,6 @@ export default {
     ...mapActions(['setTag', 'setOpenMenuFalse',
                    'setOpenMenuTrue', 'setSearchQuery',
                    'setRubric']),
-    showStatus() {
-      window.status = 'wdefewfw'
-    },
     searchIt() {
       if(this.searchInput) {
         this.setSearchQuery(this.searchInput)

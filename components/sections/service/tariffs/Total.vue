@@ -36,8 +36,9 @@
         <p v-if="isSale&&saleEconomy!==0" class="license__card-total-economy">Экономия {{saleEconomy}} рублей</p>
       </div>
 
-      <div :class="buttonClass">
-        <button class="calculate__btn" @click="goToLink">{{ button }}</button>
+      <div class="button__container" :class="buttonClass">
+        <button v-if="modal" class="calculate__btn" @click="$emit('openModal')">{{ button }}</button>
+        <button v-else class="calculate__btn" @click="goToLink">{{ button }}</button>
         <button class="calculate__btn-download" type="button" @click="$emit('createPDF')">
           <svg class="clip__icon" width="9" height="18">
             <use xlink:href="@/assets/img/sprites.svg#clip"></use>
@@ -66,6 +67,7 @@
 import '@/assets/fonts/PTSans-Regular-normal.js'
 
 export default {
+  name: 'Total',
   props: {
     total: {
       type: Number,
@@ -102,6 +104,10 @@ export default {
     link: {
       type: String,
       required: true
+    },
+    modal: {
+      type: Boolean,
+      default: false,
     }
   },
   data() {
@@ -145,12 +151,20 @@ export default {
       return { 'calculate__total-wrap-tablet-btn': this.mobile }
     },
   },
-  created() {
-    if(this.isSale) {
-      this.periodSale = this.sales[0]
+  watch: {
+    sales() {
+      this.init()
     }
   },
+  created() {
+    this.init()
+  },
   methods: {
+    init() {
+      if(this.isSale) {
+        this.periodSale = this.sales[0]
+      }
+    },
     goToLink() {
         if(this.link)
         window.open(this.link, '_blank')
@@ -175,6 +189,10 @@ export default {
 </script>
 
 <style scoped>
+.button__container {
+  text-align: center;
+}
+
 .license__card-selection {
   width: 100%;
   max-width: 343px;

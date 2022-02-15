@@ -46,6 +46,7 @@ export default {
 }
 
 .channel__title {
+  margin-top: 48px;
   margin-bottom: 48px;
 }
 

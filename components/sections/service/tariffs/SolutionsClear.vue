@@ -9,13 +9,13 @@
         </div>
       </div>
       <div class="tariff__common-wrapper tariff__common-wrapper--active">
-        <div v-for="solution, s in solutionConfigs" :key="'solution-' + s" class="ready__cofiguration">
+        <div v-for="(solution, s) in solutionConfigs" :key="'solution-' + s" class="ready__cofiguration">
           <div class="tariff__wrapper-sample">
             <div class="tariff__wrap-tab">
               <p class="tariff__tab-text">Тип диска</p>
               <div class="tariff__tab-sample">
                 <div class="tariff__tab-sample-links"
-                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab, 
+                    :class="{'tariff__tab-sample-links--active': data.firstDisk===activeTab[s].tab,
                               'ml-13' : !data.secondDisk}"
                     @click="changeDiscTab(s, data.firstDisk)">{{ data.firstDisk }}</div>
                 <div v-if="data.secondDisk" class="tariff__tab-sample-links"
@@ -43,14 +43,15 @@
                 </svg>
 
                 <ul class="tariff__dropdown-content">
-                  <li v-for="onePeriod, p in data.periods" :key="onePeriod.key"
+                  <li v-for="(onePeriod, p) in data.periods" :key="onePeriod.key"
                       :dropText="onePeriod.attributes.period"
                       class="tariff__dropdown-text" @click="choosePeriod(s, onePeriod.attributes.period, p, onePeriod.attributes.month)">
                       {{ onePeriod.attributes.period }}</li>
                 </ul>
               </div>
             </div>
-            <div class="tariff__wrap-counter">
+
+            <div v-if="data.isServer" class="tariff__wrap-counter">
               <p class="tariff__tab-text">Количество серверов</p>
               <div class="tariff__counter">
                 <svg class="counter__icon-minus" width="8" height="3" @click="serversSub(s)">
@@ -62,6 +63,7 @@
                 </svg>
               </div>
             </div>
+
           </div>
           <div data-tabTariff-content class="tariff__wrapper-configuration tariff__wrapper-configuration--active">
             <div class="tariff__configuration">
@@ -77,7 +79,7 @@
             </div>
 
             <div v-if="solutionConfigs.length-s===1" class="tariff__wrapper-right">
-              <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="false" 
+              <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="false"
                      :items="clearItems" :link="link" :total="total" :economy="economy"
                       @createPDF="createPdf"/>
             </div>
@@ -99,7 +101,7 @@
 
     </div>
     <div class="calculate__total-tablet">
-      <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="true" 
+      <Total :totalmonth="totalMonth" :bonus="bonuses" :mobile="true"
              :items="clearItems" :link="link" :total="total" :economy="economy"
               @createPDF="createPdf"/>
     </div>
@@ -143,25 +145,25 @@ export default {
         }
         if(!this.items[0].item) {
           return ''
-        } 
+        }
         if(this.items.length===1) {
           const type = this.items[0].item.type
           const period = this.period[0].month
           const id = this.items[0].item.billing_id
-          return `https://my.rusonyx.ru/billmgr?startpage=` 
-                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+          return `https://my.rusonyx.ru/billmgr?startpage=`
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=`
                    + id + `&period=` + period + `&project=3`
         }
         return ''
       },
-      clearItems() {       
+      clearItems() {
           return this.items.map(item => {
-            if(item.item) {  
+            if(item.item) {
             const options = item.item.options.map(option => {
               return {
                 option: option.attributes.option
               }
-            })          
+            })
             return {
               title: item.item.title,
               biling_id: item.item.billing_id,
@@ -171,7 +173,7 @@ export default {
           } else {
             return {}
           }
-          })  
+          })
       },
       total() {
         const result = this.items.reduce((accum, a, i) => {
@@ -238,11 +240,11 @@ export default {
         }
 
         return billings.map(item => {
-          
+
         if(item.options.length) {
           const options = item.options[0]
 
-          return { 
+          return {
             layout: options.layout,
             key: options.key,
             attributes: {
@@ -254,8 +256,8 @@ export default {
                           diskType: options.attributes.diskType,
                           price: Math.round(item.periods[0].amount) + ' ₽ / месяц',
                           periodPrice: item.periods.map(period => {
-                            return { 
-                                    period: period.period, 
+                            return {
+                                    period: period.period,
                                     price: Math.round(period.amount),
                                     sale: period.percent!=='0%',
                                     oldPrice: Math.round(period.full_cost),
@@ -280,7 +282,7 @@ export default {
                 options: item.attributes.options,
                 price: item.attributes.periods[0].attributes.amount,
                 periodPrice: item.attributes.periods.map(period => {
-                    return {period: period.attributes.period, 
+                    return {period: period.attributes.period,
                             price: Math.round(period.attributes.amount),
                             sale: period.percent!=='0%',
                             oldPrice: Math.round(period.full_cost),
@@ -339,7 +341,7 @@ export default {
               doc.text('Количество серверов: ' + this.servers[index].servers, 10, offset)
               offset+=5
               doc.text('Тариф: ' + element.item.title, 10, offset)
-              offset+=5            
+              offset+=5
               element.item.options.forEach(option => {
                 doc.text(option.attributes.option, 15, offset)
                 offset+=5
@@ -347,13 +349,13 @@ export default {
               doc.text(element.item.price, 10, offset)
               offset+=5
               }
-              
+
             })
-            doc.line(10, offset, 200, offset);            
+            doc.line(10, offset, 200, offset);
             offset+=10
             doc.text('Итого: ' + this.totalMonth + ' ₽ / месяц', 10, offset)
             offset+=5
-            doc.text('Оплата: ' + this.totalAll + ' ₽', 10, offset)       
+            doc.text('Оплата: ' + this.totalAll + ' ₽', 10, offset)
           doc.save("rusonyx.pdf")
         }
       },

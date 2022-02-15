@@ -31,7 +31,9 @@
                 </div>
               </div>
 
-              <div v-if="item.layout==='checkbox'" class="calculate__wrap-chechbox">
+              <div v-if="item.layout==='checkbox'">
+                <div v-if="item.attributes.title" class="calculate__checkbox-title">{{ item.attributes.title }}</div>
+                <div class="calculate__wrap-chechbox">
                 <label v-for="(checkbox, i) in item.attributes.checkboxes" :key="checkbox.key"
                        class="calculate__checkbox">{{ checkbox.attributes.title }}
                   <input v-model="config.flags[i].isTrue" class="calculate__checkbox-input" type="checkbox"/>
@@ -50,6 +52,7 @@
                     </div>
                   </div>
                 </label>
+                </div>
               </div>
 
               <div v-if="item.layout==='field'" class="calculate__input-text calculate__last-configuration">
@@ -74,7 +77,7 @@
                     <span class="calculate__checkmark"></span>
                   </label>
                   <div class="calculate__input--mod">
-                    <input class="calculate__input-write" :value="configValues[c].copyAmount" type="number" :disabled="!configValues[c].copy"
+                    <input v-model="configValues[c].copyAmount" class="calculate__input-write" type="number" :disabled="!configValues[c].copy"
                             min="0"/>
                   </div>
                   <div class="calculate__input--mod">
@@ -120,7 +123,9 @@
                :items="clearFields"
                :button="data.button" :link="data.link"
                :sales="sales"
-               @createPDF="createPdf"/>
+               :modal="data.modal"
+               @createPDF="createPdf"
+               @openModal="showPopup"/>
       </div>
     </div>
     <div class="calculate__wrapper-btn-add">
@@ -134,8 +139,14 @@
       <Total :total="total" :bonus="bonus" :mobile="true"
              :items="clearFields"
              :button="data.button" :link="data.link"
-             @createPDF="createPdf"/>
+             :sales="sales"
+             :modal="data.modal"
+             @createPDF="createPdf"
+             @openModal="showPopup"/>
     </div>
+    <Modal v-if="data.modal" :title="'Отправить заявку'"
+           :modal="data.modal"
+           :show-popup="is_show" @closePopup="closePopup()"/>
   </section>
 </template>
 
@@ -147,7 +158,8 @@ export default {
   name: 'Calculate',
   components: {
     Slider,
-    'Total': () => import('~/components/sections/service/tariffs/Total'),
+    Total: () => import('~/components/sections/service/tariffs/Total'),
+    Modal: () => import('~/components/sections/general/Modal'),
   },
   props: {
     data: {
@@ -157,6 +169,7 @@ export default {
   },
   data() {
     return {
+      is_show: false,
       firstDisk: null,
       configValues: [{
         copy: false,
@@ -248,21 +261,21 @@ export default {
 
         flags = item.flags.reduce((accum, a) => {
           if (a.isTrue) {
-            return accum + a.value
+            return accum + Number(a.value)
           }
           return accum
         }, 0)
 
         settings = item.settings.reduce((accum, a) => {
-          return accum + (a.value * a.price)
+          return accum + (Number(a.value) * Number(a.price))
         }, 0)
 
         disks = item.disks.reduce((accum, a) => {
-          return accum + (a.amount * a.price)
+          return accum + (Number(a.amount) * Number(a.price))
         }, 0)
 
         if(item.copy) {
-          copy = copy + item.copyPrice + item.copyAmount * item.copyGbPrice
+          copy = Number(item.copyPrice) + Number(item.copyAmount) * Number(item.copyGbPrice)
         }
 
         total += Number(selects) + Number(flags) + Number(settings) + Number(disks) + Number(fields) + Number(copy)
@@ -275,12 +288,23 @@ export default {
   watch: {
     key() {
       this.init()
+    },
+    data() {
+      this.init()
     }
   },
   created() {
     this.init()
   },
   methods: {
+    showPopup() {
+      this.is_show = true
+      document.body.style.overflow = 'hidden'
+    },
+    closePopup() {
+      this.is_show = false
+      document.body.style.overflow = 'auto'
+    },
     copyOn(index) {
       this.configValues[index].copyAmount = this.configValues[index].disks.reduce((acc, b) => {
           return acc + Number(b.amount)
@@ -371,7 +395,7 @@ export default {
 
       this.configValues[index].disks.push({
         title: this.firstDisk.title,
-        amount: this.firstDisk.default,
+        amount: Number(this.firstDisk.default),
         price: this.firstDisk.types[0].attributes.price
       })
     },
@@ -442,6 +466,19 @@ export default {
   letter-spacing: 0px;
   text-align: left;
   margin-left: 10px;
+}
+
+.calculate__checkbox-title {
+  font-family: "Graphik", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: 0px;
+  text-align: left;
+  margin-top: 24px;
+  margin-bottom: -24px;
+
 }
 
 .calculate {

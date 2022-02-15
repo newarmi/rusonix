@@ -26,7 +26,7 @@ export default {
       type: Object,
       required: true
     }
-  }, 
+  },
 }
 </script>
 
@@ -73,9 +73,9 @@ export default {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   margin-bottom: 24px;
 }

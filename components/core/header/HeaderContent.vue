@@ -1,25 +1,27 @@
 <template>
-<div>
-  <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
-    <div class="container">
-      <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
-      <Search v-if="header.search"/>
-      <ul v-if="header.tags" class="start__list">
-            <li v-for="tag in tags" :key="tag.key" class="start__item">
-              <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{tag.attributes.name}}</div>
-            </li>
-          </ul>
-      <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`" v-html="header.description"></div>
-      <div v-if="isButtonPage">
-        <button v-for="button in headerButtons" :key="button.key" 
-                class="start__cscard-btn" @click="buttonAction(button)">{{ button.attributes.title }}</button>
+  <div>
+    <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
+      <div class="container">
+        <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
+        <Search v-if="header.search"/>
+        <ul v-if="header.tags" class="start__list">
+          <li v-for="tag in tags" :key="tag.key" class="start__item">
+            <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{ tag.attributes.name }}</div>
+          </li>
+        </ul>
+        <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`"
+             v-html="header.description"></div>
+        <div v-if="isButtonPage">
+          <button v-for="button in headerButtons" :key="button.key"
+                  class="start__cscard-btn" @click="buttonAction(button)">{{ button.attributes.title }}
+          </button>
+        </div>
       </div>
-    </div>    
+    </div>
+    <div v-if="isDecor" class="header__decor"
+         :class="{ 'header__decor__color' : isKnowledgeCategory}"
+         :style="decorColorClass"></div>
   </div>
-  <div v-if="isDecor" class="header__decor" 
-       :class="{ 'header__decor__color' : isKnowledgeCategory}"
-       :style="'background-color:' + header.color"></div>
-</div>
 </template>
 
 <script>
@@ -29,6 +31,9 @@ export default {
     Search: () => import('@/components/core/header/Search')
   },
   computed: {
+    decorColorClass() {
+      return this.isKnowledgeCategory ? {} : { 'background-color': this.header.color }
+    },
     isKnowledgeCategory () {
         return this.$route.name==='knowledge-category'||this.$route.name==='knowledge-search'
     },
@@ -40,9 +45,6 @@ export default {
     },
     isDocument() {
         return this.$route.name==='company-document'
-    },
-    isJournal() {
-        return this.$route.name==='journal'
     },
     isButtonPage() {
       return  !this.isArticle
@@ -102,10 +104,6 @@ export default {
   background-color: #ffffff;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-}
-
-.header__decor__color {
-  background-color: #FCF7F2;
 }
 
 .header-content__wrapper {
@@ -242,5 +240,7 @@ export default {
 .start__cscard-btn:hover {
   background: #065848;
 }
-
+.header__decor__color {
+  background-color: #FCF7F2;
+}
 </style>
