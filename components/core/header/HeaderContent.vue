@@ -150,6 +150,7 @@ export default {
 
 .start__list {
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 28px;
 }
 
@@ -179,6 +180,9 @@ export default {
   }
   .start__list {
     margin-bottom: 24px;
+  }
+  .start__link {
+    margin-top: 15px;
   }
 }
 @media (max-width: 375px) {

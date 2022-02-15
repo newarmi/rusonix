@@ -4,15 +4,17 @@
       <div class="calculate__total-title-wrap" :class="wrapClass">
         <div class="calculate__total-title" :class="totalClass">Итого</div>
       </div>
-      <div v-for="item, i in items" :key="item.title + i" class="calculate__wrapper-total-text">
+      <div v-for="(item, i) in items" :key="item.title + i" class="calculate__wrapper-total-text">
         <div v-if="item" class="calculate__total-wrap-text">
           <div class="calculate__total-card-text title_bold">{{item.title}}</div>
           <div v-for="option in item.options" :key="option.key" class="calculate__total-card-text">{{option.option}}</div>
         </div>
-        <div v-if="item.item" class="calculate__total-wrap-price">
+        <div class="calculate__total-wrap-price">
           <div class="calculate__total-card-text"></div>
-          <div class="calculate__total-card-text"></div>
-          <div class="calculate__total-card-text"></div>
+          <div v-for="option in item.options" :key="option.key + 'price'" class="calculate__total-card-text">
+            <p></p>
+            <div v-if="option.price&&option.option">{{option.price}} ₽</div>
+          </div>
         </div>
       </div>
 
@@ -272,10 +274,11 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   color: #7c7c7c;
   margin-bottom: 16px;
+  min-height: 20px;
 }
 
 .calculate__total-wrap {

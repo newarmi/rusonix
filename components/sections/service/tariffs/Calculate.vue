@@ -128,7 +128,7 @@
                @openModal="showPopup"/>
       </div>
     </div>
-    <div class="calculate__wrapper-btn-add">
+    <div v-if="data.addConfig" class="calculate__wrapper-btn-add">
       <button class="calculate__btn-add" @click="addConfiguration()">+ добавить конфигурацию</button>
       <button v-if="configValues.length>1" class="calculate__btn-add" @click="removeConfiguration()">- убрать
         конфигурацию
@@ -192,7 +192,8 @@ export default {
 
         const selects = config.selects.map(select => {
           return {
-            option: select.listItem
+            option: select.listItem,
+            price: select.price
           }
         })
 
@@ -205,7 +206,8 @@ export default {
         const flags = config.flags.map(flag => {
           if (flag.isTrue) {
             return {
-              option: flag.name
+              option: flag.name,
+              price: flag.value
             }
           } else {
             return {}
@@ -213,14 +215,20 @@ export default {
         }).filter(item => Object.keys(item).length)
 
         const settings = config.settings.map(setting => {
+          let price = setting.value * setting.price
+          price = price.toFixed(2)
           return {
-            option: setting.name + ': ' + setting.value
+            option: setting.name + ': ' + setting.value,
+            price
           }
         })
 
         const disks = config.disks.map(disk => {
+          let price = disk.price * disk.amount
+          price = price.toFixed(2)
           return {
-            option: ' ' + disk.title + ': ' + disk.amount
+            option: ' ' + disk.title + ': ' + disk.amount,
+            price
           }
         })
 
@@ -347,7 +355,7 @@ export default {
         if (field.layout === 'listOption') {
           field.attributes.index = k
           this.configValues[0].selects.push({
-            price: Number(field.attributes.list[0].attributes.price),
+            price: field.attributes.list[0].attributes.price,
             listItem: field.attributes.list[0].attributes.listItem
           })
           k++
