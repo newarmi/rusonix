@@ -14,6 +14,7 @@
                 <p class="magazine__link" @click="goToRubric(article.rubricSlug)">{{ article.rubricName }}</p>
                 <p class="magazine__text">{{ article.date }}</p>
               </div>
+              <p class="magazine__descr">{{ article.description }}</p>
               <nuxt-link :to="'journal/' + article.slug" class="magazine__text-title magazine__link-to-post">{{ article.title }}</nuxt-link>
             </div>
           </div>
@@ -143,7 +144,7 @@ export default {
   flex-direction: column;
   margin-top: 24px;
   margin-bottom: 21px;
-  max-width: 431px;
+  /*max-width: 431px;*/
 }
 .magazine__wrap-text {
   display: flex;
@@ -162,6 +163,19 @@ export default {
   text-transform: uppercase;
   margin-right: 52px;
   cursor: pointer;
+}
+
+.magazine__descr {
+  font-family: 'Graphik', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  text-align: left;
+  color: #787878;
+  position: relative;
+  min-height: 60px;
 }
 
 .magazine__text {
