@@ -70,19 +70,19 @@ export default {
             this.isMenuOpen = !this.isMenuOpen
           } else {
             this.isMenuOpen = !this.isMenuOpen
-            this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})  
+            this.$router.push({path: '/' + parent.attributes.page, hash: button.attributes.tab})
           }
             break;
           }
         case('rubric'): {
           this.setRubric(button.attributes.page)
-          this.$router.push({path: '/journal'})  
+          this.$router.push({path: '/blog'})
           break
         }
         case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
-        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
+        case('document'): this.$router.push({path: '/about/' + button.attributes.page}); break;
         case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
-        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
+        case('journal'): this.$router.push({path: '/blog/' + button.attributes.page}); break;
         case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
         case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
         case('link'):  window.open(button.attributes.link, '_blank'); break;

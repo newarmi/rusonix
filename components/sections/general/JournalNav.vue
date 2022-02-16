@@ -21,7 +21,7 @@ export default {
   computed: {
     ...mapGetters(['rubrics', 'activeRubric']),
     navRubrics() {
-      const rubrics = this.rubrics.map(item => {
+      return this.rubrics.map(item => {
         const active = item.slug === this.activeRubric
         return {
           isActive: active,
@@ -29,7 +29,6 @@ export default {
           slug: item.slug
         }
       })
-      return rubrics
     }
   },
   mounted() {
@@ -68,11 +67,7 @@ export default {
     ...mapActions(['setRubric']),
     filter(rubric) {
        this.navRubrics.forEach(element => {
-         if(element.rubric===rubric) {
-           element.isActive=true
-         } else {
-          element.isActive=false
-         }
+         element.isActive = element.rubric === rubric;
        })
        this.setRubric(rubric)
     }
@@ -89,12 +84,10 @@ export default {
   display: flex;
   justify-content: left;
   align-items: center;
-
   width: 100%;
   max-width: 1440px;
   padding: 0 84px;
   margin: 0 auto;
-
   overflow: hidden;
 }
 
@@ -113,6 +106,7 @@ export default {
   color: #202a89;
   border-bottom: 2px solid #202a89;
 }
+
 .navigation__magazine-link:hover {
   cursor: pointer;
   color: #202a89;

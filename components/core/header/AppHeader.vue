@@ -1,6 +1,6 @@
 <template>
   <header class="header" :style="bgImage">
-    <TopLine />   
+    <TopLine />
     <HeaderContent />
     <Slider v-if="$route.fullPath==='/'"/>
   </header>
@@ -30,10 +30,10 @@ export default {
   computed: {
     header() {
       switch(this.$route.name) {
-        case('service-slug'): case('license-slug'): case('hosting-slug'): case('support-slug'): case('support-slug-doc'): 
+        case('service-slug'): case('license-slug'): case('hosting-slug'):
+        case('support-slug'): case('support-slug-doc'): case('about-slug'):
           return this.$store.getters['universal/header']
-        case('company-document'): return this.$store.getters['requisites/header']
-        case('journal-article'): return this.$store.getters['journal/header']
+        case('blog-article'): return this.$store.getters['journal/header']
       }
       return this.$store.getters.header
     },

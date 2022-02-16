@@ -2,9 +2,9 @@
   <div>
     <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
       <div class="container">
-        <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard" v-html="header.title"></h1>
+        <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard animate__animated animate__fadeInUp" v-html="header.title"></h1>
         <Search v-if="header.search"/>
-        <ul v-if="header.tags" class="start__list">
+        <ul v-if="!isArticle&&isTags" class="start__list">
           <li v-for="tag in tags" :key="tag.key" class="start__item">
             <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{ tag.attributes.name }}</div>
           </li>
@@ -25,12 +25,24 @@
 </template>
 
 <script>
+import 'animate.css'
+
 export default {
   name: 'HeaderContent',
   components: {
     Search: () => import('@/components/core/header/Search')
   },
   computed: {
+    isTags() {
+      if(this.header.tags) {
+        if(this.header.tags.length===0) {
+          return false
+        } else {
+          return this.header.tags.length
+        }
+      }
+      return false
+    },
     decorColorClass() {
       return this.isKnowledgeCategory ? {} : { 'background-color': this.header.color }
     },
@@ -38,23 +50,23 @@ export default {
         return this.$route.name==='knowledge-category'||this.$route.name==='knowledge-search'
     },
     isArticle() {
-        return this.$route.name==='journal-article'
+        return this.$route.name==='blog-article'
     },
     isPost() {
       return this.$route.name==='knowledge-category-post'
     },
     isDocument() {
-        return this.$route.name==='company-document'
+        return this.$route.name==='about-document'
     },
     isButtonPage() {
       return  !this.isArticle
     },
     header() {
       switch(this.$route.name) {
-        case('service-slug'): case('license-slug'): case('hosting-slug'): case('support-slug'): case('support-slug-doc'):
+        case('service-slug'): case('license-slug'): case('hosting-slug'):
+        case('support-slug'): case('support-slug-doc'): case('about-slug'):
           return this.$store.getters['universal/header']
-        case('company-document'): return this.$store.getters['requisites/header']
-        case('journal-article'): return this.$store.getters['journal/header']
+        case('blog-article'): return this.$store.getters['journal/header']
       }
       return this.$store.getters.header
     },
@@ -76,9 +88,8 @@ export default {
       switch(button.layout) {
         case('tab'): this.scrollToBlock(button.attributes.tab); break;
         case('main'): this.$router.push({path: '/' + button.attributes.page, hash: button.attributes.tab}); break;
-        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
         case('service'): this.$router.push({path: '/service/' + button.attributes.page, hash: button.attributes.tab}); break;
-        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
+        case('journal'): this.$router.push({path: '/blog/' + button.attributes.page}); break;
         case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
         case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
         case('link'):  window.open(button.attributes.link, '_blank'); break;

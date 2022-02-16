@@ -9,7 +9,7 @@
           <ul class="decision__list">
             <label class="decision__item" v-html="card.attributes.services"></label>
           </ul>
-          <picture class="picture">         
+          <picture class="picture">
             <img
               :src="card.imageLink"
               :srcset="card.imageLink"
@@ -39,7 +39,7 @@ export default {
   },
   created() {
     this.blocks.cards.forEach(element => {
-          element.imageLink = this.$config.imgURL + '' + element.attributes.image
+      element.imageLink = this.$config.imgURL + '' + element.attributes.image
     });
   }
 }
@@ -50,20 +50,9 @@ export default {
   color: black;
 }
 
-
 .decision {
   margin-top: 46px;
   margin-bottom: 72px;
-}
-
-.title {
-  font-family: "Graphik", sans-serif;
-  font-size: 38px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 41px;
-  letter-spacing: 0px;
-  text-align: left;
 }
 
 .decision__title {
@@ -81,17 +70,17 @@ export default {
   height: 520px;
   border: 1px solid #eaeaea;
   border-radius: 6px;
-  box-shadow: 0px 20px 30px -20px #fcf7f2;
-
+  box-shadow: 0 20px 30px -20px #fcf7f2;
   position: relative;
 }
+
 .decision__card-title {
   font-family: "Graphik", sans-serif;
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   max-width: 190px;
   margin-top: 48px;
@@ -124,17 +113,6 @@ export default {
   padding-right: 20px;
   white-space: pre-wrap;
   color: #5B5B5B;
-}
-
-.decision__link {
-  font-family: "Graphik", sans-serif;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 15px;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #5b5b5b;
 }
 
 .decision__img {

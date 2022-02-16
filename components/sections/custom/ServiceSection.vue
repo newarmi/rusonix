@@ -8,7 +8,7 @@
       </div>
       <div class="license__sertificates">
         <div v-for="item in services.services" :key="item.key" class="license__sertificate-wrap">
-         
+
           <picture class="picture">
             <img
               :src="$config.imgURL + item.attributes.image"
@@ -18,7 +18,7 @@
               @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, item.attributes.link)"
             />
           </picture>
-         
+
           <div class="nl__black">
             <div class="license__sertificate-title"
             @click="setSslFilter(item.attributes.filterType, item.attributes.filterValue, item.attributes.tab, item.attributes.link)">{{ item.attributes.title }} </div>
@@ -39,7 +39,7 @@ export default {
       type: Object,
       required: true
     }
-  }, 
+  },
   computed: {
 
   },
@@ -64,7 +64,7 @@ export default {
 .license {
   background-color: #fcf7f2;
   padding-top: 72px;
-  padding-bottom: 24px;
+  padding-bottom: 48px;
 }
 .license__container {
   width: 100%;

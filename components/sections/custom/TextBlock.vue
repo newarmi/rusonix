@@ -22,7 +22,7 @@
                           <img src="@/assets/img/contact-icon.png" alt="contact icon"></span>
                           <nuxt-link :to="'/knowledge/post/' + post.attributes.slug" class="contact__item-link">{{post.attributes.title}}</nuxt-link>
                         </li>
-                      </div> 
+                      </div>
                     </ul>
                     <ul class="contact__list-content">
                       <div v-for="post, j in block.attributes.post" :key="post.key">
@@ -37,7 +37,7 @@
             </div>
         </div>
     </section>
-    
+
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
     blocks() {
       return this.items.block
     },
-  }, 
+  },
 }
 </script>
 
@@ -81,17 +81,6 @@ export default {
   .container {
     padding: 0 24px;
   }
-}
-
-.title {
-  font-family: "Graphik", sans-serif;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin-top: 28px;
 }
 
 .support {
@@ -136,7 +125,7 @@ export default {
 }
 
 .contact__title {
-  margin-bottom: 48px;
+  margin: 48px 0;
 }
 
 @media (max-width: 768px) {

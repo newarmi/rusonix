@@ -32,7 +32,7 @@ export default {
     ...mapActions(['setRubric']),
     goToRubric(rubric){
       this.setRubric(rubric)
-      this.$router.push({path: '/journal'})
+      this.$router.push({path: '/blog'})
     },
     time(unixTimestamp) {
       const a = new Date(unixTimestamp)

@@ -7,15 +7,11 @@
     </main>
 </template>
 
-<script type="application/ld+json">
-</script>
-
 <script>
 
-
 export default {
-  name: 'JournalArticle',
-  components: { 
+  name: 'BlogArticle',
+  components: {
     Article: () => import('@/components/sections/journal/Article'),
     BottomArticles: () => import('@/components/sections/journal/BottomArticles')
   },

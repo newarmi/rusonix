@@ -1,21 +1,21 @@
 export const state = () => ({
     page: {}
   })
-  
+
   export const mutations = {
     setPage(state, page) {
       state.page = page
     },
   }
-  
+
   export const actions = {
-    async fetchPage({commit}, article) {   
-      const page = await this.$axios.$get('journal' + article)
+    async fetchPage({commit}, article) {
+      const page = await this.$axios.$get('blog' + article)
       commit('setPage', page)
     },
   }
-  
-  export const getters = {  
+
+  export const getters = {
       article: state => state.page.article,
       bottom: state => state.page.bottom,
 
@@ -24,4 +24,3 @@ export const state = () => ({
       footer: state => state.page.footer,
       topArticles: state => state.page.topArticles,
   }
-  

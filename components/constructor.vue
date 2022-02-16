@@ -20,18 +20,17 @@
       <Reviews v-if="block.layout==='reviews'" :tag="block.attributes.tag" />
       <Career v-if="block.layout==='career'" :tag="block.attributes.tag" />
       <Contacts v-if="block.layout==='contacts'" :tag="block.attributes.tag" />
-      <Requisites v-if="block.layout==='requisites'" :tag="block.attributes.tag" />
-      <Partner v-if="block.layout==='partner'" :title="block.attributes.title" 
+      <Partner v-if="block.layout==='partner'" :title="block.attributes.title"
                                                :description="block.attributes.description"
                                                :tag="block.attributes.tag"  />
       <Form v-if="block.layout==='form'" :title="block.attributes.title" :tag="block.attributes.tag" />
-      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" 
-                                               :title="block.attributes.title" 
+      <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag"
+                                               :title="block.attributes.title"
                                                :description="block.attributes.description" />
-      <Journal v-if="block.layout==='journal'" 
+      <Journal v-if="block.layout==='journal'"
             :navigation="block.attributes.navigation"
-            :title="block.attributes.title" :lines="block.attributes.linesNumber" 
-            :tag="block.attributes.tag" /> 
+            :title="block.attributes.title" :lines="block.attributes.linesNumber"
+            :tag="block.attributes.tag" />
     </div>
   </div>
 </template>
@@ -39,7 +38,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-export default {  
+export default {
   name: 'Constructor',
   components: {
     Youtube: () => import('~/components/sections/custom/Youtube'),
@@ -57,7 +56,6 @@ export default {
     History: () => import('~/components/sections/general/history/History'),
     Career: () => import('~/components/sections/general/Career'),
     Contacts: () => import('~/components/sections/general/Contacts'),
-    Requisites: () => import('~/components/sections/general/Requisites'),
     ImagesBottom: () => import('~/components/sections/custom/ImagesBottom'),
     ImagesInside: () => import('~/components/sections/custom/ImagesInside'),
     ImagesLink: () => import('~/components/sections/custom/ImageLink'),
@@ -76,12 +74,12 @@ export default {
   },
   mounted() {
     this.scroll()
-  },    
+  },
   methods: {
     ...mapActions(['resetTag']),
     scroll() {
       if(this.tag) {
-      
+
       const block = document.querySelector('#' + this.tag)
         if(block)
           block.scrollIntoView({ behavior: 'smooth' })

@@ -210,7 +210,7 @@ export default {
           }
         case('rubric'): {
           this.setRubric(button.attributes.page)
-          this.$router.push({path: '/journal'})
+          this.$router.push({path: '/blog'})
           break
         }
         case('main'): {
@@ -227,7 +227,6 @@ export default {
 
           this.$router.push({path: '/' + button.attributes.page}); break;
         }
-        case('document'): this.$router.push({path: '/company/' + button.attributes.page}); break;
         case('service'): {
           this.setTag(button.attributes.tab)
           this.$router.push({path: '/' + button.attributes.page});
@@ -236,7 +235,7 @@ export default {
         case('category'): this.$router.push({path: '/knowledge/' + button.attributes.page}); break;
         case('post'): this.$router.push({path: '/knowledge/post/' + button.attributes.page}); break;
         case('link'):  window.open(button.attributes.link, '_blank'); break;
-        case('journal'): this.$router.push({path: '/journal/' + button.attributes.page}); break;
+        case('journal'): this.$router.push({path: '/blog/' + button.attributes.page}); break;
 
       }
     },

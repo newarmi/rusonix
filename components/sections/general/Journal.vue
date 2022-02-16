@@ -5,7 +5,7 @@
       <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>
         <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
           <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">
-            <nuxt-link :to="'journal/' + article.slug" class="picture">
+            <nuxt-link :to="'/blog/' + article.slug" class="picture">
               <source media="(max-width: 1250px)" :src="article.imgMobileLink" :srcset="article.imgMobileLink"/>
               <img :src="article.imgDesktopLink" :srcset="article.imgDesktopLink" :class="smallBigImg(i, j)" alt="magazine"/>
             </nuxt-link>
@@ -15,7 +15,7 @@
                 <p class="magazine__text">{{ article.date }}</p>
               </div>
               <p class="magazine__descr">{{ article.description }}</p>
-              <nuxt-link :to="'journal/' + article.slug" class="magazine__text-title magazine__link-to-post">{{ article.title }}</nuxt-link>
+              <nuxt-link :to="'blog/' + article.slug" class="magazine__text-title magazine__link-to-post">{{ article.title }}</nuxt-link>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default {
   computed: {
     ...mapGetters(['journal', 'rubrics', 'activeRubric']),
     currentRubric() {
-      if(this.$route.name!=='journal')
+      if(this.$route.name!=='blog')
       return 'all'
       return this.activeRubric
     },
@@ -90,7 +90,7 @@ export default {
     ...mapActions(['setRubric', 'resetRubric']),
     goToRubric(rubric){
       this.setRubric(rubric)
-      this.$router.push({path: '/journal'})
+      this.$router.push({path: '/blog'})
     },
     timeConverter(unixTimestamp) {
       const a = new Date(unixTimestamp)
