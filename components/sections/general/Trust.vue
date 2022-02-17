@@ -2,7 +2,6 @@
   <section :id="tag" class="confidents">
     <div class="container">
       <h2 class="confidents__title title">{{ title }}</h2>
-
       <div class="confidents__partners">
         <div class="wrapper wrapper-left">
           <div class="boxes">
@@ -17,78 +16,32 @@
           </div>
         </div>
       </div>
-
-    <div class="confidents__partners">
-      <div class="wrapper">
-        <div class="boxes">
-          <picture v-for="(logo, i) in secondLine" :key="'sl:' + i + logo.image" class="box">
-            <img
-              :src="logo.imageLink"
-              :srcset="logo.imageLink"
-              class="confidents__img"
-              alt="partner"
-            />
-          </picture>
+      <div class="confidents__partners">
+        <div class="wrapper">
+          <div class="boxes">
+            <picture v-for="(logo, i) in secondLine" :key="'sl:' + i + logo.image" class="box">
+              <img
+                :src="logo.imageLink"
+                :srcset="logo.imageLink"
+                class="confidents__img"
+                alt="partner"
+              />
+            </picture>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="confidents__partners">
-      <div class="wrapper wrapper-left">
-        <div class="boxes">
-          <picture v-for="(logo, i) in thirdLine" :key="'tl:' + i + logo.image" class="box">
-            <img
-              :src="logo.imageLink"
-              :srcset="logo.imageLink"
-              class="confidents__img-left"
-              alt="partner"
-            />
-          </picture>
-        </div>
-      </div>
-    </div>
-    </div>
-    <!-- Slider tablet   -->
-    <div class="swiper partner-swiper">
-      <div class="swiper-wrapper">
-        <div v-for="logo, i in firstLine" :key="'smfl' + i  + logo.image" class="swiper-slide slide__indent-1">
-          <picture class="picture">
-            <img
-              :src="logo.imageLink"
-              :srcset="logo.imageLink"
-              class="confidents__img"
-              alt="partner"
-            />
-          </picture>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper partner-swiper">
-      <div class="swiper-wrapper">
-        <div v-for="logo, i in secondLine" :key="'smsl' + i  + logo.image" class="swiper-slide slide__indent-1">
-          <picture class="picture">
-            <img
-              :src="logo.imageLink"
-              :srcset="logo.imageLink"
-              class="confidents__img"
-              alt="partner"
-            />
-          </picture>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper partner-swiper">
-      <div class="swiper-wrapper">
-        <div v-for="logo, i in thirdLine" :key="'smtl' + i  + logo.image" class="swiper-slide slide__indent-1">
-          <picture class="picture">
-            <img
-              :src="logo.imageLink"
-              :srcset="logo.imageLink"
-              class="confidents__img"
-              alt="partner"
-            />
-          </picture>
+      <div class="confidents__partners">
+        <div class="wrapper wrapper-left">
+          <div class="boxes">
+            <picture v-for="(logo, i) in thirdLine" :key="'tl:' + i + logo.image" class="box">
+              <img
+                :src="logo.imageLink"
+                :srcset="logo.imageLink"
+                class="confidents__img-left"
+                alt="partner"
+              />
+            </picture>
+          </div>
         </div>
       </div>
     </div>
@@ -199,26 +152,9 @@ export default {
   text-align:center;
 }
 
-.box-left-first {
-  width: 250px;
-  height: 70px;
-  position:absolute;
-  text-align:center;
-}
-
-.box-left-second {
-  width: 250px;
-  height: 70px;
-  position:absolute;
-  text-align:center;
-}
-
 .boxes {
   position:relative;
-
-  /*left:-50px;*/
 }
-
 
 .confidents {
   background-color: #3f342c;
@@ -236,41 +172,15 @@ export default {
   margin: 0 auto 40px;
 }
 
-
-.partner-swiper {
-  display: none;
-}
 @media (max-width: 1200px) {
   .confidents {
     padding-bottom: 8px;
     overflow: hidden;
   }
-  /*.confidents__partners {*/
-  /*  display: none;*/
-  /*}*/
-  /*.partner-swiper {*/
-  /*  display: block;*/
-  /*  margin-bottom: 40px;*/
-  /*}*/
-  .slide__indent-1 {
-    margin-right: 140px !important;
-  }
-  .slide__indent-5 {
-    margin-right: 170px !important;
-  }
-  .slide__indent-3 {
-    margin-right: 53px !important;
-  }
 }
 @media (max-width: 992px) {
   .confidents {
     padding-top: 48px;
-  }
-  .slide__indent-1 {
-    margin-right: 140px !important;
-  }
-  .slide__indent-5 {
-    margin-right: 170px !important;
   }
 }
 
