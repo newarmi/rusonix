@@ -1,10 +1,57 @@
 <template>
-<section :id="tag" class="confidents">
+  <section :id="tag" class="confidents">
     <div class="container">
       <h2 class="confidents__title title">{{ title }}</h2>
+
+      <div class="confidents__partners">
+        <div class="wrapper wrapper-left">
+          <div class="boxes">
+            <picture v-for="(logo, i) in firstLine" :key="'tl:' + i + logo.image" class="box">
+              <img
+                :src="logo.imageLink"
+                :srcset="logo.imageLink"
+                class="confidents__img-left"
+                alt="partner"
+              />
+            </picture>
+          </div>
+        </div>
+      </div>
+
+    <div class="confidents__partners">
+      <div class="wrapper">
+        <div class="boxes">
+          <picture v-for="(logo, i) in secondLine" :key="'sl:' + i + logo.image" class="box">
+            <img
+              :src="logo.imageLink"
+              :srcset="logo.imageLink"
+              class="confidents__img"
+              alt="partner"
+            />
+          </picture>
+        </div>
+      </div>
     </div>
-        <div class="confidents__partners">
-          <picture v-for="(logo, i) in firstLine" :key="'fl:' + i + logo.image" class="picture">
+    <div class="confidents__partners">
+      <div class="wrapper wrapper-left">
+        <div class="boxes">
+          <picture v-for="(logo, i) in thirdLine" :key="'tl:' + i + logo.image" class="box">
+            <img
+              :src="logo.imageLink"
+              :srcset="logo.imageLink"
+              class="confidents__img-left"
+              alt="partner"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- Slider tablet   -->
+    <div class="swiper partner-swiper">
+      <div class="swiper-wrapper">
+        <div v-for="logo, i in firstLine" :key="'smfl' + i  + logo.image" class="swiper-slide slide__indent-1">
+          <picture class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -13,8 +60,13 @@
             />
           </picture>
         </div>
-        <div class="confidents__partners">
-          <picture v-for="(logo, i) in secondLine" :key="'sl:' + i + logo.image" class="picture">
+      </div>
+    </div>
+
+    <div class="swiper partner-swiper">
+      <div class="swiper-wrapper">
+        <div v-for="logo, i in secondLine" :key="'smsl' + i  + logo.image" class="swiper-slide slide__indent-1">
+          <picture class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -23,8 +75,13 @@
             />
           </picture>
         </div>
-        <div class="confidents__partners">
-          <picture v-for="(logo, i) in thirdLine" :key="'tl:' + i + logo.image" class="picture">
+      </div>
+    </div>
+
+    <div class="swiper partner-swiper">
+      <div class="swiper-wrapper">
+        <div v-for="logo, i in thirdLine" :key="'smtl' + i  + logo.image" class="swiper-slide slide__indent-1">
+          <picture class="picture">
             <img
               :src="logo.imageLink"
               :srcset="logo.imageLink"
@@ -33,57 +90,13 @@
             />
           </picture>
         </div>
-
-        <!-- Slider tablet   -->
-        <div class="swiper partner-swiper">
-          <div class="swiper-wrapper">
-            <div v-for="logo, i in firstLine" :key="'smfl' + i  + logo.image" class="swiper-slide slide__indent-1">
-              <picture class="picture">
-                <img
-                  :src="logo.imageLink"
-                  :srcset="logo.imageLink"
-                  class="confidents__img"
-                  alt="partner"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper partner-swiper">
-           <div class="swiper-wrapper">
-            <div v-for="logo, i in secondLine" :key="'smsl' + i  + logo.image" class="swiper-slide slide__indent-1">
-              <picture class="picture">
-                <img
-                  :src="logo.imageLink"
-                  :srcset="logo.imageLink"
-                  class="confidents__img"
-                  alt="partner"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
-
-        <div class="swiper partner-swiper">
-          <div class="swiper-wrapper">
-            <div v-for="logo, i in thirdLine" :key="'smtl' + i  + logo.image" class="swiper-slide slide__indent-1">
-              <picture class="picture">
-                <img
-                  :src="logo.imageLink"
-                  :srcset="logo.imageLink"
-                  class="confidents__img"
-                  alt="partner"
-                />
-              </picture>
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
-import Swiper from 'swiper'
+import { gsap } from 'gsap'
 import { mapGetters } from 'vuex';
 
 export default {
@@ -100,83 +113,118 @@ export default {
       return this.trust.title
     },
     firstLine() {
+      const array = []
       const firstLine = this.trust.sections.find(Boolean).alt_title
       const arrayFirstLine = JSON.parse(firstLine)
       arrayFirstLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url
+        array.push(element)
       });
-      return arrayFirstLine
+      arrayFirstLine.forEach(element => {
+        array.push(element)
+      });
+      return array
     },
     secondLine() {
+      const array = []
       const secondLine = this.trust.sections.find(Boolean).image
       const arraySecondLine = JSON.parse(secondLine)
       arraySecondLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url
+        array.push(element)
       });
-      return arraySecondLine
+      arraySecondLine.forEach(element => {
+        array.push(element)
+      });
+
+      return array
     },
     thirdLine() {
+      const array = []
       const thirdLine = this.trust.sections.find(Boolean).content
       const arrayThirdLine = JSON.parse(thirdLine)
       arrayThirdLine.forEach(element => {
         element.imageLink = this.$config.siteURL + '' + element.url
+        array.push(element)
       });
-      return arrayThirdLine
+      arrayThirdLine.forEach(element => {
+        array.push(element)
+      });
+      return array
     }
   },
   mounted() {
-
-    this.$nextTick(() => {
-      this.slider = new Swiper(".partner-swiper", {
-        slidesPerView: 5,
-        spaceBetween: 96,
-        loop: true,
-        autoplay: {
-         delay: 2500,
-         disableOnInteraction: false,
-       },
-        breakpoints: {
-          360: {
-            slidesPerView: 2,
-            spaceBetween: 96,
-            loop: true,
-            autoplay: {
-              delay: 2500,
-              disableOnInteraction: false,
-            }
-          },
-          576: {
-            slidesPerView: 3.45,
-            spaceBetween: 96,
-            loop: true,
-            autoplay: {
-              delay: 2500,
-              disableOnInteraction: false,
-            }
-          },
-          992: {
-            slidesPerView: 5,
-            spaceBetween: 96,
-            loop: true,
-            autoplay: {
-              delay: 2500,
-              disableOnInteraction: false,
-            }
-          }
-        },
-      })
-    })
+    gsap.set(".box", {
+      x: (i) => i * 250
+    });
+    gsap.to(".box", {
+      duration: 40,
+      ease: "none",
+      x: "+=3000", // move each box 500px to right
+      modifiers: {
+        x: gsap.utils.unitize(x => parseFloat(x) % 3000) // force x value to be between 0 and 500 using modulus
+      },
+      repeat: -1
+    });
    }
  }
 </script>
 
 <style scoped>
+.wrapper-left {
+  transform: scale(-1,1);
+}
+
+.confidents__img-left {
+  transform: scale(-1,1);
+}
+
+.container {
+  width: auto;
+}
+
+.wrapper{
+  width: 3000px;
+  height: 70px;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  margin-left: -780px;
+}
+
+.box{
+  width: 250px;
+  height: 70px;
+  position:absolute;
+  text-align:center;
+}
+
+.box-left-first {
+  width: 250px;
+  height: 70px;
+  position:absolute;
+  text-align:center;
+}
+
+.box-left-second {
+  width: 250px;
+  height: 70px;
+  position:absolute;
+  text-align:center;
+}
+
+.boxes {
+  position:relative;
+
+  /*left:-50px;*/
+}
 
 
 .confidents {
   background-color: #3f342c;
   padding-top: 72px;
   padding-bottom: 32px;
+  overflow: hidden;
 }
 
 .confidents__title {
@@ -185,19 +233,10 @@ export default {
 }
 
 .confidents__partners {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 40px;
   margin: 0 auto 40px;
-  max-width: 1440px;
 }
 
-.confidents__img {
-  max-width: fit-content;
-  flex: 1 1 calc((100% / 6) - 40px);
-}
+
 .partner-swiper {
   display: none;
 }
@@ -206,13 +245,13 @@ export default {
     padding-bottom: 8px;
     overflow: hidden;
   }
-  .confidents__partners {
-    display: none;
-  }
-  .partner-swiper {
-    display: block;
-    margin-bottom: 40px;
-  }
+  /*.confidents__partners {*/
+  /*  display: none;*/
+  /*}*/
+  /*.partner-swiper {*/
+  /*  display: block;*/
+  /*  margin-bottom: 40px;*/
+  /*}*/
   .slide__indent-1 {
     margin-right: 140px !important;
   }

@@ -4,7 +4,7 @@
     <div class="container">
       <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>
         <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
-          <div v-for="(article, j) in item" :key="article.title" :class="leftRight(i, j)">
+          <div v-for="(article, j) in item" :key="article.title" class="animate__animated animate__fadeInUp animate__fadeIn" :class="leftRight(i, j)">
             <nuxt-link :to="'/blog/' + article.slug" class="picture">
               <source media="(max-width: 1250px)" :src="article.imgMobileLink" :srcset="article.imgMobileLink"/>
               <img :src="article.imgDesktopLink" :srcset="article.imgDesktopLink" :class="smallBigImg(i, j)" alt="magazine"/>

@@ -8,7 +8,7 @@
             {{ blocks.article[0].attributes.title }}
           </div>
           <div class="advantage__text text" v-html="blocks.article[0].attributes.text"></div>
-          <a href="" class="advantage__link">{{ blocks.article[0].attributes.linkName }}</a>
+          <a :href="blocks.article[0].attributes.link" class="advantage__link">{{ blocks.article[0].attributes.linkName }}</a>
         </div>
         <picture class="picture">
           <img
@@ -34,7 +34,7 @@
             {{ blocks.article[1].attributes.title }}
           </div>
           <div class="advantage__text text" v-html="blocks.article[1].attributes.text"></div>
-          <a href="" class="advantage__link">{{ blocks.article[1].attributes.link_name }}</a>
+          <a :href="blocks.article[1].attributes.link" class="advantage__link">{{ blocks.article[1].attributes.link_name }}</a>
         </div>
       </div>
       <div class="advantage__wrapper">
@@ -42,7 +42,7 @@
           <div class="advantage__title-text">{{ blocks.article[2].attributes.title }}</div>
           <div class="advantage__text text" v-html="blocks.article[2].attributes.text">
           </div>
-          <a href="" class="advantage__link">{{ blocks.article[2].attributes.linkName }}</a>
+          <a :href="blocks.article[2].attributes.link" class="advantage__link">{{ blocks.article[2].attributes.linkName }}</a>
         </div>
         <picture class="picture">
           <img

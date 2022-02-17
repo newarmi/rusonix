@@ -1,16 +1,17 @@
 <template>
   <section :id="items.tag" class="details">
-
       <div class="details__wrapper-img">
         <div v-for="item in items.links" :key="item.key" class="details__img-desk">
-          <nuxt-link :to="'/' + item.attributes.page" class="details__text text" >{{item.attributes.title}}</nuxt-link>
-        </div> 
+          <nuxt-link v-if="item.layout==='link'" :to="'/' + item.attributes.page"
+                     class="details__text text">{{item.attributes.title}}</nuxt-link>
+          <nuxt-link v-if="item.layout==='knowledge'" :to="'/knowledge/post/' + item.attributes.page"
+                     class="details__text text" >{{item.attributes.title}}</nuxt-link>
+        </div>
       </div>
   </section>
 </template>
 
 <script>
-
 
 export default {
   name: 'Pages',
@@ -20,18 +21,6 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-      
-    }
-  },
-  computed: {
-    
-  },
-  created() {
-   
-  }
-
 }
 </script>
 
@@ -40,10 +29,6 @@ export default {
   background-color: white;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.details__title {
-  margin-bottom: 24px;
 }
 
 .details__text {
@@ -59,19 +44,8 @@ export default {
   flex-direction: column;
 }
 
-.details__img {
-  /* border: 4px solid #272727;
-  border-radius: 20px; */
-}
-
 .details__img-desk {
   margin-right: 73px;
-}
-
-.details__img-mob {
-  display: flex;
-  flex-direction: column;
-  align-self: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -88,14 +62,15 @@ export default {
   .details__wrapper-img {
     justify-content: center;
   }
+
   .details__wrapper-img {
     flex-direction: column;
-    }
-    .details {
+  }
+
+  .details {
     padding-top: 10px;
     padding-bottom: 10px;
-}
-    
-}
+  }
 
+}
 </style>
