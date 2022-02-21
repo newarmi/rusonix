@@ -15,7 +15,7 @@
               </div>
 
               <h1 class="payers__title">{{content.title}}</h1>
-              <div class="payers__wrap-content" v-html="content.content"></div>          
+              <div class="payers__wrap-content" v-html="content.content"></div>
               <p v-if="content.author!=='NULL'&&content.author" class="payers__publication">Опубликовано: {{content.author}}</p>
           </div>
       </div>
@@ -26,7 +26,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  async asyncData({ store, params }) {    
+  async asyncData({ store, params }) {
     await store.dispatch('fetchPage', 'knowledge')
     await store.dispatch('knowledge/getContent', params.post)
   },
@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  overflow: visible;
+}
+
 .payers {
   background-color: #FCF7F2;
 }
