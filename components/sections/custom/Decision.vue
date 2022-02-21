@@ -3,7 +3,8 @@
     <div class="container">
       <h2 class="decision__title title">{{blocks.title}}</h2>
       <div class="decision__wrapper-cards">
-        <div v-for="card in blocks.cards" :key="card.key" class="decision__card" >
+        <div v-for="(card, index) in blocks.cards" :key="card.key" class="decision__card"
+          :class="'decision' + blocks.tag + index">
           <div class="decision__card-title"><nuxt-link class="black-link" :to="card.attributes.link">{{card.attributes.title}}</nuxt-link></div>
           <div class="decision__card-text" v-html="card.attributes.description"></div>
           <ul class="decision__list">
@@ -24,6 +25,11 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Decision',
   props: {
@@ -37,10 +43,29 @@ export default {
       return this.decisions
     }
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   created() {
     this.blocks.cards.forEach(element => {
       element.imageLink = this.$config.imgURL + '' + element.attributes.image
     });
+  },
+  methods: {
+
+    scrollAnimation() {
+      this.blocks.cards.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: ".decision",
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 3,
+          }
+        })
+          .from(".decision" + this.blocks.tag + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+    },
   }
 }
 </script>

@@ -19,6 +19,9 @@
               <div class="reviews__icon-text">
                 {{ client.alt_title }}
               </div>
+              <button class="swiper-button-prev"></button>
+              <button class="swiper-button-next"></button>
+              <div class="swiper-pagination swiper-pagination-black"></div>
             </div>
           </div>
         </div>
@@ -60,7 +63,15 @@ export default {
     this.$nextTick(() => {
       this.slider = new Swiper('.' + this.sliderClass, {
         loop: true,
-        spaceBetween: 33
+        spaceBetween: 33,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+        },
       })
     })
   },
@@ -72,6 +83,11 @@ export default {
 </script>
 
 <style scoped>
+.swiper-button-next,
+.swiper-button-prev {
+  color: black;
+  background: none;
+}
 
 .review__img {
   border-radius: 100px;
@@ -130,12 +146,40 @@ export default {
   color: #000;
 }
 
+@media (max-width: 1100px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 90%;
+  }
+}
+
+
 @media (max-width: 768px) {
   .reviews__text {
     margin-bottom: 48px;
   }
-  .reviews__wrapper {
-    align-items: flex-start;
+}
+
+@media (min-width: 500px) {
+  .swiper-pagination {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+
+
+  .swiper-pagination {
+    display: block;
+    margin-top: 15px;
+  }
+
+  .swiper-container {
+    overflow: visible;
   }
 }
 

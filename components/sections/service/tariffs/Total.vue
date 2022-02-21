@@ -11,7 +11,7 @@
         </div>
         <div class="calculate__total-wrap-price">
           <div class="calculate__total-card-text"></div>
-          <div v-for="option in item.options" :key="option.key + 'price'" class="calculate__total-card-text">
+          <div v-for="(option, index) in item.options" :key="index + 'price' + option.price" class="calculate__total-card-text">
             <p></p>
             <div v-if="option.price&&option.option">{{option.price}} ₽</div>
           </div>

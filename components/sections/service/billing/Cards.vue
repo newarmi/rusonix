@@ -1,10 +1,11 @@
 <template>
-  <section :id="tariff.tag" class="license">
+  <section :id="tariff.tag" class="license-billing">
     <div class="container">
-      <div class="license__title title">{{ tariff.tariffTitle }}</div>
+      <h2 class="license__title title" :class="tariff.tag + tariff.mode">{{ tariff.tariffTitle }}</h2>
 
       <div class="license__wrapper-cards">
-        <div v-for="card, ind in cards" :key="card.key" class="license__wrap-card">
+        <div v-for="(card, ind) in cards" :key="card.key"
+             class="license__wrap-card" :class="'billing' + tariff.tag + ind">
           <div class="license__wrap-card--title">
           <div class="license__card-title">{{ card.title ? card.title : card.name }}
 
@@ -88,6 +89,8 @@
 </template>
 
 <script>
+import {gsap} from "gsap";
+
 export default {
   name: 'BillingCards',
   props: {
@@ -110,7 +113,23 @@ export default {
   created() {
     this.init()
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
+    scrollAnimation() {
+      this.cards.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "." + this.tariff.tag + this.tariff.mode,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 2,
+          }
+        })
+          .from(".billing" + this.tariff.tag + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+    },
     init() {
       this.cards = this.$store.getters['universal/billingTariffs'].map(item=>item)
 
@@ -189,7 +208,7 @@ display: flex;
   margin-bottom: 24px;
 }
 
-.license {
+.license-billing {
   background-color: #fcf7f2;
   padding-top: 72px;
   padding-bottom: 72px;

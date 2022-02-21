@@ -4,7 +4,8 @@
           <h2 class="advantage__title title">{{images.title}}</h2>
           <div class="advantage__title-text" v-html="images.description"></div>
           <div class="advantage__wrapper-cards">
-            <div v-for="article in articles" :key="article.key" class="advantage__card">
+            <div v-for="(article, index) in articles" :key="article.key"
+                 class="advantage__card" :class="'image' + images.tag + index">
               <picture class="picture">
                 <img
                   :src="$config.imgURL + article.attributes.image"
@@ -20,6 +21,10 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
 name: 'ImagesBottom',
@@ -33,7 +38,26 @@ name: 'ImagesBottom',
     articles() {
       return this.images.images
     }
-  },   
+  },
+  mounted() {
+    this.scrollAnimation();
+  },
+  methods: {
+    scrollAnimation() {
+      this.articles.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "#" + this.images.tag,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+          }
+        })
+        .from('.image' + this.images.tag + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+
+    },
+  }
 }
 </script>
 

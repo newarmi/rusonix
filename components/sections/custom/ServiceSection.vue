@@ -7,8 +7,8 @@
         </div>
       </div>
       <div class="license__sertificates">
-        <div v-for="item in services.services" :key="item.key" class="license__sertificate-wrap">
-
+        <div v-for="(item, index) in services.services" :key="item.key" class="license__sertificate-wrap"
+             :class="'license' + index + services.tag">
           <picture class="picture">
             <img
               :src="$config.imgURL + item.attributes.image"
@@ -31,6 +31,10 @@
 
 <script>
 import { mapActions } from 'vuex';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   name: 'ServiceSection',
@@ -43,9 +47,27 @@ export default {
   computed: {
 
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
     ...mapActions('universal', ['setFilter']),
     ...mapActions(['setTag']),
+    scrollAnimation() {
+      this.services.services.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "#" + this.services.tag,
+            start: "top bottom",
+            end: "center bottom",
+            scrub: 3,
+
+          }
+        })
+          .from(".license" + index + this.services.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * index})
+      })
+
+    },
     setSslFilter(filterType, filterValue, tag, route) {
       if(filterValue)
       this.setFilter({filterType, filterValue})

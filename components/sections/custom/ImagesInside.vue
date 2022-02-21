@@ -6,7 +6,8 @@
           <div class="program__title-text" v-html="images.description"></div>
         </div>
         <div class="program__wrapper-cards">
-          <div v-for="article in articles" :key="article.key" class="program__card">
+          <div v-for="(article, index) in articles" :key="article.key"
+               class="program__card" :class="'bottom' + index + images.tag">
             <picture class="picture">
               <img
                 :src="$config.imgURL + article.attributes.image"
@@ -22,6 +23,11 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'ImagesInside',
   props: {
@@ -34,7 +40,26 @@ export default {
     articles() {
       return this.images.images
     }
-  },   
+  },
+  mounted() {
+    this.scrollAnimation();
+  },
+  methods: {
+    scrollAnimation() {
+      this.articles.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "#" + this.images.tag,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 1,
+          }
+        })
+          .from('.bottom' + index + this.images.tag, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+
+    },
+  }
 }
 
 </script>

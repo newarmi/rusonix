@@ -21,6 +21,7 @@ export default {
 
   plugins: [
     // '@/plugins/axios'
+
   ],
 
   loading: { color: '#FF9B06' },
@@ -42,9 +43,9 @@ export default {
     [
       'primevue/nuxt', {
         theme: 'md-light-indigo',
-        ripple: true,    
-          components: ['Slider'],     //an array of components to be registered
-          directives: []      //an array of directives to be registered
+        ripple: true,
+          components: ['Slider'],     // an array of components to be registered
+          directives: []      // an array of directives to be registered
       }
   ]
   ],
@@ -67,7 +68,7 @@ export default {
       img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[contenthash:7].[ext]',
       font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[contenthash:7].[ext]'
     },
-    transpile: ['primevue']
+    transpile: ['primevue', 'gsap']
   },
 
   server: {

@@ -1,19 +1,18 @@
 <template>
   <div>
-    <div class="header-content__wrapper" :class="`header-content__${$route.name}`">
+    <div class="header-content__wrapper">
       <div class="container">
-        <h1 v-if="header.title&&!isArticle" class="start__title start__title-cscard animate__animated animate__fadeInUp" v-html="header.title"></h1>
+        <h1 v-if="header.title&&!isArticle" class="start__title animate__animated animate__fadeInUp" v-html="header.title"></h1>
         <Search v-if="header.search"/>
         <ul v-if="!isArticle&&isTags" class="start__list">
           <li v-for="tag in tags" :key="tag.key" class="start__item">
             <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{ tag.attributes.name }}</div>
           </li>
         </ul>
-        <div v-if="header.description" class="start__title-descr" :class="`header-content__${$route.name}`"
-             v-html="header.description"></div>
-        <div v-if="isButtonPage">
+        <div v-if="header.description" class="start__title-descr" v-html="header.description"></div>
+        <div v-if="!isArticle">
           <button v-for="button in headerButtons" :key="button.key"
-                  class="start__cscard-btn" @click="buttonAction(button)">{{ button.attributes.title }}
+                  class="start__btn" @click="buttonAction(button)">{{ button.attributes.title }}
           </button>
         </div>
       </div>
@@ -58,9 +57,6 @@ export default {
     isDocument() {
         return this.$route.name==='about-document'
     },
-    isButtonPage() {
-      return  !this.isArticle
-    },
     header() {
       switch(this.$route.name) {
         case('service-slug'): case('license-slug'): case('hosting-slug'):
@@ -82,6 +78,9 @@ export default {
     isDecor() {
       return !this.isArticle&&!this.isDocument&&!this.isPost;
     }
+  },
+  mounted() {
+
   },
   methods: {
     buttonAction(button) {
@@ -106,6 +105,7 @@ export default {
 </script>
 
 <style scoped>
+
 .header__decor {
   position: absolute;
   bottom: 0;
@@ -135,28 +135,24 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 64px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   color: #ffffff;
+  padding-top: 0;
+  margin-bottom: 12px;
 }
 
 .start__title-descr {
   font-family: "Graphik", sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: 0px;
-    text-align: left;
-    color: #fff;
-    opacity: 0.6;
-    /* max-width: 460px; */
-    margin-bottom: 72px;
-}
-
-.start__title-cscard {
-    padding-top: 0;
-    margin-bottom: 12px;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #fff;
+  opacity: 0.6;
+  margin-bottom: 72px;
 }
 
 .start__list {
@@ -181,37 +177,13 @@ export default {
   cursor: pointer;
 }
 
-.start__title-descr.header-content__services {
-  max-width: 460px
-}
-
 @media (max-width: 768px) {
-  .start__title-descr.header-content__services {
-    max-width: 340px;
-  }
   .start__list {
     margin-bottom: 24px;
   }
   .start__link {
     margin-top: 15px;
   }
-}
-@media (max-width: 375px) {
-  .start__title-descr.header-content__services {
-    max-width: none;
-  }
-}
-
-.start__title >>> .start__title-decor {
-  font-family: "Graphik", sans-serif;
-  font-size: 50px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 64px;
-  letter-spacing: 0;
-  text-align: left;
-  color: #ffffff;
-  overflow: hidden;
 }
 
 @media (max-width: 992px) {
@@ -224,25 +196,16 @@ export default {
     letter-spacing: 0px;
     text-align: left;
   }
-  .start__title >>> .start__title-decor {
-    font-family: "Graphik", sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: 40px;
-    letter-spacing: 0px;
-    text-align: left;
-  }
 }
 
-.start__cscard-btn {
+.start__btn {
   min-width: 195px;
   font-family: "Graphik", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: center;
   color: #fff;
   padding: 15px 33px;
@@ -252,9 +215,10 @@ export default {
   margin: 10px 10px;
 }
 
-.start__cscard-btn:hover {
+.start__btn:hover {
   background: #065848;
 }
+
 .header__decor__color {
   background-color: #FCF7F2;
 }

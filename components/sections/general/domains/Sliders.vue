@@ -3,7 +3,7 @@
     <div class="swiper-container" :class="sliderTopClass">
       <div class="swiper-wrapper">
         <div v-for="item in topItems" :key="item.title" class="swiper-slide">
-          <div class="domain__card" :class="{'card__busy': item.status!=='free'}" 
+          <div class="domain__card" :class="{'card__busy': item.status!=='free'}"
           @click="goToBilling(item.href)">
             <div class="domain__card-content">
               <span class="domain__card-title">{{ item.title }}</span>
@@ -16,7 +16,7 @@
     <div class="swiper-container" :class="sliderBottomClass">
       <div class="swiper-wrapper">
         <div v-for="item in bottomItems" :key="item.title" class="swiper-slide">
-          <div class="domain__card" :class="{'card__busy': item.status!=='free'}" 
+          <div class="domain__card" :class="{'card__busy': item.status!=='free'}"
                @click="goToBilling(item.href)">
             <div class="domain__card-content">
               <span class="domain__card-title">{{ item.title }}</span>
@@ -35,6 +35,7 @@ import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 import uniqueId from 'lodash/uniqueId'
 import { mapGetters } from 'vuex';
+
 
 export default {
   name: 'Sliders',
@@ -74,6 +75,7 @@ export default {
     if (this.sliderTop) { this.sliderTop.destroy() }
     if (this.sliderBottom) { this.sliderBottom.destroy() }
     this.mountSlider()
+
   },
   beforeDestroy () {
     if (this.sliderTop) { this.sliderTop.destroy() }
@@ -139,7 +141,7 @@ export default {
   letter-spacing: 0px;
   text-align: center;
   margin-top: 24px;
-} 
+}
 
 .swiper-wrapper {
   padding: 3px 0 0 12px;

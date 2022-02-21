@@ -5,8 +5,7 @@
           <div class="bitrix__advantage-text text" v-html="items.blockDescription"></div>
           <div class="bitrix__advantage-img-info--mod">
             <picture class="picture">
-              <source
-                media="(max-width: 768px)"
+              <source media="(max-width: 768px)"
                 :src="benefits.image"
                 :srcset="benefits.image"
               />
@@ -42,7 +41,7 @@
                   :src="benefits.image"
                   :srcset="benefits.image"
                   alt="bitrix img"
-                  class="bitrix__img"
+                  class="bitrix__img image-animation"
                 />
               </picture>
             </div>
@@ -52,6 +51,9 @@
 </template>
 
 <script>
+import {gsap} from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
     props: {
@@ -84,7 +86,23 @@ export default {
         });
         return simpleArticles
       }
+    },
+  mounted() {
+    this.scrollAnimation();
+  },
+  methods: {
+    scrollAnimation() {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".bitrix__advantage",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+      .from(".image-animation", {x: innerWidth * 2, opacity: 0})
     }
+  }
 }
 </script>
 

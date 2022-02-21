@@ -2,7 +2,7 @@
   <section :id="blocks.tag" class="advantage">
     <div class="container">
       <h2 class="advantage__title title">{{ blocks.title }}</h2>
-      <div class="advantage__wrapper">
+      <div class="advantage__wrapper first">
         <div class="advantage__section-text">
           <div class="advantage__title-text">
             {{ blocks.article[0].attributes.title }}
@@ -10,7 +10,7 @@
           <div class="advantage__text text" v-html="blocks.article[0].attributes.text"></div>
           <a :href="blocks.article[0].attributes.link" class="advantage__link">{{ blocks.article[0].attributes.linkName }}</a>
         </div>
-        <picture class="picture">
+        <picture class="picture-1">
           <img
             :src="blocks.article[0].attributes.imageLink"
             :srcset="blocks.article[0].attributes.imageLink"
@@ -20,8 +20,8 @@
         </picture>
       </div>
 
-      <div class="advantage__wrapper advantage__wrapper--mod">
-        <picture class="picture">
+      <div class="advantage__wrapper advantage__wrapper--mod second">
+        <picture class="picture-2">
           <img
             :src="blocks.article[1].attributes.imageLink"
             :srcset="blocks.article[1].attributes.imageLink"
@@ -37,14 +37,14 @@
           <a :href="blocks.article[1].attributes.link" class="advantage__link">{{ blocks.article[1].attributes.link_name }}</a>
         </div>
       </div>
-      <div class="advantage__wrapper">
+      <div class="advantage__wrapper third">
         <div class="advantage__section-text">
           <div class="advantage__title-text">{{ blocks.article[2].attributes.title }}</div>
           <div class="advantage__text text" v-html="blocks.article[2].attributes.text">
           </div>
           <a :href="blocks.article[2].attributes.link" class="advantage__link">{{ blocks.article[2].attributes.linkName }}</a>
         </div>
-        <picture class="picture">
+        <picture class="picture-3">
           <img
             :src="blocks.article[2].attributes.imageLink"
             :srcset="blocks.article[2].attributes.imageLink"
@@ -58,6 +58,11 @@
 </template>
 
 <script>
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'LinkArticles',
   props: {
@@ -71,10 +76,46 @@ export default {
       return this.articles
     },
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   created() {
     this.blocks.article.forEach(element => {
         element.attributes.imageLink = this.$config.imgURL + '' + element.attributes.image
     })
+  },
+  methods: {
+    scrollAnimation() {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".first",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".picture-1", {x: innerWidth * 2, opacity: 0})
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".second",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".picture-2", {x: 0 - innerWidth * 2, opacity: 0})
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".third",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+      .from(".picture-3", {x: innerWidth * 2, opacity: 0})
+    }
   }
 }
 </script>

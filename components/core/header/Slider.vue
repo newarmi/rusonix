@@ -2,16 +2,20 @@
   <div>
     <div class="swiper__wrapper">
       <div class="container">
-        <div class="swiper-container container__start-sliders" :class="sliderClass" >
-          <div class="swiper-wrapper">
-            <div v-for="(article) in clearArticles" :key="article[0].content"
-              class="swiper-slide start__slide pointer" >
-              <p class="start__slide-text">{{ article[0].content }}</p>
+          <div class="swiper-container container__start-sliders" :class="sliderClass" >
+            <div class="swiper-wrapper">
+              <div v-for="(article) in clearArticles" :key="article[0].content"
+                class="swiper-slide start__slide pointer animate__animated animate__fadeInUp" >
+                <p class="start__slide-text">{{ article[0].content }}</p>
+              </div>
+
             </div>
+            <div class="swiper-pagination swiper-pagination-white animate__animated animate__fadeInUp"></div>
           </div>
-        </div>
       </div>
     </div>
+
+
     <div v-for="(article, i) in clearArticles" :key="article[0].content">
       <Popup :title="article[0].content" :show-popup="is_show[i].show" @closePopup="closePopup(i)">
         <div v-for="(item, j) in article" :key="item.type + j">
@@ -30,6 +34,7 @@
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 import uniqueId from 'lodash/uniqueId'
+import 'animate.css'
 
 export default {
   name: 'Slider',
@@ -57,12 +62,15 @@ export default {
     const sliderId = uniqueId()
     this.sliderClass = 'swiper-' + sliderId
     this.$nextTick(() => {
-      
+
       this.slider = new Swiper('.' + this.sliderClass, {
         slidesPerView: 'auto',
         spaceBetween: 33,
         loop: true,
-
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+        },
         breakpoints: {
           576: {
             centerSlides: true,
@@ -98,61 +106,22 @@ export default {
 </script>
 
 <style scoped>
-/* Popup */
-.popup-feature {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(135.914px);
+.swiper-container {
+  overflow: visible;
 }
-.popup-feature {
-  overflow-y: scroll;
-}
-.body-scroll {
-  overflow-y: hidden;
-}
-.popup-show {
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-}
-.popup-container {
-  width: 100%;
-  max-width: 1440px;
-  padding: 48px 258px;
-  margin: 0 auto;
-}
-.popup-feature-wrap {
-  background-color: #ffffff;
-  border-radius: 8px;
 
-  width: 100%;
-  max-width: 924px;
-  padding: 72px 58px;
-  margin: 0 auto;
-  position: relative;
-}
-.popup-feature-title {
-  font-family: "Graphik", sans-serif;
-  font-size: 30px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
+.swiper-pagination {
+  top: 140px;
 
-  margin-bottom: 48px;
 }
+
 .popup-feature-text {
   font-family: "Graphik", sans-serif;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   opacity: 0.6;
   max-width: 720px;
@@ -163,49 +132,12 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   opacity: 0.6;
   max-width: 770px;
 }
-.popup-feature3-text {
-  font-family: "Graphik", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  opacity: 0.6;
-  max-width: 785px;
-}
-.popup-feature1-wrap-text {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-.popup__close-feature {
-  position: absolute;
-  right: -60px;
-  top: 0;
-  cursor: pointer;
-  fill: white;
-}
-.popup-feature-title-text {
-  font-family: "Graphik", sans-serif;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 32px;
-  letter-spacing: 0px;
-  text-align: left;
-  margin-bottom: 24px;
-}
-.popup-feature__wrapper-content {
-  margin-bottom: 48px;
-}
-.popup-feature__wrapper-content:last-child {
-  margin-bottom: 0;
-}
+
 .popup__img {
   margin-top: 24px;
   margin-bottom: 24px;
@@ -216,9 +148,8 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 22px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: center;
-
   color: #ffffff;
   background-color: #0f7f69;
   border-radius: 6px;
@@ -229,34 +160,6 @@ export default {
 .popup__btn:hover {
   background-color: #065848;
 }
-.popup-feature-wrap-text {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-@media (max-width: 1200px) {
-  .popup-container {
-    padding: 48px 120px;
-  }
-}
-@media (max-width: 992px) {
-  .popup-container {
-    padding: 48px 10px;
-  }
-  .popup__close-feature {
-    top: 10px;
-    right: 10px;
-    fill: #000;
-  }
-}
-
-@media (max-width: 576px) {
-  .popup-feature-wrap {
-    padding: 32px 20px;
-  }
-  .popup-feature1 {
-    overflow-y: scroll;
-  }
-}
 
 .pointer {
   cursor: pointer;
@@ -264,7 +167,7 @@ export default {
 
 @media (max-width: 992px) {
   .swiper__wrapper {
-    padding-bottom: 90px;
+    padding-bottom: 10px;
   }
 }
 
@@ -273,9 +176,11 @@ export default {
 }
 
 .container__start-sliders {
-  max-width: 780px;
+  padding-bottom: 20px;
+  max-width: 770px;
   width: 100%;
   margin-left: 0;
+  overflow: hidden;
 }
 
 .start__slide {
@@ -303,7 +208,7 @@ export default {
   font-style: normal;
   font-weight: 400;
   line-height: 32px;
-  letter-spacing: 0px;
+  letter-spacing: 0;
   text-align: left;
   color: #ffffff;
   padding: 48px 36px 24px 24px;

@@ -34,7 +34,7 @@
             <div class="support__info-text" v-html="article.attributes.text">
             </div>
           </li>
-        
+
 
           <li class="support__info-item support__info-item--modification">
             <div class="support__info-title">
@@ -50,6 +50,10 @@
 </template>
 
 <script>
+import {gsap} from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Support',
   props: {
@@ -81,6 +85,22 @@ export default {
         return articles
       }
   },
+  mounted() {
+    this.scrollAnimation();
+  },
+  methods: {
+    scrollAnimation() {
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".support",
+          start: "top bottom",
+          end: "center bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".advantage__img", {x: innerWidth * 2, opacity: 0})
+    }
+  }
 }
 </script>
 

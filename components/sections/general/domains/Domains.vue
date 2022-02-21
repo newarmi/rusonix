@@ -7,9 +7,9 @@
       </div>
       <div class="domain__search">
         <div class="domain__search-wrap">
-          <input v-model="domainString" type="text" placeholder="Введите имя домена, которое хотите зарегистрировать" 
-                 class="domain__search-input" @keyup.enter="ckeckIfnotNull" />
-          <svg class="domain__icon" width="20" height="20" @click="ckeckIfnotNull">
+          <input v-model="domainString" type="text" placeholder="Введите имя домена, которое хотите зарегистрировать"
+                 class="domain__search-input" @keyup.enter="checkIfNotNull" />
+          <svg class="domain__icon" width="20" height="20" @click="checkIfNotNull">
             <use xlink:href="@/assets/svg/sprites.svg#search-domain"></use>
           </svg>
           <p class="info__message" :class="{'msg__show':load}">Подождите несколько секунд</p>
@@ -18,7 +18,9 @@
       </div>
       <div class="domain__cards-wrapp">
         <div class="domain__cards">
-          <div v-for="item in domainItems" :key="item.title" 
+          <div v-for="(item, index) in domainItems"
+               :id = "'domains' + index + tag"
+               :key="item.title"
                class="domain__card" :class="{'card__busy': item.status!=='free'}"
                @click="goToBilling(item.href)">
             <div class="domain__card-content">
@@ -40,6 +42,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 
 export default {
   name: 'Domains',
@@ -95,36 +102,53 @@ export default {
         }
       })
 
-      if(this.domainAnswer&&!this.domainAnswer.error) {     
-        
+      if(this.domainAnswer&&!this.domainAnswer.error) {
+
         const filterDomains = this.domainAnswer.pricelist.map(item => {
 
             const el = domains.find(obj => obj.billing_id === item.id);
             let href = ''
-            if(item.status==='free') 
+            if(item.status==='free')
               href = 'https://my.rusonyx.ru/billmgr#/domain/order/register?domainName=' + this.dom + '&page=pick'
             return {
                   status: item.status,
                   price: item.price.period[0].cost,
-                  href, 
+                  href,
                   title: this.dom + el.title,
             }
           })
         return filterDomains
       }
-      
+
       return domains
     },
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
     ...mapActions(['checkBillingDomain']),
-    ckeckIfnotNull() {
+    scrollAnimation() {
+
+      this.domainItems.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: ".domain__cards-wrapp",
+            start: "top bottom",
+            end: "center bottom",
+            scrub: 3,
+          }
+        })
+          .from('#domains' + index + this.tag, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+    },
+    checkIfNotNull() {
       if(this.domainString) {
         this.checkDomain()
       }
     },
-    checkDomain() { 
-      
+    checkDomain() {
+
       this.domainString=this.domainString.trim().replaceAll(/ +/g, '-')
       const point = this.domainString.indexOf('.')
       if(point!==-1)

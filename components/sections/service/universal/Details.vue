@@ -32,6 +32,11 @@
 </template>
 
 <script>
+import {gsap} from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Details',
   props: {
@@ -48,6 +53,33 @@ export default {
         return details
       }
   },
+  mounted() {
+    this.scrollAnimation();
+  },
+  methods: {
+    scrollAnimation() {
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".details",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".details__img-desk", {x: 0 - innerWidth * 2, opacity: 0})
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".details",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".details__img-mob", {x: innerWidth * 2, opacity: 0})
+    }
+  }
 
 }
 </script>

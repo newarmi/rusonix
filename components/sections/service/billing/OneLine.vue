@@ -2,9 +2,7 @@
   <div :id="lines.tag">
     <section class="license__storage" >
       <div class="container">
-        <div class="license__title title">
-          {{ title }}
-        </div>
+        <div class="license__title title">{{ title }}</div>
 
         <div class="license__wrapper" :class="wrapper">
           <div class="license__wrapper-top" :class="titleWrapper">
@@ -50,7 +48,7 @@
                 {{ periodToText(line.periods[0].period) }}
               </div>
               <select v-else class="license__select license__select--mod" @change="choosePeriod($event.target.value)">
-                <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                <option v-for="period, i in line.periods" :key="'period' + period.id"
                         :value="i">
                   {{ periodToText(period.period) }}
                 </option>
@@ -102,7 +100,7 @@
                   {{ periodToText(line.periods[0].period) }}
                 </div>
                 <select v-else class="license__select license__select--mod" @change="choosePeriod(ind, $event.target.value)">
-                  <option v-for="period, i in line.periods" :key="'period' + period.id" 
+                  <option v-for="period, i in line.periods" :key="'period' + period.id"
                           :value="i">
                     {{ periodToText(period.period) }}
                   </option>
@@ -117,7 +115,7 @@
           <button class="license__btn license__btn--tablet"
                   @click="goToBilling(line.billing_id, line.type)">
                   {{ line.button ? line.button : 'Заказать'}}
-          </button>        
+          </button>
         </div>
 
       </div>
@@ -182,11 +180,11 @@ export default {
   },
   created() {
     this.init()
-  }, 
+  },
   methods: {
     init() {
       this.line = this.$store.getters['universal/billingTariffs'].map(item=>item)
-      
+
       if(this.lines.mode) {
           this.line = this.line.filter(item => {
              return item.mode?.find(obj => obj.attributes.title === this.lines.mode)
@@ -202,7 +200,7 @@ export default {
       }
       if(periodNumber>1&&periodNumber<5) {
         return period + ' месяца'
-      } 
+      }
       if(periodNumber<12) {
         return period + ' месяцев'
       }
@@ -214,8 +212,8 @@ export default {
       this.currentPeriod = period
     },
     goToBilling(id, type) {
-     window.open(`https://my.rusonyx.ru/billmgr?startpage=` 
-                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=` 
+     window.open(`https://my.rusonyx.ru/billmgr?startpage=`
+                   + type + `&startform=` + type + `%2Eorder%2Eparam&pricelist=`
                    + id + `&period=` + this.line.periods[this.currentPeriod].period + `&project=3`, '_blank')
     },
   }

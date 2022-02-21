@@ -1,10 +1,11 @@
 <template>
-  <section id="journal" class="magazine">
+  <section :id="tag" class="magazine">
     <Navigation v-if="navigation" :rubrics="rubrics" />
     <div class="container">
       <h2 v-if="!navigation" class="magazine__title title">{{ title }}</h2>
-        <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper">
-          <div v-for="(article, j) in item" :key="article.title" class="animate__animated animate__fadeInUp animate__fadeIn" :class="leftRight(i, j)">
+        <div v-for="(item, i) in articlesArray" :key="'item' + i" class="magazine__wrapper"
+             :class="'wrapper' + i">
+          <div v-for="(article, j) in item" :id="'blog' + j + i + tag" :key="article.title" :class="leftRight(i, j)">
             <nuxt-link :to="'/blog/' + article.slug" class="picture">
               <source media="(max-width: 1250px)" :src="article.imgMobileLink" :srcset="article.imgMobileLink"/>
               <img :src="article.imgDesktopLink" :srcset="article.imgDesktopLink" :class="smallBigImg(i, j)" alt="magazine"/>
@@ -26,6 +27,10 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   name: 'Journal',
@@ -86,8 +91,30 @@ export default {
       return articlesArray
     }
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
     ...mapActions(['setRubric', 'resetRubric']),
+    scrollAnimation() {
+      let article = 0
+      this.articlesArray.forEach((item, index) => {
+        item.forEach((el, j) => {
+          article++
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: ".wrapper" + index,
+              start: "top bottom",
+              end: "top bottom",
+              scrub: 3,
+
+            }
+          })
+            .from("#blog" + j + index + this.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * article})
+        })
+      })
+
+    },
     goToRubric(rubric){
       this.setRubric(rubric)
       this.$router.push({path: '/blog'})

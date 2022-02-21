@@ -1,9 +1,7 @@
 <template>
-  <section :id="lines.tag" class="license__storage">
+  <section :id="lines.tag" class="license__storage" :class="lines.tag + lines.mode">
     <div class="container">
-      <div class="license__title title">
-        {{ lines.tariffTitle }}
-      </div>
+      <h2 class="license__title title">{{ lines.tariffTitle }}</h2>
       <div class="license__wrapper" :class="wrapper">
         <div class="license__wrapper-top" :class="titleWrapper">
           <div class="license__top-title" :class="titleText">Сертификат</div>
@@ -14,12 +12,10 @@
           <div class="license__top-title" :class="titleText">Стоимость</div>
         </div>
 
-        <div v-for="line, ind in billingTariffs" :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
-
+        <div v-for="(line, ind) in billingTariffs" :id="'line-billing' + ind"
+             :key="line.key" class="license__wrapper-bottom" :class="wrapperBottom">
           <div class="license__wrap-text">{{ line.title ? line.title : line.name }}</div>
-
           <div v-for="item in line.options[0].attributes.options" :key="item.key">
-
             <div v-if="item.layout === 'list'" class="license__wrap-select">
               <select class="license__select license__select--mod">
                 <option v-for="option in item.attributes.list" :key="option.key" :value="option.attributes.item" >
@@ -77,12 +73,9 @@
                 </option>
               </select>
             </div>
-
             <div v-if="item.layout === 'text'" class="license__tablet-text license__tablet-text--mod" >
               {{ item.attributes.value }}
             </div>
-
-
           </div>
           <div class="license__tablet-wrap--tablet" >
 
@@ -111,6 +104,8 @@
 </template>
 
 <script>
+import {gsap} from "gsap";
+
 export default {
   name: 'Lines',
   props: {
@@ -179,7 +174,23 @@ export default {
   created() {
       this.init()
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
+    scrollAnimation() {
+      this.billingTariffs.forEach((item, index) => {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: "." + this.lines.tag + this.lines.mode,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 2,
+          }
+        })
+          .from('#line-billing' + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+      })
+    },
     init() {
       this.billingTariffs.forEach(() => {
         this.periods.push({period: 0})
@@ -213,12 +224,6 @@ export default {
 </script>
 
 <style scoped>
-.license {
-  background-color: #fcf7f2;
-  padding-top: 72px;
-  padding-bottom: 36px;
-}
-
 .license__storage {
   background-color: #fcf7f2;
   padding-top: 36px;

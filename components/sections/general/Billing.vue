@@ -5,7 +5,7 @@
       <div class="details__text text" v-html="billing.description"></div>
       <div class="details__wrapper-img">
         <div class="details__img-desk">
-          <picture class="picture">
+          <picture class="picture pic-1">
             <img
               :src="imageDesktop"
               :srcset="imageDesktop"
@@ -15,7 +15,7 @@
           </picture>
         </div>
         <div class="details__img-mob">
-          <picture class="picture">
+          <picture class="picture pic-2">
             <img
               :src="imageMobile"
               :srcset="imageMobile"
@@ -31,6 +31,10 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default {
   name: 'Billing',
@@ -49,9 +53,36 @@ export default {
   computed: {
     ...mapGetters(['billing'])
   },
+  mounted() {
+    this.scrollAnimation();
+  },
   created() {
     this.imageDesktop = this.$config.imgURL + '' + this.billing.image
     this.imageMobile = this.$config.imgURL + '' + this.billing.content
+  },
+  methods: {
+    scrollAnimation() {
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".details",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+      .from(".details__img-desk", {x: 0 - innerWidth * 2, opacity: 0})
+
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".details",
+          start: "top bottom",
+          end: "bottom bottom",
+          scrub: 0.5,
+        }
+      })
+        .from(".details__img-mob", {x: innerWidth * 2, opacity: 0})
+    }
   }
 
 }

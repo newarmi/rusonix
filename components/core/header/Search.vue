@@ -2,9 +2,9 @@
   <div class="start__screen">
     <div class="container">
       <div class="start__screen-search">
-        <input v-model="searchString" class="start__screen-input" type="text" 
+        <input v-model="searchString" class="start__screen-input" type="text"
                placeholder="Поиск по ресурсам службы поддержки" @keyup.enter="search"/>
-        <label for="" class="start__screen-input-icon">
+        <label class="start__screen-input-icon">
           <img src="@/assets/img/search__support.png" alt="search" @click="search" />
         </label>
       </div>
@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     ...mapGetters(['quickSearch'])
-  },  
+  },
   methods: {
    ...mapActions('knowledge', ['setSearch']),
    quick(item) {
