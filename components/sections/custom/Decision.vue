@@ -59,7 +59,7 @@ export default {
           scrollTrigger: {
             trigger: ".decision",
             start: "top bottom",
-            end: "bottom bottom",
+            end: "center bottom",
             scrub: 3,
           }
         })
