@@ -1,5 +1,6 @@
 <template>
-  <div class="license__wrapper-bottom license__wrapper-bottom-two">
+  <div>
+  <div :id="'storageLine' + number" class="license__wrapper-bottom license__wrapper-bottom-two">
     <div class="license__wrap-text" v-html="line.title"></div>
 
     <div class="license__input">
@@ -48,12 +49,19 @@
       </button>
     </div>
 
-    <Modal v-if="line.modal" :title="line.title" :period="sale.period"
-           :show-popup="is_show" @closePopup="closePopup()"/>
+
+  </div>
+  <Modal v-if="line.modal" :title="line.title" :period="sale.period"
+         :show-popup="is_show" @closePopup="closePopup()"/>
   </div>
 </template>
 
 <script>
+import {gsap} from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Storage',
   components: {
@@ -63,6 +71,10 @@ export default {
     line: {
       type: Object,
       required: true,
+    },
+    number: {
+      type: Number,
+      default: 1,
     },
   },
   data() {
@@ -108,8 +120,21 @@ export default {
       return Math.round(this.total - this.price)
     }
   },
-
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
+    scrollAnimation() {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: ".storagesWrapper",
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 2,
+          }
+        })
+          .from("#storageLine" + this.number, {y: innerHeight, opacity: 0, delay: 0.1 * this.number})
+    },
     changeTb(value) {
       if(Number(value)>Number(this.line.max)) {
         this.tbytes = this.line.max

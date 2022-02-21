@@ -1,23 +1,26 @@
 <template>
   <div>
     <!-- desktop  -->
-    <div class="license__wrapper">
+    <div class="license__wrapper containersWrapper">
       <div class="license__wrapper-top license__wrapper-top-two">
         <div class="license__top-title license__top-title-two">Сертификат</div>
         <div class="license__top-title license__top-title-two">CPU</div>
         <div class="license__top-title license__top-title-two">Период</div>
         <div class="license__top-title license__top-title-two">Стоимость</div>
       </div>
-      <Container v-for="line in lines" :key="line.key" :line="line.attributes"/>
+      <Container v-for="(line, index) in lines"
+                 :key="line.key" :number="index" :line="line.attributes"/>
     </div>
     <!-- tablet  -->
     <div class="license__tablet-wrapper">
-      <ContainerTablet v-for="line in lines" :key="line.key" :line="line.attributes"/>
+      <ContainerTablet v-for="line in lines" :key="line.key"
+                       :line="line.attributes"/>
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'LineContainers',
   components: {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- desktop  -->
-    <div class="license__wrapper line-storage" >
+    <div class="license__wrapper line-storage storagesWrapper" >
       <div class="license__wrapper-top license__wrapper-top-two">
         <div class="license__top-title license__top-title-two">Сертификат</div>
         <div class="license__top-title license__top-title-two">Кол-во ТБ</div>
@@ -9,7 +9,7 @@
         <div class="license__top-title license__top-title-two">Период</div>
         <div class="license__top-title license__top-title-two">Стоимость</div>
       </div>
-      <Storage v-for="(line, index) in lines" :key="line.key" :class="'storage' + index"
+      <Storage v-for="(line, index) in lines" :key="line.key" :number="index"
                 :line="line.attributes"/>
     </div>
     <!-- tablet  -->
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import {gsap} from "gsap";
 
 export default {
   name: 'LinesStorages',
@@ -34,26 +33,6 @@ export default {
       required: true,
     },
   },
-  mounted() {
-    this.scrollAnimation();
-  },
-  methods: {
-    scrollAnimation() {
-      this.lines.forEach((item, index) => {
-        gsap.timeline({
-          scrollTrigger: {
-            trigger: ".line-storage",
-            start: "top bottom",
-            end: "bottom bottom",
-            markers: true,
-            scrub: 1,
-          }
-        })
-          .from(".storage" + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})
-      })
-
-    },
-  }
 }
 </script>
 

@@ -1,5 +1,6 @@
 <template>
-  <div class="license__wrapper-bottom license__wrapper-bottom-two">
+  <div>
+  <div :id="'lineCount' + number" class="license__wrapper-bottom license__wrapper-bottom-two" >
     <div class="license__wrap-text" v-html="line.title"></div>
     <div class="license__wrap-select">
       <select v-model="cpuPrice" class="license__select license__select--mod">
@@ -33,13 +34,18 @@
         {{ line.buttonName ? line.buttonName : 'Заказать' }}
       </button>
     </div>
-
-    <Modal v-if="line.modal" :title="line.title" :period="sale.period"
-           :show-popup="is_show" @closePopup="closePopup()"/>
+  </div>
+  <Modal v-if="line.modal" :title="line.title" :period="sale.period"
+         :show-popup="is_show" @closePopup="closePopup()"/>
   </div>
 </template>
 
 <script>
+import {gsap} from "gsap";
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default {
   name: 'Container',
   components: {
@@ -50,6 +56,15 @@ export default {
       type: Object,
       required: true,
     },
+    id: {
+      type: String,
+      default: 'id'
+    },
+    number: {
+      type: Number,
+      default: 1
+    }
+
   },
   data() {
     return {
@@ -74,8 +89,21 @@ export default {
       return Math.round(this.cpuPrice * this.sale.month - this.price)
     }
   },
-
+  mounted() {
+    this.scrollAnimation();
+  },
   methods: {
+    scrollAnimation() {
+        gsap.timeline({
+          scrollTrigger: {
+            trigger: ".containersWrapper",
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 2,
+          }
+        })
+          .from('#lineCount' + this.number, {y: innerHeight, opacity: 0, delay: this.number * 0.1})
+    },
     periodToText(period) {
       const periodNumber = Number(period)
       if (periodNumber === 1) {
