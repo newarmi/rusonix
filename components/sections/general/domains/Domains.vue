@@ -139,7 +139,7 @@ export default {
             scrub: 3,
           }
         })
-          .from('#domains' + index + this.tag, {y: innerHeight, opacity: 0, delay: 0.1 * index})
+          .from('#domains' + index + this.tag, {y: innerHeight, opacity: 0, delay: 0.1 * index, ease: "back.out(1.0)"})
       })
     },
     checkIfNotNull() {

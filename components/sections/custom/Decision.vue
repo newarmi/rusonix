@@ -60,7 +60,7 @@ export default {
             trigger: ".decision",
             start: "top bottom",
             end: "center bottom",
-            scrub: 3,
+            scrub: 2,
           }
         })
           .from(".decision" + this.blocks.tag + index, {y: innerHeight, opacity: 0, delay: 0.1 * index})

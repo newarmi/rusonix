@@ -61,10 +61,9 @@ export default {
             start: "top bottom",
             end: "center bottom",
             scrub: 3,
-
           }
         })
-          .from(".license" + index + this.services.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * index})
+          .from(".license" + index + this.services.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * index, ease: "back.out(1.0)"})
       })
 
     },

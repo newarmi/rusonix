@@ -2,7 +2,9 @@
   <div>
     <div class="header-content__wrapper">
       <div class="container">
-        <h1 v-if="header.title&&!isArticle" class="start__title animate__animated animate__fadeInUp" v-html="header.title"></h1>
+        <div class="start__title-wrapper">
+        <h1 v-if="header.title&&!isArticle" class="start__title" v-html="header.title"></h1>
+        </div>
         <Search v-if="header.search"/>
         <ul v-if="!isArticle&&isTags" class="start__list">
           <li v-for="tag in tags" :key="tag.key" class="start__item">
@@ -24,7 +26,7 @@
 </template>
 
 <script>
-import 'animate.css'
+import { gsap } from 'gsap'
 
 export default {
   name: 'HeaderContent',
@@ -77,12 +79,16 @@ export default {
     },
     isDecor() {
       return !this.isArticle&&!this.isDocument&&!this.isPost;
-    }
+    },
   },
   mounted() {
-
+    this.animation();
   },
   methods: {
+    animation() {
+        gsap.from(".start__title", {duration: 0.7, y: innerHeight / 3,
+                                                opacity: 0})
+    },
     buttonAction(button) {
       switch(button.layout) {
         case('tab'): this.scrollToBlock(button.attributes.tab); break;
@@ -105,6 +111,10 @@ export default {
 </script>
 
 <style scoped>
+
+.start__title-wrapper{
+  overflow: hidden;
+}
 
 .header__decor {
   position: absolute;

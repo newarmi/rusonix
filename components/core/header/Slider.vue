@@ -4,8 +4,8 @@
       <div class="container">
           <div class="swiper-container container__start-sliders" :class="sliderClass" >
             <div class="swiper-wrapper">
-              <div v-for="(article) in clearArticles" :key="article[0].content"
-                class="swiper-slide start__slide pointer animate__animated animate__fadeInUp" >
+              <div v-for="(article, index) in clearArticles" :key="article[0].content"
+                class="swiper-slide start__slide pointer" :class="'article' + index">
                 <p class="start__slide-text">{{ article[0].content }}</p>
               </div>
 
@@ -34,7 +34,7 @@
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 import uniqueId from 'lodash/uniqueId'
-import 'animate.css'
+import { gsap } from 'gsap'
 
 export default {
   name: 'Slider',
@@ -59,6 +59,8 @@ export default {
     })
   },
   mounted() {
+    this.animation();
+
     const sliderId = uniqueId()
     this.sliderClass = 'swiper-' + sliderId
     this.$nextTick(() => {
@@ -91,6 +93,14 @@ export default {
     }
   },
   methods: {
+    animation() {
+
+      this.clearArticles.forEach((item, index) => {
+        gsap.from(".article" + index, {duration: 1.5, y: innerHeight / 3,
+                                                  opacity: 0, ease: "back.out(1.0)",
+                                                  delay: 0.1 * index})
+      })
+    },
     showPopup(i) {
       this.is_show[i].show = true
       document.body.style.overflow = 'hidden'
@@ -111,8 +121,7 @@ export default {
 }
 
 .swiper-pagination {
-  top: 140px;
-
+  top: 145px;
 }
 
 .popup-feature-text {
@@ -189,6 +198,7 @@ export default {
   background-color: rgba(213, 213, 213, 0.15);
   backdrop-filter: blur(27px);
   border-radius: 6px;
+  margin-top: 10px;
 }
 
 @media (max-width: 768px) {
