@@ -238,6 +238,7 @@ export default {
   .start__link {
     margin-top: 15px;
   }
+
 }
 
 @media (max-width: 992px) {
@@ -249,6 +250,9 @@ export default {
     line-height: 40px;
     letter-spacing: 0px;
     text-align: left;
+    }
+  .start__title-wrapper {
+    padding-bottom: 30px;
   }
 }
 
