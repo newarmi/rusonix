@@ -148,8 +148,7 @@ export default {
       }
     },
     checkDomain() {
-
-      this.domainString=this.domainString.trim().replaceAll(/ +/g, '-')
+      this.domainString=this.domainString.trim().replaceAll(/ +/g, '-').toLowerCase()
       const point = this.domainString.indexOf('.')
       if(point!==-1)
       this.domainString = this.domainString.slice(0, point)
@@ -384,6 +383,5 @@ export default {
   background-color: #FCF7F2;
   cursor: default;
 }
-
 
 </style>

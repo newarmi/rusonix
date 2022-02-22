@@ -23,21 +23,38 @@
             </div>
           </div>
 
-          <div v-for="option in card.attributes.options" :key="option.key">
-            <div v-if="option.layout === 'listOption'">
-              <div class="license__card-selection-title">
-                {{ option.attributes.option }}
-              </div>
-              <div class="license__card-selection">
-                <select class="license__select">
-                  <option v-for="item in option.attributes.list" :key="item.key"
-                    value="item.attributes.listItem">
-                    {{ item.attributes.listItem }}
-                  </option>
-                </select>
-              </div>
-            </div>
-          </div>
+<!--          <div v-if="card.periods.length>1">-->
+<!--            <div class="license__card-selection-title">-->
+<!--              Период-->
+<!--            </div>-->
+<!--            <div class="license__card-selection">-->
+<!--              <select class="license__select" @change="choosePeriod(ind, $event.target.value)">-->
+<!--                <option-->
+<!--                  v-for="(period, i) in card.periods"-->
+<!--                  :key="period.key"-->
+<!--                  :value="i">-->
+<!--                  {{periodToText(period.period)}}-->
+<!--                </option>-->
+<!--              </select>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div v-for="option in card.attributes.options" :key="option.key">-->
+<!--            <div v-if="option.layout === 'listOption'">-->
+<!--              <div class="license__card-selection-title">-->
+<!--                {{ option.attributes.option }}-->
+<!--              </div>-->
+<!--              <div class="license__card-selection">-->
+<!--                <select class="license__select">-->
+<!--                  <option v-for="item in option.attributes.list" :key="item.key"-->
+<!--                    value="item.attributes.listItem">-->
+<!--                    {{ item.attributes.listItem }}-->
+<!--                  </option>-->
+<!--                </select>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
 
           <div class="license__card-total">
             {{ card.attributes.price }}
@@ -45,6 +62,18 @@
               {{ card.attributes.priceComment }}
             </div>
           </div>
+
+<!--          <div class="license__card-wrap-total">-->
+<!--            <div class="license__prices-wrapper">-->
+<!--              <div v-if="" class="license__card-oldprice">-->
+<!--                <p class="license__card-oldprice-text">{{ Math.floor(card.periods[periods[index].period].full_cost) }} ₽</p>-->
+<!--              </div>-->
+<!--              <div class="license__card-total license__card-total&#45;&#45;mod">{{ Math.floor(card.periods[periods[index].period].amount) }} ₽</div>-->
+<!--            </div>-->
+<!--            <p v-if="card.periods[periods[ind].period].percent!=='0%'" class="license__card-total-economy">-->
+<!--              Экономия {{Math.floor(card.periods[periods[ind].period].full_cost - card.periods[periods[index].period].amount)}} рублей</p>-->
+<!--          </div>-->
+
 
           <div class="license__btn-wrap">
             <div v-if="card.attributes.modal" class="license__btn"
@@ -85,12 +114,14 @@ export default {
   },
   data() {
     return {
-      is_show: []
+      is_show: [],
+      periods: [],
     }
   },
   created() {
     this.cards.cards.forEach(() => {
       this.is_show.push({ show: false })
+      this.periods.push({period: 0})
     })
   },
   mounted() {
@@ -122,6 +153,24 @@ export default {
       this.is_show[i].show = false
       document.body.style.overflow = 'auto'
     },
+    choosePeriod(card, period) {
+      this.periods[card].period = period
+    },
+    periodToText(period) {
+      const periodNumber = Number(period)
+      if(periodNumber===1) {
+        return period + ' месяц'
+      }
+      if(periodNumber>1&&periodNumber<5) {
+        return period + ' месяца'
+      }
+      if(periodNumber<12) {
+        return period + ' месяцев'
+      }
+      if(periodNumber===12) return '12 месяцев'
+      if(periodNumber===24) return '24 месяца'
+      if(periodNumber===36) return '36 месяцев'
+    }
   }
 }
 </script>

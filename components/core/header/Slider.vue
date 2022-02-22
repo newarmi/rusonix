@@ -15,7 +15,6 @@
       </div>
     </div>
 
-
     <div v-for="(article, i) in clearArticles" :key="article[0].content">
       <Popup :title="article[0].content" :show-popup="is_show[i].show" @closePopup="closePopup(i)">
         <div v-for="(item, j) in article" :key="item.type + j">
@@ -59,16 +58,15 @@ export default {
     })
   },
   mounted() {
-    this.animation();
-
     const sliderId = uniqueId()
     this.sliderClass = 'swiper-' + sliderId
     this.$nextTick(() => {
-
       this.slider = new Swiper('.' + this.sliderClass, {
         slidesPerView: 'auto',
         spaceBetween: 33,
         loop: true,
+        observer: true,
+        loopedSlides: this.clearArticles.length,
         pagination: {
           el: '.swiper-pagination',
           type: 'bullets',
@@ -83,6 +81,9 @@ export default {
             const index = this.slider.clickedSlide.attributes[2].value
             this.showPopup(index);
           },
+          init: () => {
+            this.animation()
+          }
         },
       })
     })
@@ -94,11 +95,11 @@ export default {
   },
   methods: {
     animation() {
-
+      const anim = [];
       this.clearArticles.forEach((item, index) => {
-        gsap.from(".article" + index, {duration: 1.5, y: innerHeight / 3,
+        anim.push(gsap.from(".article" + index, {duration: 1.5, y: innerHeight / 3,
                                                   opacity: 0, ease: "back.out(1.0)",
-                                                  delay: 0.1 * index})
+                                                  delay: 0.1 * index}))
       })
     },
     showPopup(i) {

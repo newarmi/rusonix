@@ -3,7 +3,7 @@
     <div class="header-content__wrapper">
       <div class="container">
         <div class="start__title-wrapper">
-        <h1 v-if="header.title&&!isArticle" class="start__title" v-html="header.title"></h1>
+          <h1 v-if="header.title&&!isArticle" class="start__title" v-html="header.title"></h1>
         </div>
         <Search v-if="header.search"/>
         <ul v-if="!isArticle&&isTags" class="start__list">
@@ -26,7 +26,14 @@
 </template>
 
 <script>
+import 'animate.css'
 import { gsap } from 'gsap'
+ import { SplitText } from 'gsap/SplitText'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (process.client) {
+  gsap.registerPlugin(ScrollTrigger, SplitText)
+}
 
 export default {
   name: 'HeaderContent',
@@ -82,12 +89,49 @@ export default {
     },
   },
   mounted() {
-    this.animation();
+    this.titlesAnimating();
   },
   methods: {
-    animation() {
-        gsap.from(".start__title", {duration: 0.7, y: innerHeight / 3,
-                                                opacity: 0})
+    titlesAnimating() {
+      const allRevealParagraph = document.querySelectorAll('.start__title');
+
+      const appearOptionsP = {
+        threshold: 0.5,
+        rootMargin: '-200px 0px'
+      };
+
+      const observerOne = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          const el = entry.target;
+          if (!entry.isIntersecting) {
+            el.tlp.pause();
+          } else if (entry.isIntersecting) {
+            el.tlp.play(0);
+            observerOne.unobserve(el);
+          }
+        })
+      }, appearOptionsP)
+
+      allRevealParagraph.forEach((el) => {
+
+        const outerSplitP = new SplitText(el, { type: 'words' })
+        const innerSplitP = new SplitText(outerSplitP.words, {type: 'words'});
+
+        el.tlp = gsap.timeline({
+          paused: true,
+        })
+          .set(outerSplitP.words, {
+            overflow: 'hidden'
+          })
+          .from(innerSplitP.words, {
+            duration: 0.8,
+            yPercent: 100,
+            ease: 'expo',
+            stagger: 0.1
+          });
+
+         observerOne.observe(el);
+      });
     },
     buttonAction(button) {
       switch(button.layout) {

@@ -61,11 +61,11 @@ export default {
             start: "top bottom",
             end: "center bottom",
             scrub: 3,
+            toggleActions: 'play none none none',
           }
         })
-          .from(".license" + index + this.services.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * index, ease: "back.out(1.0)"})
+        .from(".license" + index + this.services.tag, {y: innerHeight / 3, opacity: 0, delay: 0.1 * index, ease: "back.out(1.0)"})
       })
-
     },
     setSslFilter(filterType, filterValue, tag, route) {
       if(filterValue)

@@ -29,6 +29,7 @@
                 </div>
               </div>
             </div>
+
             <div v-if="card.periods.length>1">
                 <div class="license__card-selection-title">
                   Период
@@ -84,7 +85,6 @@
           </div>
         </div>
       </div>
-
   </section>
 </template>
 
