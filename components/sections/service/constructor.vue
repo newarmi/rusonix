@@ -16,6 +16,8 @@
       <ServiceLines v-if="block.layout==='serviceLines'" :key="block.key" :items="block.attributes" />
       <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" :title="block.attributes.title"
                                                :description="block.attributes.description" />
+      <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
+      <Contacts v-if="block.layout==='contacts'" :tag="block.attributes.tag" />
     </div>
 
     <div id="tariff">
@@ -67,6 +69,8 @@ export default {
     HelpForm: () => import('~/components/sections/general/HelpForm'),
     Faq: () => import('~/components/sections/service/universal/FAQ'),
     Domains: () => import('~/components/sections/general/domains/Domains'),
+    ImageSlider: () => import('~/components/sections/custom/imageSlider/Images'),
+    Contacts: () => import('~/components/sections/general/Contacts'),
 
     BillingCards: () => import('~/components/sections/service/billing/Cards'),
     BillingLines: () => import('~/components/sections/service/billing/SimpleLines'),

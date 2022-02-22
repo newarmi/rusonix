@@ -3,7 +3,7 @@ export const state = () => ({
     filterType: '',
     filterValue: ''
   })
-  
+
   export const mutations = {
     setPage(state, page) {
       state.page = page
@@ -13,9 +13,9 @@ export const state = () => ({
       state.filterValue = filterValue
     },
   }
-  
+
   export const actions = {
-    async fetchPage({commit}, slug) {   
+    async fetchPage({commit}, slug) {
       const page = await this.$axios.$get(slug)
       commit('setPage', page)
     },
@@ -24,16 +24,17 @@ export const state = () => ({
       commit('setFilter', {filterType, filterValue})
     },
   }
-  
+
   export const getters = {
     buttons: state => state.page.buttons,
     header: state => state.page.header,
     footer: state => state.page.footer,
-    topArticles: state => state.page.topArticles,   
+    topArticles: state => state.page.topArticles,
 
-    filterType: state => state.filterType, 
-    filterValue: state => state.filterValue, 
+    filterType: state => state.filterType,
+    filterValue: state => state.filterValue,
     domainTarriff: state => state.page.domains,
+    contactsServices: state => state.page.contacts,
 
     blocks: state => state.page.blocks,
 

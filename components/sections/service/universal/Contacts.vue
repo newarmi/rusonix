@@ -64,9 +64,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['contacts']),
+    ...mapGetters('universal', ['contactsServices']),
     allContacts() {
-      return this.contacts.sections
+      return this.contactsServices.sections
     },
     mainContacts() {
       return this.allContacts.slice(0, 2)
