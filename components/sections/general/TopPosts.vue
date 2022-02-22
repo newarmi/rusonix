@@ -27,13 +27,13 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
-  
-    computed: {
-        ...mapGetters('knowledge', ['topPosts', 'lastPosts'])
-    },
+
+  computed: {
+    ...mapGetters('knowledge', ['topPosts', 'lastPosts'])
+  },
 }
 </script>
 

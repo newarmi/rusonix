@@ -5,7 +5,7 @@
       <div class="channel__wrapper">
           <div class="channel__video">
               <iframe class="channel__video-frame" :src="items.link"
-                      title="YouTube video player" frameborder="0"
+                      title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowfullscreen></iframe>
           </div>
@@ -89,6 +89,7 @@ export default {
   width: 100%;
   max-width: 504px;
   height: 287px;
+  border: none;
 }
 
 .channel__text {

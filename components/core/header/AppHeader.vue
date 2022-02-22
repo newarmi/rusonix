@@ -31,7 +31,7 @@ export default {
     header() {
       switch(this.$route.name) {
         case('service-slug'): case('license-slug'): case('hosting-slug'):
-        case('support-slug'): case('support-slug-doc'): case('about-slug'):
+        case('support-slug'): case('support-slug-doc'): case('about-slug'): case('partners-slug'):
           return this.$store.getters['universal/header']
         case('blog-article'): return this.$store.getters['journal/header']
       }

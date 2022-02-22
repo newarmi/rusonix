@@ -1,6 +1,6 @@
 <template>
   <div id='knowledge'>
-    <Constructor :pageblocks="pageBlocks" />     
+    <Constructor :pageblocks="pageBlocks" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'Knowledge',
   components: {
-    'Constructor': () => import('~/components/constructor'),
+    Constructor: () => import('~/components/constructor'),
   },
   async asyncData({store}) {
     await store.dispatch('fetchPage', 'knowledge')
