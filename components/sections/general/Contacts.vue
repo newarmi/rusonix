@@ -69,7 +69,7 @@ export default {
       return this.contacts.sections
     },
     mainContacts() {
-      return this.allContacts.slice(0, 2)
+     return this.allContacts.slice(0, 2)
     },
     otherContacts() {
       const contactArray = [];

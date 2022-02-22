@@ -34,7 +34,7 @@ export const state = () => ({
     filterType: state => state.filterType,
     filterValue: state => state.filterValue,
     domainTarriff: state => state.page.domains,
-    contactsServices: state => state.page.contacts,
+    contacts: state => state.page.contacts,
 
     blocks: state => state.page.blocks,
 

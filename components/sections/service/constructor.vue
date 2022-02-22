@@ -70,7 +70,7 @@ export default {
     Faq: () => import('~/components/sections/service/universal/FAQ'),
     Domains: () => import('~/components/sections/general/domains/Domains'),
     ImageSlider: () => import('~/components/sections/custom/imageSlider/Images'),
-    Contacts: () => import('~/components/sections/general/Contacts'),
+    Contacts: () => import('~/components/sections/service/universal/Contacts'),
 
     BillingCards: () => import('~/components/sections/service/billing/Cards'),
     BillingLines: () => import('~/components/sections/service/billing/SimpleLines'),

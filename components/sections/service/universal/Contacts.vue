@@ -1,7 +1,7 @@
 <template>
   <section :id="tag" class="contact">
     <div class="container">
-      <h2 class="contact__title title">{{ contacts.title }}</h2>
+      <h2 class="contact__title title">{{ contacts.contacts.title }}</h2>
     </div>
     <div class="container contact__container-map">
       <div class="contact__map">
@@ -64,9 +64,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('universal', ['contactsServices']),
+    ...mapGetters('universal', ['contacts']),
     allContacts() {
-      return this.contactsServices.sections
+      return this.contacts.contacts.sections
     },
     mainContacts() {
       return this.allContacts.slice(0, 2)
