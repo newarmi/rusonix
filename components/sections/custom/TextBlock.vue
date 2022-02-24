@@ -14,10 +14,11 @@
                 <Images v-if="block.layout==='images'" :items="block.attributes" />
                 <Links v-if="block.layout==='files'" :items="block.attributes" />
                 <Pages v-if="block.layout==='links'" :items="block.attributes" />
+                <Faq v-if="block.layout==='faq'" :items="block.attributes" />
 
                 <div v-if="block.layout==='posts'" class="contact__list contact__list--mod">
                     <ul class="contact__list-content">
-                      <div v-for="post, i in block.attributes.post" :key="post.key">
+                      <div v-for="(post, i) in block.attributes.post" :key="post.key">
                         <li v-if="(i%2)===0" class="contact__item contact__item-content"><span class="contact__item-img">
                           <img src="@/assets/img/contact-icon.png" alt="contact icon"></span>
                           <nuxt-link :to="'/knowledge/post/' + post.attributes.slug" class="contact__item-link">{{post.attributes.title}}</nuxt-link>
@@ -47,6 +48,7 @@ export default {
     Images: () => import('~/components/sections/general/Images'),
     Links: () => import('~/components/sections/general/Links'),
     Pages: () => import('~/components/sections/general/Pages'),
+    Faq: () => import('~/components/sections/service/universal/FAQ'),
   },
   props: {
     items: {
@@ -83,10 +85,10 @@ export default {
   }
 }
 
-.support {
-  padding-top: 28px;
-  padding-bottom: 75px;
-}
+/*.support {*/
+/*  padding-top: 28px;*/
+/*  padding-bottom: 75px;*/
+/*}*/
 
 @media (max-width: 768px) {
   .support {

@@ -1,20 +1,22 @@
 <template>
-  <div>
-    <Service />
+  <div id="about">
+    <Constructor />
   </div>
 </template>
 
 <script>
 
 export default {
+  name: 'About',
   components: {
-    Service: () => import('~/components/sections/service/constructor'),
+    Constructor: () => import('~/components/constructor'),
   },
-
-  async asyncData({ params, store }) {
-    const slug = params.slug
-    await store.dispatch('universal/fetchPage', 'about/' + slug)
+  async asyncData({store, params}) {
+    await store.dispatch('fetchPage', 'about/' + params.slug)
   },
 }
-
 </script>
+
+<style scoped>
+
+</style>

@@ -1,18 +1,18 @@
 <template>
   <section :id="tag" class="contact">
     <div class="container">
-      <h2 class="contact__title title">{{ contacts.title }}</h2>
+      <h2 class="contact__title title">{{ title }}</h2>
     </div>
     <div class="container contact__container-map">
       <div class="contact__map">
         <picture class="picture">
           <source
             media="(max-width: 768px)"
-            srcset="@/assets/img/contact-map-tablet.jpg, @/assets/img/contact-map-tablet@2x.jpg 2x"
+            :srcset="$config.imgURL + cardPhone"
           />
           <img
-            src="@/assets/img/contact-map.jpg"
-            srcset="@/assets/img/contact-map@2x.jpg 2x"
+            :src="$config.imgURL + card"
+            :srcset="$config.imgURL + card"
             alt="contact-map"
             class="contact__map-img"
           />
@@ -61,6 +61,18 @@ export default {
     tag: {
       type: String,
       default: 'contacts'
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    card: {
+      type: String,
+      default: ''
+    },
+    cardPhone: {
+      type: String,
+      default: ''
     }
   },
   computed: {

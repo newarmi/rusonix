@@ -28,6 +28,11 @@
               <use xlink:href="@/assets/svg/sprites.svg#youtube"></use>
             </svg>
           </a>
+          <a class="footer__icon-link" :href="footer.youtube">
+            <svg class="youtube__icon" width="20" height="14">
+              <use xlink:href="@/assets/svg/telegram.svg"></use>
+            </svg>
+          </a>
         </div>
       </div>
       <div class="footer__wrapper-right">

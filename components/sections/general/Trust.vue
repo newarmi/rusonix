@@ -58,13 +58,14 @@ export default {
     tag: {
       type: String,
       default: 'trust'
-    }
+    },
+    title: {
+      type: String,
+      default: ''
+    },
   },
   computed: {
     ...mapGetters(['trust']),
-    title() {
-      return this.trust.title
-    },
     firstLine() {
       const array = []
       const firstLine = this.trust.sections.find(Boolean).alt_title

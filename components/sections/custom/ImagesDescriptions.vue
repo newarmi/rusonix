@@ -1,19 +1,19 @@
 <template>
-  <section :id="tag" class="career">
+  <section :id="images.tag" class="career">
     <div class="container">
-      <h2 class="career__title title">{{ careerItems.title }}</h2>
+      <h2 class="career__title title">{{ images.title }}</h2>
       <div class="career__wrapper">
-        <div v-for="item in careerItems.sections" :key="item.title" class="career__wrap-card" >
+        <div v-for="item in images.images" :key="item.key" class="career__wrap-card" >
           <picture class="picture">
             <img
-              :src="item.imageLink"
-              :srcset="item.imageLink"
+              :src="$config.imgURL + item.attributes.image"
+              :srcset="$config.imgURL + item.attributes.image"
               class="career__img"
               alt="career card"
             />
           </picture>
-          <div class="career__card-title">{{ item.title }}</div>
-          <div class="career__card-text text" v-html="item.content">
+          <div class="career__card-title">{{ item.attributes.title }}</div>
+          <div class="career__card-text text" v-html="item.attributes.description">
           </div>
         </div>
       </div>
@@ -22,25 +22,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'Career',
   props: {
-    tag: {
-      type: String,
-      default: 'career'
+    images: {
+      type: Object,
+      required: true
     }
   },
   computed: {
-    ...mapGetters(['career']),
-    careerItems() {
-      const career = this.career
-      career.sections.forEach(element => {
-        element.imageLink = this.$config.imgURL + element.image
-      });
-      return career
-    }
+    // careerItems() {
+    //   const career = this.career
+    //   career.sections.forEach(element => {
+    //     element.imageLink = this.$config.imgURL + element.image
+    //   });
+    //   return career
+    // }
   }
 }
 </script>

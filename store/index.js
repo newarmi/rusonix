@@ -102,7 +102,10 @@ export const getters = {
 
   tag: state => state.tag,
 
-  pageBlocks: state => state.page.blocks,
+  blocks: state => state.page.blocks,
+  tariffs: state => state.page.tariffs,
+  billingTariffs: state => state.page.billingTariffs,
+
   articles: state => state.page.articles,
   journal: state => state.page.journal,
   rubrics: state => state.page.rubrics,

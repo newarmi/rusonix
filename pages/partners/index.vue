@@ -1,29 +1,25 @@
 <template>
-  <div id='mainPage'>
-    <Constructor  :pageblocks="pageBlocks" />
+  <div id="partners">
+    <Constructor />
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
-  name: 'MainPages',
+  name: 'Partners',
 
   components: {
-    'Constructor': () => import('~/components/constructor'),
+    Constructor: () => import('~/components/constructor'),
   },
   async asyncData({store}) {
     await store.dispatch('fetchPage', 'partners')
   },
-  computed: {
-    ...mapGetters(['pageBlocks'])
-  },
+
 }
 
 </script>
 
 <style scoped>
-
 
 </style>

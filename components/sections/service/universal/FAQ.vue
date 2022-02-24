@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     showHideArticle(index) {
-      this.show[index].show = !this.show[index].show 
+      this.show[index].show = !this.show[index].show
     }
   }
 }
@@ -52,8 +52,8 @@ export default {
 
 <style scoped>
 .support {
-  padding-top: 72px;
-  padding-bottom: 24px;
+  /*padding-top: 72px;*/
+  /*padding-bottom: 24px;*/
 }
 
 .support__title {

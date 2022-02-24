@@ -3,7 +3,7 @@
     <div class="header__wrapper-top">
       <div class="header__wrapper">
         <div class="header__top-info">
-          <nuxt-link :to="'/journal/' + topArticles.top_header.content" class="header__top-info">
+          <nuxt-link :to="'/blog/' + topArticles.top_header.content" class="header__top-info">
             {{ topArticles.top_header.name }}
           </nuxt-link>
         </div>
@@ -15,8 +15,8 @@
             <p @click="openSearch">{{ searchWord }}</p>
           </li>
           <li class="contacts__search">
-            <label for="search" class="search">
-              <input id="search" v-model="searchInput" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" @keyup.enter="searchIt"/>
+            <label for="searchInput" class="search">
+              <input id="searchInput" v-model="searchInput" class="contacts__search-input" :class="isActive" :placeholder="searchPlace" @keyup.enter="searchIt"/>
               <svg class="search__icon" :class="isActive" width="17" height="17"
                 viewbox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg"  @click="openSearch" >
                 <path d="M4.66263 13.0119L4.3106 12.7034L3.97958 13.0343L0.720178 16.2929L0.707136 16.2799L3.9663 13.0213L4.29742 12.6902L3.98877 12.3381C1.53122 9.53454 1.63978 5.26526 4.31431 2.59073C7.10195 -0.196911 11.6216 -0.196911 14.4093 2.59073C17.1969 5.37838 17.1969 9.89805 14.4093 12.6857C11.735 15.36 7.46619 15.4688 4.66263 13.0119Z"

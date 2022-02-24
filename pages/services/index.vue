@@ -1,5 +1,5 @@
 <template>
-  <div id="license">
+  <div id="services">
     <Constructor />
   </div>
 </template>
@@ -7,16 +7,19 @@
 <script>
 
 export default {
-  name: 'License',
+  name: 'Services',
+
   components: {
     Constructor: () => import('~/components/constructor'),
   },
-  async asyncData({store, params}) {
-    await store.dispatch('fetchPage', 'license/' + params.slug)
+  async asyncData({store}) {
+    await store.dispatch('fetchPage', 'services')
   },
 }
+
 </script>
 
 <style scoped>
+
 
 </style>

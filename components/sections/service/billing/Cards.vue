@@ -131,7 +131,7 @@ export default {
       })
     },
     init() {
-      this.cards = this.$store.getters['universal/billingTariffs'].map(item=>item)
+      this.cards = this.$store.getters.billingTariffs.map(item=>item)
 
       if(this.tariff.mode) {
           this.cards = this.cards.filter(item => {

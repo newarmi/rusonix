@@ -34,20 +34,16 @@
 import Swiper from 'swiper'
 import 'swiper/css/swiper.min.css'
 import uniqueId from 'lodash/uniqueId'
+import { mapGetters } from "vuex";
 
 export default {
   name: 'Slider',
-  props: {
-    reviews: {
-      type: Object,
-      required: true
-    }
-  },
   data: () => ({
     slider: null,
     sliderClass: ''
   }),
   computed: {
+    ...mapGetters(['reviews']),
     clients() {
       const clients = this.reviews.sections
       clients.forEach(element => {

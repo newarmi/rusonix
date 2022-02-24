@@ -183,7 +183,7 @@ export default {
   },
   methods: {
     init() {
-      this.line = this.$store.getters['universal/billingTariffs'].map(item=>item)
+      this.line = this.$store.getters.billingTariffs.map(item=>item)
 
       if(this.lines.mode) {
           this.line = this.line.filter(item => {

@@ -1,14 +1,13 @@
 <template>
   <section :id="tag" class="reviews">
     <div class="container">
-      <h2 class="reviews__title title">{{ reviews.title }}</h2>
-      <Slider :reviews="reviews"/>
+      <h2 class="reviews__title title">{{ title }}</h2>
+      <Slider />
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 
 export default {
   name: 'Reviews',
@@ -19,10 +18,11 @@ export default {
     tag: {
       type: String,
       default: 'reviews'
+    },
+    title: {
+      type: String,
+      default: ''
     }
-  },
-  computed: {
-    ...mapGetters(['reviews']),
   }
 }
 </script>

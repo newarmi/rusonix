@@ -61,7 +61,7 @@
                 <div v-for="radio, i in ssl.filter4" :key="radio.key" class="sertificate__custom-radio-wrap">
                   <input :id="'custom-radio-fourth-' + i" v-model="filterValues[3].filter" class="custom-radio" type="radio" name="custom-radio-4" :value="radio.attributes.filterValue" />
                   <label class="custom__radio-label" :for="'custom-radio-fourth-' + i">{{ radio.attributes.filterValue }}</label>
-                </div>           
+                </div>
                 <div class="sertificate__custom-radio-wrap">
                   <input id="custom-radio-fourth-all" v-model="filterValues[3].filter" class="custom-radio" type="radio" name="custom-radio-4" value="all" checked="checked" />
                   <label class="custom__radio-label" for="custom-radio-fourth-all">Любой</label>
@@ -75,7 +75,7 @@
       <div class="sertificate__buy-wrapper-title">
         <div v-for="option in mainOptions" :key="option" class="sertificate__buy-title">{{option}}</div>
       </div>
-      
+
       <SslLine v-for="certificate in filtered" :key="certificate.key" :certificate="certificate"/>
 
     </div>
@@ -106,7 +106,7 @@ export default {
   computed: {
       ...mapGetters('universal', ['filterType', 'filterValue']),
       allBilling() {
-        return this.$store.getters['universal/billingTariffs']
+        return this.$store.getters.billingTariffs
       },
       billingClear() {
         return this.allBilling.map(item => {
@@ -159,13 +159,13 @@ export default {
         const finish = [];
 
         if(this.filterValues[0].filter!=='all') {
-          filtered = filtered.filter(certificates => { 
+          filtered = filtered.filter(certificates => {
               if(Array.isArray(certificates.attributes.forWhat)) {
                 return certificates.attributes.forWhat.some(item => this.filterValues[0].filter === item.attributes.option)
               }
               return false
             })
-        } 
+        }
 
         if(this.filterValues[1].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[1].filter === certificates.attributes.level)
         if(this.filterValues[2].filter!=='all') filtered = filtered.filter(certificates => this.filterValues[2].filter === certificates.attributes.provider)
@@ -180,10 +180,10 @@ export default {
           if(!element.attributes.oldPrice)
           finish.push(element)
         })
-        
+
         return finish
       }
-      
+
   },
   created() {
         if(this.filterValue) {
@@ -277,7 +277,7 @@ export default {
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(1) {
   flex: 0 0 30%;
   margin-left: 20px;
- 
+
 }
 .sertificate__buy-wrapper-title > .sertificate__buy-title:nth-child(2) {
   flex: 0 1 18%;

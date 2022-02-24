@@ -124,7 +124,7 @@ export default {
   },
   computed: {
     allBillingTariffs () {
-      return this.$store.getters['universal/billingTariffs']
+      return this.$store.getters.billingTariffs
     },
     billingTariffs() {
       if(this.lines.mode) {

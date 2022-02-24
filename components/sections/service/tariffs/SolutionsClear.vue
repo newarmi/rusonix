@@ -179,7 +179,7 @@ export default {
         const result = this.items.reduce((accum, a, i) => {
           if(a.item)
           return accum + Number(a.item.periodPrice[this.period[i].periodNumber].price)
-          return accum + 0
+          return accum
         }, 0)
 
         return Math.round(result)
@@ -188,7 +188,7 @@ export default {
         const result = this.items.reduce((accum, a, i) => {
           if(a.item)
           return accum + Number(a.item.periodPrice[this.period[i].periodNumber].economy)
-          return accum + 0
+          return accum
         }, 0)
 
         return Math.round(result)
@@ -212,10 +212,10 @@ export default {
         return Math.round(result)
       },
       allBilling() {
-        return this.$store.getters['universal/billingTariffs']
+        return this.$store.getters.billingTariffs
       },
       mode() {
-        const tariffs = this.$store.getters['universal/tariffs']
+        const tariffs = this.$store.getters.tariffs
         let mode  = ''
         tariffs.forEach(item => {
           if(item.layout === 'billing')

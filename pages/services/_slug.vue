@@ -6,17 +6,15 @@
 
 <script>
 
+
 export default {
-  name: 'License',
   components: {
     Constructor: () => import('~/components/constructor'),
   },
-  async asyncData({store, params}) {
-    await store.dispatch('fetchPage', 'license/' + params.slug)
+
+  async asyncData({ params, store }) {
+    const slug = params.slug
+    await store.dispatch('fetchPage', 'services/' + slug)
   },
 }
 </script>
-
-<style scoped>
-
-</style>

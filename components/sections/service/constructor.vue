@@ -79,9 +79,6 @@ export default {
 
   computed: {
     ...mapGetters(['tag']),
-    header() {
-      return this.$store.getters['universal/header']
-    },
     blocks() {
       return this.$store.getters['universal/blocks']
     },
@@ -95,9 +92,7 @@ export default {
   methods: {
     ...mapActions(['resetTag']),
     scroll() {
-        console.log(this.tag)
       if(this.tag) {
-
       const block = document.querySelector('#' + this.tag)
         if(block)
           block.scrollIntoView({ behavior: 'smooth' })
