@@ -51,7 +51,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://api.rusonyx.staj.fun/api/',
+    baseURL: 'https://bc.dev.rusonyx.staj.fun/api/',
   },
 
   build: {
@@ -76,8 +76,8 @@ export default {
   },
 
   publicRuntimeConfig: {
-    imgURL: 'https://api.rusonyx.staj.fun/storage/',
-    siteURL: 'https://api.rusonyx.staj.fun/',
+    imgURL: 'https://bc.dev.rusonyx.staj.fun/storage/',
+    siteURL: 'https://bc.dev.rusonyx.staj.fun/',
   },
 
   serverMiddleware: [
