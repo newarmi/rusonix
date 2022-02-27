@@ -1,5 +1,7 @@
 <template>
   <section :id="images.tag" class="details container">
+      <h2 class="advantage__title title">{{images.title}}</h2>
+      <div class="bitrix__advantage-text text" v-html="images.description"></div>
       <div class="details__wrapper-img">
         <div v-for="item in images.images" :key="item.key" class="details__img-desk">
           <picture class="picture">
@@ -42,6 +44,15 @@ export default {
 </script>
 
 <style scoped>
+.bitrix__advantage-text {
+  opacity: 0.6;
+  margin-bottom: 96px;
+}
+
+.advantage__title {
+  margin-bottom: 24px;
+}
+
 .details {
   background-color: white;
   padding-top: 35px;
