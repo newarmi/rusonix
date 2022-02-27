@@ -1,7 +1,7 @@
 <template>
-  <section :id="items.tag" class="details">
+  <section :id="images.tag" class="details container">
       <div class="details__wrapper-img">
-        <div v-for="item in items.images" :key="item.key" class="details__img-desk">
+        <div v-for="item in images.images" :key="item.key" class="details__img-desk">
           <picture class="picture">
             <img
               :src="$config.imgURL +  item.attributes.image"
@@ -21,21 +21,21 @@
 export default {
   name: 'Images',
   props: {
-    items: {
+    images: {
       type: Object,
       required: true
     }
   },
   data() {
     return {
-      
+
     }
   },
   computed: {
-    
+
   },
   created() {
-   
+
   }
 
 }
@@ -99,7 +99,7 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-    
+
 }
 
 </style>

@@ -12,6 +12,7 @@
       <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
       <ImagesLink v-if="block.layout==='imagesLinks'" :images="block.attributes" />
+      <ImagesBig v-if="block.layout==='imagesBig'" :images="block.attributes" />
 
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
@@ -90,6 +91,7 @@ export default {
     Contacts: () => import('~/components/sections/general/Contacts'),
     ImagesBottom: () => import('~/components/sections/custom/ImagesBottom'),
     ImagesInside: () => import('~/components/sections/custom/ImagesInside'),
+    ImagesBig: () => import('~/components/sections/custom/ImagesBig'),
     ImagesDescriptions: () => import('~/components/sections/custom/ImagesDescriptions'),
     ImagesLink: () => import('~/components/sections/custom/ImageLink'),
     Partner: () => import('~/components/sections/general/Partner'),

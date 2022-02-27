@@ -23,7 +23,12 @@ export default {
                 hid: 'description',
                 name: 'description',
                 content: this.header.meta_description,
-            }
+            },
+            {
+              hid: 'keywords',
+              name: 'keywords',
+              content: this.header.meta_keywords,
+            },
         ],
     }
   },
