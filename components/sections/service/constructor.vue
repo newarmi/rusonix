@@ -3,8 +3,6 @@
     <div v-for="(block, i) in blocks" :key="block.layout + '' + i">
       <Benefits v-if="block.layout==='benefits'" :items="block.attributes" />
       <Tabs v-if="block.layout==='tabs'" :items="block.attributes" />
-      <Details v-if="block.layout==='billing'" :tag="block.attributes.tag" />
-      <Reviews v-if="block.layout==='reviews'" :tag="block.attributes.tag" />
       <Technologies v-if="block.layout==='technologies'" :items="block.attributes" />
       <Support v-if="block.layout==='questions'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
@@ -17,7 +15,6 @@
       <Domains v-if="block.layout==='domains'" :tag="block.attributes.tag" :title="block.attributes.title"
                                                :description="block.attributes.description" />
       <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
-      <Contacts v-if="block.layout==='contacts'" :tag="block.attributes.tag" />
     </div>
 
     <div id="tariff">
@@ -50,8 +47,6 @@ export default {
     Youtube: () => import('~/components/sections/custom/Youtube'),
     TextBlock: () => import('~/components/sections/custom/TextBlock'),
     Benefits: () => import('~/components/sections/service/universal/Benefits'),
-    Details: () => import('~/components/sections/service/universal/Details'),
-    Reviews: () => import('~/components/sections/service/universal/reviews/Reviews'),
     Technologies: () => import('~/components/sections/service/universal/Technologies'),
     Support: () => import('~/components/sections/service/universal/Support'),
     Tabs: () => import('~/components/sections/service/universal/Tabs'),
@@ -70,7 +65,6 @@ export default {
     Faq: () => import('~/components/sections/service/universal/FAQ'),
     Domains: () => import('~/components/sections/general/domains/Domains'),
     ImageSlider: () => import('~/components/sections/custom/imageSlider/Images'),
-    Contacts: () => import('~/components/sections/service/universal/Contacts'),
 
     BillingCards: () => import('~/components/sections/service/billing/Cards'),
     BillingLines: () => import('~/components/sections/service/billing/SimpleLines'),

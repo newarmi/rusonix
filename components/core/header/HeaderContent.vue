@@ -5,7 +5,7 @@
         <div class="start__title-wrapper">
           <h1 v-if="header.title&&!isArticle" class="start__title" v-html="header.title"></h1>
         </div>
-        <Search v-if="header.search"/>
+        <Search v-if="isKnowledge"/>
         <ul v-if="!isArticle&&isTags" class="start__list">
           <li v-for="tag in tags" :key="tag.key" class="start__item">
             <div class="start__link" @click="scrollToBlock(tag.attributes.tag)">{{ tag.attributes.name }}</div>
@@ -50,6 +50,12 @@ export default {
         }
       }
       return false
+    },
+    isKnowledge() {
+      return this.$route.name==='knowledge-category'||
+             this.$route.name==='knowledge-search'||
+             this.$route.name==='knowledge'||
+             this.$route.name==='knowledge-category-post'
     },
     decorColorClass() {
       return this.isKnowledgeCategory ? {} : { 'background-color': this.header.color }
