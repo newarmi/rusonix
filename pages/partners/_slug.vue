@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <Service />
+  <div id="partners">
+    <Constructor />
   </div>
 </template>
 
@@ -9,12 +9,11 @@
 
 export default {
   components: {
-    Service: () => import('~/components/sections/service/constructor'),
+    Constructor: () => import('~/components/constructor'),
   },
 
   async asyncData({ params, store }) {
-    const slug = params.slug
-    await store.dispatch('universal/fetchPage', 'partners/' + slug)
+    await store.dispatch('fetchPage', 'partners/' + params.slug)
   },
 }
 </script>
