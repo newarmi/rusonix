@@ -13,7 +13,8 @@ export default {
   },
 
   async asyncData({ params, store }) {
-    await store.dispatch('fetchPage', 'partners/' + params.slug)
+    const slug = params.slug
+    await store.dispatch('fetchPage', 'partners/' + slug)
   },
 }
 </script>

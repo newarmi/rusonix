@@ -23,15 +23,18 @@ export default {
                 hid: 'description',
                 name: 'description',
                 content: this.header.meta_description,
-            }
+            },
+            {
+              hid: 'keywords',
+              name: 'keywords',
+              content: this.header.meta_keywords,
+            },
         ],
     }
   },
   computed: {
     header() {
       switch(this.$route.name) {
-        case('support-slug'): case('support-slug-doc'): case('partners-slug'):
-          return this.$store.getters['universal/header']
         case('blog-article'): return this.$store.getters['journal/header']
       }
       return this.$store.getters.header

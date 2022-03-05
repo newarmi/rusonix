@@ -1,7 +1,9 @@
 <template>
-  <section :id="items.tag" class="details">
+  <section :id="images.tag" class="details container">
+      <h2 class="advantage__title title">{{images.title}}</h2>
+      <div class="bitrix__advantage-text text" v-html="images.description"></div>
       <div class="details__wrapper-img">
-        <div v-for="item in items.images" :key="item.key" class="details__img-desk">
+        <div v-for="item in images.images" :key="item.key" class="details__img-desk">
           <picture class="picture">
             <img
               :src="$config.imgURL +  item.attributes.image"
@@ -21,27 +23,36 @@
 export default {
   name: 'Images',
   props: {
-    items: {
+    images: {
       type: Object,
       required: true
     }
   },
   data() {
     return {
-      
+
     }
   },
   computed: {
-    
+
   },
   created() {
-   
+
   }
 
 }
 </script>
 
 <style scoped>
+.bitrix__advantage-text {
+  opacity: 0.6;
+  margin-bottom: 96px;
+}
+
+.advantage__title {
+  margin-bottom: 24px;
+}
+
 .details {
   background-color: white;
   padding-top: 35px;
@@ -99,7 +110,7 @@ export default {
     padding-top: 10px;
     padding-bottom: 10px;
 }
-    
+
 }
 
 </style>

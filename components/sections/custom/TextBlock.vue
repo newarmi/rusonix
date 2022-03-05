@@ -26,7 +26,7 @@
                       </div>
                     </ul>
                     <ul class="contact__list-content">
-                      <div v-for="post, j in block.attributes.post" :key="post.key">
+                      <div v-for="(post, j) in block.attributes.post" :key="post.key">
                         <li v-if="(j%2)!==0" class="contact__item contact__item-content">
                           <span class="contact__item-img"><img src="@/assets/img/contact-icon.png" alt="contact icon"></span>
                           <nuxt-link :to="'/knowledge/post/' + post.attributes.slug" class="contact__item-link">{{post.attributes.title}}</nuxt-link>
@@ -45,7 +45,6 @@
 <script>
 export default {
   components: {
-    Images: () => import('~/components/sections/general/Images'),
     Links: () => import('~/components/sections/general/Links'),
     Pages: () => import('~/components/sections/general/Pages'),
     Faq: () => import('~/components/sections/service/universal/FAQ'),

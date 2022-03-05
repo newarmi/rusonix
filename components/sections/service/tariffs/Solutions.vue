@@ -257,7 +257,7 @@ export default {
   },
   computed: {
       allBilling() {
-        return this.$store.getters['universal/billingTariffs']
+        return this.$store.getters.billingTariffs
       },
       billingClear() {
         return this.allBilling.map(item => {
@@ -265,7 +265,7 @@ export default {
           const options = item.options[0]
 
           return {
-            layout: options.layout, 
+            layout: options.layout,
             key: options.key,
             attributes: {
                           "oldPrice": options.attributes.oldPrice,

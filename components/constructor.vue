@@ -12,6 +12,7 @@
       <ImageSlider v-if="block.layout==='imagesSlider'" :items="block.attributes" />
       <ImagesInside v-if="block.layout==='imagesInside'" :images="block.attributes" />
       <ImagesLink v-if="block.layout==='imagesLinks'" :images="block.attributes" />
+      <ImagesBig v-if="block.layout==='imagesBig'" :images="block.attributes" />
 
       <Youtube v-if="block.layout==='youtube'" :items="block.attributes" />
       <TextBlock v-if="block.layout==='textBlock'" :items="block.attributes" />
@@ -42,6 +43,11 @@
       <Tabs v-if="block.layout==='tabs'" :items="block.attributes" />
       <Technologies v-if="block.layout==='technologies'" :items="block.attributes" />
       <Support v-if="block.layout==='questions'" :items="block.attributes" />
+      <HelpForm v-if="block.layout==='helpForm'" :key="block.key" :items="block.attributes" />
+      <SupportForm v-if="block.layout==='supportForm'" :key="block.key" :items="block.attributes" />
+      <SimpleForm v-if="block.layout==='simpleForm'" :items="block.attributes" />
+      <ServiceLines v-if="block.layout==='serviceLines'" :key="block.key" :items="block.attributes" />
+
     </div>
 
     <div id="tariff">
@@ -90,6 +96,7 @@ export default {
     Contacts: () => import('~/components/sections/general/Contacts'),
     ImagesBottom: () => import('~/components/sections/custom/ImagesBottom'),
     ImagesInside: () => import('~/components/sections/custom/ImagesInside'),
+    ImagesBig: () => import('~/components/sections/custom/ImagesBig'),
     ImagesDescriptions: () => import('~/components/sections/custom/ImagesDescriptions'),
     ImagesLink: () => import('~/components/sections/custom/ImageLink'),
     Partner: () => import('~/components/sections/general/Partner'),
@@ -106,6 +113,10 @@ export default {
     BillingCards: () => import('~/components/sections/service/billing/Cards'),
     BillingLines: () => import('~/components/sections/service/billing/SimpleLines'),
     BillingOneLine: () => import('~/components/sections/service/billing/OneLine'),
+    HelpForm: () => import('~/components/sections/general/HelpForm'),
+    SupportForm: () => import('~/components/sections/general/SupportForm'),
+    SimpleForm: () => import('~/components/sections/general/SimpleForm'),
+    ServiceLines: () => import('~/components/sections/general/ServiceLines'),
   },
   computed: {
     ...mapGetters(['tag', 'blocks', 'tariffs'])

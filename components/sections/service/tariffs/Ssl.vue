@@ -104,7 +104,7 @@ export default {
     }
   },
   computed: {
-      ...mapGetters('universal', ['filterType', 'filterValue']),
+      ...mapGetters(['filterType', 'filterValue']),
       allBilling() {
         return this.$store.getters.billingTariffs
       },

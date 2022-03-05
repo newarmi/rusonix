@@ -81,16 +81,13 @@ export default {
   },
   computed: {
     ...mapGetters(['domainTarriff', 'domainAnswer']),
-    universalDomains() {
-      return this.$store.getters['universal/domainTarriff']
-    },
     error() {
       if(this.load) return false
       if(this.domainAnswer) return this.domainAnswer.error
       return this.domainAnswer
     },
     domainItems() {
-      let domains = this.domainTarriff ? this.domainTarriff : this.universalDomains
+      let domains = this.domainTarriff
 
       domains = domains.map(item => {
         return {
@@ -127,7 +124,7 @@ export default {
     this.scrollAnimation();
   },
   methods: {
-    ...mapActions(['checkBillingDomain']),
+    ...mapActions(['checkBillingDomain', 'resetDomain']),
     scrollAnimation() {
 
       this.domainItems.forEach((item, index) => {
@@ -160,6 +157,7 @@ export default {
           this.load = false
         })
       }
+      this.resetDomain()
     },
     convertStatus(status) {
       return status==='free' ? 'Купить' : 'Занят'

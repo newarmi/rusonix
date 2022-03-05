@@ -6,7 +6,9 @@ export const state = () => ({
   searchQuery: '',
   searchResult: {},
   activeRubric: 'all',
-  domain: null
+  domain: null,
+  filterType: '',
+  filterValue: ''
 })
 
 export const mutations = {
@@ -42,6 +44,13 @@ export const mutations = {
   },
   setDomain(state, domain) {
     state.domain = domain
+  },
+  setFilter(state, {filterType, filterValue}) {
+    state.filterType = filterType
+    state.filterValue = filterValue
+  },
+  resetDomain(state) {
+    state.domain = null
   }
 }
 
@@ -57,7 +66,7 @@ export const actions = {
   async search({commit, state}) {
     let searchResult = [];
     if(state.searchQuery.length!==0) {
-      searchResult = await this.$axios.$post('page/search', {search: state.searchQuery})
+      searchResult = await this.$axios.$post('searchInfo', {search: state.searchQuery})
     }
     commit('setSearchResult', searchResult)
   },
@@ -86,6 +95,12 @@ export const actions = {
   },
   resetRubric({commit}) {
     commit('resetRubric')
+  },
+  setFilter({commit}, {filterType, filterValue}) {
+    commit('setFilter', {filterType, filterValue})
+  },
+  resetDomain({commit}) {
+    commit('resetDomain')
   }
 }
 
@@ -126,4 +141,7 @@ export const getters = {
   header: state => state.page.header,
 
   quickSearch: state => state.page.quickSearch,
+
+  filterType: state => state.filterType,
+  filterValue: state => state.filterValue,
 }

@@ -68,7 +68,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 48px;
+  /*margin-bottom: 48px;*/
 }
 
 .support__info-item {
