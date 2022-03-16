@@ -1,25 +1,18 @@
 <template>
-  <div id="partners">
+  <div id='mainPage'>
     <Constructor />
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'Partners',
-
+  name: 'MainPage',
   components: {
     Constructor: () => import('~/components/constructor'),
   },
   async asyncData({store}) {
-    await store.dispatch('fetchPage', 'partners')
+    await store.dispatch('fetchPage', 'index')
   },
-
 }
-
 </script>
 
-<style scoped>
-
-</style>

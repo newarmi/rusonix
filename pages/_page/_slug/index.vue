@@ -1,22 +1,19 @@
 <template>
-  <div id="license">
+  <div id="second">
     <Constructor />
   </div>
 </template>
 
 <script>
 
+
 export default {
-  name: 'License',
+  name: 'SecondPage',
   components: {
     Constructor: () => import('~/components/constructor'),
   },
   async asyncData({store, params}) {
-    await store.dispatch('fetchPage', 'license/' + params.slug)
+    await store.dispatch('fetchPage', params.page + '/' + params.slug)
   },
 }
 </script>
-
-<style scoped>
-
-</style>

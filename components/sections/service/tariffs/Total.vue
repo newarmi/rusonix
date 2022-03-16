@@ -7,7 +7,7 @@
       <div v-for="(item, i) in items" :key="item.title + i" class="calculate__wrapper-total-text">
         <div v-if="item" class="calculate__total-wrap-text">
           <div class="calculate__total-card-text title_bold">{{item.title}}</div>
-          <div v-for="option in item.options" :key="option.key" class="calculate__total-card-text">{{option.option}}</div>
+          <div v-for="(option, opt) in item.options" :key="'option' + option.key + opt" class="calculate__total-card-text">{{option.option}}</div>
         </div>
         <div class="calculate__total-wrap-price">
           <div class="calculate__total-card-text"></div>
@@ -19,7 +19,7 @@
       </div>
 
       <select v-if="isSale" v-model="periodSale" class="license__select">
-        <option v-for="sale in sales" :key="sale.key" :value="sale">
+        <option v-for="(sale, i) in sales" :key="sale.key + i" :value="sale">
           {{periodToText(sale.attributes.period)}}
         </option>
       </select>
@@ -56,7 +56,7 @@
         {{ bonus.title }}
       </div>
       <ul class="calculate__total-list">
-        <li v-for="item in bonus.bonuses" :key="item.key" class="calculate__total-item">
+        <li v-for="(item, ind) in bonus.bonuses" :key="item.key + ind" class="calculate__total-item">
           {{ item.attributes.title }}
         </li>
       </ul>

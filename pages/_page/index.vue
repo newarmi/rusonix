@@ -1,20 +1,17 @@
 <template>
-  <div id="document">
+  <div id="first">
     <Constructor />
   </div>
 </template>
 
 <script>
-
-
 export default {
+  name: 'FirstPage',
   components: {
     Constructor: () => import('~/components/constructor'),
   },
-
   async asyncData({params, store}) {
-    const doc = params.doc
-    await store.dispatch('fetchPage', 'support/dokumenty/' + doc)
+    await store.dispatch('fetchPage', params.page)
   },
 }
 </script>

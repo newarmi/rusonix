@@ -121,7 +121,7 @@ export default {
   created() {
     this.cards.cards.forEach(() => {
       this.is_show.push({ show: false })
-      this.periods.push({period: 0})
+      this.periods.push({ period: 0 })
     })
   },
   mounted() {
@@ -134,7 +134,7 @@ export default {
           scrollTrigger: {
             trigger: "#" + this.cards.tag,
             start: "top bottom",
-            end: "bottom bottom",
+            end: "center center",
             scrub: 1,
           }
         })

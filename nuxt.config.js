@@ -51,7 +51,7 @@ export default {
   ],
 
   axios: {
-    baseURL: 'https://bc.dev.rusonyx.staj.fun/api/',
+    baseURL: 'https://bc-dev-detour.rusonyx.ru:8000/api/',
   },
 
   build: {
